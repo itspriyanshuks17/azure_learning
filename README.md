@@ -103,8 +103,13 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Key**: Serverless containers, Container Groups.
 
 - **[08. Azure Functions](08_azure_functions.md)**
+
   - **Use Case**: Event-driven code (Serverless), responding to triggers.
   - **Key**: Triggers vs Bindings; Consumption Plan (Pay-per-use).
+
+- **[09. Azure Virtual Networks (VNet)](09_virtual_networks.md)**
+  - **Use Case**: Private network in the cloud, Isolation, Segmentation.
+  - **Key**: Subnets (CIDR), NSG vs ASG, Peering, VPN Gateway.
 
 ---
 
