@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shared Responsibility - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+
+    <aside class="sidebar">
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🤝 Azure Shared Responsibility Model</h1>
+<h2>📌 Overview</h2>
+<p>The <strong>Shared Responsibility Model</strong> is a fundamental cloud security concept. In an on-premises datacenter, you own the whole stack (from physical security to applications). In the cloud, Microsoft Azure takes over some physical and operational burdens, but <strong>you</strong> remain responsible for other aspects.</p>
+<blockquote>
+<p><strong>Key Concept</strong>: Security <strong>OF</strong> the Cloud (Azure&#39;s job) vs. Security <strong>IN</strong> the Cloud (Your job).</p>
+</blockquote>
+<hr>
+<h2>🏗️ Responsibility Matrix</h2>
+<p>The division of responsibility depends on the cloud service model (IaaS, PaaS, or SaaS).</p>
+<table>
+<thead>
+<tr>
+<th align="left">Responsibility</th>
+<th align="center">On-Premises</th>
+<th align="center">IaaS (Infrastructure as a Service)</th>
+<th align="center">PaaS (Platform as a Service)</th>
+<th align="center">SaaS (Software as a Service)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Information &amp; Data</strong></td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+</tr>
+<tr>
+<td align="left"><strong>Devices (Mobile/PC)</strong></td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+</tr>
+<tr>
+<td align="left"><strong>Accounts &amp; Identities</strong></td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+</tr>
+<tr>
+<td align="left"><strong>Identity &amp; Directory Infra</strong></td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">🤝 Shared</td>
+<td align="center">☁️ Microsoft</td>
+</tr>
+<tr>
+<td align="left"><strong>Applications</strong></td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">🤝 Shared / ☁️ Msft</td>
+<td align="center">☁️ Microsoft</td>
+</tr>
+<tr>
+<td align="left"><strong>Network Controls</strong></td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">🤝 Shared</td>
+<td align="center">☁️ Microsoft</td>
+</tr>
+<tr>
+<td align="left"><strong>Operating System</strong></td>
+<td align="center">👤 You</td>
+<td align="center">👤 You</td>
+<td align="center">☁️ Microsoft</td>
+<td align="center">☁️ Microsoft</td>
+</tr>
+<tr>
+<td align="left"><strong>Physical Hosts</strong></td>
+<td align="center">👤 You</td>
+<td align="center">☁️ Microsoft</td>
+<td align="center">☁️ Microsoft</td>
+<td align="center">☁️ Microsoft</td>
+</tr>
+<tr>
+<td align="left"><strong>Physical Network</strong></td>
+<td align="center">👤 You</td>
+<td align="center">☁️ Microsoft</td>
+<td align="center">☁️ Microsoft</td>
+<td align="center">☁️ Microsoft</td>
+</tr>
+<tr>
+<td align="left"><strong>Physical Datacenter</strong></td>
+<td align="center">👤 You</td>
+<td align="center">☁️ Microsoft</td>
+<td align="center">☁️ Microsoft</td>
+<td align="center">☁️ Microsoft</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>🔍 Detailed Breakdown</h2>
+<h3>1. ☁️ Microsoft&#39;s Responsibility (Security OF the Cloud)</h3>
+<p>Microsoft covers the global infrastructure and foundational services.</p>
+<ul>
+<li><strong>Physical Security</strong>: Guards, fences, cameras at Azure datacenters.</li>
+<li><strong>Host Infrastructure</strong>: Compute servers, storage arrays, networking hardware.</li>
+<li><strong>Virtualization Layer</strong>: The hypervisor (Hyper-V context) ensuring tenant isolation.</li>
+<li><strong>Compliance</strong>: Adhering to standards (ISO, SOC, HIPAA, FedRAMP).</li>
+</ul>
+<h3>2. 👤 Your Responsibility (Security IN the Cloud)</h3>
+<p>You are always responsible for:</p>
+<ul>
+<li><strong>Data</strong>: Data classification, encryption (at rest and in transit).</li>
+<li><strong>Endpoints</strong>: Securing devices that connect to Azure.</li>
+<li><strong>Accounts</strong>: Identity management (MFA, RBAC, PIM) using <strong>Microsoft Entra ID</strong> (formerly Azure AD).</li>
+<li><strong>Access Management</strong>: Who can do what in your Azure subscription.</li>
+</ul>
+<h3>3. 🤝 Shared Responsibility</h3>
+<p>Some layers vary based on the service type:</p>
+<ul>
+<li><strong>Patching</strong>:<ul>
+<li><strong>IaaS (e.g., Azure VM)</strong>: You patch the OS.</li>
+<li><strong>PaaS (e.g., Azure SQL)</strong>: Microsoft patches the OS/DB engine; you manage firewall rules.</li>
+</ul>
+</li>
+<li><strong>Networking</strong>:<ul>
+<li><strong>IaaS</strong>: You configure VNETs, NSGs, and Route Tables.</li>
+<li><strong>PaaS</strong>: Microsoft provides the connectivity; you configure Service Endpoints/Private Links.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<h2>💡 Hinglish Explanation (Zimmedari)</h2>
+<h3><strong>1. On-Premises (Khud ka Ghar)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Zameen khareedne se lekar, ghar banane, aur gate par tala lagane tak—sab zimmedari aapki hai.</li>
+</ul>
+<h3><strong>2. IaaS (Kiraye ka Flat)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Landlord (Microsoft) building ki security aur maintenance dekhega. Par flat ke andar ka tala lagana aur apni cheezein sambhalna <strong>aapki</strong> zimmedari hai.</li>
+</ul>
+<h3><strong>3. PaaS (Hotel)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Hotel (Microsoft) building, room service, aur furniture dekhega. Aap bas apne samaan (Data + Apps) ke zimmedar ho.</li>
+</ul>
+<h3><strong>4. SaaS (Online Cab)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Driver (Microsoft) gaadi chalayega, maintenance karega. Aap bas baitho aur enjoy karo. Par apna wallet aur phone (Data/Identity) sambhalna ab bhi <strong>aapki</strong> zimmedari hai.</li>
+</ul>
+<blockquote>
+<p><strong>Yaad Rakhein</strong>: <strong>DATA</strong> ki zimmedari hamesha AAPKI hoti hai, chahe woh koi bhi model ho. Microsoft aapke data ka backup by default nahi lega (unless aap configure karein).</p>
+</blockquote>
+<hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li><strong>SaaS</strong>: Microsoft handles the most (e.g., Office 365). You only really manage Data &amp; Identity.</li>
+<li><strong>IaaS</strong>: You handle the most (e.g., Azure VMs). You are responsible for the O.S. (patching, anti-virus).</li>
+<li><strong>On-Premises</strong>: You handle everything.</li>
+<li><strong>ALWAYS Your Responsibility</strong>: Data, Endpoints, Accounts, Access Management.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

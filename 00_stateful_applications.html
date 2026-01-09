@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stateful Applications - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+
+    <aside class="sidebar">
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>💾 Stateful Applications</h1>
+<h2>📌 Overview</h2>
+<p>While modern cloud apps prefer statelessness, <strong>Stateful Applications</strong> save data on the local disk or memory of the server instance.</p>
+<hr>
+<h2>1. Use Cases</h2>
+<ul>
+<li><strong>Databases</strong>: SQL Server, MySQL, PostgreSQL. They <em>must</em> persist data to disk.</li>
+<li><strong>Legacy Apps</strong>: Older apps designed before modern cloud patterns.</li>
+<li><strong>Real-time Gaming</strong>: Where microsecond latency matters, and state is kept in memory.</li>
+</ul>
+<hr>
+<h2>2. Challenges in Azure</h2>
+<p>If you run a Stateful App on an Azure VM:</p>
+<ul>
+<li><strong>Scaling is Hard</strong>: You can&#39;t just add a new VM because it won&#39;t have the data from the first VM.</li>
+<li><strong>Failover</strong>: If the VM dies, the local data might be lost (unless using persistent attached storage like Premium SSDs).</li>
+</ul>
+<h2>3. Azure Solutions for Stateful Workloads</h2>
+<h3>A. Session Affinity (Sticky Sessions)</h3>
+<p>If you have a legacy web app that keeps sessions in memory:</p>
+<ul>
+<li>Configure <strong>Azure Application Gateway</strong> with <strong>Cookie-based Affinity</strong>.</li>
+<li><strong>How it works</strong>: The Load Balancer ensures User A <em>always</em> goes to Server A.</li>
+<li><strong>Downside</strong>: If Server A crashes, User A loses their session.</li>
+</ul>
+<h3>B. Stateful Sets (AKS)</h3>
+<p>In Kubernetes (AKS), you can use <strong>StatefulSets</strong>.</p>
+<ul>
+<li>Ensures pods stay sticky to a specific Persistent Volume (Azure Disk).</li>
+<li>Good for running Databases inside containers (e.g., Mongo/Cassandra).</li>
+</ul>
+<hr>
+<h2>💡 Hinglish Explanation</h2>
+<ul>
+<li><strong>Stateful</strong>: Jaise aapne apne laptop ke Desktop pe file save ki. Agar laptop kharab hua, file gayi.</li>
+<li><strong>Problem</strong>: Cloud mein VMs kabhi bhi restart ho sakti hain. Isliye important data VM ke andar maat rakho.</li>
+<li><strong>Solution (External State)</strong>: Data ko Google Drive (Database/Storage) pe rakho. Ab chahe laptop badal lo, data wahi milega.</li>
+</ul>
+<hr>
+<h2>💡 Summary</h2>
+<ul>
+<li>Avoid building new Stateful web apps.</li>
+<li>If you must (Databases), use <strong>Managed Services</strong> like <strong>Azure SQL Database</strong> which handle the &quot;State&quot; complexity (replication, backups) for you.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

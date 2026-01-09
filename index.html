@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+
+    <aside class="sidebar">
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🚀 Azure Learning Guide (AZ-900)</h1>
+<p>A comprehensive, hands-on guide to <strong>Microsoft Azure</strong> fundamentals covering core services, cloud concepts, security, and architecture. This repository contains detailed notes and guides to help you master Azure and prepare for the <strong>AZ-900: Microsoft Azure Fundamentals</strong> exam.</p>
+<h2>📚 Table of Contents</h2>
+<h3>☁️ Module 1: Cloud Concepts (25-30%)</h3>
+<ul>
+<li><p><strong><a href="00_cloud_benefits.html">00. Benefits of Cloud Computing</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: HA, Scalability, Elasticity, Agility, Geo-distribution, DR.</li>
+<li><strong>Key</strong>: Understanding the &quot;Why&quot; behind cloud adoption.</li>
+</ul>
+</li>
+<li><p><strong><a href="00_shared_responsibility.html">00. Azure Shared Responsibility Model</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Fundamental security model defining what Microsoft manages vs what YOU manage.</li>
+<li><strong>Key</strong>: Security <strong>OF</strong> the Cloud (Physical, Network) vs Security <strong>IN</strong> the Cloud (Data, Identity).</li>
+</ul>
+</li>
+<li><p><strong><a href="00_deployment_models.html">00. Deployment Models</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Public, Private, Hybrid, and Multi-Cloud.</li>
+<li><strong>Key</strong>: CapEx vs OpEx; Azure Arc for hybrid management.</li>
+</ul>
+</li>
+<li><p><strong><a href="00_service_models.html">00. Cloud Service Models (IaaS, PaaS, SaaS)</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: IaaS (VMs), PaaS (App Service), SaaS (M365).</li>
+<li><strong>Key</strong>: Understanding the trade-off between Control and Management overhead.</li>
+</ul>
+</li>
+<li><p><strong><a href="00_scaling.html">00. Scalability &amp; Auto Scaling</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Vertical vs Horizontal Scaling; Elasticity.</li>
+<li><strong>Key</strong>: Azure Virtual Machine Scale Sets (VMSS) and Autoscale rules.</li>
+</ul>
+</li>
+<li><p><strong><a href="00_monolith_vs_microservices.html">00. Monolith vs Microservices</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Comparison of architecture styles.</li>
+<li><strong>Key</strong>: Decoupling services using Azure Functions and Service Bus.</li>
+</ul>
+</li>
+<li><p><strong><a href="00_stateless_applications.html">00. Stateless vs Stateful Applications</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Designing for the cloud using external state stores (Redis/Cosmos DB).</li>
+<li><strong>Key</strong>: Why statelessness enables massive horizontal scaling.</li>
+</ul>
+</li>
+<li><p><strong><a href="00_virtualization.html">00. Virtualization &amp; Containers</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: How the hypervisor works and the difference between VMs and Containers.</li>
+<li><strong>Key</strong>: Azure Kubernetes Service (AKS) concept.</li>
+</ul>
+</li>
+<li><p><strong><a href="00_containers.html">00. Containerization &amp; Docker</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Containers (OS Virtualization) vs VMs (Hardware Virtualization).</li>
+<li><strong>Key</strong>: Docker, Kubernetes, and Azure Container Instances (ACI).</li>
+</ul>
+</li>
+<li><p><strong><a href="00_load_balancers.html">00. Azure Load Balancers</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Distributing traffic.</li>
+<li><strong>Key</strong>: Azure Load Balancer (L4) vs Application Gateway (L7/WAF) vs Traffic Manager (DNS).</li>
+</ul>
+</li>
+</ul>
+<h3>🏗️ Module 2: Azure Core Architecture &amp; Services (35-40%)</h3>
+<ul>
+<li><p><strong><a href="01_resource_hierarchy.html">01. Azure Resource Hierarchy</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Management Groups -&gt; Subscriptions -&gt; Resource Groups -&gt; Resources.</li>
+<li><strong>Key</strong>: Inheritance of RBAC and Policies.</li>
+</ul>
+</li>
+<li><p><strong><a href="02_resource_groups.html">02. Azure Resource Groups</a></strong></p>
+<ul>
+<li><strong>Definition</strong>: Logical container for resources deployed on Azure.</li>
+<li><strong>Key</strong>: Lifecycle management, RBAC scopes, and region independence.</li>
+</ul>
+</li>
+<li><p><strong><a href="03_virtual_machines.html">03. Azure Virtual Machines (VMs)</a></strong></p>
+<ul>
+<li><strong>Use Case</strong>: IaaS workloads, Lift and Shift, Custom OS requirements.</li>
+<li><strong>Key</strong>: Availability Sets vs Availability Zones.</li>
+</ul>
+</li>
+<li><p><strong><a href="04_storage_services.html">04. Azure Storage Services</a></strong></p>
+<ul>
+<li><strong>Use Case</strong>: Storing blobs, files, queues, and tables.</li>
+<li><strong>Key</strong>: Blob access tiers (Hot, Cool, Archive, Cold).</li>
+</ul>
+</li>
+<li><p><strong><a href="05_vm_scale_sets.html">05. Azure VM Scale Sets (VMSS)</a></strong></p>
+<ul>
+<li><strong>Use Case</strong>: Autoscaling identical VMs for high traffic.</li>
+<li><strong>Key</strong>: Horizontal Scaling vs Vertical Scaling; Autoscaling rules.</li>
+</ul>
+</li>
+<li><p><strong><a href="06_azure_virtual_desktop.html">06. Azure Virtual Desktop (AVD)</a></strong></p>
+<ul>
+<li><strong>Use Case</strong>: Cloud VDI, Remote work, Windows 11 Multi-session.</li>
+<li><strong>Key</strong>: Host Pools and FSLogix profiles.</li>
+</ul>
+</li>
+<li><p><strong><a href="07_azure_container_instances.html">07. Azure Container Instances (ACI)</a></strong></p>
+<ul>
+<li><strong>Use Case</strong>: Simple apps, Task automation, Dev/Test.</li>
+<li><strong>Key</strong>: Serverless containers, Container Groups.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>🎯 Structured Learning Path (AZ-900)</h2>
+<h3>Phase 1: Foundation (Cloud Concepts)</h3>
+<ol>
+<li><strong>Understand terminology</strong>: High Availability, Scalability, Elasticity, Agility.</li>
+<li><strong>Master the Models</strong>: Know the difference between IaaS/PaaS/SaaS inside out.</li>
+<li><strong>Economics</strong>: Understand CapEx (Upfront) vs OpEx (Pay-as-you-go).</li>
+</ol>
+<h3>Phase 2: Core Services</h3>
+<ol>
+<li><strong>Compute</strong>: When to use a VM vs App Service vs Function.</li>
+<li><strong>Networking</strong>: Virtual Networks, Subnets, and how Traffic Manager routes global users.</li>
+<li><strong>Storage</strong>: Blob Storage scenarios and redundancy options (LRS/ZRS/GRS).</li>
+</ol>
+<h3>Phase 3: Security &amp; Governance</h3>
+<ol>
+<li><strong>Identity</strong>: Microsoft Entra ID (formerly Azure AD), MFA, RBAC.</li>
+<li><strong>Governance</strong>: Policy, Blueprints, Resource Locks, and Cost Management.</li>
+</ol>
+<h2>🛠️ Prerequisites &amp; Setup</h2>
+<h3>Required Accounts &amp; Tools</h3>
+<ul>
+<li><strong>Azure Free Account</strong> - <a href="https://azure.microsoft.com/free/">Sign up here</a> (Contains $200 credit).</li>
+<li><strong>Azure CLI</strong> - <a href="https://docs.microsoft.com/cli/azure/install-azure-cli">Installation guide</a>.</li>
+<li><strong>VS Code</strong> - With Azure Tools extension pack.</li>
+</ul>
+<h3>Initial Setup Checklist</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Create Azure Free Account.</li>
+<li><input checked="" disabled="" type="checkbox"> Install Azure CLI (<code>az login</code>).</li>
+<li><input disabled="" type="checkbox"> Create your first Resource Group.</li>
+<li><input disabled="" type="checkbox"> explore the Azure Portal search bar.</li>
+</ul>
+<h2>💡 Exam Cheat Sheet (Quick Tips)</h2>
+<ul>
+<li><strong>IoT Hub</strong>: Bi-directional communication with millions of IoT devices.</li>
+<li><strong>IoT Central</strong>: SaaS solution for IoT (No coding required).</li>
+<li><strong>Azure Databricks</strong>: Apache Spark-based analytics.</li>
+<li><strong>HDInsight</strong>: Open-source analytics (Hadoop, Kafka).</li>
+<li><strong>Azure Synapse</strong>: Enterprise data warehousing + Big Data analytics.</li>
+<li><strong>Azure Sentinel</strong>: Cloud-native SIEM (Security Info &amp; Event Management).</li>
+<li><strong>Azure Key Vault</strong>: Store secrets/keys/certificates securely.</li>
+<li><strong>DDoS Protection</strong>: Basic (Free) vs Standard (Paid).</li>
+</ul>
+<hr>
+<h2>📞 Support &amp; Contributions</h2>
+<h3>Found an Issue?</h3>
+<ul>
+<li>Create an issue in this repository.</li>
+<li>Specify which AZ-900 concept needs correction.</li>
+</ul>
+<p><em>Last updated: January 2026 | AZ-900 Aligned</em></p>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

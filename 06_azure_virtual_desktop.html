@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Virtual Desktop - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+
+    <aside class="sidebar">
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🖥️ Azure Virtual Desktop (AVD)</h1>
+<h2>📌 Overview</h2>
+<p><strong>Azure Virtual Desktop (AVD)</strong> is a <strong>desktop and app virtualization service</strong> that <strong>runs on the cloud</strong>. It allows <strong>users to access a full Windows desktop</strong> or specific apps from any device (laptop, tablet, phone) securely.</p>
+<ul>
+<li><strong>Formerly known as</strong>: Windows Virtual Desktop (WVD).</li>
+<li><strong>Core Concept</strong>: Your &quot;computer&quot; isn&#39;t on your desk; it&#39;s a VM in Azure that is streamed to your screen.</li>
+</ul>
+<hr>
+<h2>1. Why AVD? (Key Benefits)</h2>
+<h3>👥 Windows 10/11 Multi-session</h3>
+<p>This is a <strong>unique</strong> feature available ONLY in Azure.</p>
+<ul>
+<li><strong>Traditional VDI</strong>: 1 User = 1 VM. Expensive.</li>
+<li><strong>AVD Multi-session</strong>: Multiple users can log into the <strong>same</strong> Windows 11 VM simultaneously.</li>
+<li><strong>Benefit</strong>: Drastically reduces cost (you pay for fewer VMs).</li>
+</ul>
+<h3>🚀 Optimized for Microsoft 365</h3>
+<ul>
+<li>Office apps (Outlook, Teams, OneDrive) often perform poorly in virtual environments due to caching issues.</li>
+<li>AVD is specifically optimized to make Outlook/Teams run as fast as a local PC.</li>
+</ul>
+<h3>☁️ PaaS Management</h3>
+<ul>
+<li><strong>Microsoft manages</strong>: The Gateway, Web Access, Broker, and Diagnostics (The complicated &quot;Plumbing&quot;).</li>
+<li><strong>You manage</strong>: The Desktop VMs and Policies.</li>
+<li><strong>Comparison</strong>: Much easier than setting up a traditional Remote Desktop Services (RDS) farm on-premise.</li>
+</ul>
+<hr>
+<h2>2. Core Components</h2>
+<h3>🏨 Host Pools</h3>
+<p>A collection of identical Virtual Machines that serve the desktops/apps to users.</p>
+<ul>
+<li><strong>Personal (Persistent)</strong>: Each user gets their own dedicated VM (e.g., for developers needing admin rights).</li>
+<li><strong>Pooled (Non-persistent)</strong>: Users share a pool of VMs. The system assigns them to any available VM (Cost-effective).</li>
+</ul>
+<h3>🧊 FSLogix (Profile Containers)</h3>
+<p>In a pooled environment, you might log into <code>VM-A</code> today and <code>VM-B</code> tomorrow. What about your files and Outlook settings?</p>
+<ul>
+<li><strong>FSLogix</strong> stores your user profile in a separate &quot;Container&quot; (VHD file) on network storage (Azure Files).</li>
+<li>When you login, this container is instantly attached to the VM.</li>
+<li><strong>Result</strong>: It <em>feels</em> like your personal computer, even though you are hopping between VMs.</li>
+</ul>
+<hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li><strong>Multi-session</strong>: If the question mentions &quot;Windows 10/11 Enterprise Multi-session&quot;, the answer is <strong>Azure Virtual Desktop (AVD)</strong>.</li>
+<li><strong>Cost Savings</strong>: AVD saves money by allowing multiple users to share a single VM.</li>
+<li><strong>BYOD</strong>: Enables secure &quot;Bring Your Own Device&quot; scenarios (Corporate data stays in Azure, never touches the personal laptop).</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Load Balancers - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+
+    <aside class="sidebar">
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>⚖️ Azure Load Balancing</h1>
+<h2>📌 Overview</h2>
+<p>Load balancing refers to evenly distributing traffic (network load) across a group of backend resources or servers. Azure provides various load balancing services depending on the traffic type (Global vs Regional) and layer (Layer 4 vs Layer 7).</p>
+<hr>
+<h2>1. Regional Load Balancers (Traffic within a Region)</h2>
+<h3>🧱 Azure Load Balancer (Layer 4)</h3>
+<p>Operates at the Transport Layer (TCP/UDP). It distributes traffic based on IP address and port number.</p>
+<ul>
+<li><strong>Use Case</strong>: High-performance, low-latency Traffic distribution for non-HTTP apps (e.g., SQL AlwaysOn, internal microservice calls).</li>
+<li><strong>Features</strong>:<ul>
+<li><strong>Public</strong>: Incoming internet traffic to VMs.</li>
+<li><strong>Internal</strong>: Traffic between Private IPs inside a VNET.</li>
+</ul>
+</li>
+</ul>
+<h3>🌐 Azure Application Gateway (Layer 7)</h3>
+<p>Operates at the Application Layer (HTTP/HTTPS). It is a web traffic load balancer.</p>
+<ul>
+<li><strong>Use Case</strong>: Web Applications requiring SSL termination, Cookie-based session affinity, or URL path-based routing (<code>/images</code> goes to pool A, <code>/video</code> goes to pool B).</li>
+<li><strong>Key Feature</strong>: <strong>Web Application Firewall (WAF)</strong> - Protects against common web attacks like SQL Injection &amp; XSS.</li>
+</ul>
+<hr>
+<h2>2. Global Load Balancers (Traffic across Regions)</h2>
+<h3>🌍 Azure Traffic Manager</h3>
+<p>DNS-based traffic load balancer. It distributes traffic to services across global Azure regions.</p>
+<ul>
+<li><strong>Mechanism</strong>: Use DNS to direct client requests to the most appropriate endpoint based on a traffic-routing method (e.g., Priority, Weighted, Geographic).</li>
+<li><strong>Note</strong>: It does NOT see the traffic payload; it just returns the IP of the best regional endpoint.</li>
+</ul>
+<h3>🚪 Azure Front Door</h3>
+<p>A global, scalable entry-point that uses the Microsoft global edge network to create fast, secure, and widely scalable web applications.</p>
+<ul>
+<li><strong>Layer</strong>: Layer 7 (HTTP/HTTPS).</li>
+<li><strong>Features</strong>:<ul>
+<li>Instant failover.</li>
+<li>Global WAF.</li>
+<li>CDN-like caching capabilities.</li>
+<li><strong>Use Case</strong>: Modern, global web applications requiring instant failover and acceleration.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<h2>💡 Hinglish Explanation (Traffic Police)</h2>
+<h3><strong>1. Azure Load Balancer (Layer 4)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh Traffic Police wala sirf gaadi ka number (IP + Port) dekhta hai. Woh andar nahi dekhta ki gaadi mein kaun baitha hai. Yeh fast hai aur simple traffic (TCP/UDP) ke liye use hota hai.</li>
+</ul>
+<h3><strong>2. Application Gateway (Layer 7)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh smart security guard hai. Yeh gaadi rok kar puchta hai &quot;Kahan jana hai?&quot; (URL check karta hai).<ul>
+<li>Agar aap <code>/images</code> bologe toh Image Server ke paas bhejega.</li>
+<li>Agar aap <code>/videos</code> bologe toh Video Server ke paas bhejega.</li>
+<li>Iske paas firewall (WAF) bhi hai jo hackers ko rokta hai.</li>
+</ul>
+</li>
+</ul>
+<h3><strong>3. Traffic Manager (DNS)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh GPS system ki tarah hai. Yeh user ko batata hai ki &quot;Sabse kareeb rasta kaunsa hai?&quot;. Agar user US mein hai toh US server ka address dega, agar India mein hai toh India ka.</li>
+</ul>
+<hr>
+<h2>🆚 Selection Cheat Sheet</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Service</th>
+<th align="left">Scope</th>
+<th align="left">Layer</th>
+<th align="left">Protocols</th>
+<th align="left">Best For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Azure Load Balancer</strong></td>
+<td align="left">Regional</td>
+<td align="left">4</td>
+<td align="left">TCP/UDP</td>
+<td align="left">Non-HTTP, High Performance, Internal DB traffic</td>
+</tr>
+<tr>
+<td align="left"><strong>Application Gateway</strong></td>
+<td align="left">Regional</td>
+<td align="left">7</td>
+<td align="left">HTTP/S</td>
+<td align="left">Web Apps, WAF protection, SSL Termination</td>
+</tr>
+<tr>
+<td align="left"><strong>Traffic Manager</strong></td>
+<td align="left">Global</td>
+<td align="left">DNS</td>
+<td align="left">Any</td>
+<td align="left">Disaster Recovery routing, Simple Multi-region</td>
+</tr>
+<tr>
+<td align="left"><strong>Azure Front Door</strong></td>
+<td align="left">Global</td>
+<td align="left">7</td>
+<td align="left">HTTP/S</td>
+<td align="left">Global Microservices, Web App Acceleration</td>
+</tr>
+</tbody></table>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
