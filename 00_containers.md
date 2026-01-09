@@ -30,6 +30,7 @@ Containerization is an OS-level virtualization method used to deploy and run app
 | **Size**      | Gigabytes (GB)            | Megabytes (MB)               |
 | **Startup**   | Minutes                   | Seconds                      |
 
+![1767943947427](image/00_containers/1767943947427.png)
 ---
 
 ## 2. Docker Fundamentals 🐳
