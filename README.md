@@ -52,8 +52,18 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Key**: Docker, Kubernetes, and Azure Container Instances (ACI).
 
 - **[00. Azure Load Balancers](00_load_balancers.md)**
+
   - **Definition**: Distributing traffic.
   - **Key**: Azure Load Balancer (L4) vs Application Gateway (L7/WAF) vs Traffic Manager (DNS).
+
+- **[00. OSI Model & Azure](00_osi_model.md)**
+
+  - **Definition**: 7 Layers of networking (Physical to Application).
+  - **Key**: L4 (Load Balancer) vs L7 (App Gateway).
+
+- **[00. TCP/IP Model](00_tcp_ip_model.md)**
+  - **Definition**: The 4-layer model used by the Internet (Application, Transport, Internet, Network Interface).
+  - **Key**: TCP vs UDP; Encapsulation.
 
 ### 🏗️ Module 2: Azure Core Architecture & Services (35-40%)
 
@@ -88,8 +98,13 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Key**: Host Pools and FSLogix profiles.
 
 - **[07. Azure Container Instances (ACI)](07_azure_container_instances.md)**
+
   - **Use Case**: Simple apps, Task automation, Dev/Test.
   - **Key**: Serverless containers, Container Groups.
+
+- **[08. Azure Functions](08_azure_functions.md)**
+  - **Use Case**: Event-driven code (Serverless), responding to triggers.
+  - **Key**: Triggers vs Bindings; Consumption Plan (Pay-per-use).
 
 ---
 
