@@ -61,6 +61,11 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Definition**: 7 Layers of networking (Physical to Application).
   - **Key**: L4 (Load Balancer) vs L7 (App Gateway).
 
+- **[00. Cross-Origin Resource Sharing (CORS)](00_cors.md)**
+
+  - **Definition**: Browser security mechanism allowing cross-domain requests.
+  - **Key**: Same-Origin Policy, Preflight Requests, Access-Control-Allow-Origin.
+
 - **[00. TCP/IP Model](00_tcp_ip_model.md)**
   - **Definition**: The 4-layer model used by the Internet (Application, Transport, Internet, Network Interface).
   - **Key**: TCP vs UDP; Encapsulation.
