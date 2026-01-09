@@ -61,16 +61,7 @@
 </ul>
 <hr>
 <h2>Workflow</h2>
-<pre><code class="language-mermaid">flowchart TD
-    A[User/DevOps] --&gt; B[Azure CLI / Portal / PowerShell]
-    B --&gt; C[Resource Group]
-    C --&gt; D[Virtual Network + Subnet]
-    D --&gt; E[Network Security Group]
-    C --&gt; F[Storage - OS Disk / Data Disk]
-    C --&gt; G[Virtual Machine]
-    G --&gt; H[Public/Private IP for access]
-</code></pre>
-<hr>
+<pre><code class="language-undefined">[object Object]</code></pre><hr>
 <h2>Common Use Cases</h2>
 <ul>
 <li>Hosting web applications.</li>
@@ -81,75 +72,17 @@
 <hr>
 <h2>Steps to Create a VM using Azure CLI</h2>
 <h3>1. Login to Azure</h3>
-<pre><code class="language-bash">az login
-</code></pre>
-<h3>2. Create a Resource Group</h3>
-<pre><code class="language-bash">az group create --name MyResourceGroup --location eastus
-</code></pre>
-<h3>3. Create a Virtual Network &amp; Subnet</h3>
-<pre><code class="language-bash">az network vnet create \
-  --resource-group MyResourceGroup \
-  --name MyVNet \
-  --subnet-name MySubnet
-</code></pre>
-<h3>4. Create a Public IP Address</h3>
-<pre><code class="language-bash">az network public-ip create \
-  --resource-group MyResourceGroup \
-  --name MyPublicIP
-</code></pre>
-<h3>5. Create a Network Security Group (NSG) and Allow SSH/HTTP</h3>
-<pre><code class="language-bash">az network nsg create \
-  --resource-group MyResourceGroup \
-  --name MyNSG
-
-# Allow SSH (Linux VM)
-az network nsg rule create \
-  --resource-group MyResourceGroup \
-  --nsg-name MyNSG \
-  --name AllowSSH \
-  --protocol tcp \
-  --priority 1000 \
-  --destination-port-ranges 22 \
-  --access allow
-
-# Allow RDP (Windows VM)
-az network nsg rule create \
-  --resource-group MyResourceGroup \
-  --nsg-name MyNSG \
-  --name AllowRDP \
-  --protocol tcp \
-  --priority 1001 \
-  --destination-port-ranges 3389 \
-  --access allow
-</code></pre>
-<h3>6. Create a Network Interface Card (NIC)</h3>
-<pre><code class="language-bash">az network nic create \
-  --resource-group MyResourceGroup \
-  --name MyNIC \
-  --vnet-name MyVNet \
-  --subnet MySubnet \
-  --network-security-group MyNSG \
-  --public-ip-address MyPublicIP
-</code></pre>
-<h3>7. Create the VM</h3>
-<pre><code class="language-bash">az vm create \
-  --resource-group MyResourceGroup \
-  --name MyVM \
-  --nics MyNIC \
-  --image UbuntuLTS \
-  --admin-username azureuser \
-  --generate-ssh-keys
-</code></pre>
-<h3>8. Open Ports (if needed, e.g., HTTP/HTTPS)</h3>
-<pre><code class="language-bash">az vm open-port --port 80 --resource-group MyResourceGroup --name MyVM
-az vm open-port --port 443 --resource-group MyResourceGroup --name MyVM
-</code></pre>
-<h3>9. Connect to VM</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>2. Create a Resource Group</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>3. Create a Virtual Network &amp; Subnet</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>4. Create a Public IP Address</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>5. Create a Network Security Group (NSG) and Allow SSH/HTTP</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>6. Create a Network Interface Card (NIC)</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>7. Create the VM</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>8. Open Ports (if needed, e.g., HTTP/HTTPS)</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>9. Connect to VM</h3>
 <ul>
 <li><p><strong>Linux VM (SSH):</strong></p>
-<pre><code class="language-bash">ssh azureuser@&lt;PublicIP&gt;
-</code></pre>
-</li>
+<pre><code class="language-undefined">[object Object]</code></pre></li>
 <li><p><strong>Windows VM (RDP):</strong></p>
 <ul>
 <li>Use Remote Desktop Client → Enter <code>&lt;PublicIP&gt;</code>.</li>
@@ -167,8 +100,10 @@ az vm open-port --port 443 --resource-group MyResourceGroup --name MyVM
 </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-      hljs.highlightAll();
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
     </script>
     <script src="js/script.js"></script>
   </body>

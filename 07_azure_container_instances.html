@@ -82,32 +82,15 @@
 <h2>3. 🛠️ Hands-on: Create ACI with Azure CLI</h2>
 <h3>Step 1: Create a Container</h3>
 <p>Run a public Nginx image.</p>
-<pre><code class="language-bash">az container create \
-  --resource-group myResourceGroup \
-  --name myContainer \
-  --image nginx \
-  --ports 80 \
-  --dns-name-label my-unique-app-dns
-</code></pre>
-<p><img src="image/07_azure_container_instances/1767944862740.png" alt="1767944862740"></p>
+<pre><code class="language-undefined">[object Object]</code></pre><p><img src="image/07_azure_container_instances/1767944862740.png" alt="1767944862740"></p>
 <h3>Step 2: Verify it Works</h3>
 <p>Get the URL (FQDN) of your container.</p>
-<pre><code class="language-bash">az container show \
-  --resource-group myResourceGroup \
-  --name myContainer \
-  --query ipAddress.fqdn \
-  --output tsv
-</code></pre>
-<p><img src="image/07_azure_container_instances/1767946251549.png" alt="1767946251549"></p>
+<pre><code class="language-undefined">[object Object]</code></pre><p><img src="image/07_azure_container_instances/1767946251549.png" alt="1767946251549"></p>
 <h3>Step 3: View Logs</h3>
 <p>See what&#39;s happening inside.</p>
-<pre><code class="language-bash">az container logs --resource-group myResourceGroup --name myContainer
-</code></pre>
-<p><img src="image/07_azure_container_instances/1767946299450.png" alt="1767946299450"></p>
+<pre><code class="language-undefined">[object Object]</code></pre><p><img src="image/07_azure_container_instances/1767946299450.png" alt="1767946299450"></p>
 <h3>Step 4: Delete</h3>
-<pre><code class="language-bash">az container delete --resource-group myResourceGroup --name myContainer
-</code></pre>
-<h2><img src="image/07_azure_container_instances/1767946272622.png" alt="1767946272622"></h2>
+<pre><code class="language-undefined">[object Object]</code></pre><h2><img src="image/07_azure_container_instances/1767946272622.png" alt="1767946272622"></h2>
 <h2>💡 Exam Tips for AZ-900</h2>
 <ul>
 <li><strong>Simplest Way</strong>: ACI is the &quot;Simplest&quot; way to run a container.</li>
@@ -117,8 +100,10 @@
 </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-      hljs.highlightAll();
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
     </script>
     <script src="js/script.js"></script>
   </body>

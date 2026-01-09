@@ -81,15 +81,7 @@
 </ul>
 <hr>
 <h2>Workflow</h2>
-<pre><code class="language-mermaid">flowchart TD
-    A[User/Application] --&gt; B[Azure Storage Account]
-    B --&gt; C[Blob Storage]
-    B --&gt; D[File Storage]
-    B --&gt; E[Queue Storage]
-    B --&gt; F[Table Storage]
-    B --&gt; G[Managed Disks for VM]
-</code></pre>
-<hr>
+<pre><code class="language-undefined">[object Object]</code></pre><hr>
 <h2>Common Use Cases</h2>
 <ul>
 <li>Storing application logs, backups, and media files.</li>
@@ -101,50 +93,15 @@
 <hr>
 <h2>Steps to Manage Storage Account using Azure CLI</h2>
 <h3>1. Login to Azure</h3>
-<pre><code class="language-bash">az login
-</code></pre>
-<h3>2. Create a Resource Group (if not exists)</h3>
-<pre><code class="language-bash">az group create --name MyResourceGroup --location eastus
-</code></pre>
-<h3>3. Create a Storage Account</h3>
-<pre><code class="language-bash">az storage account create \
-  --name mystorageacct123 \
-  --resource-group MyResourceGroup \
-  --location eastus \
-  --sku Standard_LRS \
-  --kind StorageV2
-</code></pre>
-<h3>4. List Storage Accounts</h3>
-<pre><code class="language-bash">az storage account list -o table
-</code></pre>
-<h3>5. Get Storage Account Keys</h3>
-<pre><code class="language-bash">az storage account keys list \
-  --resource-group MyResourceGroup \
-  --account-name mystorageacct123
-</code></pre>
-<h3>6. Create a Blob Container</h3>
-<pre><code class="language-bash">az storage container create \
-  --name mycontainer \
-  --account-name mystorageacct123
-</code></pre>
-<h3>7. Upload a File to Blob</h3>
-<pre><code class="language-bash">az storage blob upload \
-  --container-name mycontainer \
-  --file ./localfile.txt \
-  --name remotefile.txt \
-  --account-name mystorageacct123
-</code></pre>
-<h3>8. Download a Blob</h3>
-<pre><code class="language-bash">az storage blob download \
-  --container-name mycontainer \
-  --name remotefile.txt \
-  --file ./downloadedfile.txt \
-  --account-name mystorageacct123
-</code></pre>
-<h3>9. Delete Storage Account (Caution!)</h3>
-<pre><code class="language-bash">az storage account delete --name mystorageacct123 --resource-group MyResourceGroup --yes
-</code></pre>
-<hr>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>2. Create a Resource Group (if not exists)</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>3. Create a Storage Account</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>4. List Storage Accounts</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>5. Get Storage Account Keys</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>6. Create a Blob Container</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>7. Upload a File to Blob</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>8. Download a Blob</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><h3>9. Delete Storage Account (Caution!)</h3>
+<pre><code class="language-undefined">[object Object]</code></pre><hr>
 <h2>Notes</h2>
 <ul>
 <li><strong>Storage Account Names</strong> must be <strong>globally unique</strong> and lowercase.</li>
@@ -156,8 +113,10 @@
 </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-      hljs.highlightAll();
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
     </script>
     <script src="js/script.js"></script>
   </body>

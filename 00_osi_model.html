@@ -172,32 +172,7 @@
 </ul>
 <hr>
 <h2>3. Architecture Diagram</h2>
-<pre><code class="language-mermaid">graph TD
-    subgraph &quot;Layer 7 (Application)&quot;
-        Browser[Web Browser / User]
-        AG[Azure App Gateway / Front Door]
-    end
-
-    subgraph &quot;Layer 4 (Transport)&quot;
-        LB[Azure Load Balancer]
-        TCP[TCP/UDP Port 80/443]
-    end
-
-    subgraph &quot;Layer 3 (Network)&quot;
-        VNET[Virtual Network]
-        IP[Private IP Address 10.0.0.5]
-    end
-
-    Browser --&gt;|HTTP Request| AG
-    AG --&gt;|Forward Request| LB
-    LB --&gt;|Distribute TCP Stream| VNET
-    VNET --&gt;|Route Packet| VM[Virtual Machine]
-
-    style AG fill:#0078d4,color:#fff
-    style LB fill:#0078d4,color:#fff
-    style VNET fill:#5c2d91,color:#fff
-</code></pre>
-<hr>
+<pre><code class="language-undefined">[object Object]</code></pre><hr>
 <h2>💡 Exam Tips for AZ-900</h2>
 <ul>
 <li><strong>Azure Load Balancer</strong>: Works at <strong>Layer 4</strong> (Transport).</li>
@@ -207,8 +182,10 @@
 </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-      hljs.highlightAll();
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
     </script>
     <script src="js/script.js"></script>
   </body>

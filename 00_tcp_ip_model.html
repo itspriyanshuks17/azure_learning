@@ -113,33 +113,7 @@
 </ul>
 <hr>
 <h2>3. Architecture Diagram</h2>
-<pre><code class="language-mermaid">flowchart TD
-    subgraph &quot;Application Layer&quot;
-        HTTP[HTTP/HTTPS Data]
-    end
-
-    subgraph &quot;Transport Layer&quot;
-        TCP[&quot;TCP Segment (Source Port: 1024, Dest Port: 80)&quot;]
-    end
-
-    subgraph &quot;Internet Layer&quot;
-        IP[&quot;IP Packet (Source IP: 10.0.0.5, Dest IP: 1.2.3.4)&quot;]
-    end
-
-    subgraph &quot;Network Access Layer&quot;
-        MAC[&quot;Ethernet Frame (MAC Addresses)&quot;]
-    end
-
-    HTTP --&gt;|Encapsulation| TCP
-    TCP --&gt;|Encapsulation| IP
-    IP --&gt;|Encapsulation| MAC
-    MAC --&gt;|Physical Cable| Internet((&quot;The Internet/Azure VNET&quot;))
-
-    style HTTP fill:#0078d4,color:#fff
-    style TCP fill:#5c2d91,color:#fff
-    style IP fill:#107c10,color:#fff
-</code></pre>
-<hr>
+<pre><code class="language-undefined">[object Object]</code></pre><hr>
 <hr>
 <h2>💡 Hinglish Explanation (Courier System)</h2>
 <h3><strong>1. Application Layer (Letter Likhna)</strong></h3>
@@ -173,8 +147,10 @@
 </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-      hljs.highlightAll();
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
     </script>
     <script src="js/script.js"></script>
   </body>
