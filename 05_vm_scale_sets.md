@@ -27,7 +27,31 @@ Changing the number of instances (e.g., from 2 VMs to 5 VMs).
 
 ---
 
-## 2. How VMSS Works
+## 2. Orchestration Modes 🎻
+
+Azure VMSS provides two ways to manage the instances:
+
+### 🅰️ Uniform Orchestration (Review the "Classic" VMSS)
+
+This is the standard mode familiar to most users.
+
+- **Characteristics**: Uses identical VM instances (same image, same size) from a central configuration.
+- **Management**: You manage the _Scale Set_, not individual VMs.
+- **Pros**: Easy to scale to 1,000s of VMs; faster provisioning; perfect for stateless stateless workloads.
+- **Cons**: Less flexibility if you need to tweak one specific VM.
+
+### 🅱️ Flexible Orchestration (The New Standard)
+
+Brings the best of Scale Sets and Availability Sets together.
+
+- **Characteristics**: Treats VMs like standard Azure IaaS VMs but groups them for scaling. You can mix different VM types or Spot instances.
+- **Management**: You have full control over the individual NICs and Disks of the VMs.
+- **Pros**: High Availability (spread across Fault Domains); Easier troubleshooting; Fast scaling.
+- **Recommendation**: Microsoft recommends **Flexible** mode for most new workloads.
+
+---
+
+## 3. How VMSS Works
 
 1. **Golden Image**: You provide a standard VM image (e.g., Ubuntu web server with Nginx installed) or a Custom Image (AMI equivalent).
 2. **Configuration**: You set the "Instance Count" or "Autoscale Rules".
