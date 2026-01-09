@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -62,14 +64,28 @@
 </ul>
 <hr>
 <h2>Workflow</h2>
-<div class="mermaid">flowchart TD
-    A[User/DevOps] --> B[Azure CLI / Portal / PowerShell]
-    B --> C[Resource Group]
-    C --> D[Virtual Network + Subnet]
-    D --> E[Network Security Group]
-    C --> F[Storage - OS Disk / Data Disk]
-    C --> G[Virtual Machine]
-    G --> H[Public/Private IP for access]</div><hr>
+<pre><code class="language-text">    +-----------------+
+    |   User / DevOps |
+    +-----------------+
+            |
+            v
+    +-------------------------------+
+    | Azure CLI / Portal / Powershell|
+    +-------------------------------+
+            |
+            v
+    +-----------------------+
+    |    Resource Group     |
+    +-----------------------+
+      |        |        |
+      |        |        +---> [ Virtual Network + Subnet ] --> [ Network Security Group ]
+      |        |
+      |        +------------> [ Storage: OS Disk / Data Disk ]
+      |
+      v
+  +-----------------+
+  | Virtual Machine | ----> [ Public/Private IP ]
+  +-----------------+</code></pre><hr>
 <h2>Common Use Cases</h2>
 <ul>
 <li>Hosting web applications.</li>

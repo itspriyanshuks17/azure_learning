@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -79,18 +81,26 @@
 </ul>
 <hr>
 <h2>🌲 Visualizing the Hierarchy</h2>
-<pre><code class="language-text">[ Root Management Group (Tenant) ]
-       |
-       |-- [ HR Management Group ]
-       |      |
-       |      |-- [ HR Dev Subscription ]
-       |      |      |-- [ RG-App1 ] -- (VM, Disk)
-       |      |
-       |      |-- [ HR Prod Subscription ]
-       |             |-- [ RG-App1 ] -- (VM, SQL)
-       |
-       |-- [ IT Management Group ]
-              |-- [ IT Services Subscription ]</code></pre><h2><img src="image/01_resource_hierarchy/1767940729762.png" alt="1767940729762"></h2>
+<pre><code class="language-text">                    +------------------------------+
+                    |  Root Management Group       |
+                    +------------------------------+
+                                   |
+                   +-------------------------------+
+                   |     HR Management Group       |
+                   +-------------------------------+
+                      /                         \
+                     /                           \
+          +-----------------------+      +-----------------------+
+          |  HR Dev Subscription  |      |  HR Prod Subscription |
+          +-----------------------+      +-----------------------+
+                     |                              |
+            +-----------------+            +-----------------+
+            |   RG-App-Dev    |            |   RG-App-Prod   |
+            +-----------------+            +-----------------+
+               /         \                    /         \
+        +--------+   +--------+        +--------+   +--------+
+        |   VM   |   | S3 Acc |        |   VM   |   | SQL DB |
+        +--------+   +--------+        +--------+   +--------+</code></pre><h2><img src="image/01_resource_hierarchy/1767940729762.png" alt="1767940729762"></h2>
 <h2>🔒 Policy &amp; Access Inheritance</h2>
 <p>A key concept in Azure is <strong>Inheritance</strong>. Settings applied at a higher level trickle down.</p>
 <ol>

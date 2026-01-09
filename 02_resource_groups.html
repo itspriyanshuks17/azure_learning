@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -61,11 +63,29 @@
 </ul>
 <hr>
 <h2>Workflow</h2>
-<div class="mermaid">flowchart TD
-    A[User/DevOps] --> B[Azure CLI / Portal / PowerShell]
-    B --> C[Azure Subscription]
-    C --> D[Resource Group]
-    D --> E[Resources: VM, VNet, Storage, DB, etc.]</div><hr>
+<pre><code class="language-text">    +-----------------+
+    |   User / DevOps |
+    +-----------------+
+            |
+            v
+    +-------------------------------+
+    | Azure CLI / Portal / Powershell|
+    +-------------------------------+
+            |
+            v
+    +-----------------------+
+    |   Azure Subscription  |
+    +-----------------------+
+            |
+            v
+    +-----------------------+
+    |    Resource Group     |
+    +-----------------------+
+            |
+            v
+    +------------------------------------------+
+    |  Resources: VM, VNet, Storage, DB, etc.  |
+    +------------------------------------------+</code></pre><hr>
 <h2>Common Use Cases</h2>
 <ul>
 <li>Grouping all resources of a project/application.</li>

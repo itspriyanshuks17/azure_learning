@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -81,6 +83,23 @@
 <li><strong>Azure Logic Apps</strong>: Visual workflow designer (Low-code/No-code) to integrate apps (e.g., When an email arrives, create a ticket in DevOps).</li>
 </ul>
 <hr>
+<h2>4. Architecture Comparison</h2>
+<pre><code class="language-text">    1. MONOLITH             2. MICROSERVICES           3. SERVERLESS
+    (All-in-One)            (Decoupled Services)       (Function-as-a-Service)
+
+   +-------------+         +------+   +------+          +-----------+
+   | [ UI Layer ]|         | [UI] |   | [UI] |          |  Trigger  |
+   | [ Business ]|         +------+   +------+          +-----------+
+   | [ Data Acc ]|            |          |                    |
+   +-------------+            v          v                    v
+         |                 +------+   +------+          +-----------+
+         v                 | Svc A|   | Svc B|          | Function()|
+   +-------------+         +------+   +------+          +-----------+
+   |  Database   |            |          |              (Ephemeral)
+   +-------------+            v          v
+                           +------+   +------+
+                           | DB 1 |   | DB 2 |
+                           +------+   +------+</code></pre><hr>
 <hr>
 <h2>💡 Hinglish Explanation (Cake Analogy)</h2>
 <h3><strong>1. Monolith (Wedding Cake)</strong></h3>

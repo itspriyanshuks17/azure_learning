@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -90,6 +92,29 @@
 <li><strong>Use Case</strong>: Email, Calendaring, Office tools, CRM.</li>
 </ul>
 <hr>
+<h2>4. Visual Comparison (Control vs Convenience)</h2>
+<pre><code class="language-text">      On-Premises            IaaS                 PaaS                 SaaS
+    (You Do All)         (Infrastructure)      (Platform)           (Software)
+
+   +--------------+      +--------------+      +--------------+      +--------------+
+   | Applications |      | Applications |      | Applications |      |              |
+   +--------------+      +--------------+      +--------------+      |              |
+   |     Data     |      |     Data     |      |     Data     |      |              |
+   +--------------+      +--------------+      +--------------+      |              |
+   |   Runtime    |      |   Runtime    |      |              |      |              |
+   +--------------+      +--------------+      |              |      |              |
+   |  Middleware  |      |  Middleware  |      |   Managed    |      |   Managed    |
+   +--------------+      +--------------+      |      by      |      |      by      |
+   |      OS      |      |      OS      |      |   Microsoft  |      |   Microsoft  |
+   +--------------+      +--------------+      |              |      |              |
+   |Virtualization|      |              |      |              |      |              |
+   +--------------+      |   Managed    |      |              |      |              |
+   |   Servers    |      |      by      |      |              |      |              |
+   +--------------+      |   Microsoft  |      |              |      |              |
+   |   Storage    |      |              |      |              |      |              |
+   +--------------+      |              |      |              |      |              |
+   |  Networking  |      |              |      |              |      |              |
+   +--------------+      +--------------+      +--------------+      +--------------+</code></pre><hr>
 <hr>
 <h2>💡 Hinglish Explanation (Service Models)</h2>
 <h3><strong>1. IaaS (Kiraye ka Ghar)</strong></h3>

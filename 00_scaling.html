@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -78,6 +80,23 @@
 <li><strong>Triggers</strong>: Scale based on CPU usage &gt; 70%, Memory usage, or Queue depth.</li>
 </ul>
 <hr>
+<h2>3. Architecture Diagram</h2>
+<h3>Vertical vs Horizontal Scaling</h3>
+<pre><code class="language-text">       VERTICAL SCALING (Scale Up)             HORIZONTAL SCALING (Scale Out)
+       ===========================             ==============================
+
+      +-------------------+                       +-----+    +-----+    +-----+
+      |   Big Server      |                       | VM1 |    | VM2 |    | VM3 |
+      |  (8 vCPU, 32GB)   |                       +-----+    +-----+    +-----+
+      |                   |                          ^          ^          ^
+      +-------------------+                          |          |          |
+               ^                               +--------------------------+
+               |                               |      Load Balancer       |
+               |                               +--------------------------+
+      +-------------------+                                 ^
+      |   Small Server    |                                 |
+      |  (2 vCPU, 8GB)    |                              (Traffic)
+      +-------------------+</code></pre><hr>
 <h2>3. Elasticity</h2>
 <p>The ability to <strong>automatically</strong> scale out and scale in based on demand.</p>
 <ul>

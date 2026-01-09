@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -71,7 +73,22 @@
 <li><strong>OnFailure</strong>: Restart only if it fails (Good for batch jobs).</li>
 <li><strong>Never</strong>: Run once and stop (Good for one-off tasks).</li>
 </ul>
-<h2><img src="image/07_azure_container_instances/1767944136795.png" alt="1767944136795"></h2>
+<hr>
+<h2>3. Serverless Architecture</h2>
+<pre><code class="language-text">    USER / SCRIPT             AZURE CLOUD
+    =============            =============
+
+   +-------------+          +------------------------+
+   |  Run Command|  ----->  | Azure Container Engine |
+   | (Az CLI)    |          | (Serverless Management)|
+   +-------------+          +------------------------+
+                                        |
+       (No VM to Manage)                v
+                            +------------------------+
+                            | [+] MyContainer        |
+                            |     (App + Libs)       |
+                            |     [ Public IP ]      |
+                            +------------------------+</code></pre><h2><img src="image/07_azure_container_instances/1767944136795.png" alt="1767944136795"></h2>
 <h2>2. Use Cases</h2>
 <ol>
 <li><strong>Event-Driven Applications</strong>: Run a script when a file is uploaded to Storage.</li>

@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -49,13 +51,22 @@
 <h2>1. High Availability (HA) ⏱️</h2>
 <p><strong>Definition</strong>: The ability of a system to remain operational and accessible for a long period of time, even if some components fail.</p>
 <ul>
-<li><strong>Concept</strong>: &quot;Up time&quot; (e.g., 99.99% SLA).</li>
-<li><strong>Azure Implementation</strong>:<ul>
+<li><p><strong>Concept</strong>: &quot;Up time&quot; (e.g., 99.99% SLA).</p>
+</li>
+<li><p><strong>Azure Implementation</strong>:</p>
+<ul>
 <li><strong>Availability Zones</strong>: Run VMs in different physical buildings to survive a fire/flood.</li>
 <li><strong>Region Pairs</strong>: Replicate data to a different geography to survive a major regional outage.</li>
 </ul>
 </li>
-<li><strong>Example</strong>: If one server crashes, the Load Balancer instantly directs traffic to a healthy server.</li>
+<li><p><strong>Example</strong>: If one server crashes, the Load Balancer instantly directs traffic to a healthy server.</p>
+<pre><code class="language-text">      [ Region A (Primary) ]                [ Region B (Secondary) ]
+      +--------------------+                +--------------------+
+      |   App Server  (X)  |  <-- FAIL      |    App Server      |
+      +--------------------+                +--------------------+
+               |                                     ^
+               | (Replication / Failover)            |
+               +-------------------------------------+</code></pre></li>
 </ul>
 <h2>2. Scalability 📈</h2>
 <p><strong>Definition</strong>: The ability to increase or decrease resources to meet changing demand.</p>
@@ -166,13 +177,13 @@
 <hr>
 <h2>💰 OpEx vs CapEx Review</h2>
 <ul>
-<li><strong>CapEx (Capital Expenditure)</strong>: <ul>
+<li><strong>CapEx (Capital Expenditure)</strong>:<ul>
 <li>Spending money upfront on physical infrastructure (On-Prem).</li>
 <li>You own the asset, but you are responsible for maintenance, power, and cooling. Scaling requires buying more hardware.</li>
 <li>Upfront investment in physical hardware (e.g., buying an F5 appliance).</li>
 </ul>
 </li>
-<li><strong>OpEx (Operational Expenditure)</strong>: <ul>
+<li><strong>OpEx (Operational Expenditure)</strong>:<ul>
 <li>Spending money on services or products now and being billed for them. This is the <strong>Cloud Consumption Model</strong> (Pay-as-you-go).</li>
 <li>Pay-as-you-go model used by Azure. You pay only for the traffic processed and the hours the service is active. No upfront costs, and scaling is handled by the cloud provider.</li>
 </ul>

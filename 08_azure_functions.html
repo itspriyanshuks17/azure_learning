@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -69,6 +71,20 @@
 <li><strong>Output Binding</strong>: &quot;Take this result variable and write it to a Queue message.&quot;</li>
 </ul>
 <hr>
+<h2>3. Architecture Flow</h2>
+<pre><code class="language-text">      Events (Trigger)           Function App             Action (Output)
+      ================           ============             ===============
+
+    +----------------+         +--------------+          +---------------+
+    | New Photo      | ------> | Resize Code  | -------> | Save Thumbnail|
+    | (Blob Storage) |         | (Serverless) |          | (Blob Storage)|
+    +----------------+         +--------------+          +---------------+
+            ^                                                   |
+            |                                                   v
+    +----------------+                                   +---------------+
+    | HTTP Request   |                                   | Send Email    |
+    | (API Call)     |                                   | (SendGrid)    |
+    +----------------+                                   +---------------+</code></pre><hr>
 <h2>2. Hosting Plans</h2>
 <p>You pay differently depending on how you host your function.</p>
 <h3>🥤 Consumption Plan (Serverless)</h3>

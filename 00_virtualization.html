@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -74,12 +76,28 @@
 <li><strong>Pros</strong>: Greater density (run more apps on less hardware), Portability (runs same on laptop vs cloud).</li>
 <li><strong>Azure Services</strong>:<ul>
 <li><strong>Azure Container Instances (ACI)</strong>: Run a container without managing servers (Serverless).</li>
-<li><strong>Azure Kubernetes Service (AKS)</strong>: Orchestration for managing thousands of containers.</li>
+<li><strong>Azure Kubernetes Service (AKS)</strong>: Orchestration for managing thousands of containers.<ul>
 <li><strong>Azure Container Apps</strong>: Serverless container platform for microservices.</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <hr>
+<h2>3. Architecture Comparison</h2>
+<pre><code class="language-text">      VIRTUAL MACHINE (IaaS)              CONTAINER (PaaS / Serverless)
+      ======================              =============================
+
+    +-----------------------+              +-----------------------+
+    |    App 1   |   App 2  |              |  App 1   |   App 2    |
+    +------------+----------+              +----------+------------+
+    |  Guest OS  | Guest OS |              |    Container Engine   |
+    +------------+----------+              |       (Docker)        |
+    |      Hypervisor       |              +-----------------------+
+    +-----------------------+              |        Host OS        |
+    |    Physical Server    |              +-----------------------+
+    +-----------------------+              |    Physical Server    |
+                                           +-----------------------+</code></pre><hr>
 <hr>
 <h2>💡 Hinglish Explanation (Virtualization)</h2>
 <h3><strong>Hypervisor (The Magician)</strong></h3>

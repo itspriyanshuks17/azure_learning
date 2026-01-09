@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -133,6 +135,25 @@
 </tr>
 </tbody></table>
 <hr>
+<h2>2. Visualization (Who Owns What?)</h2>
+<pre><code class="language-text">      On-Premises          IaaS                 PaaS                SaaS
+     (Full Burden)     (Infra Managed)      (Platform Managed)   (Software Managed)
+
+    +-------------+    +-------------+      +-------------+      +-------------+
+    |   Data      |    |   Data      |      |   Data      |      |   Data      |
+    +-------------+    +-------------+      +-------------+      +-------------+
+    | Applications|    | Applications|      | Applications|      |             |
+    +-------------+    +-------------+      +-------------+      |             |
+    |  Runtime    |    |  Runtime    |      |             |      |             |
+    +-------------+    +-------------+      |             |      |             |
+    |     OS      |    |     OS      |      | Microsoft   |      | Microsoft   |
+    +-------------+    +-------------+      |   Manages   |      |   Manages   |
+    | Virtualiz.  |    |             |      |             |      |             |
+    +-------------+    | Microsoft   |      |             |      |             |
+    |   Servers   |    |   Manages   |      |             |      |             |
+    +-------------+    |             |      |             |      |             |
+    |   Network   |    |             |      |             |      |             |
+    +-------------+    +-------------+      +-------------+      +-------------+</code></pre><hr>
 <h2>🔍 Detailed Breakdown</h2>
 <h3>1. ☁️ Microsoft&#39;s Responsibility (Security OF the Cloud)</h3>
 <p>Microsoft covers the global infrastructure and foundational services.</p>

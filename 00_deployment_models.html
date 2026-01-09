@@ -11,9 +11,11 @@
     />
   </head>
   <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
 
     <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <nav>
         <a href="index.html">🏠 Home</a>
@@ -56,15 +58,21 @@
 <li>High scalability (virtually unlimited).</li>
 <li>No maintenance (Microsoft manages hardware).</li>
 <li>Quick deployment.</li>
-</ul>
-</li>
-<li><strong>Cons</strong>:<ul>
 <li>Specific security/compliance requirements might not be met for certain industries.</li>
 <li>Less control over physical hardware.</li>
 </ul>
 </li>
 </ul>
-<h2>2. Private Cloud</h2>
+<h4>Architecture Diagram (Public)</h4>
+<pre><code class="language-text">       [  Microsoft Azure Datacenter  ]
+       +------------------------------+
+       |   Customer A   Customer B    |
+       |  +----------+  +----------+  |
+       |  |   VM     |  |   VM     |  |
+       |  +----------+  +----------+  |
+       |                              |
+       |    (Shared Hardware Pool)    |
+       +------------------------------+</code></pre><h2>2. Private Cloud</h2>
 <p>Computing resources used exclusively by a single business or organization. A private cloud can be physically located at your on-site organization’s datacenter, or it can be hosted by a third-party service provider.</p>
 <ul>
 <li><strong>Examples</strong>: <strong>Azure Stack Hub</strong> (running Azure services in your own datacenter).</li>
@@ -73,16 +81,23 @@
 <li><strong>Pros</strong>:<ul>
 <li>Complete control over environment and security.</li>
 <li>tailored to specific legacy applications.</li>
-</ul>
-</li>
-<li><strong>Cons</strong>:<ul>
 <li>High initial cost and ongoing maintenance.</li>
 <li>Limited scalability compared to Public Cloud.</li>
 <li>You are responsible for hardware updates.</li>
 </ul>
 </li>
 </ul>
-<h2>3. Hybrid Cloud</h2>
+<h4>Architecture Diagram (Private)</h4>
+<pre><code class="language-text">       [   Your Company Datacenter    ]
+       +------------------------------+
+       |   Marketing     Research     |
+       |  +----------+  +----------+  |
+       |  |   App    |  | Database |  |
+       |  +----------+  +----------+  |
+       |                              |
+       |    (Your Physical Racks)     |
+       |    (Firewall Protected)      |
+       +------------------------------+</code></pre><h2>3. Hybrid Cloud</h2>
 <p>A computing environment that combines a public cloud and a private cloud by allowing data and applications to be shared between them.</p>
 <ul>
 <li><strong>Examples</strong>: Using <strong>Azure Arc</strong> to manage on-prem servers from the Azure Portal; Keeping sensitive patient records on-prem (Private) while running the patient portal web app on Azure (Public).</li>
@@ -107,6 +122,17 @@
 <li><strong>Management</strong>: <strong>Azure Arc</strong> allows you to manage resources across Azure, AWS, and GCP from a single pane of glass.</li>
 </ul>
 <hr>
+<h2>5. Architecture Diagram (Hybrid Cloud)</h2>
+<pre><code class="language-text">    PRIVATE CLOUD (On-Prem)                   PUBLIC CLOUD (Azure)
+    =======================                   ====================
+
+   +-----------------------+                 +-----------------------+
+   |   Local Datacenter    |                 |    Azure Region       |
+   |                       |                 |                       |
+   |  [ SQL Database ]     | <-------------> |   [ Web App ]         |
+   |  (Sensitive Data)     |    (VPN /       |   (Public facing)     |
+   |                       |  ExpressRoute)  |                       |
+   +-----------------------+                 +-----------------------+</code></pre><hr>
 <hr>
 <h2>💡 Hinglish Explanation (Deployment Models)</h2>
 <h3><strong>1. Public Cloud (Bus)</strong></h3>
