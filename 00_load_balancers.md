@@ -74,8 +74,23 @@ These do **not** consider the real-time load or health of the server. They follo
   ```
 
 - **Weighted Round Robin**:
+
   - Assigns more requests to powerful servers and fewer to weaker ones based on a weight (e.g., Server A: 70%, Server B: 30%).
   - **Best For**: Environments with mixed hardware capabilities.
+
+  ```text
+       (High Spec)     (Standard)      (Low Spec)
+       [Server A]      [Server B]      [Server C]
+       (Weight 3)      (Weight 2)      (Weight 1)
+           ^               ^               ^
+           |  (3 Types)    |  (2 Types)    |  (1 Type)
+           |   |   |       |   |           |
+      +-----------------------------------------+
+      |             Load Balancer               |
+      +-----------------------------------------+
+                          ^
+                          | (Incoming Requests)
+  ```
 
 ### **B. Dynamic Algorithms**
 
@@ -83,6 +98,18 @@ These **do** consider the real-time status of the server (CPU, RAM, Active Conne
 
 - **Least Connection**: Sends request to the server with the fewest active connections.
 - **Resource Based**: Checks CPU/Memory usage before sending traffic.
+
+  ```text
+                  (Busy)          (Idle)
+               [Server A]       [Server B]
+               (conn: 50)       (conn: 2)
+                   |                ^
+                   | (Skipped)      | (Selected!)
+                   |                |
+             +---------------------------+
+             |      Load Balancer        | <--- Checks Status
+             +---------------------------+
+  ```
 
 ---
 
