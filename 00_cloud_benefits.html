@@ -166,8 +166,62 @@
 <hr>
 <h2>💰 OpEx vs CapEx Review</h2>
 <ul>
-<li><strong>CapEx (Capital Expenditure)</strong>: Spending money upfront on physical infrastructure (On-Prem).</li>
-<li><strong>OpEx (Operational Expenditure)</strong>: Spending money on services or products now and being billed for them. This is the <strong>Cloud Consumption Model</strong> (Pay-as-you-go).</li>
+<li><strong>CapEx (Capital Expenditure)</strong>: <ul>
+<li>Spending money upfront on physical infrastructure (On-Prem).</li>
+<li>You own the asset, but you are responsible for maintenance, power, and cooling. Scaling requires buying more hardware.</li>
+<li>Upfront investment in physical hardware (e.g., buying an F5 appliance).</li>
+</ul>
+</li>
+<li><strong>OpEx (Operational Expenditure)</strong>: <ul>
+<li>Spending money on services or products now and being billed for them. This is the <strong>Cloud Consumption Model</strong> (Pay-as-you-go).</li>
+<li>Pay-as-you-go model used by Azure. You pay only for the traffic processed and the hours the service is active. No upfront costs, and scaling is handled by the cloud provider.</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Feature</th>
+<th align="left">CapEx (On-Prem Hardware)</th>
+<th align="left">OpEx (Azure Load Balancers)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Upfront Cost</strong></td>
+<td align="left">High (Buying Servers/Racks)</td>
+<td align="left">Zero</td>
+</tr>
+<tr>
+<td align="left"><strong>Scaling</strong></td>
+<td align="left">Slow (Procurement + Install)</td>
+<td align="left">Instant (Elasticity)</td>
+</tr>
+<tr>
+<td align="left"><strong>Maintenance</strong></td>
+<td align="left">Manual (Firmware/Hardware)</td>
+<td align="left">Managed by Microsoft</td>
+</tr>
+<tr>
+<td align="left"><strong>Billing</strong></td>
+<td align="left">Fixed Asset</td>
+<td align="left">Consumption-based</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>📊 Cost Analysis</h2>
+<h3><strong>CapEx (Capital Expenditure)</strong></h3>
+<ul>
+<li><strong>Upfront Cost</strong>: High (Buying Servers/Racks).</li>
+<li><strong>Scaling</strong>: Slow (Procurement + Install).</li>
+<li><strong>Maintenance</strong>: Manual (Firmware/Hardware).</li>
+<li><strong>Billing</strong>: Fixed Asset.</li>
+</ul>
+<h3><strong>OpEx (Operating Expenditure)</strong></h3>
+<ul>
+<li><strong>Upfront Cost</strong>: Zero.</li>
+<li><strong>Scaling</strong>: Instant (Elasticity).</li>
+<li><strong>Maintenance</strong>: Managed by Microsoft.</li>
+<li><strong>Billing</strong>: Consumption-based.</li>
 </ul>
 </main>
 
