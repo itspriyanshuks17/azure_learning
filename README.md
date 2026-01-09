@@ -78,8 +78,18 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Key**: Blob access tiers (Hot, Cool, Archive, Cold).
 
 - **[05. Azure VM Scale Sets (VMSS)](05_vm_scale_sets.md)**
+
   - **Use Case**: Autoscaling identical VMs for high traffic.
   - **Key**: Horizontal Scaling vs Vertical Scaling; Autoscaling rules.
+
+- **[06. Azure Virtual Desktop (AVD)](06_azure_virtual_desktop.md)**
+
+  - **Use Case**: Cloud VDI, Remote work, Windows 11 Multi-session.
+  - **Key**: Host Pools and FSLogix profiles.
+
+- **[07. Azure Container Instances (ACI)](07_azure_container_instances.md)**
+  - **Use Case**: Simple apps, Task automation, Dev/Test.
+  - **Key**: Serverless containers, Container Groups.
 
 ---
 
