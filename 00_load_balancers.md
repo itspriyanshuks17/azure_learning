@@ -48,6 +48,87 @@ A global, scalable entry-point that uses the Microsoft global edge network to cr
 
 ---
 
+## 3. Load Balancing Algorithms 🧮
+
+### **A. Static Algorithms**
+
+These do **not** consider the real-time load or health of the server. They follow a fixed rule. **Benefits**: Simple, Less Overhead.
+
+- **Round Robin**:
+
+  - Requests are assigned to servers in a strictly circular order (Server A -> Server B -> Server C -> Server A...).
+  - **Best For**: Small applications where all servers have identical specs.
+
+  ```mermaid
+  flowchart LR
+      User((User)) --> LB[Load Balancer]
+      subgraph Pool [Backend Pool]
+        LB -- Req 1 --> VM1[VM 1]
+        LB -- Req 2 --> VM2[VM 2]
+        LB -- Req 3 --> VM3[VM 3]
+      end
+      style VM1 fill:#4caf50
+      style VM2 fill:#4caf50
+      style VM3 fill:#4caf50
+  ```
+
+- **Weighted Round Robin**:
+  - Assigns more requests to powerful servers and fewer to weaker ones based on a weight (e.g., Server A: 70%, Server B: 30%).
+  - **Best For**: Environments with mixed hardware capabilities.
+
+### **B. Dynamic Algorithms**
+
+These **do** consider the real-time status of the server (CPU, RAM, Active Connections).
+
+- **Least Connection**: Sends request to the server with the fewest active connections.
+- **Resource Based**: Checks CPU/Memory usage before sending traffic.
+
+---
+
+## 4. High Availability Configurations 🛡️
+
+### **Active-Active**
+
+- **Concept**: All Load Balancers/Servers are active and processing traffic simultaneously.
+- **Benefit**: Utilization of all resources; higher throughput.
+- **Downside**: If one fails, the others must handle the extra load immediately.
+
+```mermaid
+flowchart TD
+    User((User)) --> TM[Traffic Manager]
+    subgraph RegionA [Region A]
+      TM -->|Traffic| LB1[LB A]
+      LB1 --> App1[App A]
+    end
+    subgraph RegionB [Region B]
+      TM -->|Traffic| LB2[LB B]
+      LB2 --> App2[App B]
+    end
+    style App1 fill:#4caf50,color:#fff
+    style App2 fill:#4caf50,color:#fff
+```
+
+### **Active-Passive (Failover)**
+
+- **Concept**: One Primary server handles all traffic. The Secondary (Passive) server sits idle, waiting for the Primary to fail.
+- **Benefit**: Predictable failover capacity (the backup is fresh).
+- **Downside**: Wasted resources (money spent on an idle server).
+
+```mermaid
+flowchart TD
+    User((User)) --> TM[Traffic Manager]
+    subgraph Primary [Primary Region]
+      TM -->|Active| LB1[LB A]
+      LB1 --> App1[App A]
+    end
+    subgraph Secondary [Secondary Region]
+      TM -.->|Standby| LB2[LB B]
+      LB2 --> App2[App B]
+    end
+    style App1 fill:#4caf50,color:#fff
+    style App2 fill:#ff5722,color:#fff,stroke-dasharray: 5 5
+```
+
 ---
 
 ## 💡 Hinglish Explanation (Traffic Police)
@@ -67,6 +148,20 @@ A global, scalable entry-point that uses the Microsoft global edge network to cr
 
 - **Hinglish**: Yeh GPS system ki tarah hai. Yeh user ko batata hai ki "Sabse kareeb rasta kaunsa hai?". Agar user US mein hai toh US server ka address dega, agar India mein hai toh India ka.
 
+### **4. Algorithms (Tareeka)**
+
+- **Round Robin (Card Dealer)**:
+  - **Hinglish**: Tash ke patte batna. Ek tumhe, ek tumhe, ek tumhe. Sabko barabar mauka milega, chahe koi slow ho ya fast.
+- **Dynamic (Smart Queue)**:
+  - **Hinglish**: Mall ka billing counter. Aap wahan jaoge jahan sabse kam bheed hai (Least Connection).
+
+### **5. High Availability (Jugaad)**
+
+- **Active-Active (Dono Dukan Khuli)**:
+  - **Hinglish**: Do billing counters khule hain. Dono pe kaam ho raha hai. Kaam jaldi hoga.
+- **Active-Passive (Stepney Tyre)**:
+  - **Hinglish**: Ek tyre gadi chala raha hai (Primary), doosra trunk mein pada hai (Secondary). Jab pehla phatega, tabhi doosra use hoga. Tab tak woh extra weight hai (Cost).
+
 ---
 
 ## 🆚 Selection Cheat Sheet
@@ -77,3 +172,23 @@ A global, scalable entry-point that uses the Microsoft global edge network to cr
 | **Application Gateway** | Regional | 7     | HTTP/S    | Web Apps, WAF protection, SSL Termination       |
 | **Traffic Manager**     | Global   | DNS   | Any       | Disaster Recovery routing, Simple Multi-region  |
 | **Azure Front Door**    | Global   | 7     | HTTP/S    | Global Microservices, Web App Acceleration      |
+
+
+---
+
+## 💡 Exam Tips for AZ-900
+
+### **1. Load Balancing**
+
+- **Question Type**: Multiple Choice (Single Answer).
+- **Difficulty**: Easy to Moderate.
+- **Key Concepts**:
+  - **Azure Load Balancer** (Layer 4).
+  - **Application Gateway** (Layer 7).
+  - **Traffic Manager** (DNS).
+  - **Azure Front Door** (Layer 7).
+- **Best Practices**:
+  - Understand the differences between regional and global load balancers.
+  - Know the use cases for each service.
+  - Be familiar with the load balancing algorithms and their trade-offs.
+  - Understand the OpEx vs CapEx comparison.
