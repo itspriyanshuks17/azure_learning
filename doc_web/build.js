@@ -17,21 +17,41 @@ const CONFIG = {
 };
 
 // Markdown Parser Setup
-const renderer = new marked.Renderer();
-renderer.code = function(code, language) {
-    if (language === 'mermaid' || language === 'flowchart' || language === 'graph') {
-        return `<div class="mermaid">${code}</div>`;
+// Markdown Parser Setup
+const renderer = {
+    code(code, language) {
+        let text = '';
+        let lang = '';
+
+        // Handle Token Object (marked v17+ potential signature)
+        if (typeof code === 'object' && code !== null) {
+            text = code.text || '';
+            lang = code.lang || '';
+        } else {
+            // Classic signature
+            text = code || '';
+            lang = language || '';
+        }
+        
+        // Ensure string
+        text = String(text);
+        
+        const cleanLang = (lang || '').trim();
+
+        // Fallback: Check if content looks like mermaid
+        const isMermaidContent = /^(flowchart|graph|sequenceDiagram|classDiagram|stateDiagram|erDiagram|gantt|pie|journey|mindmap|timeline)/i.test(text.trim());
+
+        if (cleanLang === 'mermaid' || cleanLang === 'flowchart' || cleanLang === 'graph' || isMermaidContent) {
+            return `<div class="mermaid">${text}</div>`;
+        }
+        return `<pre><code class="language-${cleanLang}">${text}</code></pre>`;
     }
-    // Default behavior for other languages (let client-side highlight.js handle it)
-    return `<pre><code class="language-${language}">${code}</code></pre>`;
 };
 
-marked.setOptions({
-    renderer: renderer,
+marked.use({ 
+    renderer,
     gfm: true,
-    breaks: true,
-    headerIds: true,
-    mangle: false
+    breaks: true
 });
 
 async function build() {
