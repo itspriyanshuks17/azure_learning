@@ -46,6 +46,11 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Definition**: How the hypervisor works and the difference between VMs and Containers.
   - **Key**: Azure Kubernetes Service (AKS) concept.
 
+- **[00. Containerization & Docker](00_containers.md)**
+
+  - **Definition**: Containers (OS Virtualization) vs VMs (Hardware Virtualization).
+  - **Key**: Docker, Kubernetes, and Azure Container Instances (ACI).
+
 - **[00. Azure Load Balancers](00_load_balancers.md)**
   - **Definition**: Distributing traffic.
   - **Key**: Azure Load Balancer (L4) vs Application Gateway (L7/WAF) vs Traffic Manager (DNS).
