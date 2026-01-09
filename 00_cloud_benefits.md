@@ -107,5 +107,35 @@ Understanding the core benefits of the cloud is essential for the AZ-900 exam. T
 
 ## 💰 OpEx vs CapEx Review
 
-- **CapEx (Capital Expenditure)**: Spending money upfront on physical infrastructure (On-Prem).
-- **OpEx (Operational Expenditure)**: Spending money on services or products now and being billed for them. This is the **Cloud Consumption Model** (Pay-as-you-go).
+- **CapEx (Capital Expenditure)**: 
+    - Spending money upfront on physical infrastructure (On-Prem).
+    - You own the asset, but you are responsible for maintenance, power, and cooling. Scaling requires buying more hardware.
+    - Upfront investment in physical hardware (e.g., buying an F5 appliance).
+- **OpEx (Operational Expenditure)**: 
+    - Spending money on services or products now and being billed for them. This is the **Cloud Consumption Model** (Pay-as-you-go).
+    - Pay-as-you-go model used by Azure. You pay only for the traffic processed and the hours the service is active. No upfront costs, and scaling is handled by the cloud provider.
+
+| Feature          | CapEx (On-Prem Hardware)     | OpEx (Azure Load Balancers) |
+| :--------------- | :--------------------------- | :-------------------------- |
+| **Upfront Cost** | High (Buying Servers/Racks)  | Zero                        |
+| **Scaling**      | Slow (Procurement + Install) | Instant (Elasticity)        |
+| **Maintenance**  | Manual (Firmware/Hardware)   | Managed by Microsoft        |
+| **Billing**      | Fixed Asset                  | Consumption-based           |
+
+---
+
+## 📊 Cost Analysis
+
+### **CapEx (Capital Expenditure)**
+
+- **Upfront Cost**: High (Buying Servers/Racks).
+- **Scaling**: Slow (Procurement + Install).
+- **Maintenance**: Manual (Firmware/Hardware).
+- **Billing**: Fixed Asset.
+
+### **OpEx (Operating Expenditure)**
+
+- **Upfront Cost**: Zero.
+- **Scaling**: Instant (Elasticity).
+- **Maintenance**: Managed by Microsoft.
+- **Billing**: Consumption-based.
