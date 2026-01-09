@@ -68,8 +68,13 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Key**: Availability Sets vs Availability Zones.
 
 - **[04. Azure Storage Services](04_storage_services.md)**
+
   - **Use Case**: Storing blobs, files, queues, and tables.
   - **Key**: Blob access tiers (Hot, Cool, Archive, Cold).
+
+- **[05. Azure VM Scale Sets (VMSS)](05_vm_scale_sets.md)**
+  - **Use Case**: Autoscaling identical VMs for high traffic.
+  - **Key**: Horizontal Scaling vs Vertical Scaling; Autoscaling rules.
 
 ---
 
