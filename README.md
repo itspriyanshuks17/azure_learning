@@ -1,1 +1,130 @@
-# azure_learning
+# 🚀 Azure Learning Guide (AZ-900)
+
+A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering core services, cloud concepts, security, and architecture. This repository contains detailed notes and guides to help you master Azure and prepare for the **AZ-900: Microsoft Azure Fundamentals** exam.
+
+## 📚 Table of Contents
+
+### ☁️ Module 1: Cloud Concepts (25-30%)
+
+- **[00. Benefits of Cloud Computing](00_cloud_benefits.md)**
+
+  - **Definition**: HA, Scalability, Elasticity, Agility, Geo-distribution, DR.
+  - **Key**: Understanding the "Why" behind cloud adoption.
+
+- **[00. Azure Shared Responsibility Model](00_shared_responsibility.md)**
+
+  - **Definition**: Fundamental security model defining what Microsoft manages vs what YOU manage.
+  - **Key**: Security **OF** the Cloud (Physical, Network) vs Security **IN** the Cloud (Data, Identity).
+
+- **[00. Deployment Models](00_deployment_models.md)**
+
+  - **Definition**: Public, Private, Hybrid, and Multi-Cloud.
+  - **Key**: CapEx vs OpEx; Azure Arc for hybrid management.
+
+- **[00. Cloud Service Models (IaaS, PaaS, SaaS)](00_service_models.md)**
+
+  - **Definition**: IaaS (VMs), PaaS (App Service), SaaS (M365).
+  - **Key**: Understanding the trade-off between Control and Management overhead.
+
+- **[00. Scalability & Auto Scaling](00_scaling.md)**
+
+  - **Definition**: Vertical vs Horizontal Scaling; Elasticity.
+  - **Key**: Azure Virtual Machine Scale Sets (VMSS) and Autoscale rules.
+
+- **[00. Monolith vs Microservices](00_monolith_vs_microservices.md)**
+
+  - **Definition**: Comparison of architecture styles.
+  - **Key**: Decoupling services using Azure Functions and Service Bus.
+
+- **[00. Stateless vs Stateful Applications](00_stateless_applications.md)**
+
+  - **Definition**: Designing for the cloud using external state stores (Redis/Cosmos DB).
+  - **Key**: Why statelessness enables massive horizontal scaling.
+
+- **[00. Virtualization & Containers](00_virtualization.md)**
+
+  - **Definition**: How the hypervisor works and the difference between VMs and Containers.
+  - **Key**: Azure Kubernetes Service (AKS) concept.
+
+- **[00. Azure Load Balancers](00_load_balancers.md)**
+  - **Definition**: Distributing traffic.
+  - **Key**: Azure Load Balancer (L4) vs Application Gateway (L7/WAF) vs Traffic Manager (DNS).
+
+### 🏗️ Module 2: Azure Core Architecture & Services (35-40%)
+
+- **[01. Azure Resource Hierarchy](01_resource_hierarchy.md)**
+
+  - **Definition**: Management Groups -> Subscriptions -> Resource Groups -> Resources.
+  - **Key**: Inheritance of RBAC and Policies.
+
+- **[02. Azure Resource Groups](02_resource_groups.md)**
+
+  - **Definition**: Logical container for resources deployed on Azure.
+  - **Key**: Lifecycle management, RBAC scopes, and region independence.
+
+- **[03. Azure Virtual Machines (VMs)](03_virtual_machines.md)**
+
+  - **Use Case**: IaaS workloads, Lift and Shift, Custom OS requirements.
+  - **Key**: Availability Sets vs Availability Zones.
+
+- **[04. Azure Storage Services](04_storage_services.md)**
+  - **Use Case**: Storing blobs, files, queues, and tables.
+  - **Key**: Blob access tiers (Hot, Cool, Archive, Cold).
+
+---
+
+## 🎯 Structured Learning Path (AZ-900)
+
+### Phase 1: Foundation (Cloud Concepts)
+
+1. **Understand terminology**: High Availability, Scalability, Elasticity, Agility.
+2. **Master the Models**: Know the difference between IaaS/PaaS/SaaS inside out.
+3. **Economics**: Understand CapEx (Upfront) vs OpEx (Pay-as-you-go).
+
+### Phase 2: Core Services
+
+1. **Compute**: When to use a VM vs App Service vs Function.
+2. **Networking**: Virtual Networks, Subnets, and how Traffic Manager routes global users.
+3. **Storage**: Blob Storage scenarios and redundancy options (LRS/ZRS/GRS).
+
+### Phase 3: Security & Governance
+
+1. **Identity**: Microsoft Entra ID (formerly Azure AD), MFA, RBAC.
+2. **Governance**: Policy, Blueprints, Resource Locks, and Cost Management.
+
+## 🛠️ Prerequisites & Setup
+
+### Required Accounts & Tools
+
+- **Azure Free Account** - [Sign up here](https://azure.microsoft.com/free/) (Contains $200 credit).
+- **Azure CLI** - [Installation guide](https://docs.microsoft.com/cli/azure/install-azure-cli).
+- **VS Code** - With Azure Tools extension pack.
+
+### Initial Setup Checklist
+
+- [x] Create Azure Free Account.
+- [x] Install Azure CLI (`az login`).
+- [ ] Create your first Resource Group.
+- [ ] explore the Azure Portal search bar.
+
+## 💡 Exam Cheat Sheet (Quick Tips)
+
+- **IoT Hub**: Bi-directional communication with millions of IoT devices.
+- **IoT Central**: SaaS solution for IoT (No coding required).
+- **Azure Databricks**: Apache Spark-based analytics.
+- **HDInsight**: Open-source analytics (Hadoop, Kafka).
+- **Azure Synapse**: Enterprise data warehousing + Big Data analytics.
+- **Azure Sentinel**: Cloud-native SIEM (Security Info & Event Management).
+- **Azure Key Vault**: Store secrets/keys/certificates securely.
+- **DDoS Protection**: Basic (Free) vs Standard (Paid).
+
+---
+
+## 📞 Support & Contributions
+
+### Found an Issue?
+
+- Create an issue in this repository.
+- Specify which AZ-900 concept needs correction.
+
+_Last updated: January 2026 | AZ-900 Aligned_
