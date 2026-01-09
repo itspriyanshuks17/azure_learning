@@ -42,7 +42,15 @@ const renderer = {
         const isMermaidContent = /^(flowchart|graph|sequenceDiagram|classDiagram|stateDiagram|erDiagram|gantt|pie|journey|mindmap|timeline)/i.test(text.trim());
 
         if (cleanLang === 'mermaid' || cleanLang === 'flowchart' || cleanLang === 'graph' || isMermaidContent) {
-            return `<div class="mermaid">${text}</div>`;
+            // Decode HTML entities (e.g., &quot; -> ", &gt; -> >) so Mermaid can parse it
+            const decodedText = text
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&amp;/g, '&');
+            
+            return `<div class="mermaid">${decodedText}</div>`;
         }
         return `<pre><code class="language-${cleanLang}">${text}</code></pre>`;
     }
