@@ -17,7 +17,17 @@ const CONFIG = {
 };
 
 // Markdown Parser Setup
+const renderer = new marked.Renderer();
+renderer.code = function(code, language) {
+    if (language === 'mermaid' || language === 'flowchart' || language === 'graph') {
+        return `<div class="mermaid">${code}</div>`;
+    }
+    // Default behavior for other languages (let client-side highlight.js handle it)
+    return `<pre><code class="language-${language}">${code}</code></pre>`;
+};
+
 marked.setOptions({
+    renderer: renderer,
     gfm: true,
     breaks: true,
     headerIds: true,
