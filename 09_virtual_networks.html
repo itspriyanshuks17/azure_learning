@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Networks - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🌐 Azure Virtual Networks (VNet)</h1>
+<h2>📌 Overview</h2>
+<p>Azure Virtual Network (VNet) is the <strong>fundamental building block</strong> for your <strong>private network in Azure</strong>. It enables Azure resources, such as <strong>Virtual Machines</strong> (VMs), <strong>to securely communicate with each other</strong>, the internet, and on-premises networks.</p>
+<p>Think of a VNet as your own isolated network within the Microsoft Azure cloud.</p>
+<h3>✨ Key Features</h3>
+<ul>
+<li><strong>Isolation:</strong> It is <strong>logically isolated</strong> from other networks in Azure.</li>
+<li><strong>Communication:</strong> Allows <strong>resources</strong> to <strong>talk</strong> to <strong>each other securely</strong>.</li>
+<li><strong>Filtering:</strong> You can <strong>filter traffic using Network Security Groups</strong> (NSGs).</li>
+<li><strong>Routing:</strong> You can control how traffic flows between subnets.</li>
+</ul>
+<hr>
+<h2>🏗️ Architecture Components</h2>
+<h3>1. Address Space (CIDR)</h3>
+<p>When you create a VNet, you must <strong>specify a custom private IP address space using CIDR notation</strong> (e.g., <code>10.0.0.0/16</code>).</p>
+<h3>2. Subnets</h3>
+<p>A VNet can be <strong>segmented into smaller parts</strong> called <strong>Subnets</strong>. This helps in organizing and securing resources.</p>
+<ul>
+<li><strong>Example:</strong> <code>10.0.1.0/24</code> for Web Servers, <code>10.0.2.0/24</code> for Database Servers.</li>
+<li><strong>Reserved IPs:</strong> Azure reserves the first 4 and the last 1 IP address in <em>every</em> subnet (Total 5 IPs reserved).</li>
+</ul>
+<h4>Architecture Diagram (VNet Structure)</h4>
+<pre><code class="language-text">       [  Azure Cloud Region (East US)  ]
+       +--------------------------------+
+       |   VNet (Address: 10.0.0.0/16)  |
+       |  +--------------------------+  |
+       |  |  Subnet A (10.0.1.0/24)  |  |  <-- Web Tier
+       |  |   [VM1]      [VM2]       |  |
+       |  +--------------------------+  |
+       |                              |
+       |  +--------------------------+  |
+       |  |  Subnet B (10.0.2.0/24)  |  |  <-- DB Tier
+       |  |   [SQL DB]               |  |
+       |  +--------------------------+  |
+       +--------------------------------+</code></pre><hr>
+<h2>🛡️ Security (Traffic Filtering)</h2>
+<h3>1. Network Security Groups (NSG)</h3>
+<p>An NSG contains security rules that allow or deny inbound network traffic to, or outbound network traffic from, several types of Azure resources.</p>
+<ul>
+<li><strong>Rules:</strong> Based on Source IP, Destination IP, Port, and Protocol (5-Tuple).</li>
+<li><strong>Default:</strong> By default, all inbound traffic is blocked (except from VNet), and all outbound traffic is active.</li>
+</ul>
+<h3>2. Application Security Groups (ASG)</h3>
+<p>ASGs allow you to group VMs based on their application logic (e.g., &quot;WebServers&quot;, &quot;DBServers&quot;) rather than explicit IP addresses. This simplifies NSG rules.</p>
+<hr>
+<h2>🔗 Connectivity (Connecting VNets)</h2>
+<h3>1. VNet Peering</h3>
+<p>Connects two Azure Virtual Networks. Once peered, the VNets appear as one for connectivity purposes.</p>
+<ul>
+<li><strong>Low Latency:</strong> Data flows over the ultra-fast Microsoft backbone network.</li>
+<li><strong>Non-Transitive:</strong> If A connects to B, and B connects to C, A <em>cannot</em> talk to C automatically. You must explicitly peer A and C.</li>
+</ul>
+<h4>Architecture Diagram (VNet Peering)</h4>
+<pre><code class="language-text">     [ VNet A ] <===========> [ VNet B ]
+     (10.1.0.0)    Peering    (10.2.0.0)
+        |
+        x  (NO Direct Access)
+        |
+     [ VNet C ]</code></pre><h3>2. VPN Gateway</h3>
+<p>Used to send <strong>encrypted traffic between an Azure virtual network</strong> and <strong>an on-premises location</strong> over the public Internet.</p>
+<hr>
+<h2>💡 Hinglish Explanation (Housing Society)</h2>
+<h3><strong>1. Virtual Network (Housing Society)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: VNet ek badi &quot;Housing Society&quot; yani Gated Community jaisi hai. Yeh poori duniya se alag (Isolated) hai. Iske andar sirf permission wale log hi aa sakte hain.</li>
+</ul>
+<h3><strong>2. Address Space (Plot Area)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Society banane se pehle hum decide karte hain ki kitni zameen leni hai (e.g., <code>10.0.0.0/16</code>). Yeh decide karta hai ki kitne ghar ban sakte hain.</li>
+</ul>
+<h3><strong>3. Subnets (Blocks/Wards)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Society ke andar hum alag-alag blocks banate hain:<ul>
+<li><strong>Block A (Web Subnet)</strong>: Sirf Web servers rahenge.</li>
+<li><strong>Block B (DB Subnet)</strong>: Sirf Database rahega.</li>
+<li>Security guard (NSG) ko bol diya hai ki &quot;Block A ke log Block B mein bina permission nahi ja sakte&quot;.</li>
+</ul>
+</li>
+</ul>
+<h3><strong>4. Reserved IPs (Nagar Palika)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Har block mein Azure 5 IP addresses apne paas rakhta hai (Maintenance aur Routing ke liye). Jaise society mein kuch area park aur bijli ghar ke liye reserved hota hai.</li>
+</ul>
+<h3><strong>5. Peering (Bridge)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Agar do alag-alag societies (VNet A aur VNet B) ko judna hai, toh unke beech ek &quot;Bridge&quot; (Peering) bana dete hain. Log bina highway (Internet) pe gaye seedha aa-ja sakte hain.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips for AZ-900</h2>
+<ol>
+<li><strong>Isolation</strong>: VNets are scoped to a single <strong>Region</strong>. They cannot span multiple regions (though you can peer them across regions).</li>
+<li><strong>Peering</strong>: Remember that VNet peering is <strong>not transitive</strong>. (A &lt;-&gt; B &lt;-&gt; C does not mean A &lt;-&gt; C).</li>
+<li><strong>Reserved IPs</strong>: Always remember Azure reserves <strong>5 IP addresses</strong> in every subnet. If you need 10 IPs, plan for at least 15.</li>
+<li><strong>NSG vs ASG</strong>: NSG is the <em>Rule List</em> (Allow/Deny), ASG is the <em>Label</em> (WebServers) to make rules easier to write.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
