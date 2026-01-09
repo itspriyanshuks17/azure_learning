@@ -47,21 +47,21 @@
 
     <main class="main-content"><h1>🌐 Azure Virtual Networks (VNet)</h1>
 <h2>📌 Overview</h2>
-<p>Azure Virtual Network (VNet) is the fundamental building block for your private network in Azure. It enables Azure resources, such as Virtual Machines (VMs), to securely communicate with each other, the internet, and on-premises networks.</p>
+<p>Azure Virtual Network (VNet) is the <strong>fundamental building block</strong> for your <strong>private network in Azure</strong>. It enables Azure resources, such as <strong>Virtual Machines</strong> (VMs), <strong>to securely communicate with each other</strong>, the internet, and on-premises networks.</p>
 <p>Think of a VNet as your own isolated network within the Microsoft Azure cloud.</p>
 <h3>✨ Key Features</h3>
 <ul>
-<li><strong>Isolation:</strong> It is logically isolated from other networks in Azure.</li>
-<li><strong>Communication:</strong> Allows resources to talk to each other securely.</li>
-<li><strong>Filtering:</strong> You can filter traffic using Network Security Groups (NSGs).</li>
+<li><strong>Isolation:</strong> It is <strong>logically isolated</strong> from other networks in Azure.</li>
+<li><strong>Communication:</strong> Allows <strong>resources</strong> to <strong>talk</strong> to <strong>each other securely</strong>.</li>
+<li><strong>Filtering:</strong> You can <strong>filter traffic using Network Security Groups</strong> (NSGs).</li>
 <li><strong>Routing:</strong> You can control how traffic flows between subnets.</li>
 </ul>
 <hr>
 <h2>🏗️ Architecture Components</h2>
 <h3>1. Address Space (CIDR)</h3>
-<p>When you create a VNet, you must specify a custom private IP address space using CIDR notation (e.g., <code>10.0.0.0/16</code>).</p>
+<p>When you create a VNet, you must <strong>specify a custom private IP address space using CIDR notation</strong> (e.g., <code>10.0.0.0/16</code>).</p>
 <h3>2. Subnets</h3>
-<p>A VNet can be segmented into smaller parts called <strong>Subnets</strong>. This helps in organizing and securing resources.</p>
+<p>A VNet can be <strong>segmented into smaller parts</strong> called <strong>Subnets</strong>. This helps in organizing and securing resources.</p>
 <ul>
 <li><strong>Example:</strong> <code>10.0.1.0/24</code> for Web Servers, <code>10.0.2.0/24</code> for Database Servers.</li>
 <li><strong>Reserved IPs:</strong> Azure reserves the first 4 and the last 1 IP address in <em>every</em> subnet (Total 5 IPs reserved).</li>
@@ -103,8 +103,30 @@
         |
         x  (NO Direct Access)
         |
-     [ VNet C ]</code></pre><h3>2. VPN Gateway</h3>
-<p>Used to send encrypted traffic between an Azure virtual network and an on-premises location over the public Internet.</p>
+     [ VNet C ]</code></pre><h3>3. Step-by-Step Guide: Creating VNet Peering 🛠️</h3>
+<p>Here is how you can practically implement peering between two VNets using Azure CLI.</p>
+<p><strong>Step 1: Create Two Virtual Networks (VNet1 &amp; VNet2)</strong></p>
+<pre><code class="language-bash"># Create Resource Group
+az group create --name MyResourceGroup --location eastus
+
+# Create VNet 1
+az network vnet create --name VNet1 --resource-group MyResourceGroup --address-prefix 10.1.0.0/16 --subnet-name Subnet1 --subnet-prefix 10.1.1.0/24
+
+# Create VNet 2
+az network vnet create --name VNet2 --resource-group MyResourceGroup --address-prefix 10.2.0.0/16 --subnet-name Subnet1 --subnet-prefix 10.2.1.0/24</code></pre><p><strong>Step 2: Initiate Peering from VNet1 to VNet2</strong></p>
+<pre><code class="language-bash"># Get ID of VNet2
+VNet2Id=$(az network vnet show --resource-group MyResourceGroup --name VNet2 --query id --output tsv)
+
+# Peer VNet1 -> VNet2
+az network vnet peering create --name VNet1ToVNet2 --resource-group MyResourceGroup --vnet-name VNet1 --remote-vnet $VNet2Id --allow-vnet-access</code></pre><p><strong>Step 3: Initiate Peering from VNet2 to VNet1</strong><br><em>Peering must be reciprocal (both ways) to work.</em></p>
+<pre><code class="language-bash"># Get ID of VNet1
+VNet1Id=$(az network vnet show --resource-group MyResourceGroup --name VNet1 --query id --output tsv)
+
+# Peer VNet2 -> VNet1
+az network vnet peering create --name VNet2ToVNet1 --resource-group MyResourceGroup --vnet-name VNet2 --remote-vnet $VNet1Id --allow-vnet-access</code></pre><p><strong>Step 4: Verify Connectivity</strong></p>
+<pre><code class="language-bash"># Check Peering State (Should be 'Connected')
+az network vnet peering show --resource-group MyResourceGroup --vnet-name VNet1 --name VNet1ToVNet2 --query peeringState</code></pre><h3>4. VPN Gateway</h3>
+<p>Used to send <strong>encrypted traffic between an Azure virtual network</strong> and <strong>an on-premises location</strong> over the public Internet.</p>
 <hr>
 <h2>💡 Hinglish Explanation (Housing Society)</h2>
 <h3><strong>1. Virtual Network (Housing Society)</strong></h3>

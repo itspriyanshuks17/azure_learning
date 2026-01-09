@@ -83,7 +83,52 @@ Connects two Azure Virtual Networks. Once peered, the VNets appear as one for co
      [ VNet C ]
 ```
 
-### 2. VPN Gateway
+### 3. Step-by-Step Guide: Creating VNet Peering 🛠️
+
+Here is how you can **practically implement peering between two VNets** using Azure CLI.
+
+**Step 1: Create Two Virtual Networks (VNet1 & VNet2)**
+
+```bash
+# Create Resource Group
+az group create --name MyResourceGroup --location eastus
+
+# Create VNet 1
+az network vnet create --name VNet1 --resource-group MyResourceGroup --address-prefix 10.1.0.0/16 --subnet-name Subnet1 --subnet-prefix 10.1.1.0/24
+
+# Create VNet 2
+az network vnet create --name VNet2 --resource-group MyResourceGroup --address-prefix 10.2.0.0/16 --subnet-name Subnet1 --subnet-prefix 10.2.1.0/24
+```
+
+**Step 2: Initiate Peering from VNet1 to VNet2**
+
+```bash
+# Get ID of VNet2
+VNet2Id=$(az network vnet show --resource-group MyResourceGroup --name VNet2 --query id --output tsv)
+
+# Peer VNet1 -> VNet2
+az network vnet peering create --name VNet1ToVNet2 --resource-group MyResourceGroup --vnet-name VNet1 --remote-vnet $VNet2Id --allow-vnet-access
+```
+
+**Step 3: Initiate Peering from VNet2 to VNet1**
+_Peering must be reciprocal (both ways) to work._
+
+```bash
+# Get ID of VNet1
+VNet1Id=$(az network vnet show --resource-group MyResourceGroup --name VNet1 --query id --output tsv)
+
+# Peer VNet2 -> VNet1
+az network vnet peering create --name VNet2ToVNet1 --resource-group MyResourceGroup --vnet-name VNet2 --remote-vnet $VNet1Id --allow-vnet-access
+```
+
+**Step 4: Verify Connectivity**
+
+```bash
+# Check Peering State (Should be 'Connected')
+az network vnet peering show --resource-group MyResourceGroup --vnet-name VNet1 --name VNet1ToVNet2 --query peeringState
+```
+
+### 4. VPN Gateway
 
 Used to send **encrypted traffic between an Azure virtual network** and **an on-premises location** over the public Internet.
 
