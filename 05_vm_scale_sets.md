@@ -104,6 +104,79 @@ VMSS automatically distributes instances across:
 
 ---
 
+## 4. 🛠️ Hands-on: Create VMSS with Azure CLI
+
+### Step 1: Create a Resource Group
+
+```bash
+az group create --name myResourceGroup --location eastus
+```
+
+### Step 2: Create a VM Scale Set
+
+This command creates a VMSS with 2 instances, a load balancer, and generates SSH keys automatically.
+
+```bash
+az vmss create \
+  --resource-group myResourceGroup \
+  --name myScaleSet \
+  --image Ubuntu2204 \
+  --upgrade-policy-mode automatic \
+  --admin-username azureuser \
+  --generate-ssh-keys
+```
+
+### Step 3: View the Instances
+
+Check the status of your running instances or list all resources in the group.
+
+```bash
+# List all resources (VMSS, LB, VNET, etc.)
+az resource list --resource-group myResourceGroup --output table
+
+# List specific VMSS instances
+az vmss list-instances \
+  --resource-group myResourceGroup \
+  --name myScaleSet \
+  --output table
+```
+
+### Step 4: Manually Scale Out
+
+Increase the instance count from default (2) to 5.
+
+```bash
+az vmss scale \
+  --resource-group myResourceGroup \
+  --name myScaleSet \
+  --new-capacity 5
+```
+
+### Step 5: Configure Autoscale (Optional)
+
+Add a rule to scale out when CPU > 70%.
+
+```bash
+az monitor autoscale create \
+  --resource-group myResourceGroup \
+  --resource myScaleSet \
+  --resource-type Microsoft.Compute/virtualMachineScaleSets \
+  --name myAutoscale \
+  --min-count 2 \
+  --max-count 10 \
+  --count 2
+```
+
+### Step 6: Clean Up
+
+Don't forget to delete resources to avoid costs!
+
+```bash
+az group delete --name myResourceGroup --yes --no-wait
+```
+
+---
+
 ## 💡 Exam Tips for AZ-900
 
 - **Scale Sets** = "Identical VMs" + "Autoscaling".
