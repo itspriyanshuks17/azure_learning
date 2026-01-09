@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtualization - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🖥️ Virtualization &amp; Containers</h1>
+<h2>📌 Overview</h2>
+<p>Virtualization is the core technology behind Cloud Computing. It allows a single physical server to be sliced into multiple &quot;virtual&quot; servers, each isolated from the others.</p>
+<hr>
+<h2>1. How Virtualization Works (The Hypervisor)</h2>
+<p>A <strong>Hypervisor</strong> is software that sits on top of physical hardware and creates/manages Virtual Machines (VMs).</p>
+<ul>
+<li><strong>Azure&#39;s Hypervisor</strong>: Modified version of <strong>Microsoft Hyper-V</strong>.</li>
+<li><strong>Role</strong>:<ul>
+<li>Assigns Memory, CPU, and Storage to each VM.</li>
+<li>Ensures isolation (VM A cannot see VM B&#39;s data).</li>
+<li>Enables &quot;Multi-tenancy&quot; (Multiple customers on one physical rack).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>2. Virtual Machines (VMs) 🆚 Containers</h2>
+<h3>💻 Virtual Machines (IaaS)</h3>
+<ul>
+<li><strong>Structure</strong>: Hardware -&gt; Hypervisor -&gt; <strong>Guest OS</strong> -&gt; App.</li>
+<li><strong>Heavyweight</strong>: Each VM has a full Operating System (Windows/Linux) kernel.</li>
+<li><strong>Boot Time</strong>: Minutes.</li>
+<li><strong>Azure Service</strong>: <strong>Azure Virtual Machines</strong>.</li>
+</ul>
+<h3>📦 Containers (PaaS/Serverless)</h3>
+<ul>
+<li><strong>Structure</strong>: Hardware -&gt; OS -&gt; <strong>Container Engine</strong> -&gt; App.</li>
+<li><strong>Lightweight</strong>: Containers share the Host OS kernel. They only package the app and dependencies (libs).</li>
+<li><strong>Boot Time</strong>: Seconds.</li>
+<li><strong>Pros</strong>: Greater density (run more apps on less hardware), Portability (runs same on laptop vs cloud).</li>
+<li><strong>Azure Services</strong>:<ul>
+<li><strong>Azure Container Instances (ACI)</strong>: Run a container without managing servers (Serverless).</li>
+<li><strong>Azure Kubernetes Service (AKS)</strong>: Orchestration for managing thousands of containers.<ul>
+<li><strong>Azure Container Apps</strong>: Serverless container platform for microservices.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>3. Architecture Comparison</h2>
+<pre><code class="language-text">      VIRTUAL MACHINE (IaaS)              CONTAINER (PaaS / Serverless)
+      ======================              =============================
+
+    +-----------------------+              +-----------------------+
+    |    App 1   |   App 2  |              |  App 1   |   App 2    |
+    +------------+----------+              +----------+------------+
+    |  Guest OS  | Guest OS |              |    Container Engine   |
+    +------------+----------+              |       (Docker)        |
+    |      Hypervisor       |              +-----------------------+
+    +-----------------------+              |        Host OS        |
+    |    Physical Server    |              +-----------------------+
+    +-----------------------+              |    Physical Server    |
+                                           +-----------------------+</code></pre><hr>
+<hr>
+<h2>💡 Hinglish Explanation (Virtualization)</h2>
+<h3><strong>Hypervisor (The Magician)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Socho aapke paas ek bada Cake (Physical Server) hai. Hypervisor woh chaku (knife) hai jo cake ko barabar 4 hisson mein katata hai. Har hissa (VM) samajhta hai ki woh pura cake hai, par asal mein woh bas ek tukda hai.</li>
+</ul>
+<h3><strong>Virtual Machine (VM)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Ek poora computer doosre computer ke andar. Iska apna Windows/Linux hota hai. Thoda bhaari (heavy) hota hai aur start hone mein time leta hai.</li>
+</ul>
+<h3><strong>Container</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh Tiffin Box jaisa hai. Khana (App) wahi hai, par bartan (OS) alag se nahi lana padta. Sab log ek hi dining table (Host OS) share karte hain. Bohot halka aur fast hota hai.</li>
+</ul>
+<hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li>If asked about &quot;Separation of environments using software&quot; -&gt; <strong>Virtualization</strong>.</li>
+<li>If asked about &quot;Lightweight, shared kernel, rapid startup&quot; -&gt; <strong>Containers</strong>.</li>
+<li><strong>Azure Kubernetes Service (AKS)</strong> is the standard for <em>orchestration</em> (managing) containers in production.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -36,7 +36,27 @@ A **Hypervisor** is software that sits on top of physical hardware and creates/m
 - **Azure Services**:
   - **Azure Container Instances (ACI)**: Run a container without managing servers (Serverless).
   - **Azure Kubernetes Service (AKS)**: Orchestration for managing thousands of containers.
-  - **Azure Container Apps**: Serverless container platform for microservices.
+    - **Azure Container Apps**: Serverless container platform for microservices.
+
+---
+
+## 3. Architecture Comparison
+
+```text
+      VIRTUAL MACHINE (IaaS)              CONTAINER (PaaS / Serverless)
+      ======================              =============================
+
+    +-----------------------+              +-----------------------+
+    |    App 1   |   App 2  |              |  App 1   |   App 2    |
+    +------------+----------+              +----------+------------+
+    |  Guest OS  | Guest OS |              |    Container Engine   |
+    +------------+----------+              |       (Docker)        |
+    |      Hypervisor       |              +-----------------------+
+    +-----------------------+              |        Host OS        |
+    |    Physical Server    |              +-----------------------+
+    +-----------------------+              |    Physical Server    |
+                                           +-----------------------+
+```
 
 ---
 

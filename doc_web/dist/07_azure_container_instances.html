@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Container Instances - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>📦 Azure Container Instances (ACI)</h1>
+<h2>📌 Overview</h2>
+<p><strong>Azure Container Instances (ACI)</strong> is the fastest and simplest way to run a container in Azure, without having to manage any virtual machines or adopt a higher-level service like Kubernetes.</p>
+<ul>
+<li><strong>Type</strong>: Serverless Containers (PaaS).</li>
+<li><strong>Billing</strong>: Per-second billing based on how long the container runs.</li>
+<li><strong>Boot Time</strong>: Seconds.</li>
+</ul>
+<hr>
+<h2>1. Key Concepts</h2>
+<h3>🚀 Serverless</h3>
+<p>You don&#39;t worry about the underlying server. You just say &quot;Here is my Docker Image, run it with 2 CPU and 4 GB RAM.&quot; Azure handles the rest.</p>
+<h3>👥 Container Groups</h3>
+<p>The top-level resource in ACI is a <strong>Container Group</strong>.</p>
+<ul>
+<li>Usually contains 1 container.</li>
+<li>Can contain multiple containers (sidecars) that share the same:<ul>
+<li>Lifecycle (start/stop together).</li>
+<li>Local network (localhost).</li>
+<li>Storage volumes.</li>
+</ul>
+</li>
+</ul>
+<h3>🔄 Restart Policies</h3>
+<ul>
+<li><strong>Always</strong>: Keep restarting if it crashes (Good for web servers).</li>
+<li><strong>OnFailure</strong>: Restart only if it fails (Good for batch jobs).</li>
+<li><strong>Never</strong>: Run once and stop (Good for one-off tasks).</li>
+</ul>
+<hr>
+<h2>3. Serverless Architecture</h2>
+<pre><code class="language-text">    USER / SCRIPT             AZURE CLOUD
+    =============            =============
+
+   +-------------+          +------------------------+
+   |  Run Command|  ----->  | Azure Container Engine |
+   | (Az CLI)    |          | (Serverless Management)|
+   +-------------+          +------------------------+
+                                        |
+       (No VM to Manage)                v
+                            +------------------------+
+                            | [+] MyContainer        |
+                            |     (App + Libs)       |
+                            |     [ Public IP ]      |
+                            +------------------------+</code></pre><h2><img src="image/07_azure_container_instances/1767944136795.png" alt="1767944136795"></h2>
+<h2>2. Use Cases</h2>
+<ol>
+<li><strong>Event-Driven Applications</strong>: Run a script when a file is uploaded to Storage.</li>
+<li><strong>Data Processing Jobs</strong>: Crunch numbers for 10 minutes and then stop.</li>
+<li><strong>Bursting from AKS</strong>: If your Kubernetes cluster is full, you can &quot;burst&quot; extra pods into ACI (Virtual Nodes).</li>
+<li><strong>Dev/Test</strong>: Quickly test a new container image.</li>
+</ol>
+<hr>
+<h2>3. 🛠️ Hands-on: Create ACI with Azure CLI</h2>
+<h3>Step 1: Create a Container</h3>
+<p>Run a public Nginx image.</p>
+<pre><code class="language-bash">az container create \
+  --resource-group myResourceGroup \
+  --name myContainer \
+  --image nginx \
+  --ports 80 \
+  --dns-name-label my-unique-app-dns</code></pre><p><img src="image/07_azure_container_instances/1767944862740.png" alt="1767944862740"></p>
+<h3>Step 2: Verify it Works</h3>
+<p>Get the URL (FQDN) of your container.</p>
+<pre><code class="language-bash">az container show \
+  --resource-group myResourceGroup \
+  --name myContainer \
+  --query ipAddress.fqdn \
+  --output tsv</code></pre><p><img src="image/07_azure_container_instances/1767946251549.png" alt="1767946251549"></p>
+<h3>Step 3: View Logs</h3>
+<p>See what&#39;s happening inside.</p>
+<pre><code class="language-bash">az container logs --resource-group myResourceGroup --name myContainer</code></pre><p><img src="image/07_azure_container_instances/1767946299450.png" alt="1767946299450"></p>
+<h3>Step 4: Delete</h3>
+<pre><code class="language-bash">az container delete --resource-group myResourceGroup --name myContainer</code></pre><h2><img src="image/07_azure_container_instances/1767946272622.png" alt="1767946272622"></h2>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li><strong>Simplest Way</strong>: ACI is the &quot;Simplest&quot; way to run a container.</li>
+<li><strong>No Orchestration</strong>: If you need scaling, auto-healing, or complex networking, use <strong>AKS</strong>. If you just need to run &quot;x&quot;, use <strong>ACI</strong>.</li>
+<li><strong>Per-Second Billing</strong>: Great for short-lived tasks.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

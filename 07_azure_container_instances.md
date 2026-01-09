@@ -32,8 +32,28 @@ The top-level resource in ACI is a **Container Group**.
 - **OnFailure**: Restart only if it fails (Good for batch jobs).
 - **Never**: Run once and stop (Good for one-off tasks).
 
-![1767944136795](image/07_azure_container_instances/1767944136795.png)
 ---
+
+## 3. Serverless Architecture
+
+```text
+    USER / SCRIPT             AZURE CLOUD
+    =============            =============
+
+   +-------------+          +------------------------+
+   |  Run Command|  ----->  | Azure Container Engine |
+   | (Az CLI)    |          | (Serverless Management)|
+   +-------------+          +------------------------+
+                                        |
+       (No VM to Manage)                v
+                            +------------------------+
+                            | [+] MyContainer        |
+                            |     (App + Libs)       |
+                            |     [ Public IP ]      |
+                            +------------------------+
+```
+
+## ![1767944136795](image/07_azure_container_instances/1767944136795.png)
 
 ## 2. Use Cases
 
@@ -58,6 +78,7 @@ az container create \
   --ports 80 \
   --dns-name-label my-unique-app-dns
 ```
+
 ![1767944862740](image/07_azure_container_instances/1767944862740.png)
 
 ### Step 2: Verify it Works
@@ -71,6 +92,7 @@ az container show \
   --query ipAddress.fqdn \
   --output tsv
 ```
+
 ![1767946251549](image/07_azure_container_instances/1767946251549.png)
 
 ### Step 3: View Logs
@@ -80,16 +102,16 @@ See what's happening inside.
 ```bash
 az container logs --resource-group myResourceGroup --name myContainer
 ```
+
 ![1767946299450](image/07_azure_container_instances/1767946299450.png)
+
 ### Step 4: Delete
 
 ```bash
 az container delete --resource-group myResourceGroup --name myContainer
 ```
 
-
-![1767946272622](image/07_azure_container_instances/1767946272622.png)
----
+## ![1767946272622](image/07_azure_container_instances/1767946272622.png)
 
 ## 💡 Exam Tips for AZ-900
 

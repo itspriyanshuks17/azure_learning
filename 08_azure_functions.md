@@ -20,7 +20,6 @@ A **Trigger** is what causes the function to start running.
 - **Blob Trigger**: Run code when a new image is uploaded to Storage (e.g., to resize it).
 - **Cosmos DB Trigger**: Run code when a new document is added to the database.
   > **Rule**: A function must have exactly one trigger.
-  >
 
 ### 🔗 Bindings
 
@@ -28,6 +27,26 @@ A **Trigger** is what causes the function to start running.
 
 - **Input Binding**: "Fetch the specific Blob that triggered this function and give it to me as a variable."
 - **Output Binding**: "Take this result variable and write it to a Queue message."
+
+---
+
+## 3. Architecture Flow
+
+```text
+      Events (Trigger)           Function App             Action (Output)
+      ================           ============             ===============
+
+    +----------------+         +--------------+          +---------------+
+    | New Photo      | ------> | Resize Code  | -------> | Save Thumbnail|
+    | (Blob Storage) |         | (Serverless) |          | (Blob Storage)|
+    +----------------+         +--------------+          +---------------+
+            ^                                                   |
+            |                                                   v
+    +----------------+                                   +---------------+
+    | HTTP Request   |                                   | Send Email    |
+    | (API Call)     |                                   | (SendGrid)    |
+    +----------------+                                   +---------------+
+```
 
 ---
 

@@ -51,6 +51,29 @@ In a pooled environment, you might log into `VM-A` today and `VM-B` tomorrow. Wh
 
 ---
 
+## 3. Architecture Diagram
+
+```text
+       ( User Devices )          ( Azure Cloud )
+      +----------------+        +-----------------------------------+
+      | Laptop / Phone | -----> |  AVD Gateway / Web Access         |
+      +----------------+        |  (PaaS - Managed by Microsoft)    |
+                                +-----------------------------------+
+                                             |
+                                             v
+        +-------------------------------------------------------------+
+        |  Host Pool (IaaS - Managed by You)                          |
+        |                                                             |
+        |  +-------------+    +-------------+     +-------------+     |
+        |  | Session Host|    | Session Host|     | FSLogix     |     |
+        |  |   VM 01     |    |   VM 02     | <---| Profile     |     |
+        |  +-------------+    +-------------+     | Container   |     |
+        |                                         +-------------+     |
+        +-------------------------------------------------------------+
+```
+
+---
+
 ## 💡 Exam Tips for AZ-900
 
 - **Multi-session**: If the question mentions "Windows 10/11 Enterprise Multi-session", the answer is **Azure Virtual Desktop (AVD)**.

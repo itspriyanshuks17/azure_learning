@@ -17,9 +17,22 @@ Services are offered over the public internet and available to anyone who wants 
   - High scalability (virtually unlimited).
   - No maintenance (Microsoft manages hardware).
   - Quick deployment.
-- **Cons**:
   - Specific security/compliance requirements might not be met for certain industries.
   - Less control over physical hardware.
+
+#### Architecture Diagram (Public)
+
+```text
+       [  Microsoft Azure Datacenter  ]
+       +------------------------------+
+       |   Customer A   Customer B    |
+       |  +----------+  +----------+  |
+       |  |   VM     |  |   VM     |  |
+       |  +----------+  +----------+  |
+       |                              |
+       |    (Shared Hardware Pool)    |
+       +------------------------------+
+```
 
 ## 2. Private Cloud
 
@@ -31,10 +44,24 @@ Computing resources used exclusively by a single business or organization. A pri
 - **Pros**:
   - Complete control over environment and security.
   - tailored to specific legacy applications.
-- **Cons**:
   - High initial cost and ongoing maintenance.
   - Limited scalability compared to Public Cloud.
   - You are responsible for hardware updates.
+
+#### Architecture Diagram (Private)
+
+```text
+       [   Your Company Datacenter    ]
+       +------------------------------+
+       |   Marketing     Research     |
+       |  +----------+  +----------+  |
+       |  |   App    |  | Database |  |
+       |  +----------+  +----------+  |
+       |                              |
+       |    (Your Physical Racks)     |
+       |    (Firewall Protected)      |
+       +------------------------------+
+```
 
 ## 3. Hybrid Cloud
 
@@ -57,6 +84,23 @@ Using services from multiple public cloud providers (e.g., Azure + AWS + Google 
 
 - **Why?**: Avoid vendor lock-in, use best-of-breed features (e.g., Google for AI, Azure for Enterprise basics).
 - **Management**: **Azure Arc** allows you to manage resources across Azure, AWS, and GCP from a single pane of glass.
+
+---
+
+## 5. Architecture Diagram (Hybrid Cloud)
+
+```text
+    PRIVATE CLOUD (On-Prem)                   PUBLIC CLOUD (Azure)
+    =======================                   ====================
+
+   +-----------------------+                 +-----------------------+
+   |   Local Datacenter    |                 |    Azure Region       |
+   |                       |                 |                       |
+   |  [ SQL Database ]     | <-------------> |   [ Web App ]         |
+   |  (Sensitive Data)     |    (VPN /       |   (Public facing)     |
+   |                       |  ExpressRoute)  |                       |
+   +-----------------------+                 +-----------------------+
+```
 
 ---
 

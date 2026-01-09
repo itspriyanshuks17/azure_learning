@@ -59,17 +59,18 @@ These do **not** consider the real-time load or health of the server. They follo
   - Requests are assigned to servers in a strictly circular order (Server A -> Server B -> Server C -> Server A...).
   - **Best For**: Small applications where all servers have identical specs.
 
-  ```mermaid
-  flowchart LR
-      User((User)) --> LB[Load Balancer]
-      subgraph Pool [Backend Pool]
-        LB -- Req 1 --> VM1[VM 1]
-        LB -- Req 2 --> VM2[VM 2]
-        LB -- Req 3 --> VM3[VM 3]
-      end
-      style VM1 fill:#4caf50
-      style VM2 fill:#4caf50
-      style VM3 fill:#4caf50
+  ```text
+                                +-------------------+
+                                |    Load Balancer  |
+         +------+         +---> |     (Distributor) | ----+
+         | User | --------|     +-------------------+     |
+         +------+         |                               |
+                          | (1)           (2)             | (3)
+                          v               v               v
+                   +-----------+   +-----------+   +-----------+
+                   |   VM 1    |   |   VM 2    |   |   VM 3    |
+                   | (Green)   |   | (Green)   |   | (Green)   |
+                   +-----------+   +-----------+   +-----------+
   ```
 
 - **Weighted Round Robin**:
@@ -93,19 +94,23 @@ These **do** consider the real-time status of the server (CPU, RAM, Active Conne
 - **Benefit**: Utilization of all resources; higher throughput.
 - **Downside**: If one fails, the others must handle the extra load immediately.
 
-```mermaid
-flowchart TD
-    User((User)) --> TM[Traffic Manager]
-    subgraph RegionA [Region A]
-      TM -->|Traffic| LB1[LB A]
-      LB1 --> App1[App A]
-    end
-    subgraph RegionB [Region B]
-      TM -->|Traffic| LB2[LB B]
-      LB2 --> App2[App B]
-    end
-    style App1 fill:#4caf50,color:#fff
-    style App2 fill:#4caf50,color:#fff
+```text
+                    +-----------------------+
+                    |    Traffic Manager    |
+       +------+ --> |        (DNS)          |
+       | User |     +-----------------------+
+       +------+          /             \
+                        / (Traffic)     \ (Traffic)
+                       v                 v
+           +-----------------+     +-----------------+
+           |    Region A     |     |    Region B     |
+           |                 |     |                 |
+           |  [Load Balancer]|     |  [Load Balancer]|
+           |       |         |     |       |         |
+           |       v         |     |       v         |
+           |    [App A]      |     |    [App B]      |
+           +-----------------+     +-----------------+
+               (Active)                (Active)
 ```
 
 ### **Active-Passive (Failover)**
@@ -114,19 +119,23 @@ flowchart TD
 - **Benefit**: Predictable failover capacity (the backup is fresh).
 - **Downside**: Wasted resources (money spent on an idle server).
 
-```mermaid
-flowchart TD
-    User((User)) --> TM[Traffic Manager]
-    subgraph Primary [Primary Region]
-      TM -->|Active| LB1[LB A]
-      LB1 --> App1[App A]
-    end
-    subgraph Secondary [Secondary Region]
-      TM -.->|Standby| LB2[LB B]
-      LB2 --> App2[App B]
-    end
-    style App1 fill:#4caf50,color:#fff
-    style App2 fill:#ff5722,color:#fff,stroke-dasharray: 5 5
+```text
+                    +-----------------------+
+                    |    Traffic Manager    |
+       +------+ --> |        (DNS)          |
+       | User |     +-----------------------+
+       +------+          |             .
+                         | (Active)    . (Standby)
+                         v             .
+           +-----------------+     + . . . . . . . . +
+           |  Primary Region |     . Secondary Region.
+           |                 |     .                 .
+           |  [Load Balancer]|     .  [Load Balancer].
+           |       |         |     .       |         .
+           |       v         |     .       v         .
+           |    [App A]      |     .    [App B]      .
+           +-----------------+     + . . . . . . . . +
+               (Active)                (Passive)
 ```
 
 ---
@@ -172,7 +181,6 @@ flowchart TD
 | **Application Gateway** | Regional | 7     | HTTP/S    | Web Apps, WAF protection, SSL Termination       |
 | **Traffic Manager**     | Global   | DNS   | Any       | Disaster Recovery routing, Simple Multi-region  |
 | **Azure Front Door**    | Global   | 7     | HTTP/S    | Global Microservices, Web App Acceleration      |
-
 
 ---
 

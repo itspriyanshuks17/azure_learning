@@ -48,6 +48,35 @@ Software that is centrally hosted and managed for the end-user. It is usually ba
 
 ---
 
+## 4. Visual Comparison (Control vs Convenience)
+
+```text
+      On-Premises            IaaS                 PaaS                 SaaS
+    (You Do All)         (Infrastructure)      (Platform)           (Software)
+
+   +--------------+      +--------------+      +--------------+      +--------------+
+   | Applications |      | Applications |      | Applications |      |              |
+   +--------------+      +--------------+      +--------------+      |              |
+   |     Data     |      |     Data     |      |     Data     |      |              |
+   +--------------+      +--------------+      +--------------+      |              |
+   |   Runtime    |      |   Runtime    |      |              |      |              |
+   +--------------+      +--------------+      |              |      |              |
+   |  Middleware  |      |  Middleware  |      |   Managed    |      |   Managed    |
+   +--------------+      +--------------+      |      by      |      |      by      |
+   |      OS      |      |      OS      |      |   Microsoft  |      |   Microsoft  |
+   +--------------+      +--------------+      |              |      |              |
+   |Virtualization|      |              |      |              |      |              |
+   +--------------+      |   Managed    |      |              |      |              |
+   |   Servers    |      |      by      |      |              |      |              |
+   +--------------+      |   Microsoft  |      |              |      |              |
+   |   Storage    |      |              |      |              |      |              |
+   +--------------+      |              |      |              |      |              |
+   |  Networking  |      |              |      |              |      |              |
+   +--------------+      +--------------+      +--------------+      +--------------+
+```
+
+---
+
 ---
 
 ## 💡 Hinglish Explanation (Service Models)

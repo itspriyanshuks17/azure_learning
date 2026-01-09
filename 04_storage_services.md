@@ -1,6 +1,7 @@
 # Azure Storage Account
 
 ## Overview
+
 - Azure Storage Account provides **scalable cloud storage** for:
   - Blobs (object storage)
   - Files (SMB/NFS shares)
@@ -13,6 +14,7 @@
 ---
 
 ## Key Features
+
 - **Multiple storage types**:
   - **Blob Storage**: unstructured data (images, videos, logs).
   - **File Storage**: managed file shares.
@@ -32,25 +34,36 @@
 
 ## Workflow
 
-```mermaid
-flowchart TD
-    A[User/Application] --> B[Azure Storage Account]
-    B --> C[Blob Storage]
-    B --> D[File Storage]
-    B --> E[Queue Storage]
-    B --> F[Table Storage]
-    B --> G[Managed Disks for VM]
-````
+```text
+     +--------------------+
+     | User / Application |
+     +--------------------+
+             |
+             v
+  +-------------------------+
+  |  Azure Storage Account  |
+  +-------------------------+
+    |      |      |      |
+    |      |      |      +---> [ Blob Storage ] (Objects/Files)
+    |      |      |
+    |      |      +----------> [ File Storage ] (SMB Shares)
+    |      |
+    |      +-----------------> [ Queue Storage ] (Messaging)
+    |
+    +------------------------> [ Table Storage ] (NoSQL)
+    |
+    +------------------------> [ Managed Disks ] (VM Storage)
+```
 
 ---
 
 ## Common Use Cases
 
-* Storing application logs, backups, and media files.
-* File shares for applications.
-* Messaging between microservices using queues.
-* Storing structured NoSQL data using tables.
-* Persistent storage for VMs.
+- Storing application logs, backups, and media files.
+- File shares for applications.
+- Messaging between microservices using queues.
+- Storing structured NoSQL data using tables.
+- Persistent storage for VMs.
 
 ---
 
@@ -131,8 +144,8 @@ az storage account delete --name mystorageacct123 --resource-group MyResourceGro
 
 ## Notes
 
-* **Storage Account Names** must be **globally unique** and lowercase.
-* **StorageV2** is recommended (supports all features).
-* Use **Azure AD authentication** for secure access instead of account keys.
-* Select **replication type** based on durability requirements.
-* Blob Storage supports **Hot, Cool, and Archive tiers** for cost optimization.
+- **Storage Account Names** must be **globally unique** and lowercase.
+- **StorageV2** is recommended (supports all features).
+- Use **Azure AD authentication** for secure access instead of account keys.
+- Select **replication type** based on durability requirements.
+- Blob Storage supports **Hot, Cool, and Archive tiers** for cost optimization.

@@ -46,6 +46,30 @@ Built-in feature for PaaS Web Apps.
 
 ---
 
+## 3. Architecture Diagram
+
+### Vertical vs Horizontal Scaling
+
+```text
+       VERTICAL SCALING (Scale Up)             HORIZONTAL SCALING (Scale Out)
+       ===========================             ==============================
+
+      +-------------------+                       +-----+    +-----+    +-----+
+      |   Big Server      |                       | VM1 |    | VM2 |    | VM3 |
+      |  (8 vCPU, 32GB)   |                       +-----+    +-----+    +-----+
+      |                   |                          ^          ^          ^
+      +-------------------+                          |          |          |
+               ^                               +--------------------------+
+               |                               |      Load Balancer       |
+               |                               +--------------------------+
+      +-------------------+                                 ^
+      |   Small Server    |                                 |
+      |  (2 vCPU, 8GB)    |                              (Traffic)
+      +-------------------+
+```
+
+---
+
 ## 3. Elasticity
 
 The ability to **automatically** scale out and scale in based on demand.

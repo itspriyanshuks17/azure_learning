@@ -40,6 +40,29 @@ An evolution of microservices where you don't manage _any_ infrastructure. You j
 
 ---
 
+## 4. Architecture Comparison
+
+```text
+    1. MONOLITH             2. MICROSERVICES           3. SERVERLESS
+    (All-in-One)            (Decoupled Services)       (Function-as-a-Service)
+
+   +-------------+         +------+   +------+          +-----------+
+   | [ UI Layer ]|         | [UI] |   | [UI] |          |  Trigger  |
+   | [ Business ]|         +------+   +------+          +-----------+
+   | [ Data Acc ]|            |          |                    |
+   +-------------+            v          v                    v
+         |                 +------+   +------+          +-----------+
+         v                 | Svc A|   | Svc B|          | Function()|
+   +-------------+         +------+   +------+          +-----------+
+   |  Database   |            |          |              (Ephemeral)
+   +-------------+            v          v
+                           +------+   +------+
+                           | DB 1 |   | DB 2 |
+                           +------+   +------+
+```
+
+---
+
 ---
 
 ## 💡 Hinglish Explanation (Cake Analogy)

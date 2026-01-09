@@ -88,31 +88,39 @@ The **OSI Model** is a conceptual framework used to understand how data travels 
 
 ## 3. Architecture Diagram
 
-```mermaid
-graph TD
-    subgraph "Layer 7 (Application)"
-        Browser[Web Browser / User]
-        AG[Azure App Gateway / Front Door]
-    end
-
-    subgraph "Layer 4 (Transport)"
-        LB[Azure Load Balancer]
-        TCP[TCP/UDP Port 80/443]
-    end
-
-    subgraph "Layer 3 (Network)"
-        VNET[Virtual Network]
-        IP[Private IP Address 10.0.0.5]
-    end
-
-    Browser -->|HTTP Request| AG
-    AG -->|Forward Request| LB
-    LB -->|Distribute TCP Stream| VNET
-    VNET -->|Route Packet| VM[Virtual Machine]
-
-    style AG fill:#0078d4,color:#fff
-    style LB fill:#0078d4,color:#fff
-    style VNET fill:#5c2d91,color:#fff
+```text
+     +-------------------------------+
+     |     Layer 7 (Application)     |
+     |                               |
+     |   [ Web Browser / User ]      |
+     |             |                 |
+     |             v (HTTP Request)  |
+     |                               |
+     | [ Azure App Gateway / FD ]    |
+     +-------------------------------+
+                   |
+                   | (Forward Request)
+                   v
+     +-------------------------------+
+     |     Layer 4 (Transport)       |
+     |                               |
+     |   [ Azure Load Balancer ]     |
+     |     (TCP/UDP Port 80/443)     |
+     |                               |
+     +-------------------------------+
+                   |
+                   | (Distribute TCP Stream)
+                   v
+     +-------------------------------+
+     |     Layer 3 (Network)         |
+     |                               |
+     |   [ Virtual Network (VNET) ]  |
+     |   (Private IP: 10.0.0.5)      |
+     |             |                 |
+     |             v (Route Packet)  |
+     |                               |
+     |     [ Virtual Machine ]       |
+     +-------------------------------+
 ```
 
 ---

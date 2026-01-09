@@ -1,6 +1,7 @@
 # Azure Resource Group (RG)
 
 ## Overview
+
 - A **Resource Group (RG)** is a **logical container** for Azure resources.
 - It helps manage and organize resources like VMs, VNets, Storage Accounts, Databases, etc.
 - Every Azure resource **must belong to exactly one Resource Group**.
@@ -9,6 +10,7 @@
 ---
 
 ## Key Features
+
 - **Logical Organization**: Group related resources together.
 - **Lifecycle Management**: Delete the group → all resources inside are deleted.
 - **Access Control**: Apply RBAC (Role-Based Access Control) at the group level.
@@ -19,22 +21,40 @@
 
 ## Workflow
 
-```mermaid
-flowchart TD
-    A[User/DevOps] --> B[Azure CLI / Portal / PowerShell]
-    B --> C[Azure Subscription]
-    C --> D[Resource Group]
-    D --> E[Resources: VM, VNet, Storage, DB, etc.]
-````
+```text
+    +-----------------+
+    |   User / DevOps |
+    +-----------------+
+            |
+            v
+    +-------------------------------+
+    | Azure CLI / Portal / Powershell|
+    +-------------------------------+
+            |
+            v
+    +-----------------------+
+    |   Azure Subscription  |
+    +-----------------------+
+            |
+            v
+    +-----------------------+
+    |    Resource Group     |
+    +-----------------------+
+            |
+            v
+    +------------------------------------------+
+    |  Resources: VM, VNet, Storage, DB, etc.  |
+    +------------------------------------------+
+```
 
 ---
 
 ## Common Use Cases
 
-* Grouping all resources of a project/application.
-* Applying common policies (RBAC, tags) across resources.
-* Simplifying billing by grouping related services.
-* Easier cleanup (delete RG → delete all inside).
+- Grouping all resources of a project/application.
+- Applying common policies (RBAC, tags) across resources.
+- Simplifying billing by grouping related services.
+- Easier cleanup (delete RG → delete all inside).
 
 ---
 
@@ -84,8 +104,7 @@ az group delete --name MyResourceGroup --yes --no-wait
 
 ## Notes
 
-* **Resource Groups are regional** → all resources inside must be in the same region (with some exceptions like DNS).
-* Best practice: One RG per **application lifecycle stage** (e.g., `App1-Dev-RG`, `App1-Prod-RG`).
-* Use **naming conventions** for better clarity.
-* Deleting a Resource Group deletes **all associated resources** permanently.
-
+- **Resource Groups are regional** → all resources inside must be in the same region (with some exceptions like DNS).
+- Best practice: One RG per **application lifecycle stage** (e.g., `App1-Dev-RG`, `App1-Prod-RG`).
+- Use **naming conventions** for better clarity.
+- Deleting a Resource Group deletes **all associated resources** permanently.

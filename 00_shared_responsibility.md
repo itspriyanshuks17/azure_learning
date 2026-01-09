@@ -27,6 +27,31 @@ The division of responsibility depends on the cloud service model (IaaS, PaaS, o
 
 ---
 
+## 2. Visualization (Who Owns What?)
+
+```text
+      On-Premises          IaaS                 PaaS                SaaS
+     (Full Burden)     (Infra Managed)      (Platform Managed)   (Software Managed)
+
+    +-------------+    +-------------+      +-------------+      +-------------+
+    |   Data      |    |   Data      |      |   Data      |      |   Data      |
+    +-------------+    +-------------+      +-------------+      +-------------+
+    | Applications|    | Applications|      | Applications|      |             |
+    +-------------+    +-------------+      +-------------+      |             |
+    |  Runtime    |    |  Runtime    |      |             |      |             |
+    +-------------+    +-------------+      |             |      |             |
+    |     OS      |    |     OS      |      | Microsoft   |      | Microsoft   |
+    +-------------+    +-------------+      |   Manages   |      |   Manages   |
+    | Virtualiz.  |    |             |      |             |      |             |
+    +-------------+    | Microsoft   |      |             |      |             |
+    |   Servers   |    |   Manages   |      |             |      |             |
+    +-------------+    |             |      |             |      |             |
+    |   Network   |    |             |      |             |      |             |
+    +-------------+    +-------------+      +-------------+      +-------------+
+```
+
+---
+
 ## 🔍 Detailed Breakdown
 
 ### 1. ☁️ Microsoft's Responsibility (Security OF the Cloud)

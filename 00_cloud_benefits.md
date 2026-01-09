@@ -16,6 +16,16 @@ Understanding the core benefits of the cloud is essential for the AZ-900 exam. T
   - **Region Pairs**: Replicate data to a different geography to survive a major regional outage.
 - **Example**: If one server crashes, the Load Balancer instantly directs traffic to a healthy server.
 
+  ```text
+        [ Region A (Primary) ]                [ Region B (Secondary) ]
+        +--------------------+                +--------------------+
+        |   App Server  (X)  |  <-- FAIL      |    App Server      |
+        +--------------------+                +--------------------+
+                 |                                     ^
+                 | (Replication / Failover)            |
+                 +-------------------------------------+
+  ```
+
 ## 2. Scalability 📈
 
 **Definition**: The ability to increase or decrease resources to meet changing demand.
@@ -107,13 +117,13 @@ Understanding the core benefits of the cloud is essential for the AZ-900 exam. T
 
 ## 💰 OpEx vs CapEx Review
 
-- **CapEx (Capital Expenditure)**: 
-    - Spending money upfront on physical infrastructure (On-Prem).
-    - You own the asset, but you are responsible for maintenance, power, and cooling. Scaling requires buying more hardware.
-    - Upfront investment in physical hardware (e.g., buying an F5 appliance).
-- **OpEx (Operational Expenditure)**: 
-    - Spending money on services or products now and being billed for them. This is the **Cloud Consumption Model** (Pay-as-you-go).
-    - Pay-as-you-go model used by Azure. You pay only for the traffic processed and the hours the service is active. No upfront costs, and scaling is handled by the cloud provider.
+- **CapEx (Capital Expenditure)**:
+  - Spending money upfront on physical infrastructure (On-Prem).
+  - You own the asset, but you are responsible for maintenance, power, and cooling. Scaling requires buying more hardware.
+  - Upfront investment in physical hardware (e.g., buying an F5 appliance).
+- **OpEx (Operational Expenditure)**:
+  - Spending money on services or products now and being billed for them. This is the **Cloud Consumption Model** (Pay-as-you-go).
+  - Pay-as-you-go model used by Azure. You pay only for the traffic processed and the hours the service is active. No upfront costs, and scaling is handled by the cloud provider.
 
 | Feature          | CapEx (On-Prem Hardware)     | OpEx (Azure Load Balancers) |
 | :--------------- | :--------------------------- | :-------------------------- |

@@ -46,21 +46,29 @@ Containers that help you manage access, policy, and compliance across _multiple_
 ## 🌲 Visualizing the Hierarchy
 
 ```text
-[ Root Management Group (Tenant) ]
-       |
-       |-- [ HR Management Group ]
-       |      |
-       |      |-- [ HR Dev Subscription ]
-       |      |      |-- [ RG-App1 ] -- (VM, Disk)
-       |      |
-       |      |-- [ HR Prod Subscription ]
-       |             |-- [ RG-App1 ] -- (VM, SQL)
-       |
-       |-- [ IT Management Group ]
-              |-- [ IT Services Subscription ]
+                    +------------------------------+
+                    |  Root Management Group       |
+                    +------------------------------+
+                                   |
+                   +-------------------------------+
+                   |     HR Management Group       |
+                   +-------------------------------+
+                      /                         \
+                     /                           \
+          +-----------------------+      +-----------------------+
+          |  HR Dev Subscription  |      |  HR Prod Subscription |
+          +-----------------------+      +-----------------------+
+                     |                              |
+            +-----------------+            +-----------------+
+            |   RG-App-Dev    |            |   RG-App-Prod   |
+            +-----------------+            +-----------------+
+               /         \                    /         \
+        +--------+   +--------+        +--------+   +--------+
+        |   VM   |   | S3 Acc |        |   VM   |   | SQL DB |
+        +--------+   +--------+        +--------+   +--------+
 ```
-![1767940729762](image/01_resource_hierarchy/1767940729762.png)
----
+
+## ![1767940729762](image/01_resource_hierarchy/1767940729762.png)
 
 ## 🔒 Policy & Access Inheritance
 
@@ -73,8 +81,7 @@ A key concept in Azure is **Inheritance**. Settings applied at a higher level tr
 2.  **Azure Policy**:
     - If you apply a policy "Require Tag: CostCenter" on a **Management Group**, every Resource Group and Resource created in any child Subscription _must_ have that tag.
 
-![1767940820806](image/01_resource_hierarchy/1767940820806.png)
----
+## ![1767940820806](image/01_resource_hierarchy/1767940820806.png)
 
 ## 💡 Exam Tips for AZ-900
 

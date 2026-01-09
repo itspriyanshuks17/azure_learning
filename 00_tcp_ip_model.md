@@ -44,32 +44,37 @@ As data moves down the stack, each layer adds a "Header" (Envelope).
 
 ## 3. Architecture Diagram
 
-```mermaid
-flowchart TD
-    subgraph "Application Layer"
-        HTTP[HTTP/HTTPS Data]
-    end
-
-    subgraph "Transport Layer"
-        TCP["TCP Segment (Source Port: 1024, Dest Port: 80)"]
-    end
-
-    subgraph "Internet Layer"
-        IP["IP Packet (Source IP: 10.0.0.5, Dest IP: 1.2.3.4)"]
-    end
-
-    subgraph "Network Access Layer"
-        MAC["Ethernet Frame (MAC Addresses)"]
-    end
-
-    HTTP -->|Encapsulation| TCP
-    TCP -->|Encapsulation| IP
-    IP -->|Encapsulation| MAC
-    MAC -->|Physical Cable| Internet(("The Internet/Azure VNET"))
-
-    style HTTP fill:#0078d4,color:#fff
-    style TCP fill:#5c2d91,color:#fff
-    style IP fill:#107c10,color:#fff
+```text
+    +--------------------------------+
+    |      Application Layer         |
+    |  [ HTTP/HTTPS Data (Payload) ] |
+    +--------------------------------+
+                  |
+                  v (Encapsulation)
+    +--------------------------------+
+    |      Transport Layer           |
+    |  [ TCP Segment                 |
+    |    Source Port: 1024           |
+    |    Dest Port: 80 ]             |
+    +--------------------------------+
+                  |
+                  v (Encapsulation)
+    +--------------------------------+
+    |      Internet Layer            |
+    |  [ IP Packet                   |
+    |    Source IP: 10.0.0.5         |
+    |    Dest IP: 1.2.3.4 ]          |
+    +--------------------------------+
+                  |
+                  v (Encapsulation)
+    +--------------------------------+
+    |   Network Interface Layer      |
+    |  [ Ethernet Frame              |
+    |    MAC Addresses ]             |
+    +--------------------------------+
+                  |
+                  v (Physical Cable)
+        ( The Internet / Azure VNET )
 ```
 
 ---

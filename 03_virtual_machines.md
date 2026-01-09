@@ -1,6 +1,7 @@
 # Azure Virtual Machines (VMs)
 
 ## Overview
+
 - Azure Virtual Machines (VMs) provide **Infrastructure as a Service (IaaS)**.
 - Allow running **Windows** or **Linux** workloads in the cloud.
 - Fully customizable compute, storage, and networking options.
@@ -9,6 +10,7 @@
 ---
 
 ## Key Features
+
 - Supports multiple OS (Windows, Linux, custom images).
 - Flexible sizes: General-purpose, Compute-optimized, Memory-optimized, GPU.
 - Integrated with **Azure Networking** (VNet, Subnets, NSGs).
@@ -20,25 +22,39 @@
 
 ## Workflow
 
-```mermaid
-flowchart TD
-    A[User/DevOps] --> B[Azure CLI / Portal / PowerShell]
-    B --> C[Resource Group]
-    C --> D[Virtual Network + Subnet]
-    D --> E[Network Security Group]
-    C --> F[Storage - OS Disk / Data Disk]
-    C --> G[Virtual Machine]
-    G --> H[Public/Private IP for access]
-````
+```text
+    +-----------------+
+    |   User / DevOps |
+    +-----------------+
+            |
+            v
+    +-------------------------------+
+    | Azure CLI / Portal / Powershell|
+    +-------------------------------+
+            |
+            v
+    +-----------------------+
+    |    Resource Group     |
+    +-----------------------+
+      |        |        |
+      |        |        +---> [ Virtual Network + Subnet ] --> [ Network Security Group ]
+      |        |
+      |        +------------> [ Storage: OS Disk / Data Disk ]
+      |
+      v
+  +-----------------+
+  | Virtual Machine | ----> [ Public/Private IP ]
+  +-----------------+
+```
 
 ---
 
 ## Common Use Cases
 
-* Hosting web applications.
-* Running development/test environments.
-* Migrating on-premises apps to the cloud.
-* High-performance workloads with GPU/compute-intensive VMs.
+- Hosting web applications.
+- Running development/test environments.
+- Migrating on-premises apps to the cloud.
+- High-performance workloads with GPU/compute-intensive VMs.
 
 ---
 
@@ -134,21 +150,21 @@ az vm open-port --port 443 --resource-group MyResourceGroup --name MyVM
 
 ### 9. Connect to VM
 
-* **Linux VM (SSH):**
+- **Linux VM (SSH):**
 
   ```bash
   ssh azureuser@<PublicIP>
   ```
-* **Windows VM (RDP):**
 
-  * Use Remote Desktop Client → Enter `<PublicIP>`.
+- **Windows VM (RDP):**
+
+  - Use Remote Desktop Client → Enter `<PublicIP>`.
 
 ---
 
 ## Notes
 
-* Always place VMs inside a **Resource Group**.
-* Use **Managed Disks** instead of unmanaged for reliability.
-* Tag resources for better management (`--tags env=dev project=test`).
-* Monitor with **Azure Monitor** and **Log Analytics**.
-
+- Always place VMs inside a **Resource Group**.
+- Use **Managed Disks** instead of unmanaged for reliability.
+- Tag resources for better management (`--tags env=dev project=test`).
+- Monitor with **Azure Monitor** and **Log Analytics**.
