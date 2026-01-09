@@ -40,6 +40,32 @@ You define _when_ to add/remove VMs.
 - **Metric-based**: "If Average CPU > 75% for 5 minutes, Add 1 VM."
 - **Time-based**: "Every morning at 8 AM, increase to 10 instances."
 
+### 📐 Architecture Diagram
+
+```mermaid
+graph TD
+    User([User]) --> LB[Azure Load Balancer]
+    LB --> VM1[VM Instance 1]
+    LB --> VM2[VM Instance 2]
+    LB --> VM3[VM Instance 3]
+
+    subgraph "VM Scale Set"
+        VM1
+        VM2
+        VM3
+    end
+
+    VM1 --> DB[(Azure SQL Database)]
+    VM2 --> DB
+    VM3 --> DB
+
+    style LB fill:#0078d4,stroke:#fff,stroke-width:2px,color:#fff
+    style DB fill:#5c2d91,stroke:#fff,stroke-width:2px,color:#fff
+    style VM1 fill:#d1d1d1,stroke:#333,stroke-width:1px
+    style VM2 fill:#d1d1d1,stroke:#333,stroke-width:1px
+    style VM3 fill:#d1d1d1,stroke:#333,stroke-width:1px
+```
+
 ---
 
 ## 3. Availability & Fault Tolerance
