@@ -93,7 +93,16 @@
 <li>Requests are assigned to servers in a strictly circular order (Server A -&gt; Server B -&gt; Server C -&gt; Server A...).</li>
 <li><strong>Best For</strong>: Small applications where all servers have identical specs.</li>
 </ul>
-<pre><code class="language-undefined">[object Object]</code></pre></li>
+<div class="mermaid">flowchart LR
+    User((User)) --> LB[Load Balancer]
+    subgraph Pool [Backend Pool]
+      LB -- Req 1 --> VM1[VM 1]
+      LB -- Req 2 --> VM2[VM 2]
+      LB -- Req 3 --> VM3[VM 3]
+    end
+    style VM1 fill:#4caf50
+    style VM2 fill:#4caf50
+    style VM3 fill:#4caf50</div></li>
 <li><p><strong>Weighted Round Robin</strong>:</p>
 <ul>
 <li>Assigns more requests to powerful servers and fewer to weaker ones based on a weight (e.g., Server A: 70%, Server B: 30%).</li>
@@ -115,13 +124,35 @@
 <li><strong>Benefit</strong>: Utilization of all resources; higher throughput.</li>
 <li><strong>Downside</strong>: If one fails, the others must handle the extra load immediately.</li>
 </ul>
-<pre><code class="language-undefined">[object Object]</code></pre><h3><strong>Active-Passive (Failover)</strong></h3>
+<div class="mermaid">flowchart TD
+    User((User)) --> TM[Traffic Manager]
+    subgraph RegionA [Region A]
+      TM -->|Traffic| LB1[LB A]
+      LB1 --> App1[App A]
+    end
+    subgraph RegionB [Region B]
+      TM -->|Traffic| LB2[LB B]
+      LB2 --> App2[App B]
+    end
+    style App1 fill:#4caf50,color:#fff
+    style App2 fill:#4caf50,color:#fff</div><h3><strong>Active-Passive (Failover)</strong></h3>
 <ul>
 <li><strong>Concept</strong>: One Primary server handles all traffic. The Secondary (Passive) server sits idle, waiting for the Primary to fail.</li>
 <li><strong>Benefit</strong>: Predictable failover capacity (the backup is fresh).</li>
 <li><strong>Downside</strong>: Wasted resources (money spent on an idle server).</li>
 </ul>
-<pre><code class="language-undefined">[object Object]</code></pre><hr>
+<div class="mermaid">flowchart TD
+    User((User)) --> TM[Traffic Manager]
+    subgraph Primary [Primary Region]
+      TM -->|Active| LB1[LB A]
+      LB1 --> App1[App A]
+    end
+    subgraph Secondary [Secondary Region]
+      TM -.->|Standby| LB2[LB B]
+      LB2 --> App2[App B]
+    end
+    style App1 fill:#4caf50,color:#fff
+    style App2 fill:#ff5722,color:#fff,stroke-dasharray: 5 5</div><hr>
 <h2>💡 Hinglish Explanation (Traffic Police)</h2>
 <h3><strong>1. Azure Load Balancer (Layer 4)</strong></h3>
 <ul>

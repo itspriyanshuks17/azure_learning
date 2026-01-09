@@ -94,14 +94,24 @@
 <hr>
 <h2>3. 🛠️ Hands-on: Create a Function App</h2>
 <h3>Step 1: Create a Resource Group</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>Step 2: Create a Storage Account (Required)</h3>
+<pre><code class="language-bash">az group create --name myResourceGroup --location eastus2</code></pre><h3>Step 2: Create a Storage Account (Required)</h3>
 <p>Function Apps require a storage account to manage triggers and logging.</p>
 <blockquote>
 <p><strong>Note</strong>: Your subscription has a restricted list of allowed regions.<br>If <code>eastus2</code> fails, try: <code>westus2</code>, <code>northeurope</code>, <code>southeastasia</code>.</p>
 </blockquote>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>Step 3: Create the Function App</h3>
+<pre><code class="language-bash">az storage account create \
+  --name priyanshuksharma$RANDOM \
+  --resource-group myResourceGroup \
+  --location eastasia \
+  --sku Standard_LRS</code></pre><h3>Step 3: Create the Function App</h3>
 <p>Replace <code>&lt;storage_name&gt;</code> with the name generated above.</p>
-<pre><code class="language-undefined">[object Object]</code></pre><hr>
+<pre><code class="language-bash">az functionapp create \
+  --resource-group myResourceGroup \
+  --consumption-plan-location eastasia \
+  --runtime node \
+  --functions-version 4 \
+  --name myUniqueFunctionApp$RANDOM \
+  --storage-account <storage_name></code></pre><hr>
 <h2>💡 Exam Tips for AZ-900</h2>
 <ul>
 <li><strong>Stateless</strong>: By default, Azure Functions are stateless (they handle a request and forget).</li>

@@ -61,7 +61,11 @@
 </ul>
 <hr>
 <h2>Workflow</h2>
-<pre><code class="language-undefined">[object Object]</code></pre><hr>
+<div class="mermaid">flowchart TD
+    A[User/DevOps] --> B[Azure CLI / Portal / PowerShell]
+    B --> C[Azure Subscription]
+    C --> D[Resource Group]
+    D --> E[Resources: VM, VNet, Storage, DB, etc.]</div><hr>
 <h2>Common Use Cases</h2>
 <ul>
 <li>Grouping all resources of a project/application.</li>
@@ -72,12 +76,16 @@
 <hr>
 <h2>Steps to Manage Resource Groups using Azure CLI</h2>
 <h3>1. Login to Azure</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>2. List All Resource Groups</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>3. Create a Resource Group</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>4. Get Details of a Resource Group</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>5. Tag a Resource Group</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>6. Delete a Resource Group</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><hr>
+<pre><code class="language-bash">az login</code></pre><h3>2. List All Resource Groups</h3>
+<pre><code class="language-bash">az group list -o table</code></pre><h3>3. Create a Resource Group</h3>
+<pre><code class="language-bash">az group create \
+  --name MyResourceGroup \
+  --location eastus</code></pre><h3>4. Get Details of a Resource Group</h3>
+<pre><code class="language-bash">az group show --name MyResourceGroup -o json</code></pre><h3>5. Tag a Resource Group</h3>
+<pre><code class="language-bash">az group update \
+  --name MyResourceGroup \
+  --set tags.Project=Demo tags.Environment=Dev</code></pre><h3>6. Delete a Resource Group</h3>
+<pre><code class="language-bash">az group delete --name MyResourceGroup --yes --no-wait</code></pre><hr>
 <h2>Notes</h2>
 <ul>
 <li><strong>Resource Groups are regional</strong> → all resources inside must be in the same region (with some exceptions like DNS).</li>

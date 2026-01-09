@@ -96,7 +96,27 @@
 <li><strong>Time-based</strong>: &quot;Every morning at 8 AM, increase to 10 instances.&quot;</li>
 </ul>
 <h3>📐 Architecture Diagram</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><hr>
+<div class="mermaid">graph TD
+    User([User]) --> LB[Azure Load Balancer]
+    LB --> VM1[VM Instance 1]
+    LB --> VM2[VM Instance 2]
+    LB --> VM3[VM Instance 3]
+
+    subgraph "VM Scale Set"
+        VM1
+        VM2
+        VM3
+    end
+
+    VM1 --> DB[(Azure SQL Database)]
+    VM2 --> DB
+    VM3 --> DB
+
+    style LB fill:#0078d4,stroke:#fff,stroke-width:2px,color:#fff
+    style DB fill:#5c2d91,stroke:#fff,stroke-width:2px,color:#fff
+    style VM1 fill:#d1d1d1,stroke:#333,stroke-width:1px
+    style VM2 fill:#d1d1d1,stroke:#333,stroke-width:1px
+    style VM3 fill:#d1d1d1,stroke:#333,stroke-width:1px</div><hr>
 <h2>3. Availability &amp; Fault Tolerance</h2>
 <p>VMSS automatically distributes instances across:</p>
 <ul>
@@ -110,17 +130,40 @@
 <hr>
 <h2>4. 🛠️ Hands-on: Create VMSS with Azure CLI</h2>
 <h3>Step 1: Create a Resource Group</h3>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>Step 2: Create a VM Scale Set</h3>
+<pre><code class="language-bash">az group create --name myResourceGroup --location eastus</code></pre><h3>Step 2: Create a VM Scale Set</h3>
 <p>This command creates a VMSS with 2 instances, a load balancer, and generates SSH keys automatically.</p>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>Step 3: View the Instances</h3>
+<pre><code class="language-bash">az vmss create \
+  --resource-group myResourceGroup \
+  --name myScaleSet \
+  --image Ubuntu2204 \
+  --upgrade-policy-mode automatic \
+  --admin-username azureuser \
+  --generate-ssh-keys</code></pre><h3>Step 3: View the Instances</h3>
 <p>Check the status of your running instances or list all resources in the group.</p>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>Step 4: Manually Scale Out</h3>
+<pre><code class="language-bash"># List all resources (VMSS, LB, VNET, etc.)
+az resource list --resource-group myResourceGroup --output table
+
+# List specific VMSS instances
+az vmss list-instances \
+  --resource-group myResourceGroup \
+  --name myScaleSet \
+  --output table</code></pre><h3>Step 4: Manually Scale Out</h3>
 <p>Increase the instance count from default (2) to 5.</p>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>Step 5: Configure Autoscale (Optional)</h3>
+<pre><code class="language-bash">az vmss scale \
+  --resource-group myResourceGroup \
+  --name myScaleSet \
+  --new-capacity 5</code></pre><h3>Step 5: Configure Autoscale (Optional)</h3>
 <p>Add a rule to scale out when CPU &gt; 70%.</p>
-<pre><code class="language-undefined">[object Object]</code></pre><h3>Step 6: Clean Up</h3>
+<pre><code class="language-bash">az monitor autoscale create \
+  --resource-group myResourceGroup \
+  --resource myScaleSet \
+  --resource-type Microsoft.Compute/virtualMachineScaleSets \
+  --name myAutoscale \
+  --min-count 2 \
+  --max-count 10 \
+  --count 2</code></pre><h3>Step 6: Clean Up</h3>
 <p>Don&#39;t forget to delete resources to avoid costs!</p>
-<pre><code class="language-undefined">[object Object]</code></pre><hr>
+<pre><code class="language-bash">az group delete --name myResourceGroup --yes --no-wait</code></pre><hr>
 <h2>💡 Exam Tips for AZ-900</h2>
 <ul>
 <li><strong>Scale Sets</strong> = &quot;Identical VMs&quot; + &quot;Autoscaling&quot;.</li>
