@@ -60,6 +60,29 @@ Using services from multiple public cloud providers (e.g., Azure + AWS + Google 
 
 ---
 
+---
+
+## 💡 Hinglish Explanation (Deployment Models)
+
+### **1. Public Cloud (Bus)**
+
+- **Concept**: Shared infrastructure.
+- **Hinglish**: Jaise Public Bus hoti hai. Seat aapki hai, par bus sabki hai. Sasti padti hai aur maintenance driver (Microsoft) karta hai.
+- **Who uses it?**: Startups, Netflix, Students.
+
+### **2. Private Cloud (Apni Car)**
+
+- **Concept**: Dedicated infrastructure.
+- **Hinglish**: Jaise Khud ki Car. Poori car aapki hai, koi aur nahi aayega. Security full hai, par petrol, servicing (maintenance) aur khareedne ka kharcha (CapEx) aapka hai.
+- **Who uses it?**: Banks, Government (Security ke liye).
+
+### **3. Hybrid Cloud (Taxi/Rental)**
+
+- **Concept**: Best of both worlds.
+- **Hinglish**: Roz office jaane ke liye apni car (Private) use karo, par jab family trip pe jana ho toh badi bus (Public) rent karlo. Sensitive data ghar pe (Private), baaki sab cloud pe (Public).
+
+---
+
 ## 🆚 Summary Comparison
 
 | Feature         | Public Cloud ☁️       | Private Cloud 🏢          | Hybrid Cloud 🔗        |

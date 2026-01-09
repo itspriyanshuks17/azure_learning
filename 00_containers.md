@@ -30,8 +30,7 @@ Containerization is an OS-level virtualization method used to deploy and run app
 | **Size**      | Gigabytes (GB)            | Megabytes (MB)               |
 | **Startup**   | Minutes                   | Seconds                      |
 
-![1767943947427](image/00_containers/1767943947427.png)
----
+## ![1767943947427](image/00_containers/1767943947427.png)
 
 ## 2. Docker Fundamentals 🐳
 
@@ -67,6 +66,25 @@ You need an **Orchestrator** to:
 | **"I need full orchestration for my complex app."** | **Azure Kubernetes Service (AKS)** (Managed K8s cluster).  |
 | **"I want Microservices without complexity."**      | **Azure Container Apps (ACA)** (Serverless K8s).           |
 | **"I need a private place to store images."**       | **Azure Container Registry (ACR)**.                        |
+
+---
+
+---
+
+## 💡 Hinglish Explanation (Containers)
+
+### **1. VM vs Container**
+
+- **VM**: Ek apartment building jahan har flat mein apna kitchen, bathroom, sab kuch alag hai (Has own OS).
+- **Container**: Ek hotel room jahan kitchen aur laundry shared hai (Shares OS Kernel). Isliye yeh fast aur sasta hai.
+
+### **2. Docker (The Tool)**
+
+- **Hinglish**: Docker woh tool hai jo aapke code ko "Container" mein pack karta hai. "Build once, run anywhere" - agar mere laptop pe chala, toh cloud pe bhi chalega.
+
+### **3. Kubernetes (The Manager)**
+
+- **Hinglish**: Agar aapke paas 1 container hai toh aap khud sambhal loge. Par agar 1000 containers hain? Unko start karna, band karna, crash hone pe restart karna—yeh kaam **Kubernetes** (Orchestrator) karta hai. Yeh Container ka manager hai.
 
 ---
 

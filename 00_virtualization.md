@@ -40,6 +40,24 @@ A **Hypervisor** is software that sits on top of physical hardware and creates/m
 
 ---
 
+---
+
+## 💡 Hinglish Explanation (Virtualization)
+
+### **Hypervisor (The Magician)**
+
+- **Hinglish**: Socho aapke paas ek bada Cake (Physical Server) hai. Hypervisor woh chaku (knife) hai jo cake ko barabar 4 hisson mein katata hai. Har hissa (VM) samajhta hai ki woh pura cake hai, par asal mein woh bas ek tukda hai.
+
+### **Virtual Machine (VM)**
+
+- **Hinglish**: Ek poora computer doosre computer ke andar. Iska apna Windows/Linux hota hai. Thoda bhaari (heavy) hota hai aur start hone mein time leta hai.
+
+### **Container**
+
+- **Hinglish**: Yeh Tiffin Box jaisa hai. Khana (App) wahi hai, par bartan (OS) alag se nahi lana padta. Sab log ek hi dining table (Host OS) share karte hain. Bohot halka aur fast hota hai.
+
+---
+
 ## 💡 Exam Tips for AZ-900
 
 - If asked about "Separation of environments using software" -> **Virtualization**.

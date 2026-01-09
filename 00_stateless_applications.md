@@ -42,6 +42,17 @@ Now, any Web App instance can fetch the user's session from Redis. You can scale
 
 ---
 
+---
+
+## 💡 Hinglish Explanation (Bhulakkad Server)
+
+- **Stateless (Gajini)**: Server ki memory kamzor hai. Har baar jab aap aate ho, woh puchta hai "Aap kaun?". Isliye aapko apna ID card (Token/Cookie) har baar dikhana padta hai.
+  - **Fayda**: Kyunki server ko aap yaad nahi, aap kisi bhi doosre server ke paas ja sakte ho. Koi fark nahi padta.
+- **Stateful (Yaadaash)**: Server aapko yaad rakhta hai. "Are Sharmaji, aaiye, wahi purani chai lenge?".
+  - **Nuksan**: Agar woh specific server chutti pe gaya (Crash), toh doosra server aapko pehchanega nahi.
+
+---
+
 ## 💡 Key Takeaway
 
 For highly scalable cloud apps on Azure:

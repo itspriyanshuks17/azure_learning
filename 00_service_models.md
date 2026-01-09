@@ -48,6 +48,30 @@ Software that is centrally hosted and managed for the end-user. It is usually ba
 
 ---
 
+---
+
+## 💡 Hinglish Explanation (Service Models)
+
+### **1. IaaS (Kiraye ka Ghar)**
+
+- **Concept**: Infrastructure as a Service.
+- **Hinglish**: Aapne ek khali flat kiraye pe liya. Deewar aur chat (Servers/Network) landlord ki hai, par furniture, bijli, paani, aur rhne ka samaan (OS + Apps) aapko khud lana padega. Full control, par mehnat zyada.
+- **Example**: Azure VM.
+
+### **2. PaaS (Hotel Room)**
+
+- **Concept**: Platform as a Service.
+- **Hinglish**: Aap hotel mein gaye. Bed, bijli, AC sab set hai. Aap bas apna laptop lekar gaye aur kaam shuru kiya. Aapko room saaf karne ki tension nahi, woh hotel manage karega.
+- **Example**: Azure App Service (Web sites).
+
+### **3. SaaS (Pizza Order)**
+
+- **Concept**: Software as a Service.
+- **Hinglish**: Domino's se pizza order kiya. Na kitchen chahiye, na oven, na chef. Bas box kholo aur khaao. Software ready-made milta hai, bas login karo aur use karo.
+- **Example**: Gmail, Outlook, Netflix.
+
+---
+
 ## 🍕 The "Pizza as a Service" Analogy
 
 | Layer            | Traditional (On-Prem) | IaaS (Take & Bake) | PaaS (Pizza Delivery) | SaaS (Dining Out) |

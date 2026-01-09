@@ -48,6 +48,27 @@ A global, scalable entry-point that uses the Microsoft global edge network to cr
 
 ---
 
+---
+
+## 💡 Hinglish Explanation (Traffic Police)
+
+### **1. Azure Load Balancer (Layer 4)**
+
+- **Hinglish**: Yeh Traffic Police wala sirf gaadi ka number (IP + Port) dekhta hai. Woh andar nahi dekhta ki gaadi mein kaun baitha hai. Yeh fast hai aur simple traffic (TCP/UDP) ke liye use hota hai.
+
+### **2. Application Gateway (Layer 7)**
+
+- **Hinglish**: Yeh smart security guard hai. Yeh gaadi rok kar puchta hai "Kahan jana hai?" (URL check karta hai).
+  - Agar aap `/images` bologe toh Image Server ke paas bhejega.
+  - Agar aap `/videos` bologe toh Video Server ke paas bhejega.
+  - Iske paas firewall (WAF) bhi hai jo hackers ko rokta hai.
+
+### **3. Traffic Manager (DNS)**
+
+- **Hinglish**: Yeh GPS system ki tarah hai. Yeh user ko batata hai ki "Sabse kareeb rasta kaunsa hai?". Agar user US mein hai toh US server ka address dega, agar India mein hai toh India ka.
+
+---
+
 ## 🆚 Selection Cheat Sheet
 
 | Service                 | Scope    | Layer | Protocols | Best For                                        |

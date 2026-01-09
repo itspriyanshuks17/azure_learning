@@ -40,6 +40,14 @@ In Kubernetes (AKS), you can use **StatefulSets**.
 
 ---
 
+## 💡 Hinglish Explanation
+
+- **Stateful**: Jaise aapne apne laptop ke Desktop pe file save ki. Agar laptop kharab hua, file gayi.
+- **Problem**: Cloud mein VMs kabhi bhi restart ho sakti hain. Isliye important data VM ke andar maat rakho.
+- **Solution (External State)**: Data ko Google Drive (Database/Storage) pe rakho. Ab chahe laptop badal lo, data wahi milega.
+
+---
+
 ## 💡 Summary
 
 - Avoid building new Stateful web apps.
