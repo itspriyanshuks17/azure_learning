@@ -84,7 +84,44 @@
 </li>
 </ul>
 <hr>
+<h2>3. Load Balancing Algorithms 🧮</h2>
+<h3><strong>A. Static Algorithms</strong></h3>
+<p>These do <strong>not</strong> consider the real-time load or health of the server. They follow a fixed rule. <strong>Benefits</strong>: Simple, Less Overhead.</p>
+<ul>
+<li><p><strong>Round Robin</strong>:</p>
+<ul>
+<li>Requests are assigned to servers in a strictly circular order (Server A -&gt; Server B -&gt; Server C -&gt; Server A...).</li>
+<li><strong>Best For</strong>: Small applications where all servers have identical specs.</li>
+</ul>
+<pre><code class="language-undefined">[object Object]</code></pre></li>
+<li><p><strong>Weighted Round Robin</strong>:</p>
+<ul>
+<li>Assigns more requests to powerful servers and fewer to weaker ones based on a weight (e.g., Server A: 70%, Server B: 30%).</li>
+<li><strong>Best For</strong>: Environments with mixed hardware capabilities.</li>
+</ul>
+</li>
+</ul>
+<h3><strong>B. Dynamic Algorithms</strong></h3>
+<p>These <strong>do</strong> consider the real-time status of the server (CPU, RAM, Active Connections).</p>
+<ul>
+<li><strong>Least Connection</strong>: Sends request to the server with the fewest active connections.</li>
+<li><strong>Resource Based</strong>: Checks CPU/Memory usage before sending traffic.</li>
+</ul>
 <hr>
+<h2>4. High Availability Configurations 🛡️</h2>
+<h3><strong>Active-Active</strong></h3>
+<ul>
+<li><strong>Concept</strong>: All Load Balancers/Servers are active and processing traffic simultaneously.</li>
+<li><strong>Benefit</strong>: Utilization of all resources; higher throughput.</li>
+<li><strong>Downside</strong>: If one fails, the others must handle the extra load immediately.</li>
+</ul>
+<pre><code class="language-undefined">[object Object]</code></pre><h3><strong>Active-Passive (Failover)</strong></h3>
+<ul>
+<li><strong>Concept</strong>: One Primary server handles all traffic. The Secondary (Passive) server sits idle, waiting for the Primary to fail.</li>
+<li><strong>Benefit</strong>: Predictable failover capacity (the backup is fresh).</li>
+<li><strong>Downside</strong>: Wasted resources (money spent on an idle server).</li>
+</ul>
+<pre><code class="language-undefined">[object Object]</code></pre><hr>
 <h2>💡 Hinglish Explanation (Traffic Police)</h2>
 <h3><strong>1. Azure Load Balancer (Layer 4)</strong></h3>
 <ul>
@@ -102,6 +139,28 @@
 <h3><strong>3. Traffic Manager (DNS)</strong></h3>
 <ul>
 <li><strong>Hinglish</strong>: Yeh GPS system ki tarah hai. Yeh user ko batata hai ki &quot;Sabse kareeb rasta kaunsa hai?&quot;. Agar user US mein hai toh US server ka address dega, agar India mein hai toh India ka.</li>
+</ul>
+<h3><strong>4. Algorithms (Tareeka)</strong></h3>
+<ul>
+<li><strong>Round Robin (Card Dealer)</strong>:<ul>
+<li><strong>Hinglish</strong>: Tash ke patte batna. Ek tumhe, ek tumhe, ek tumhe. Sabko barabar mauka milega, chahe koi slow ho ya fast.</li>
+</ul>
+</li>
+<li><strong>Dynamic (Smart Queue)</strong>:<ul>
+<li><strong>Hinglish</strong>: Mall ka billing counter. Aap wahan jaoge jahan sabse kam bheed hai (Least Connection).</li>
+</ul>
+</li>
+</ul>
+<h3><strong>5. High Availability (Jugaad)</strong></h3>
+<ul>
+<li><strong>Active-Active (Dono Dukan Khuli)</strong>:<ul>
+<li><strong>Hinglish</strong>: Do billing counters khule hain. Dono pe kaam ho raha hai. Kaam jaldi hoga.</li>
+</ul>
+</li>
+<li><strong>Active-Passive (Stepney Tyre)</strong>:<ul>
+<li><strong>Hinglish</strong>: Ek tyre gadi chala raha hai (Primary), doosra trunk mein pada hai (Secondary). Jab pehla phatega, tabhi doosra use hoga. Tab tak woh extra weight hai (Cost).</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h2>🆚 Selection Cheat Sheet</h2>
@@ -144,6 +203,27 @@
 <td align="left">Global Microservices, Web App Acceleration</td>
 </tr>
 </tbody></table>
+<hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<h3><strong>1. Load Balancing</strong></h3>
+<ul>
+<li><strong>Question Type</strong>: Multiple Choice (Single Answer).</li>
+<li><strong>Difficulty</strong>: Easy to Moderate.</li>
+<li><strong>Key Concepts</strong>:<ul>
+<li><strong>Azure Load Balancer</strong> (Layer 4).</li>
+<li><strong>Application Gateway</strong> (Layer 7).</li>
+<li><strong>Traffic Manager</strong> (DNS).</li>
+<li><strong>Azure Front Door</strong> (Layer 7).</li>
+</ul>
+</li>
+<li><strong>Best Practices</strong>:<ul>
+<li>Understand the differences between regional and global load balancers.</li>
+<li>Know the use cases for each service.</li>
+<li>Be familiar with the load balancing algorithms and their trade-offs.</li>
+<li>Understand the OpEx vs CapEx comparison.</li>
+</ul>
+</li>
+</ul>
 </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
