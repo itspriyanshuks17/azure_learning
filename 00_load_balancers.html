@@ -111,13 +111,33 @@
 <li>Assigns more requests to powerful servers and fewer to weaker ones based on a weight (e.g., Server A: 70%, Server B: 30%).</li>
 <li><strong>Best For</strong>: Environments with mixed hardware capabilities.</li>
 </ul>
-</li>
+<pre><code class="language-text">     (High Spec)     (Standard)      (Low Spec)
+     [Server A]      [Server B]      [Server C]
+     (Weight 3)      (Weight 2)      (Weight 1)
+         ^               ^               ^
+         |  (3 Types)    |  (2 Types)    |  (1 Type)
+         |   |   |       |   |           |
+    +-----------------------------------------+
+    |             Load Balancer               |
+    +-----------------------------------------+
+                        ^
+                        | (Incoming Requests)</code></pre></li>
 </ul>
 <h3><strong>B. Dynamic Algorithms</strong></h3>
 <p>These <strong>do</strong> consider the real-time status of the server (CPU, RAM, Active Connections).</p>
 <ul>
-<li><strong>Least Connection</strong>: Sends request to the server with the fewest active connections.</li>
-<li><strong>Resource Based</strong>: Checks CPU/Memory usage before sending traffic.</li>
+<li><p><strong>Least Connection</strong>: Sends request to the server with the fewest active connections.</p>
+</li>
+<li><p><strong>Resource Based</strong>: Checks CPU/Memory usage before sending traffic.</p>
+<pre><code class="language-text">                (Busy)          (Idle)
+             [Server A]       [Server B]
+             (conn: 50)       (conn: 2)
+                 |                ^
+                 | (Skipped)      | (Selected!)
+                 |                |
+           +---------------------------+
+           |      Load Balancer        | <--- Checks Status
+           +---------------------------+</code></pre></li>
 </ul>
 <hr>
 <h2>4. High Availability Configurations 🛡️</h2>
