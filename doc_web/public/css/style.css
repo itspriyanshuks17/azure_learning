@@ -220,10 +220,11 @@ th {
 
 /* Images */
 .main-content img {
+  width: 430px !important;
+  height: 300px !important;
+  min-width: 430px !important; /* Force size even if container is smaller? No, let's just stick to width */
   max-width: 430px !important;
   max-height: 300px !important;
-  width: auto !important;
-  height: auto !important;
   object-fit: contain;
   display: block;
   margin: 20px auto;
