@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Area Networks - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🌐 Types of Area Networks (LAN, WAN, VLAN &amp; More)</h1>
+<h2>📌 Overview</h2>
+<p>Networks are classified by their <strong>Geographical Span</strong> (how much area they cover) and their <strong>Architecture</strong> (how they are built).</p>
+<p>Understanding these is crucial because <strong>Cloud Computing</strong> is essentially a massive <strong>WAN</strong> made up of millions of <strong>VLANs</strong>.</p>
+<hr>
+<h2>1. LAN (Local Area Network) 🏠</h2>
+<ul>
+<li><strong>Scope</strong>: A single room, building, or canvas.</li>
+<li><strong>Speed</strong>: Very High (1 Gbps - 10 Gbps).</li>
+<li><strong>Technology</strong>: Ethernet Cables (RJ45), Switches.</li>
+<li><strong>Example</strong>: Your home Wi-Fi or Office Network.</li>
+</ul>
+<h4>Architecture: LAN</h4>
+<pre><code class="language-text">      [ Switch ]
+      /   |    \
+     /    |     \
+  [PC]  [PC]  [Printer]
+  (All in same building)</code></pre><hr>
+<h2>2. WLAN (Wireless LAN) 📶</h2>
+<ul>
+<li><strong>Scope</strong>: Same as LAN, but Wireless.</li>
+<li><strong>Technology</strong>: Wi-Fi (IEEE 802.11).</li>
+<li><strong>Key Device</strong>: Wireless Access Point (WAP) or Router.</li>
+</ul>
+<h4>Architecture: WLAN</h4>
+<pre><code class="language-text">      [ Wi-Fi Router ]
+         /      \
+      (Waves)  (Waves)
+       /          \
+   [Laptop]     [Phone]</code></pre><hr>
+<h2>3. VLAN (Virtual LAN) 🎭 <em>Critical for Cloud</em></h2>
+<ul>
+<li><strong>Scope</strong>: Logical grouping within a physical LAN.</li>
+<li><strong>Concept</strong>: Even if Engineering and HR are connected to the <em>same</em> physical switch, a VLAN acts as a &quot;Virtual Wall&quot; separating them.</li>
+<li><strong>Azure Context</strong>: An <strong>Azure VNet</strong> is essentially a giant VLAN in Microsoft&#39;s datacenter.</li>
+</ul>
+<h4>Architecture: VLAN</h4>
+<pre><code class="language-text">       [   Physical Switch   ]
+      /    |         |    \
+     /     |         |     \
+ [Eng PC] [Eng PC] [HR PC] [HR PC]
+    |        |        |       |
+  (VLAN 10)  |      (VLAN 20) |
+   \_________/       \________/
+   (Engineering)        (HR)</code></pre><hr>
+<h2>4. MAN (Metropolitan Area Network) 🏙️</h2>
+<ul>
+<li><strong>Scope</strong>: A city or a large campus.</li>
+<li><strong>Speed</strong>: High (Fiber Optics).</li>
+<li><strong>Example</strong>: City-wide Cable TV network, ISP network covering a city.</li>
+</ul>
+<h4>Architecture: MAN</h4>
+<pre><code class="language-text">     [City Gov Building]      [University Campus]
+               \                  /
+                \                /
+                 [ Central ISP  ]
+                 [ City Hub     ]
+                /                \
+               /                  \
+        [Office A]             [Office B]</code></pre><hr>
+<h2>5. WAN (Wide Area Network) 🌎</h2>
+<ul>
+<li><strong>Scope</strong>: Spans countries or continents.</li>
+<li><strong>Speed</strong>: Varies (slower than LAN), but evolving (Fiber/Satellite).</li>
+<li><strong>Technology</strong>: Satellite, Leased Lines, MPLS, Optical Fiber (Undersea cables).</li>
+<li><strong>Azure Context</strong>: The <strong>Internet</strong> is the biggest WAN. <strong>Azure ExpressRoute</strong> is a private WAN connection between you and Azure.</li>
+</ul>
+<h4>Architecture: WAN</h4>
+<pre><code class="language-text">    [ New York Office ]                       [ London Office ]
+    ( LAN A )                                     ( LAN B )
+         \                                           /
+          \             ( The Internet )            /
+           ----------------- [WAN] -----------------
+                           (Undersea Cables)</code></pre><hr>
+<h2>6. SAN (Storage Area Network) 💾</h2>
+<ul>
+<li><strong>Scope</strong>: Dedicated high-speed network for storage devices.</li>
+<li><strong>Purpose</strong>: connect Servers to Shared Storage (Disk Arrays) so it looks like a local drive.</li>
+<li><strong>Azure Context</strong>: <strong>Azure Disk Storage</strong> behaves like a SAN provided as a service.</li>
+</ul>
+<h4>Architecture: SAN</h4>
+<pre><code class="language-text">    [ Server A ]        [ Server B ]
+          \                 /
+           \               /
+          [ Fiber Channel Switch ]
+                  |
+          [ Storage Array (Disks) ]</code></pre><hr>
+<h2>7. PAN (Personal Area Network) 🎧</h2>
+<ul>
+<li><strong>Scope</strong>: Very short range (few meters).</li>
+<li><strong>Technology</strong>: Bluetooth, NFC, USB.</li>
+<li><strong>Example</strong>: Connecting headphones to phone.</li>
+</ul>
+<hr>
+<h2>💡 Hinglish Explanation (Transportation)</h2>
+<h3><strong>1. LAN (Cycle inside House)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Apne ghar ke andar ghumna. (Fast, Private).</li>
+</ul>
+<h3><strong>2. WAN (International Flight)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Ek desh se dusre desh jana. (Long distance, Public infrastructure use karna padta hai).</li>
+</ul>
+<h3><strong>3. VLAN (Office Cubicles)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Ek bada Hall (Switch) hai, lekin humne beech mein kaanch ki deewarein (VLAN) laga di hain taaki HR ki baatein Engineering wale na sun sakein using Logic, not bricks.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips for AZ-900</h2>
+<ol>
+<li><strong>VNet = VLAN</strong>: Conceptually, when you create an Azure VNet, you are creating your own isolated <strong>VLAN</strong> in the Azure cloud.</li>
+<li><strong>ExpressRoute = WAN</strong>: ExpressRoute is a dedicated <strong>WAN</strong> link replacing the public internet.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

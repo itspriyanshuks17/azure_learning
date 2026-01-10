@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resource Hierarchy - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🌳 Azure Resource Hierarchy</h1>
+<h2>📌 Overview</h2>
+<p>Understanding how Azure organizes resources is critical for billing, access control, and policy management. There form levels of scope in the Azure Resource Hierarchy.</p>
+<p><code>Management Groups</code> &gt; <code>Subscriptions</code> &gt; <code>Resource Groups</code> &gt; <code>Resources</code></p>
+<hr>
+<h2>1. The Four Levels</h2>
+<h3>🧱 Level 1: Resources</h3>
+<p>The individual instances of services you create.</p>
+<ul>
+<li><strong>Examples</strong>: A Virtual Machine, a SQL Database, a Storage Account, a Web App.</li>
+<li><strong>Rule</strong>: Every resource must belong to exactly one Resource Group.</li>
+</ul>
+<h3>📂 Level 2: Resource Groups (RGs)</h3>
+<p>A logical container that holds related resources for an Azure solution.</p>
+<ul>
+<li><strong>Purpose</strong>: Lifecycle management. If you delete the RG, you delete everything inside it.</li>
+<li><strong>Best Practice</strong>: Group by lifecycle (e.g., <code>rg-app-dev</code> contains the VM, VNET, and Storage for the dev app).</li>
+</ul>
+<h3>💳 Level 3: Subscriptions</h3>
+<p>A logical unit of Azure services that links to an Azure account. It is a boundary for billing and access control.</p>
+<ul>
+<li><strong>Billing Boundary</strong>: You get one bill per subscription.</li>
+<li><strong>Access Boundary</strong>: You can give someone &quot;Owner&quot; access to Subscription A, but they can&#39;t see Subscription B.</li>
+<li><strong>Limits</strong>: Subscriptions have hard limits (quotas), e.g., max 250 storage accounts.</li>
+</ul>
+<h3>🏢 Level 4: Management Groups</h3>
+<p>Containers that help you manage access, policy, and compliance across <em>multiple</em> subscriptions.</p>
+<ul>
+<li><strong>Scope</strong>: A Management Group can contain Subscriptions or other Management Groups (up to 6 levels deep).</li>
+<li><strong>Use Case</strong>:<ul>
+<li><strong>Policy</strong>: Apply a policy &quot;Do not allow creating VMs in West US&quot; to the &quot;HR Department&quot; Management Group. All subscriptions under HR automatically inherit this rule.</li>
+<li><strong>Compliance</strong>: Enforce compliance standards across the entire organization.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>🌲 Visualizing the Hierarchy</h2>
+<pre><code class="language-text">                    +------------------------------+
+                    |  Root Management Group       |
+                    +------------------------------+
+                                   |
+                   +-------------------------------+
+                   |     HR Management Group       |
+                   +-------------------------------+
+                      /                         \
+                     /                           \
+          +-----------------------+      +-----------------------+
+          |  HR Dev Subscription  |      |  HR Prod Subscription |
+          +-----------------------+      +-----------------------+
+                     |                              |
+            +-----------------+            +-----------------+
+            |   RG-App-Dev    |            |   RG-App-Prod   |
+            +-----------------+            +-----------------+
+               /         \                    /         \
+        +--------+   +--------+        +--------+   +--------+
+        |   VM   |   | S3 Acc |        |   VM   |   | SQL DB |
+        +--------+   +--------+        +--------+   +--------+</code></pre><h2><img src="image/01_resource_hierarchy/1767940729762.png" alt="1767940729762"></h2>
+<h2>🔒 Policy &amp; Access Inheritance</h2>
+<p>A key concept in Azure is <strong>Inheritance</strong>. Settings applied at a higher level trickle down.</p>
+<ol>
+<li><p><strong>RBAC (Access Control)</strong>:</p>
+<ul>
+<li>If you give a user &quot;Contributor&quot; role on the <strong>Subscription</strong>, they automatically have &quot;Contributor&quot; on every <strong>Resource Group</strong> and <strong>Resource</strong> inside it.</li>
+</ul>
+</li>
+<li><p><strong>Azure Policy</strong>:</p>
+<ul>
+<li>If you apply a policy &quot;Require Tag: CostCenter&quot; on a <strong>Management Group</strong>, every Resource Group and Resource created in any child Subscription <em>must</em> have that tag.</li>
+</ul>
+</li>
+</ol>
+<h2><img src="image/01_resource_hierarchy/1767940820806.png" alt="1767940820806"></h2>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li><strong>Lowest Level</strong>: Resources.</li>
+<li><strong>Highest Level</strong>: Management Groups.</li>
+<li><strong>Resource Groups</strong>: Can NOT contain other Resource Groups (No nesting).</li>
+<li><strong>Region</strong>: A Resource Group can be in &#39;West US&#39; while the VM inside it is in &#39;East US&#39;. The RG location is just where the <em>metadata</em> is stored.</li>
+<li><strong>Billing</strong>: Happens at the <strong>Subscription</strong> level.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

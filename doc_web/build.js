@@ -9,11 +9,11 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const CONFIG = {
     rootDir: path.resolve(__dirname, '..'), // Parent dir (where notes are)
-    outDir: path.resolve(__dirname, 'dist'),
+    outDir: path.resolve(__dirname, 'dist_new'),
     templatePath: path.resolve(__dirname, 'templates/layout.html'),
     publicDir: path.resolve(__dirname, 'public'),
     imageSourceDir: path.resolve(__dirname, '../image'),
-    imageOutDir: path.resolve(__dirname, 'dist/image')
+    imageOutDir: path.resolve(__dirname, 'dist_new/image')
 };
 
 // Markdown Parser Setup
@@ -66,8 +66,10 @@ async function build() {
     console.log('🚀 Starting Build...');
 
     // 1. Clean & Prepare Output Directory
-    await fs.emptyDir(CONFIG.outDir);
-    console.log('✅ Cleaned dist folder');
+    // 1. Clean & Prepare Output Directory
+    // await fs.emptyDir(CONFIG.outDir); // DISABLED: Avoid EPERM on locked files
+    await fs.ensureDir(CONFIG.outDir);   // Just ensure it exists
+    console.log('✅ Prepared dist folder (Skipped clean)');
 
     // 2. Copy Static Assets (CSS/JS)
     if (await fs.pathExists(CONFIG.publicDir)) {

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subnets - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🔢 Azure Subnets (Sub-Networks)</h1>
+<h2>📌 Overview</h2>
+<p>A <strong>Subnet</strong> is a <strong>range of IP addresses within a Virtual Network (VNet)</strong>. You can <strong>divide a VNet into multiple subnets for organization and security</strong>.</p>
+<p>Think of a VNet as a <strong>Building</strong> and Subnets as the <strong>Floors</strong> inside it.</p>
+<h3>✨ Why segment into Subnets?</h3>
+<ol>
+<li><strong>Isolation</strong>: Keep Database servers away from the public internet.</li>
+<li><strong>Organization</strong>: Group resources by department (HR, IT, Finance).</li>
+<li><strong>Security</strong>: Apply specific security rules (NSG) to one subnet without affecting others.</li>
+</ol>
+<hr>
+<h2>🧮 Understanding CIDR Notation</h2>
+<p>Azure uses <strong>CIDR (Classless Inter-Domain Routing)</strong> to define IP ranges.</p>
+<ul>
+<li>Format: <code>IP_Address/Prefix_Length</code> (e.g., <code>10.0.0.0/24</code>)</li>
+<li>The <strong>Prefix Length</strong> (<code>/24</code>) tells you how many bits are fixed for the Network ID. The rest are for Hosts.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">CIDR Prefix</th>
+<th align="left">Total IPs</th>
+<th align="left">Usable IPs (Azure)</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>/16</code></td>
+<td align="left">65,536</td>
+<td align="left">65,531</td>
+<td align="left">Huge network (VNet size)</td>
+</tr>
+<tr>
+<td align="left"><code>/24</code></td>
+<td align="left">256</td>
+<td align="left">251</td>
+<td align="left">Standard subnet size</td>
+</tr>
+<tr>
+<td align="left"><code>/28</code></td>
+<td align="left">16</td>
+<td align="left">11</td>
+<td align="left">Very small subnet</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>⚠️ Note:</strong> Azure reserves <strong>5 IPs</strong> in <em>every</em> subnet:</p>
+<ol>
+<li>x.x.x.0 (Network Address)</li>
+<li>x.x.x.1 (Default Gateway)</li>
+<li>x.x.x.2 (Azure DNS Mapping 1)</li>
+<li>x.x.x.3 (Azure DNS Mapping 2)</li>
+<li>x.x.x.255 (Broadcast Address)</li>
+</ol>
+</blockquote>
+<hr>
+<h2>🛠️ General Concept: How to Design Subnets (Subnetting)</h2>
+<p>Subnetting is the process of stealing bits from the <strong>Host</strong> part of an IP address to create more <strong>Networks</strong> (Subnets).</p>
+<h3>Step-by-Step Guide to Creating Subnets</h3>
+<h4>Step 1: Identify Requirements</h4>
+<p>Ask yourself:</p>
+<ol>
+<li><strong>How many subnets do I need?</strong> (e.g., 2 subnets: Web, DB)</li>
+<li><strong>How many hosts (IPs) per subnet?</strong> (e.g., 50 servers each)</li>
+</ol>
+<h4>Step 2: Choose Your Network Class/CIDR</h4>
+<p>Start with a standard network block.</p>
+<ul>
+<li>Example: <code>192.168.1.0/24</code> (Standard Class C network).</li>
+<li>Total IPs: 256.</li>
+</ul>
+<h4>Step 3: Borrow Bits (The Calculation)</h4>
+<p>To create <strong>2 subnets</strong>, you need to borrow <strong>1 bit</strong> (<code>2^1 = 2</code>).</p>
+<ul>
+<li>Original CIDR: <code>/24</code></li>
+<li>New CIDR: <code>/24</code> + <code>1 bit</code> = <code>/25</code></li>
+</ul>
+<p>This splits the block perfectly in half.</p>
+<h4>Visual Calculation Example</h4>
+<p><strong>Goal</strong>: Split <code>192.168.1.0/24</code> into 2 Subnets.</p>
+<ol>
+<li><p><strong>Subnet A (First Half)</strong></p>
+<ul>
+<li><strong>Range</strong>: <code>192.168.1.0</code> to <code>192.168.1.127</code></li>
+<li><strong>CIDR</strong>: <code>192.168.1.0/25</code></li>
+<li><strong>Total IPs</strong>: 128 (Usable: 123 in Azure)</li>
+</ul>
+</li>
+<li><p><strong>Subnet B (Second Half)</strong></p>
+<ul>
+<li><strong>Range</strong>: <code>192.168.1.128</code> to <code>192.168.1.255</code></li>
+<li><strong>CIDR</strong>: <code>192.168.1.128/25</code></li>
+<li><strong>Total IPs</strong>: 128 (Usable: 123 in Azure)</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Key Rule</strong>: Every time you increase the CIDR number by 1 (e.g., /24 -&gt; /25), you <strong>double</strong> the number of subnets but <strong>halve</strong> the number of IPs in each.</p>
+</blockquote>
+<hr>
+<h2>🏗️ Architecture: Public vs Private Subnets</h2>
+<p>Although Azure doesn&#39;t technically have &quot;Public&quot; or &quot;Private&quot; subnet types (like AWS), we simulate them using <strong>NSGs</strong> and <strong>Route Tables</strong>.</p>
+<h3>1. Public Subnet</h3>
+<ul>
+<li><strong>Purpose</strong>: Hosts resources that need to talk to the Internet directly (e.g., Web Server, Load Balancer).</li>
+<li><strong>Configuration</strong>: Has a Public IP address or is attached to a NAT Gateway/Load Balancer.</li>
+<li><strong>Security</strong>: NSG allows Inbound Port 80/443.</li>
+</ul>
+<h3>2. Private Subnet</h3>
+<ul>
+<li><strong>Purpose</strong>: Hosts backend resources (e.g., Database, Internal App) that should NEVER be exposed to the internet.</li>
+<li><strong>Configuration</strong>: No Public IP. Outbound access only via Firewall/NAT.</li>
+<li><strong>Security</strong>: NSG denies all Inbound Internet traffic.</li>
+</ul>
+<h4>Architecture Diagram (Segmentation)</h4>
+<pre><code class="language-text">       [        VNet (10.0.0.0/16)        ]
+       +----------------------------------+
+       |                                  |
+       |   +--------------------------+   |
+       |   | Public Subnet (Web Tier) |   |
+       |   | 10.0.1.0/24              |   |
+       |   | [WebVM] <---(Internet)---|   |
+       |   +--------------------------+   |
+       |              |                   |
+       |              v (Allowed)         |
+       |   +--------------------------+   |
+       |   | Private Subnet (DB Tier) |   |
+       |   | 10.0.2.0/24              |   |
+       |   | [SQLDB] <---(No Access)--|   |
+       |   +--------------------------+   |
+       |                                  |
+       +----------------------------------+</code></pre><hr>
+<h2>🎓 Advanced Concepts</h2>
+<h3>1. Subnet Delegation</h3>
+<p>Some Azure services (like <strong>Azure Container Instances</strong>, <strong>App Service VNet Integration</strong>) require a subnet to be &quot;Delegated&quot; (Dedicated) to them.</p>
+<ul>
+<li>Once delegated, you cannot put other resources (like normal VMs) in that subnet.</li>
+</ul>
+<h3>2. Service Endpoints</h3>
+<p>Allows you to extend your VNet identity to Azure services (like Storage or SQL).</p>
+<ul>
+<li>Traffic flows from your VNet -&gt; Azure Backbone -&gt; Storage Account (Without going over public internet).</li>
+</ul>
+<h3>3. Private Endpoints (Private Link)</h3>
+<p>Brings the Azure Service (like SQL DB) <em>inside</em> your VNet with a private IP. This is the most secure method.</p>
+<hr>
+<h2>💡 Hinglish Explanation (Office Layout)</h2>
+<h3><strong>1. Subnet (Departments)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Poori Building (VNet) mein alag-alag floors hain.<ul>
+<li><strong>Floor 1 (Reception/Public)</strong>: Yahan bahar ke log aa sakte hain (Public Subnet).</li>
+<li><strong>Floor 2 (Finance/Private)</strong>: Yahan sirf staff aa sakta hai, bahar wale allowed nahi (Private Subnet).</li>
+</ul>
+</li>
+</ul>
+<h3><strong>2. 5 Reserved IPs (Staff Area)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Har floor pe 5 cabin management ke liye reserved hain (Manager, Electrician, Guard, etc.). Inhe aap use nahi kar sakte.</li>
+</ul>
+<h3><strong>3. Service Endpoint (Direct Tunnel)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Finance team ko Bank jana hai. Sadak (Internet) se jaane ke bajaye, unhone ek underground tunnel (Service Endpoint) bana li jo seedha bank nikalti hai. Safe aur Fast.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips for AZ-900</h2>
+<ol>
+<li><strong>Calculation</strong>: If a question asks &quot;How many usable IPs in a /24 subnet?&quot;, the answer is <strong>251</strong> (256 - 5 reserved).</li>
+<li><strong>Delegation</strong>: Certain PaaS services require a dedicated (empty) subnet.</li>
+<li><strong>Security</strong>: You secure subnets using <strong>Network Security Groups (NSGs)</strong>, not by just naming them &quot;Private&quot;.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

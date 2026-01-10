@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Load Balancers - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>⚖️ Azure Load Balancing</h1>
+<h2>📌 Overview</h2>
+<p>Load balancing refers to evenly distributing traffic (network load) across a group of backend resources or servers. Azure provides various load balancing services depending on the traffic type (Global vs Regional) and layer (Layer 4 vs Layer 7).</p>
+<hr>
+<h2>1. Regional Load Balancers (Traffic within a Region)</h2>
+<h3>🧱 Azure Load Balancer (Layer 4)</h3>
+<p>Operates at the Transport Layer (TCP/UDP). It distributes traffic based on IP address and port number.</p>
+<ul>
+<li><strong>Use Case</strong>: High-performance, low-latency Traffic distribution for non-HTTP apps (e.g., SQL AlwaysOn, internal microservice calls).</li>
+<li><strong>Features</strong>:<ul>
+<li><strong>Public</strong>: Incoming internet traffic to VMs.</li>
+<li><strong>Internal</strong>: Traffic between Private IPs inside a VNET.</li>
+</ul>
+</li>
+</ul>
+<h3>🌐 Azure Application Gateway (Layer 7)</h3>
+<p>Operates at the Application Layer (HTTP/HTTPS). It is a web traffic load balancer.</p>
+<ul>
+<li><strong>Use Case</strong>: Web Applications requiring SSL termination, Cookie-based session affinity, or URL path-based routing (<code>/images</code> goes to pool A, <code>/video</code> goes to pool B).</li>
+<li><strong>Key Feature</strong>: <strong>Web Application Firewall (WAF)</strong> - Protects against common web attacks like SQL Injection &amp; XSS.</li>
+</ul>
+<hr>
+<h2>2. Global Load Balancers (Traffic across Regions)</h2>
+<h3>🌍 Azure Traffic Manager</h3>
+<p>DNS-based traffic load balancer. It distributes traffic to services across global Azure regions.</p>
+<ul>
+<li><strong>Mechanism</strong>: Use DNS to direct client requests to the most appropriate endpoint based on a traffic-routing method (e.g., Priority, Weighted, Geographic).</li>
+<li><strong>Note</strong>: It does NOT see the traffic payload; it just returns the IP of the best regional endpoint.</li>
+</ul>
+<h3>🚪 Azure Front Door</h3>
+<p>A global, scalable entry-point that uses the Microsoft global edge network to create fast, secure, and widely scalable web applications.</p>
+<ul>
+<li><strong>Layer</strong>: Layer 7 (HTTP/HTTPS).</li>
+<li><strong>Features</strong>:<ul>
+<li>Instant failover.</li>
+<li>Global WAF.</li>
+<li>CDN-like caching capabilities.</li>
+<li><strong>Use Case</strong>: Modern, global web applications requiring instant failover and acceleration.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>3. Load Balancing Algorithms 🧮</h2>
+<h3><strong>A. Static Algorithms</strong></h3>
+<p>These do <strong>not</strong> consider the real-time load or health of the server. They follow a fixed rule. <strong>Benefits</strong>: Simple, Less Overhead.</p>
+<ul>
+<li><p><strong>Round Robin</strong>:</p>
+<ul>
+<li>Requests are assigned to servers in a strictly circular order (Server A -&gt; Server B -&gt; Server C -&gt; Server A...).</li>
+<li><strong>Best For</strong>: Small applications where all servers have identical specs.</li>
+</ul>
+<pre><code class="language-text">                              +-------------------+
+                              |    Load Balancer  |
+       +------+         +---> |     (Distributor) | ----+
+       | User | --------|     +-------------------+     |
+       +------+         |                               |
+                        | (1)           (2)             | (3)
+                        v               v               v
+                 +-----------+   +-----------+   +-----------+
+                 |   VM 1    |   |   VM 2    |   |   VM 3    |
+                 | (Green)   |   | (Green)   |   | (Green)   |
+                 +-----------+   +-----------+   +-----------+</code></pre></li>
+<li><p><strong>Weighted Round Robin</strong>:</p>
+<ul>
+<li>Assigns more requests to powerful servers and fewer to weaker ones based on a weight (e.g., Server A: 70%, Server B: 30%).</li>
+<li><strong>Best For</strong>: Environments with mixed hardware capabilities.</li>
+</ul>
+<pre><code class="language-text">     (High Spec)     (Standard)      (Low Spec)
+     [Server A]      [Server B]      [Server C]
+     (Weight 3)      (Weight 2)      (Weight 1)
+         ^               ^               ^
+         |  (3 Types)    |  (2 Types)    |  (1 Type)
+         |   |   |       |   |           |
+    +-----------------------------------------+
+    |             Load Balancer               |
+    +-----------------------------------------+
+                        ^
+                        | (Incoming Requests)</code></pre></li>
+</ul>
+<h3><strong>B. Dynamic Algorithms</strong></h3>
+<p>These <strong>do</strong> consider the real-time status of the server (CPU, RAM, Active Connections).</p>
+<ul>
+<li><p><strong>Least Connection</strong>: Sends request to the server with the fewest active connections.</p>
+</li>
+<li><p><strong>Resource Based</strong>: Checks CPU/Memory usage before sending traffic.</p>
+<pre><code class="language-text">                (Busy)          (Idle)
+             [Server A]       [Server B]
+             (conn: 50)       (conn: 2)
+                 |                ^
+                 | (Skipped)      | (Selected!)
+                 |                |
+           +---------------------------+
+           |      Load Balancer        | <--- Checks Status
+           +---------------------------+</code></pre></li>
+</ul>
+<hr>
+<h2>4. High Availability Configurations 🛡️</h2>
+<h3><strong>Active-Active</strong></h3>
+<ul>
+<li><strong>Concept</strong>: All Load Balancers/Servers are active and processing traffic simultaneously.</li>
+<li><strong>Benefit</strong>: Utilization of all resources; higher throughput.</li>
+<li><strong>Downside</strong>: If one fails, the others must handle the extra load immediately.</li>
+</ul>
+<pre><code class="language-text">                    +-----------------------+
+                    |    Traffic Manager    |
+       +------+ --> |        (DNS)          |
+       | User |     +-----------------------+
+       +------+          /             \
+                        / (Traffic)     \ (Traffic)
+                       v                 v
+           +-----------------+     +-----------------+
+           |    Region A     |     |    Region B     |
+           |                 |     |                 |
+           |  [Load Balancer]|     |  [Load Balancer]|
+           |       |         |     |       |         |
+           |       v         |     |       v         |
+           |    [App A]      |     |    [App B]      |
+           +-----------------+     +-----------------+
+               (Active)                (Active)</code></pre><h3><strong>Active-Passive (Failover)</strong></h3>
+<ul>
+<li><strong>Concept</strong>: One Primary server handles all traffic. The Secondary (Passive) server sits idle, waiting for the Primary to fail.</li>
+<li><strong>Benefit</strong>: Predictable failover capacity (the backup is fresh).</li>
+<li><strong>Downside</strong>: Wasted resources (money spent on an idle server).</li>
+</ul>
+<pre><code class="language-text">                    +-----------------------+
+                    |    Traffic Manager    |
+       +------+ --> |        (DNS)          |
+       | User |     +-----------------------+
+       +------+          |             .
+                         | (Active)    . (Standby)
+                         v             .
+           +-----------------+     + . . . . . . . . +
+           |  Primary Region |     . Secondary Region.
+           |                 |     .                 .
+           |  [Load Balancer]|     .  [Load Balancer].
+           |       |         |     .       |         .
+           |       v         |     .       v         .
+           |    [App A]      |     .    [App B]      .
+           +-----------------+     + . . . . . . . . +
+               (Active)                (Passive)</code></pre><hr>
+<h2>💡 Hinglish Explanation (Traffic Police)</h2>
+<h3><strong>1. Azure Load Balancer (Layer 4)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh Traffic Police wala sirf gaadi ka number (IP + Port) dekhta hai. Woh andar nahi dekhta ki gaadi mein kaun baitha hai. Yeh fast hai aur simple traffic (TCP/UDP) ke liye use hota hai.</li>
+</ul>
+<h3><strong>2. Application Gateway (Layer 7)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh smart security guard hai. Yeh gaadi rok kar puchta hai &quot;Kahan jana hai?&quot; (URL check karta hai).<ul>
+<li>Agar aap <code>/images</code> bologe toh Image Server ke paas bhejega.</li>
+<li>Agar aap <code>/videos</code> bologe toh Video Server ke paas bhejega.</li>
+<li>Iske paas firewall (WAF) bhi hai jo hackers ko rokta hai.</li>
+</ul>
+</li>
+</ul>
+<h3><strong>3. Traffic Manager (DNS)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh GPS system ki tarah hai. Yeh user ko batata hai ki &quot;Sabse kareeb rasta kaunsa hai?&quot;. Agar user US mein hai toh US server ka address dega, agar India mein hai toh India ka.</li>
+</ul>
+<h3><strong>4. Algorithms (Tareeka)</strong></h3>
+<ul>
+<li><strong>Round Robin (Card Dealer)</strong>:<ul>
+<li><strong>Hinglish</strong>: Tash ke patte batna. Ek tumhe, ek tumhe, ek tumhe. Sabko barabar mauka milega, chahe koi slow ho ya fast.</li>
+</ul>
+</li>
+<li><strong>Dynamic (Smart Queue)</strong>:<ul>
+<li><strong>Hinglish</strong>: Mall ka billing counter. Aap wahan jaoge jahan sabse kam bheed hai (Least Connection).</li>
+</ul>
+</li>
+</ul>
+<h3><strong>5. High Availability (Jugaad)</strong></h3>
+<ul>
+<li><strong>Active-Active (Dono Dukan Khuli)</strong>:<ul>
+<li><strong>Hinglish</strong>: Do billing counters khule hain. Dono pe kaam ho raha hai. Kaam jaldi hoga.</li>
+</ul>
+</li>
+<li><strong>Active-Passive (Stepney Tyre)</strong>:<ul>
+<li><strong>Hinglish</strong>: Ek tyre gadi chala raha hai (Primary), doosra trunk mein pada hai (Secondary). Jab pehla phatega, tabhi doosra use hoga. Tab tak woh extra weight hai (Cost).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>🆚 Selection Cheat Sheet</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Service</th>
+<th align="left">Scope</th>
+<th align="left">Layer</th>
+<th align="left">Protocols</th>
+<th align="left">Best For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Azure Load Balancer</strong></td>
+<td align="left">Regional</td>
+<td align="left">4</td>
+<td align="left">TCP/UDP</td>
+<td align="left">Non-HTTP, High Performance, Internal DB traffic</td>
+</tr>
+<tr>
+<td align="left"><strong>Application Gateway</strong></td>
+<td align="left">Regional</td>
+<td align="left">7</td>
+<td align="left">HTTP/S</td>
+<td align="left">Web Apps, WAF protection, SSL Termination</td>
+</tr>
+<tr>
+<td align="left"><strong>Traffic Manager</strong></td>
+<td align="left">Global</td>
+<td align="left">DNS</td>
+<td align="left">Any</td>
+<td align="left">Disaster Recovery routing, Simple Multi-region</td>
+</tr>
+<tr>
+<td align="left"><strong>Azure Front Door</strong></td>
+<td align="left">Global</td>
+<td align="left">7</td>
+<td align="left">HTTP/S</td>
+<td align="left">Global Microservices, Web App Acceleration</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<h3><strong>1. Load Balancing</strong></h3>
+<ul>
+<li><strong>Question Type</strong>: Multiple Choice (Single Answer).</li>
+<li><strong>Difficulty</strong>: Easy to Moderate.</li>
+<li><strong>Key Concepts</strong>:<ul>
+<li><strong>Azure Load Balancer</strong> (Layer 4).</li>
+<li><strong>Application Gateway</strong> (Layer 7).</li>
+<li><strong>Traffic Manager</strong> (DNS).</li>
+<li><strong>Azure Front Door</strong> (Layer 7).</li>
+</ul>
+</li>
+<li><strong>Best Practices</strong>:<ul>
+<li>Understand the differences between regional and global load balancers.</li>
+<li>Know the use cases for each service.</li>
+<li>Be familiar with the load balancing algorithms and their trade-offs.</li>
+<li>Understand the OpEx vs CapEx comparison.</li>
+</ul>
+</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

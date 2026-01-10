@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Osi Model - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🌐 OSI Model (Open Systems Interconnection)</h1>
+<h2>📌 Overview</h2>
+<p>The <strong>OSI Model</strong> is a conceptual framework used to understand how data travels across a network. It breaks down network communication into <strong>7 abstract layers</strong>.</p>
+<blockquote>
+<p><strong>Mnemonic</strong>: <strong>P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>hrow <strong>S</strong>ausage <strong>P</strong>izza <strong>A</strong>way<br>(Physical, Data Link, Network, Transport, Session, Presentation, Application)</p>
+<p><strong>Hindi Mnemonic: A</strong>ndhra <strong>P</strong>radesh <strong>S</strong>e <strong>T</strong>rain <strong>N</strong>ayi <strong>D</strong>elhi <strong>P</strong>ahuchi<br>(Application, Presentation, Session, Transport, Network, Data Link, Physical)</p>
+</blockquote>
+<hr>
+<h2>1. The 7 Layers &amp; Azure Mapping</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Layer</th>
+<th align="left">Name</th>
+<th align="left">Unit of Data</th>
+<th align="left">Function</th>
+<th align="left">Azure Component</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>L7</strong></td>
+<td align="left"><strong>Application</strong></td>
+<td align="left">Data</td>
+<td align="left">End-user interface (HTTP, FTP, SMTP)</td>
+<td align="left"><strong>Application Gateway</strong>, <strong>Front Door</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>L6</strong></td>
+<td align="left"><strong>Presentation</strong></td>
+<td align="left">Data</td>
+<td align="left">Encryption, Compression (SSL/TLS)</td>
+<td align="left"><strong>SSL Termination</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>L5</strong></td>
+<td align="left"><strong>Session</strong></td>
+<td align="left">Data</td>
+<td align="left">Session management</td>
+<td align="left">TCP Sessions</td>
+</tr>
+<tr>
+<td align="left"><strong>L4</strong></td>
+<td align="left"><strong>Transport</strong></td>
+<td align="left">Segment</td>
+<td align="left">Reliability, Ports (TCP/UDP)</td>
+<td align="left"><strong>Azure Load Balancer</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>L3</strong></td>
+<td align="left"><strong>Network</strong></td>
+<td align="left">Packet</td>
+<td align="left">Routing, IP Addressing</td>
+<td align="left"><strong>Virtual Network (VNET)</strong>, <strong>NSG</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>L2</strong></td>
+<td align="left"><strong>Data Link</strong></td>
+<td align="left">Frame</td>
+<td align="left">MAC Addressing, Switching</td>
+<td align="left">Virtual Switch (Managed by Azure)</td>
+</tr>
+<tr>
+<td align="left"><strong>L1</strong></td>
+<td align="left"><strong>Physical</strong></td>
+<td align="left">Bit</td>
+<td align="left">Cables, Fiber, Wireless</td>
+<td align="left">Physical Data Center Hardware</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>2. Deep Dive: The 7 Layers Explained (Hinglish)</h2>
+<h3><strong>Layer 7: Application Layer (Sabse Top Layer)</strong></h3>
+<ul>
+<li><strong>Technical</strong>: The layer where the user interacts with the application. It provides protocols like HTTP, SMTP, FTP.</li>
+<li><strong>Hinglish</strong>: Yeh woh layer hai jahan hum directly interact karte hain using apps like Chrome, Outlook, ya Skype. Jab aap browser mein &quot;google.com&quot; type karte ho, toh Application Layer active hoti hai.</li>
+<li><strong>Azure Example</strong>: <strong>Azure Application Gateway</strong> (Web traffic handle karta hai).</li>
+</ul>
+<h3><strong>Layer 6: Presentation Layer (Translator)</strong></h3>
+<ul>
+<li><strong>Technical</strong>: Responsible for encryption, decentryption, compression, and translation (e.g., ASCII to EBCDIC).</li>
+<li><strong>Hinglish</strong>: Iska kaam hai data ko us format mein convert karna jo receiver samajh sake. Example: Jab aap Amazon pe payment karte ho, toh data ko Encrypt (lock) karna is layer ka kaam hai taaki koi hack na kar sake.</li>
+<li><strong>Azure Example</strong>: <strong>SSL Termination</strong> at App Gateway.</li>
+</ul>
+<h3><strong>Layer 5: Session Layer (Manager)</strong></h3>
+<ul>
+<li><strong>Technical</strong>: Manages sessions (start, stop, maintain) between two devices.</li>
+<li><strong>Hinglish</strong>: Yeh layer doo devices ke beech conversation (session) ko start aur stop karti hai. Agar aap net banking use kar rahe ho aur 5 min tak kuch nahi kiya toh &quot;Session Expired&quot; aata hai—woh is layer ka kaam hai.</li>
+</ul>
+<h3><strong>Layer 4: Transport Layer (The Transporter)</strong></h3>
+<ul>
+<li><strong>Technical</strong>: Ensures reliable delivery (TCP) or fast delivery (UDP). Breaks data into &quot;Segments&quot;.</li>
+<li><strong>Hinglish</strong>: Iska main kaam hai data ko sahi salamat A se B tak pahunchana. Yeh decide karta hai ki data reliably bhejna hai (TCP - like Registered Post) ya fast bhejna hai (UDP - like Streaming).</li>
+<li><strong>Azure Example</strong>: <strong>Azure Load Balancer</strong> (Traffic distribute karta hai based on Ports).</li>
+</ul>
+<h3><strong>Layer 3: Network Layer (The Router)</strong></h3>
+<ul>
+<li><strong>Technical</strong>: Handles Routing and IP Addressing. Segments become &quot;Packets&quot;.</li>
+<li><strong>Hinglish</strong>: Yeh decide karta hai ki data kaunse raste (route) se jayega. Jaise Google Maps best rasta dikhata hai, waise hi Network Layer IP address use karke data ko destination tak pahunchata hai.</li>
+<li><strong>Azure Example</strong>: <strong>Virtual Network (VNET)</strong>, <strong>Routers</strong>, <strong>NSG</strong>.</li>
+</ul>
+<h3><strong>Layer 2: Data Link Layer (The Switch)</strong></h3>
+<ul>
+<li><strong>Technical</strong>: Handles physical addressing (MAC Address). Packets become &quot;Frames&quot;.</li>
+<li><strong>Hinglish</strong>: Yeh layer local network ke andar data move karti hai using MAC Address (jo device ka permanent ID hota hai). Network layer shehar (City) ke beech data bhejta hai, par Data Link layer ghar (Local) ke andar.</li>
+<li><strong>Azure Component</strong>: <strong>Virtual Switch</strong> (Managed by Azure).</li>
+</ul>
+<h3><strong>Layer 1: Physical Layer (Hardware)</strong></h3>
+<ul>
+<li><strong>Technical</strong>: The physical medium (Cables, Wi-Fi, Fiber). Frames become &quot;Bits&quot; (0s and 1s).</li>
+<li><strong>Hinglish</strong>: Yeh actual hardware hai—taar (wires), cables, optical fiber, ya Wi-Fi signals. Yahan data &quot;0&quot; aur &quot;1&quot; (Bits) ke form mein travel karta hai.</li>
+<li><strong>Azure Component</strong>: <strong>Physical Datacenters</strong>, Cables.</li>
+</ul>
+<hr>
+<h3>L4 vs L7 Load Balancing</h3>
+<ul>
+<li><p><strong>L4 (Transport Layer)</strong>:</p>
+<ul>
+<li><strong>Azure Load Balancer</strong>: Distributes traffic based on <strong>IP Address + Port</strong> (5-tuple hash). Use this for non-HTTP traffic (e.g., SQL Server, TCP streams).</li>
+<li><em>It doesn&#39;t &quot;look&quot; inside the packet.</em></li>
+</ul>
+</li>
+<li><p><strong>L7 (Application Layer)</strong>:</p>
+<ul>
+<li><strong>Azure Application Gateway</strong>: Distributes traffic based on <strong>URL request</strong>.</li>
+<li>Example: Request for <code>/images</code> goes to Server A, request for <code>/video</code> goes to Server B.</li>
+<li><em>It &quot;understands&quot; the HTTP request.</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>3. Architecture Diagram</h2>
+<pre><code class="language-text">     +-------------------------------+
+     |     Layer 7 (Application)     |
+     |                               |
+     |   [ Web Browser / User ]      |
+     |             |                 |
+     |             v (HTTP Request)  |
+     |                               |
+     | [ Azure App Gateway / FD ]    |
+     +-------------------------------+
+                   |
+                   | (Forward Request)
+                   v
+     +-------------------------------+
+     |     Layer 4 (Transport)       |
+     |                               |
+     |   [ Azure Load Balancer ]     |
+     |     (TCP/UDP Port 80/443)     |
+     |                               |
+     +-------------------------------+
+                   |
+                   | (Distribute TCP Stream)
+                   v
+     +-------------------------------+
+     |     Layer 3 (Network)         |
+     |                               |
+     |   [ Virtual Network (VNET) ]  |
+     |   (Private IP: 10.0.0.5)      |
+     |             |                 |
+     |             v (Route Packet)  |
+     |                               |
+     |     [ Virtual Machine ]       |
+     +-------------------------------+</code></pre><hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li><strong>Azure Load Balancer</strong>: Works at <strong>Layer 4</strong> (Transport).</li>
+<li><strong>Application Gateway</strong>: Works at <strong>Layer 7</strong> (Application) and includes WAF (Web Application Firewall).</li>
+<li><strong>NSG (Network Security Group)</strong>: Filters traffic at <strong>Layer 3 &amp; 4</strong> (IP and Port).</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
