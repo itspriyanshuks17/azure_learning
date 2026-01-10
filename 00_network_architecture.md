@@ -56,6 +56,8 @@ This is the **most popular** architecture in Azure.
          (Spoke C)      (Spoke D)
 ```
 
+![1768040188091](image/00_network_architecture/1768040188091.png)
+
 ### 3. Mesh Topology
 
 - **Full Mesh**: Every VNet connects to every other VNet. (Max Redundancy, High Cost).
@@ -77,6 +79,8 @@ This is the **most popular** architecture in Azure.
       (Everyone talks to Everyone)
 ```
 
+![1768040214195](image/00_network_architecture/1768040214195.png)
+
 ### 4. Bus Topology (Legacy) 🚌
 
 - **Concept**: All devices share a single communication line (Cable).
@@ -92,6 +96,8 @@ This is the **most popular** architecture in Azure.
          |        |        |        |
         [A]      [B]      [C]      [D]
 ```
+
+![1768040175636](image/00_network_architecture/1768040175636.png)
 
 ### 5. Ring Topology (Legacy) 💍
 
@@ -109,6 +115,9 @@ This is the **most popular** architecture in Azure.
             |            |
            [D] -------- [C]
 ```
+
+![1768040202402](image/00_network_architecture/1768040202402.png)
+
 
 ### 6. N-Tier Architecture (3-Tier)
 
