@@ -71,6 +71,11 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Definition**: Public vs Private, IPv4 vs IPv6.
   - **Key**: Reachability, Static vs Dynamic, Address Exhaustion.
 
+- **[00. Networking Models (Client-Server vs P2P)](00_networking_models.md)**
+
+  - **Definition**: Roles of Computers (Client/Server) & Topologies.
+  - **Key**: Centralized vs Decentralized, Server Hardware vs Client Hardware.
+
 - **[00. Area Networks (LAN, WAN, VLAN)](00_area_networks.md)**
 
   - **Definition**: Types of networks by scope (Local, Wide, Metro).
