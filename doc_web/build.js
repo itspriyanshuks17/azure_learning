@@ -54,7 +54,27 @@ const renderer = {
         }
         return `<pre><code class="language-${cleanLang}">${text}</code></pre>`;
     },
-    table(header, body) {
+    table(token) {
+        let header = '';
+        let body = '';
+
+        // Generate Header
+        let cell = '';
+        for (let j = 0; j < token.header.length; j++) {
+            cell += `<th align="${token.align[j] || ''}">${this.parser.parseInline(token.header[j].tokens)}</th>`;
+        }
+        header += `<tr>${cell}</tr>`;
+
+        // Generate Body
+        for (let i = 0; i < token.rows.length; i++) {
+            const row = token.rows[i];
+            cell = '';
+            for (let j = 0; j < row.length; j++) {
+                cell += `<td align="${token.align[j] || ''}">${this.parser.parseInline(row[j].tokens)}</td>`;
+            }
+            body += `<tr>${cell}</tr>`;
+        }
+
         return `<div class="table-wrapper">
             <table>
                 <thead>${header}</thead>
