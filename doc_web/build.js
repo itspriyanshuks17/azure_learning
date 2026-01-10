@@ -90,6 +90,9 @@ async function build() {
     // 5. Generate Sidebar HTML
     const sidebarHtml = generateSidebar(mdFiles);
 
+    // 5.1 Initialize Search Index
+    const searchIndex = [];
+
     // 6. Provide Template
     const template = await fs.readFile(CONFIG.templatePath, 'utf-8');
 
@@ -111,6 +114,14 @@ async function build() {
         // Extract Title (Available from filename or first H1)
         const title = formatTitle(file);
 
+        // Add to Search Index
+        const plainText = parseContentForSearch(content); // Custom helper
+        searchIndex.push({
+            title: title,
+            url: outFilename,
+            content: plainText
+        });
+
         // Inject into Template
         const finalHtml = template
             .replace('{{title}}', title)
@@ -122,7 +133,28 @@ async function build() {
         console.log(`  📝 Generated: ${outFilename}`);
     }
 
+    // Write Search Index
+    await fs.outputJson(path.join(CONFIG.outDir, 'search.json'), searchIndex);
+    console.log(`  🔍 Generated values for search.json with ${searchIndex.length} items`);
+
     console.log('🎉 Build Complete! Output is in doc_web/dist');
+}
+
+// Helper to strip markdown for search
+function parseContentForSearch(markdown) {
+    // Remove headers
+    let text = markdown.replace(/^#+\s+(.*)$/gm, '$1');
+    // Remove links
+    text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+    // Remove code blocks
+    text = text.replace(/```[\s\S]*?```/g, '');
+    // Remove bold/italic
+    text = text.replace(/(\*\*|__)(.*?)\1/g, '$2');
+    text = text.replace(/(\*|_)(.*?)\1/g, '$2');
+    // Remove HTML tags
+    text = text.replace(/<[^>]*>/g, '');
+    // Trim whitespace
+    return text.replace(/\s+/g, ' ').trim().toLowerCase();
 }
 
 function generateSidebar(files) {

@@ -39,4 +39,74 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.add("active");
     }
   });
+
+
+  // --- Search Logic ---
+  const searchInput = document.getElementById("search-input");
+  const searchResults = document.getElementById("search-results");
+  let searchIndex = [];
+
+  if (searchInput) {
+      // Fetch Search Index
+      fetch("search.json")
+          .then(res => res.json())
+          .then(data => {
+              searchIndex = data;
+              console.log("🔍 Search Index Loaded:", searchIndex.length, "items");
+          })
+          .catch(err => console.error("Failed to load search index:", err));
+
+      // Event Listener
+      searchInput.addEventListener("input", (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          
+          if (query.length < 2) {
+              searchResults.style.display = "none";
+              searchResults.innerHTML = "";
+              return;
+          }
+
+          // Filter Results
+          const results = searchIndex.filter(item => 
+              item.title.toLowerCase().includes(query) || 
+              item.content.includes(query)
+          ).slice(0, 10); // Limit to 10 results
+
+          displaySearchResults(results, query);
+      });
+      
+      // Close results when clicking outside
+      document.addEventListener("click", (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+              searchResults.style.display = "none";
+          }
+      });
+  }
+
+  function displaySearchResults(results, query) {
+      if (results.length === 0) {
+          searchResults.innerHTML = `<div class="search-item">No results found for "${query}"</div>`;
+          searchResults.style.display = "block";
+          return;
+      }
+
+      const html = results.map(item => `
+          <a href="${item.url}" class="search-item">
+              <div class="search-title">${item.title}</div>
+              <div class="search-excerpt">...${getExcerpt(item.content, query)}...</div>
+          </a>
+      `).join("");
+
+      searchResults.innerHTML = html;
+      searchResults.style.display = "block";
+  }
+
+  function getExcerpt(content, query) {
+      const index = content.indexOf(query);
+      if (index === -1) return content.substring(0, 50);
+      
+      const start = Math.max(0, index - 20);
+      const end = Math.min(content.length, index + query.length + 30);
+      return content.substring(start, end);
+  }
 });

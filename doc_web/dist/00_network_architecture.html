@@ -17,6 +17,10 @@
     <aside class="sidebar">
       <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
       <nav>
         <a href="index.html">🏠 Home</a>
         <a href="00_area_networks.html">Area Networks</a>
@@ -95,7 +99,8 @@
                     |
              +------+-------+
              |              |
-         (Spoke C)      (Spoke D)</code></pre><h3>3. Mesh Topology</h3>
+         (Spoke C)      (Spoke D)</code></pre><p><img src="image/00_network_architecture/1768040188091.png" alt="1768040188091"></p>
+<h3>3. Mesh Topology</h3>
 <ul>
 <li><strong>Full Mesh</strong>: Every VNet connects to every other VNet. (Max Redundancy, High Cost).</li>
 <li><strong>Partial Mesh</strong>: Some critical VNets connect to all, others do not.</li>
@@ -111,7 +116,8 @@
        |   /    \     |
        | /        \   |
       [D] ---------- [C]
-      (Everyone talks to Everyone)</code></pre><h3>4. Bus Topology (Legacy) 🚌</h3>
+      (Everyone talks to Everyone)</code></pre><p><img src="image/00_network_architecture/1768040214195.png" alt="1768040214195"></p>
+<h3>4. Bus Topology (Legacy) 🚌</h3>
 <ul>
 <li><strong>Concept</strong>: All devices share a single communication line (Cable).</li>
 <li><strong>Cloud Context</strong>: <strong>Not used</strong> in cloud networking.</li>
@@ -122,7 +128,8 @@
        |                               |
        +-------------------------------+  (Backbone)
          |        |        |        |
-        [A]      [B]      [C]      [D]</code></pre><h3>5. Ring Topology (Legacy) 💍</h3>
+        [A]      [B]      [C]      [D]</code></pre><p><img src="image/00_network_architecture/1768040175636.png" alt="1768040175636"></p>
+<h3>5. Ring Topology (Legacy) 💍</h3>
 <ul>
 <li><strong>Concept</strong>: Each device connects to exactly two other devices, forming a circle. Data travels in one direction.</li>
 <li><strong>Cloud Context</strong>: <strong>Not used</strong> virtually, though some fiber backbones (SONET) use rings for redundancy.</li>
@@ -134,7 +141,8 @@
             |   (Data)   |
             |     ->     |
             |            |
-           [D] -------- [C]</code></pre><h3>6. N-Tier Architecture (3-Tier)</h3>
+           [D] -------- [C]</code></pre><p><img src="image/00_network_architecture/1768040202402.png" alt="1768040202402"></p>
+<h3>6. N-Tier Architecture (3-Tier)</h3>
 <p>Not a topology of <em>VNets</em>, but a topology of <em>Subnets</em> inside a VNet.</p>
 <ol>
 <li><strong>Web Tier</strong> (Front-end): Publicly accessible.</li>
