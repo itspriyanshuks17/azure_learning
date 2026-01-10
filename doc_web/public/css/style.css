@@ -213,8 +213,8 @@ th {
 
 /* Images */
 .main-content img {
-  max-width: 100px !important;
-  max-height: 100px !important;
+  max-width: 430px !important;
+  max-height: 300px !important;
   width: auto !important;
   height: auto !important;
   object-fit: contain;
