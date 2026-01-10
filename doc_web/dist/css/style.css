@@ -210,6 +210,18 @@ th {
   letter-spacing: 1px;
 }
 
+/* Images */
+.main-content img {
+  max-width: 100%;
+  width: auto;
+  max-height: 500px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+}
+
 /* Mermaid Diagrams */
 .mermaid {
   background: rgba(255, 255, 255, 0.03);
