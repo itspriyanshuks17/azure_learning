@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ip Addresses - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🌍 IP Addresses: Types &amp; Versions (IPv4 vs IPv6)</h1>
+<h2>📌 Overview</h2>
+<p>An <strong>IP (Internet Protocol) Address</strong> is a numerical label assigned to each device connected to a computer network. It serves two main functions:</p>
+<ol>
+<li><strong>Identification</strong>: &quot;Who is this device?&quot;</li>
+<li><strong>Addressing</strong>: &quot;Where is this device located?&quot;</li>
+</ol>
+<p>Think of it as your <strong>Digital Address</strong> or Phone Number on the internet.</p>
+<hr>
+<h2>🏷️ Types of IP Addresses</h2>
+<h3>1. Public vs Private IP</h3>
+<div class="table-wrapper">
+            <table>
+                <thead>[object Object]</thead>
+                <tbody>undefined</tbody>
+            </table>
+        </div><h3>2. Static vs Dynamic IP</h3>
+<ul>
+<li><strong>Dynamic IP</strong>: Changes periodically (DHCP). Most home routers and standard VMs use this.<ul>
+<li><em>Cloud Context</em>: When you stop/start a VM, its Public IP might change.</li>
+</ul>
+</li>
+<li><strong>Static IP</strong>: Fixed permanent address.<ul>
+<li><em>Cloud Context</em>: Used for DNS servers, Web Servers requiring SSL, or Firewall whitelisting.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>⚔️ IPv4 vs IPv6 (The Showdown)</h2>
+<p>The internet ran out of IPv4 addresses, so IPv6 was created.</p>
+<h3>1. IPv4 (The Legacy)</h3>
+<ul>
+<li><strong>Format</strong>: 32-bit numeric address.</li>
+<li><strong>Notation</strong>: Dotted Decimal (e.g., <code>192.168.1.1</code>).</li>
+<li><strong>Total Addresses</strong>: ~4.3 Billion.</li>
+<li><strong>Header</strong>: Variable length (20-60 bytes).</li>
+</ul>
+<h3>2. IPv6 (The Future)</h3>
+<ul>
+<li><strong>Format</strong>: 128-bit alphanumeric address.</li>
+<li><strong>Notation</strong>: Hexadecimal (e.g., <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>).</li>
+<li><strong>Total Addresses</strong>: 3.4 × 10^38 (Undecillion) - virtually infinite.</li>
+<li><strong>Header</strong>: Fixed length (40 bytes) - simpler processing for routers.</li>
+<li><strong>Security</strong>: IPSec is built-in (mandatory mainly).</li>
+</ul>
+<h4>Visual Comparison Diagram</h4>
+<pre><code class="language-text">       [ IPv4 Address ]                   [ IPv6 Address ]
+       (32-Bits)                          (128-Bits)
+
+    192 . 168 .  1  .  1          2001:0db8:....:7334
+     |     |     |     |            |
+    [8]+[8]+[8]+[8] = 32         [Hex Groups x 8]
+                                    |
+   (Simple Dotted Decimal)       (Complex Hexadecimal)</code></pre><hr>
+<h2>☁️ Cloud Context (Azure)</h2>
+<p>In Azure (and most clouds):</p>
+<ul>
+<li><strong>VNets</strong> primarily use <strong>Private IPv4</strong> (Address Space like <code>10.0.0.0/16</code>).</li>
+<li><strong>Public IPs</strong> are separate resources you attach to VMs or Load Balancers.</li>
+<li><strong>IPv6</strong> is supported mainly for dual-stack architectures (IoT, Mobile networks), but IPv4 is still the default standard for internal networking.</li>
+</ul>
+<hr>
+<h2>💡 Hinglish Explanation (Mobile Process)</h2>
+<h3><strong>1. IP Address (Phone Number)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: IP address aapka phone number hai. Agar aapko kisi se baat karni hai, toh number dial karna padega.</li>
+</ul>
+<h3><strong>2. Public vs Private (Personal vs Intercom)</strong></h3>
+<ul>
+<li><strong>Public IP</strong>: Aapka personal mobile number. Ispe koi bhi call kar sakta hai (Internet).</li>
+<li><strong>Private IP</strong>: Society ka Intercom number. Sirf society ke log hi baat kar sakte hain. Bahar se koi intercom par call nahi kar sakta.</li>
+</ul>
+<h3><strong>3. IPv4 vs IPv6 (Old vs New Numbering)</strong></h3>
+<ul>
+<li><strong>IPv4 (10-digit number)</strong>: Pehle sabke paas 10 digit number the. Lekin log itne badh gaye ki number khatam hone lage.</li>
+<li><strong>IPv6 (Alpha-numeric ID)</strong>: Ab sabko ek naya, lamba aur complex unique ID mil raha hai jo kabhi khatam nahi hoga. Isme letters bhi hain aur numbers bhi.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips for AZ-900</h2>
+<ol>
+<li><strong>Private IPs</strong>: Remember the ranges <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, and <code>192.168.0.0/16</code>. Azure VNets sit here.</li>
+<li><strong>Public IP SKU</strong>: In Azure, Public IPs come in <strong>Basic</strong> and <strong>Standard</strong> SKUs. Standard is secure by default (requires NSG to open).</li>
+<li><strong>IPv6</strong>: Know that it solves the address exhaustion problem, but IPv4 is still king in VNet configuration.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

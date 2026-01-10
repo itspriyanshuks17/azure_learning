@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monolith Vs Microservices - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🏗️ Monolith vs Microservices Architecture</h1>
+<h2>📌 Overview</h2>
+<p>Modern cloud applications are often built differently than traditional ones. Understanding these architectures helps in choosing the right Azure services.</p>
+<hr>
+<h2>1. Monolithic Architecture 🏰</h2>
+<p>A single, unified unit where all components (UI, Business Logic, Database Access) are tightly coupled in one codebase and deployed together.</p>
+<ul>
+<li><strong>Characteristics</strong>:<ul>
+<li>One large codebase.</li>
+<li>Scale by cloning the entire server (Vertical Scaling is common).</li>
+<li>If one component fails (e.g., memory leak in reporting), the whole app crashes.</li>
+</ul>
+</li>
+<li><strong>Azure Mapping</strong>: A robust <strong>Azure Virtual Machine</strong> running a legacy enterprise app, or a large <strong>Azure App Service</strong>.</li>
+</ul>
+<h2>2. Microservices Architecture 🐝</h2>
+<p>Breaking an application into smaller, independent services that communicate via APIs.</p>
+<ul>
+<li><strong>Characteristics</strong>:<ul>
+<li>Decoupled: Each service handles one function (e.g., &quot;User Service&quot;, &quot;Order Service&quot;).</li>
+<li>Independent Deployment: Update the &quot;Order Service&quot; without redeploying the &quot;User Service&quot;.</li>
+<li>Polyglot: One service writes in C#, another in Python.</li>
+</ul>
+</li>
+<li><strong>Azure Mapping</strong>:<ul>
+<li><strong>Azure Kubernetes Service (AKS)</strong>.</li>
+<li><strong>Azure Functions</strong> (Serverless compute for individual tasks).</li>
+<li><strong>Azure Container Apps</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>3. Serverless Architecture (Function-as-a-Service)</h2>
+<p>An evolution of microservices where you don&#39;t manage <em>any</em> infrastructure. You just write code functions.</p>
+<ul>
+<li><strong>Azure Functions</strong>: Event-driven code (e.g., Run this code when a file is uploaded to Blob Storage).</li>
+<li><strong>Azure Logic Apps</strong>: Visual workflow designer (Low-code/No-code) to integrate apps (e.g., When an email arrives, create a ticket in DevOps).</li>
+</ul>
+<hr>
+<h2>4. Architecture Comparison</h2>
+<pre><code class="language-text">    1. MONOLITH             2. MICROSERVICES           3. SERVERLESS
+    (All-in-One)            (Decoupled Services)       (Function-as-a-Service)
+
+   +-------------+         +------+   +------+          +-----------+
+   | [ UI Layer ]|         | [UI] |   | [UI] |          |  Trigger  |
+   | [ Business ]|         +------+   +------+          +-----------+
+   | [ Data Acc ]|            |          |                    |
+   +-------------+            v          v                    v
+         |                 +------+   +------+          +-----------+
+         v                 | Svc A|   | Svc B|          | Function()|
+   +-------------+         +------+   +------+          +-----------+
+   |  Database   |            |          |              (Ephemeral)
+   +-------------+            v          v
+                           +------+   +------+
+                           | DB 1 |   | DB 2 |
+                           +------+   +------+</code></pre><hr>
+<hr>
+<h2>💡 Hinglish Explanation (Cake Analogy)</h2>
+<h3><strong>1. Monolith (Wedding Cake)</strong></h3>
+<ul>
+<li><strong>Concept</strong>: Ek bada Cake.</li>
+<li><strong>Hinglish</strong>: Agar kisi ko chocolate hissa chahiye aur kisi ko vanilla, toh pura cake katna padega. Agar cake gir gaya (crash), toh sabka cake kharab. Ise banana aur serve karna mushkil hai.</li>
+</ul>
+<h3><strong>2. Microservices (Cupcakes)</strong></h3>
+<ul>
+<li><strong>Concept</strong>: Chote-chote alag cakes.</li>
+<li><strong>Hinglish</strong>: Agar ek cupcake (Service A) gir gaya, toh baaki cupcakes (Service B, C) safe hain. Aap chocolate cupcakes zyada bana sakte ho (Scaling) agar demand badh jaye, bina vanilla cupcakes banaye.</li>
+</ul>
+<h3><strong>3. Serverless (Buffet)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Aapko cake banana hi nahi hai. Bas bolo &quot;Cake chahiye&quot; aur woh aa jayega. Na kitchen ka tension, na oven ka. Sirf khane ke paise do.</li>
+</ul>
+<hr>
+<h2>🆚 Comparison Table</h2>
+<div class="table-wrapper">
+            <table>
+                <thead>[object Object]</thead>
+                <tbody>undefined</tbody>
+            </table>
+        </div></main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deployment Models - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🌍 Cloud Deployment Models</h1>
+<h2>📌 Overview</h2>
+<p>Cloud deployment models define <strong>where</strong> your data is stored and <strong>how</strong> your customers access it. Choosing the right model depends on your budget, security, and scalability needs.</p>
+<hr>
+<h2>1. Public Cloud</h2>
+<p>Services are offered over the public internet and available to anyone who wants to purchase them. Cloud resources (like servers and storage) are owned and operated by a third-party cloud service provider (Microsoft Azure).</p>
+<ul>
+<li><strong>Examples</strong>: Azure Web Apps, Azure Virtual Machines, Azure SQL Database.</li>
+<li><strong>Ownership</strong>: Hardware/Infrastructure owned by Microsoft.</li>
+<li><strong>Cost</strong>: <strong>OpEx</strong> (Operating Expense) - Pay-as-you-go, no upfront hardware costs.</li>
+<li><strong>Pros</strong>:<ul>
+<li>High scalability (virtually unlimited).</li>
+<li>No maintenance (Microsoft manages hardware).</li>
+<li>Quick deployment.</li>
+<li>Specific security/compliance requirements might not be met for certain industries.</li>
+<li>Less control over physical hardware.</li>
+</ul>
+</li>
+</ul>
+<h4>Architecture Diagram (Public)</h4>
+<pre><code class="language-text">       [  Microsoft Azure Datacenter  ]
+       +------------------------------+
+       |   Customer A   Customer B    |
+       |  +----------+  +----------+  |
+       |  |   VM     |  |   VM     |  |
+       |  +----------+  +----------+  |
+       |                              |
+       |    (Shared Hardware Pool)    |
+       +------------------------------+</code></pre><h2>2. Private Cloud</h2>
+<p>Computing resources used exclusively by a single business or organization. A private cloud can be physically located at your on-site organization’s datacenter, or it can be hosted by a third-party service provider.</p>
+<ul>
+<li><strong>Examples</strong>: <strong>Azure Stack Hub</strong> (running Azure services in your own datacenter).</li>
+<li><strong>Ownership</strong>: Hardware is owned by YOU (or a dedicated host).</li>
+<li><strong>Cost</strong>: <strong>CapEx</strong> (Capital Expense) - Upfront investment in hardware/software.</li>
+<li><strong>Pros</strong>:<ul>
+<li>Complete control over environment and security.</li>
+<li>tailored to specific legacy applications.</li>
+<li>High initial cost and ongoing maintenance.</li>
+<li>Limited scalability compared to Public Cloud.</li>
+<li>You are responsible for hardware updates.</li>
+</ul>
+</li>
+</ul>
+<h4>Architecture Diagram (Private)</h4>
+<pre><code class="language-text">       [   Your Company Datacenter    ]
+       +------------------------------+
+       |   Marketing     Research     |
+       |  +----------+  +----------+  |
+       |  |   App    |  | Database |  |
+       |  +----------+  +----------+  |
+       |                              |
+       |    (Your Physical Racks)     |
+       |    (Firewall Protected)      |
+       +------------------------------+</code></pre><h2>3. Hybrid Cloud</h2>
+<p>A computing environment that combines a public cloud and a private cloud by allowing data and applications to be shared between them.</p>
+<ul>
+<li><strong>Examples</strong>: Using <strong>Azure Arc</strong> to manage on-prem servers from the Azure Portal; Keeping sensitive patient records on-prem (Private) while running the patient portal web app on Azure (Public).</li>
+<li><strong>Ownership</strong>: Mix of Microsoft (Public) and Yours (Private).</li>
+<li><strong>Cost</strong>: Mixed CapEx (for private) and OpEx (for public).</li>
+<li><strong>Pros</strong>:<ul>
+<li><strong>Flexibility</strong>: Run workloads where they make the most sense.</li>
+<li><strong>Compliance</strong>: Keep sensitive data local.</li>
+<li><strong>Backup</strong>: Use Public cloud for off-site backup/DR.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:<ul>
+<li>Most complex to set up and manage.</li>
+<li>Requires robust networking (VPN, ExpressRoute).</li>
+</ul>
+</li>
+</ul>
+<h2>4. Multi-Cloud (Bonus Concept)</h2>
+<p>Using services from multiple public cloud providers (e.g., Azure + AWS + Google Cloud) simultaneously.</p>
+<ul>
+<li><strong>Why?</strong>: Avoid vendor lock-in, use best-of-breed features (e.g., Google for AI, Azure for Enterprise basics).</li>
+<li><strong>Management</strong>: <strong>Azure Arc</strong> allows you to manage resources across Azure, AWS, and GCP from a single pane of glass.</li>
+</ul>
+<hr>
+<h2>5. Architecture Diagram (Hybrid Cloud)</h2>
+<pre><code class="language-text">    PRIVATE CLOUD (On-Prem)                   PUBLIC CLOUD (Azure)
+    =======================                   ====================
+
+   +-----------------------+                 +-----------------------+
+   |   Local Datacenter    |                 |    Azure Region       |
+   |                       |                 |                       |
+   |  [ SQL Database ]     | <-------------> |   [ Web App ]         |
+   |  (Sensitive Data)     |    (VPN /       |   (Public facing)     |
+   |                       |  ExpressRoute)  |                       |
+   +-----------------------+                 +-----------------------+</code></pre><hr>
+<hr>
+<h2>💡 Hinglish Explanation (Deployment Models)</h2>
+<h3><strong>1. Public Cloud (Bus)</strong></h3>
+<ul>
+<li><strong>Concept</strong>: Shared infrastructure.</li>
+<li><strong>Hinglish</strong>: Jaise Public Bus hoti hai. Seat aapki hai, par bus sabki hai. Sasti padti hai aur maintenance driver (Microsoft) karta hai.</li>
+<li><strong>Who uses it?</strong>: Startups, Netflix, Students.</li>
+</ul>
+<h3><strong>2. Private Cloud (Apni Car)</strong></h3>
+<ul>
+<li><strong>Concept</strong>: Dedicated infrastructure.</li>
+<li><strong>Hinglish</strong>: Jaise Khud ki Car. Poori car aapki hai, koi aur nahi aayega. Security full hai, par petrol, servicing (maintenance) aur khareedne ka kharcha (CapEx) aapka hai.</li>
+<li><strong>Who uses it?</strong>: Banks, Government (Security ke liye).</li>
+</ul>
+<h3><strong>3. Hybrid Cloud (Taxi/Rental)</strong></h3>
+<ul>
+<li><strong>Concept</strong>: Best of both worlds.</li>
+<li><strong>Hinglish</strong>: Roz office jaane ke liye apni car (Private) use karo, par jab family trip pe jana ho toh badi bus (Public) rent karlo. Sensitive data ghar pe (Private), baaki sab cloud pe (Public).</li>
+</ul>
+<hr>
+<h2>🆚 Summary Comparison</h2>
+<div class="table-wrapper">
+            <table>
+                <thead>[object Object]</thead>
+                <tbody>undefined</tbody>
+            </table>
+        </div></main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
