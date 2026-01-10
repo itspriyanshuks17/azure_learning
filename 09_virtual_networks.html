@@ -42,6 +42,7 @@
 <a href="07_azure_container_instances.html">Azure Container Instances</a>
 <a href="08_azure_functions.html">Azure Functions</a>
 <a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
 
       </nav>
     </aside>
@@ -83,13 +84,13 @@
        +--------------------------------+</code></pre><hr>
 <h2>🛡️ Security (Traffic Filtering)</h2>
 <h3>1. Network Security Groups (NSG)</h3>
-<p>An NSG contains security rules that allow or deny inbound network traffic to, or outbound network traffic from, several types of Azure resources.</p>
+<p>An NSG contains <strong>security rules</strong> that <strong>allow or deny inbound network traffic</strong> to, or outbound network traffic from, several types of Azure resources.</p>
 <ul>
 <li><strong>Rules:</strong> Based on Source IP, Destination IP, Port, and Protocol (5-Tuple).</li>
 <li><strong>Default:</strong> By default, all inbound traffic is blocked (except from VNet), and all outbound traffic is active.</li>
 </ul>
 <h3>2. Application Security Groups (ASG)</h3>
-<p>ASGs allow you to group VMs based on their application logic (e.g., &quot;WebServers&quot;, &quot;DBServers&quot;) rather than explicit IP addresses. This simplifies NSG rules.</p>
+<p>ASGs <strong>allow you to group VMs based on their application logic</strong> (e.g., &quot;WebServers&quot;, &quot;DBServers&quot;) rather than explicit IP addresses. This simplifies NSG rules.</p>
 <hr>
 <h2>🔗 Connectivity (Connecting VNets)</h2>
 <h3>1. VNet Peering</h3>
