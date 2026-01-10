@@ -71,6 +71,11 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Definition**: Public vs Private, IPv4 vs IPv6.
   - **Key**: Reachability, Static vs Dynamic, Address Exhaustion.
 
+- **[00. IP Classes & IANA](00_ip_classes.md)**
+
+  - **Definition**: Classful addressing (A, B, C, D, E), NID vs HID.
+  - **Key**: Default Subnet Masks, Private IP Ranges (RFC 1918), Loopback.
+
 - **[00. TCP/IP Model](00_tcp_ip_model.md)**
   - **Definition**: The 4-layer model used by the Internet (Application, Transport, Internet, Network Interface).
   - **Key**: TCP vs UDP; Encapsulation.
