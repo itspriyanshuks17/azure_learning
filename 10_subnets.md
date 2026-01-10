@@ -23,9 +23,9 @@ Azure uses **CIDR (Classless Inter-Domain Routing)** to define IP ranges.
 
 | CIDR Prefix | Total IPs | Usable IPs (Azure) | Description              |
 | :---------- | :-------- | :----------------- | :----------------------- |
-| `/16`     | 65,536    | 65,531             | Huge network (VNet size) |
-| `/24`     | 256       | 251                | Standard subnet size     |
-| `/28`     | 16        | 11                 | Very small subnet        |
+| `/16`       | 65,536    | 65,531             | Huge network (VNet size) |
+| `/24`       | 256       | 251                | Standard subnet size     |
+| `/28`       | 16        | 11                 | Very small subnet        |
 
 > **⚠️ Note:** Azure reserves **5 IPs** in _every_ subnet:
 >
@@ -34,6 +34,54 @@ Azure uses **CIDR (Classless Inter-Domain Routing)** to define IP ranges.
 > 3. x.x.x.2 (Azure DNS Mapping 1)
 > 4. x.x.x.3 (Azure DNS Mapping 2)
 > 5. x.x.x.255 (Broadcast Address)
+
+---
+
+## 🛠️ General Concept: How to Design Subnets (Subnetting)
+
+Subnetting is the process of stealing bits from the **Host** part of an IP address to create more **Networks** (Subnets).
+
+### Step-by-Step Guide to Creating Subnets
+
+#### Step 1: Identify Requirements
+
+Ask yourself:
+
+1.  **How many subnets do I need?** (e.g., 2 subnets: Web, DB)
+2.  **How many hosts (IPs) per subnet?** (e.g., 50 servers each)
+
+#### Step 2: Choose Your Network Class/CIDR
+
+Start with a standard network block.
+
+- Example: `192.168.1.0/24` (Standard Class C network).
+- Total IPs: 256.
+
+#### Step 3: Borrow Bits (The Calculation)
+
+To create **2 subnets**, you need to borrow **1 bit** (`2^1 = 2`).
+
+- Original CIDR: `/24`
+- New CIDR: `/24` + `1 bit` = `/25`
+
+This splits the block perfectly in half.
+
+#### Visual Calculation Example
+
+**Goal**: Split `192.168.1.0/24` into 2 Subnets.
+
+1.  **Subnet A (First Half)**
+
+    - **Range**: `192.168.1.0` to `192.168.1.127`
+    - **CIDR**: `192.168.1.0/25`
+    - **Total IPs**: 128 (Usable: 123 in Azure)
+
+2.  **Subnet B (Second Half)**
+    - **Range**: `192.168.1.128` to `192.168.1.255`
+    - **CIDR**: `192.168.1.128/25`
+    - **Total IPs**: 128 (Usable: 123 in Azure)
+
+> **Key Rule**: Every time you increase the CIDR number by 1 (e.g., /24 -> /25), you **double** the number of subnets but **halve** the number of IPs in each.
 
 ---
 
