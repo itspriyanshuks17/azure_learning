@@ -76,6 +76,16 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Definition**: Classful addressing (A, B, C, D, E), NID vs HID.
   - **Key**: Default Subnet Masks, Private IP Ranges (RFC 1918), Loopback.
 
+- **[00. Network Architecture & Topologies](00_network_architecture.md)**
+
+  - **Definition**: How networks are structured (Hub-Spoke, Mesh, 3-Tier).
+  - **Key**: Hub & Spoke Benefits, N-Tier Logic, Centralized Management.
+
+- **[00. OSI Model & Azure](00_osi_model.md)**
+
+  - **Definition**: 7 Layers of networking (Physical to Application).
+  - **Key**: L4 (Load Balancer) vs L7 (App Gateway).
+
 - **[00. TCP/IP Model](00_tcp_ip_model.md)**
   - **Definition**: The 4-layer model used by the Internet (Application, Transport, Internet, Network Interface).
   - **Key**: TCP vs UDP; Encapsulation.
