@@ -66,6 +66,11 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Definition**: Browser security mechanism allowing cross-domain requests.
   - **Key**: Same-Origin Policy, Preflight Requests, Access-Control-Allow-Origin.
 
+- **[00. IP Addresses & Versions](00_ip_addresses.md)**
+
+  - **Definition**: Public vs Private, IPv4 vs IPv6.
+  - **Key**: Reachability, Static vs Dynamic, Address Exhaustion.
+
 - **[00. TCP/IP Model](00_tcp_ip_model.md)**
   - **Definition**: The 4-layer model used by the Internet (Application, Transport, Internet, Network Interface).
   - **Key**: TCP vs UDP; Encapsulation.
