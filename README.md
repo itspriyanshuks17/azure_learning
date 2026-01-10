@@ -71,6 +71,11 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Definition**: Public vs Private, IPv4 vs IPv6.
   - **Key**: Reachability, Static vs Dynamic, Address Exhaustion.
 
+- **[00. Area Networks (LAN, WAN, VLAN)](00_area_networks.md)**
+
+  - **Definition**: Types of networks by scope (Local, Wide, Metro).
+  - **Key**: VLAN (Virtual Isolation), WAN (Inter-connect), SAN (Storage).
+
 - **[00. IP Classes & IANA](00_ip_classes.md)**
 
   - **Definition**: Classful addressing (A, B, C, D, E), NID vs HID.
