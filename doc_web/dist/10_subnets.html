@@ -104,6 +104,50 @@
 </ol>
 </blockquote>
 <hr>
+<h2>🛠️ General Concept: How to Design Subnets (Subnetting)</h2>
+<p>Subnetting is the process of stealing bits from the <strong>Host</strong> part of an IP address to create more <strong>Networks</strong> (Subnets).</p>
+<h3>Step-by-Step Guide to Creating Subnets</h3>
+<h4>Step 1: Identify Requirements</h4>
+<p>Ask yourself:</p>
+<ol>
+<li><strong>How many subnets do I need?</strong> (e.g., 2 subnets: Web, DB)</li>
+<li><strong>How many hosts (IPs) per subnet?</strong> (e.g., 50 servers each)</li>
+</ol>
+<h4>Step 2: Choose Your Network Class/CIDR</h4>
+<p>Start with a standard network block.</p>
+<ul>
+<li>Example: <code>192.168.1.0/24</code> (Standard Class C network).</li>
+<li>Total IPs: 256.</li>
+</ul>
+<h4>Step 3: Borrow Bits (The Calculation)</h4>
+<p>To create <strong>2 subnets</strong>, you need to borrow <strong>1 bit</strong> (<code>2^1 = 2</code>).</p>
+<ul>
+<li>Original CIDR: <code>/24</code></li>
+<li>New CIDR: <code>/24</code> + <code>1 bit</code> = <code>/25</code></li>
+</ul>
+<p>This splits the block perfectly in half.</p>
+<h4>Visual Calculation Example</h4>
+<p><strong>Goal</strong>: Split <code>192.168.1.0/24</code> into 2 Subnets.</p>
+<ol>
+<li><p><strong>Subnet A (First Half)</strong></p>
+<ul>
+<li><strong>Range</strong>: <code>192.168.1.0</code> to <code>192.168.1.127</code></li>
+<li><strong>CIDR</strong>: <code>192.168.1.0/25</code></li>
+<li><strong>Total IPs</strong>: 128 (Usable: 123 in Azure)</li>
+</ul>
+</li>
+<li><p><strong>Subnet B (Second Half)</strong></p>
+<ul>
+<li><strong>Range</strong>: <code>192.168.1.128</code> to <code>192.168.1.255</code></li>
+<li><strong>CIDR</strong>: <code>192.168.1.128/25</code></li>
+<li><strong>Total IPs</strong>: 128 (Usable: 123 in Azure)</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Key Rule</strong>: Every time you increase the CIDR number by 1 (e.g., /24 -&gt; /25), you <strong>double</strong> the number of subnets but <strong>halve</strong> the number of IPs in each.</p>
+</blockquote>
+<hr>
 <h2>🏗️ Architecture: Public vs Private Subnets</h2>
 <p>Although Azure doesn&#39;t technically have &quot;Public&quot; or &quot;Private&quot; subnet types (like AWS), we simulate them using <strong>NSGs</strong> and <strong>Route Tables</strong>.</p>
 <h3>1. Public Subnet</h3>
