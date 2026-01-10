@@ -73,35 +73,12 @@
 <li>Format: <code>IP_Address/Prefix_Length</code> (e.g., <code>10.0.0.0/24</code>)</li>
 <li>The <strong>Prefix Length</strong> (<code>/24</code>) tells you how many bits are fixed for the Network ID. The rest are for Hosts.</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th align="left">CIDR Prefix</th>
-<th align="left">Total IPs</th>
-<th align="left">Usable IPs (Azure)</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>/16</code></td>
-<td align="left">65,536</td>
-<td align="left">65,531</td>
-<td align="left">Huge network (VNet size)</td>
-</tr>
-<tr>
-<td align="left"><code>/24</code></td>
-<td align="left">256</td>
-<td align="left">251</td>
-<td align="left">Standard subnet size</td>
-</tr>
-<tr>
-<td align="left"><code>/28</code></td>
-<td align="left">16</td>
-<td align="left">11</td>
-<td align="left">Very small subnet</td>
-</tr>
-</tbody></table>
-<blockquote>
+<div class="table-wrapper">
+            <table>
+                <thead>[object Object]</thead>
+                <tbody>undefined</tbody>
+            </table>
+        </div><blockquote>
 <p><strong>⚠️ Note:</strong> Azure reserves <strong>5 IPs</strong> in <em>every</em> subnet:</p>
 <ol>
 <li>x.x.x.0 (Network Address)</li>

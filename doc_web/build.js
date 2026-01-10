@@ -53,6 +53,14 @@ const renderer = {
             return `<div class="mermaid">${decodedText}</div>`;
         }
         return `<pre><code class="language-${cleanLang}">${text}</code></pre>`;
+    },
+    table(header, body) {
+        return `<div class="table-wrapper">
+            <table>
+                <thead>${header}</thead>
+                <tbody>${body}</tbody>
+            </table>
+        </div>`;
     }
 };
 
