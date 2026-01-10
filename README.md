@@ -113,8 +113,13 @@ A comprehensive, hands-on guide to **Microsoft Azure** fundamentals covering cor
   - **Key**: Triggers vs Bindings; Consumption Plan (Pay-per-use).
 
 - **[09. Azure Virtual Networks (VNet)](09_virtual_networks.md)**
+
   - **Use Case**: Private network in the cloud, Isolation, Segmentation.
   - **Key**: Subnets (CIDR), NSG vs ASG, Peering, VPN Gateway.
+
+- **[10. Azure Subnets](10_subnets.md)**
+  - **Use Case**: Network segmentation, Security filtering.
+  - **Key**: CIDR Notation (/24 vs /16), Reserved IPs (5), Service Endpoints.
 
 ---
 

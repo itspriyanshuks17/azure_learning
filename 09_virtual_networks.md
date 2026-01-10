@@ -52,14 +52,14 @@ A VNet can be **segmented into smaller parts** called **Subnets**. This helps in
 
 ### 1. Network Security Groups (NSG)
 
-An NSG contains security rules that allow or deny inbound network traffic to, or outbound network traffic from, several types of Azure resources.
+An NSG contains **security rules** that **allow or deny inbound network traffic** to, or outbound network traffic from, several types of Azure resources.
 
 - **Rules:** Based on Source IP, Destination IP, Port, and Protocol (5-Tuple).
 - **Default:** By default, all inbound traffic is blocked (except from VNet), and all outbound traffic is active.
 
 ### 2. Application Security Groups (ASG)
 
-ASGs allow you to group VMs based on their application logic (e.g., "WebServers", "DBServers") rather than explicit IP addresses. This simplifies NSG rules.
+ASGs **allow you to group VMs based on their application logic** (e.g., "WebServers", "DBServers") rather than explicit IP addresses. This simplifies NSG rules.
 
 ---
 
