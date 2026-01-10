@@ -103,7 +103,8 @@ body {
 
 /* Content Container Effect */
 .content-wrapper {
-  max-width: 1000px;
+  max-width: 1400px;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -212,14 +213,22 @@ th {
 
 /* Images */
 .main-content img {
-  max-width: 100%;
+  max-width: 100px;
+  max-height: 100px;
   width: auto;
-  max-height: 500px;
+  height: auto;
+  object-fit: contain;
   display: block;
   margin: 20px auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 8px; /* Slightly smaller radius for small images */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--glass-border);
+  cursor: pointer; /* Suggest clickable */
+  transition: transform 0.2s ease;
+}
+
+.main-content img:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
 }
 
 /* Mermaid Diagrams */
@@ -328,7 +337,15 @@ blockquote {
   }
 
   .main-content {
-    padding: 30px 20px;
+    padding: 20px 15px;
+  }
+  
+  .content-wrapper {
+    width: 100%;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
   }
   
   .menu-toggle {
