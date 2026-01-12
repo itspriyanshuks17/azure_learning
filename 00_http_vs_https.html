@@ -109,6 +109,27 @@
 </li>
 </ul>
 <hr>
+<hr>
+<h2>🚦 HTTP Methods (The Verbs)</h2>
+<p>Methods tell the server <strong>what action</strong> to perform on the resource.</p>
+<h3>Common Methods</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Method</th><th align="left">Action</th><th align="left">Description</th><th align="left">REST Analogy</th></tr></thead>
+                <tbody><tr><td align="left"><strong>GET</strong></td><td align="left"><strong>Read</strong></td><td align="left">Retrieve data. <strong>Safe</strong> (No changes to server).</td><td align="left">&quot;Show me the menu&quot;</td></tr><tr><td align="left"><strong>POST</strong></td><td align="left"><strong>Create</strong></td><td align="left">Submit new data. <strong>Unsafe</strong> (Creates resource).</td><td align="left">&quot;Order a Pizza&quot;</td></tr><tr><td align="left"><strong>PUT</strong></td><td align="left"><strong>Update</strong></td><td align="left">Replace entire resource. (Idempotent).</td><td align="left">&quot;Replace my order with a Burger&quot;</td></tr><tr><td align="left"><strong>PATCH</strong></td><td align="left"><strong>Modify</strong></td><td align="left">Partial update. (Standard).</td><td align="left">&quot;Change cheese to extra cheese&quot;</td></tr><tr><td align="left"><strong>DELETE</strong></td><td align="left"><strong>Delete</strong></td><td align="left">Remove resource.</td><td align="left">&quot;Cancel my order&quot;</td></tr></tbody>
+            </table>
+        </div><h3>🧠 Concept: Idempotency</h3>
+<ul>
+<li><strong>Idempotent</strong>: Making the request 10 times has the <strong>same effect</strong> as making it once.<ul>
+<li><em>Example</em>: <code>DELETE /user/1</code>. If you delete it once, it&#39;s gone. If you try again, it&#39;s still gone. (PUT, DELETE, GET).</li>
+</ul>
+</li>
+<li><strong>Non-Idempotent</strong>: Making the request 10 times creates <strong>10 resources</strong>.<ul>
+<li><em>Example</em>: <code>POST /orders</code> creates 10 different orders.</li>
+</ul>
+</li>
+</ul>
+<hr>
 <h2>🤝 The Handshake Process</h2>
 <p>Before any data is sent, the client and server must agree to talk. This is called a <strong>Handshake</strong>.</p>
 <h3>1. TCP Handshake (The Foundation)</h3>
