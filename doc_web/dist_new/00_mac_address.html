@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mac Address - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_mac_address.html">Mac Address</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_networking_ports.html">Networking Ports</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🆔 MAC Address (Media Access Control)</h1>
+<h2>📌 Overview</h2>
+<p>A <strong>MAC Address</strong> (Media Access Control Address) is a <strong>unique identifier</strong> assigned to a <strong>Network Interface Controller (NIC)</strong> for use as a network address in communications within a network segment.</p>
+<ul>
+<li><strong>Nature</strong>: Physical / Hardware Address.</li>
+<li><strong>Scope</strong>: Local Network (LAN) only. It does not travel across routers to the internet.</li>
+<li><strong>Format</strong>: 6 pairs of Hexadecimal digits.</li>
+</ul>
+<p>Example: <code>00:1A:2B:3C:4D:5E</code></p>
+<hr>
+<h2>🏗️ Structure of a MAC Address</h2>
+<p>A MAC address is <strong>48 bits</strong> (6 Bytes) long.</p>
+<ol>
+<li><strong>OUI (Organizationally Unique Identifier)</strong>: The first 3 bytes. Identifies the <strong>Manufacturer</strong> (e.g., Dell, Apple, Cisco).</li>
+<li><strong>NIC Controller</strong>: The last 3 bytes. Unique serial number assigned by the manufacturer.</li>
+</ol>
+<pre><code class="language-text">      [  00 : 1A : 2B  ]  :  [  3C : 4D : 5E  ]
+      \_______________/     \_______________/
+         Vendor ID             Unique ID
+          (OUI)</code></pre><hr>
+<h2>⚔️ MAC Address vs IP Address</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">MAC Address 🆔</th><th align="left">IP Address 🌍</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Type</strong></td><td align="left"><strong>Physical</strong> Address</td><td align="left"><strong>Logical</strong> Address</td></tr><tr><td align="left"><strong>Layer</strong></td><td align="left"><strong>Data Link Layer</strong> (Layer 2)</td><td align="left"><strong>Network Layer</strong> (Layer 3)</td></tr><tr><td align="left"><strong>Changeable?</strong></td><td align="left"><strong>No</strong> (Hardcoded in hardware)</td><td align="left"><strong>Yes</strong> (Changes with network)</td></tr><tr><td align="left"><strong>Format</strong></td><td align="left">48-bit Hex (<code>00-1A...</code>)</td><td align="left">32-bit (<code>192.168...</code>) or 128-bit</td></tr><tr><td align="left"><strong>Reach</strong></td><td align="left">Local Network only</td><td align="left">Global Internet</td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>☁️ Azure Context</h2>
+<ul>
+<li><strong>Azure VMs have MAC Addresses</strong>: Each vNIC in Azure has a MAC address.</li>
+<li><strong>Assignment</strong>: Microsoft Azure assigns this MAC.</li>
+<li><strong>Persistence</strong>: The MAC usually persists through restarts, but may change if you deallocate (stop) and then start the VM again, unless you are using specific static configurations (rare/advanced).</li>
+<li><strong>Rule</strong>: You <strong>cannot</strong> configure the MAC address of an Azure VM yourself inside the OS network settings. You must let Azure manage it.</li>
+</ul>
+<hr>
+<h2>💡 Hinglish Explanation (Fingerprint vs Address)</h2>
+<h3><strong>1. MAC Address (Fingerprint)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh insaan ka <strong>Fingerprint</strong> hai.</li>
+<li><strong>Explanation</strong>: Tum duniya mein kahin bhi chale jao, tumhara fingerprint <strong>same rahega</strong>. Yeh tumhari <strong>Physical Identity</strong> hai.</li>
+</ul>
+<h3><strong>2. IP Address (Home Address)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Yeh insaan ka <strong>Ghar ka Address</strong> hai.</li>
+<li><strong>Explanation</strong>: Aaj tum Mumbai mein ho (IP: 10.0.0.1), kal Delhi shift ho gaye (IP: 192.168.1.5). Address change ho sakta hai, par fingerprint nahi.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips for AZ-900</h2>
+<ol>
+<li><strong>Communication</strong>: Devices talk to each other on a <strong>local</strong> network using MAC addresses.</li>
+<li><strong>ARP (Address Resolution Protocol)</strong>: This protocol is used to find the MAC address if you only know the IP address. (<code>Who has 10.0.0.1? Tell 00:1A...</code>).</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
