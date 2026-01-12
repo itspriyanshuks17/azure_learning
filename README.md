@@ -1,3 +1,4 @@
+![1768229913717](image/README/1768229913717.png)
 # ☁️ Azure Cloud & Networking Mastery
 
 ![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
@@ -12,25 +13,38 @@
 ## 🗺️ Learning Path
 
 ```mermaid
-mindmap
-  root((Azure Mastery))
-    Networks
-      IP(IP Addressing)
-      OSI(OSI Model)
-      TCPIP(TCP IP)
-      HTTP(HTTP and HTTPS)
-    Servers
-      Web(Web Servers)
-      Mail(Mail Servers)
-    Cloud
-      Models(IaaS PaaS SaaS)
-      Scaling(Scaling)
-      Virt(Virtualization)
-    Azure
-      VM(Virtual Machines)
-      VNet(Networking VNet)
-      Storage(Storage)
-      Serverless(Serverless)
+graph TD
+  Root((Azure Mastery))
+
+  %% Networks Branch
+  Root --> Networks[Networks]
+  Networks --> IP(IP Addressing)
+  Networks --> OSI(OSI Model)
+  Networks --> TCPIP(TCP/IP)
+  Networks --> HTTP(HTTP & HTTPS)
+
+  %% Servers Branch
+  Root --> Servers[Servers]
+  Servers --> Web(Web Servers)
+  Servers --> Mail(Mail Servers)
+
+  %% Cloud Branch
+  Root --> Cloud[Cloud Architecture]
+  Cloud --> Models(IaaS / PaaS / SaaS)
+  Cloud --> Scaling(Scaling)
+  Cloud --> Virt(Virtualization)
+
+  %% Azure Branch
+  Root --> Azure[Azure Services]
+  Azure --> VM(Virtual Machines)
+  Azure --> VNet(Networking VNet)
+  Azure --> Storage(Storage)
+  Azure --> Serverless(Serverless)
+
+  %% Styling
+  classDef main fill:#0072C6,stroke:#333,stroke-width:2px,color:white;
+  classDef sub fill:#444,stroke:#333,stroke-width:1px,color:white;
+  class Root,Networks,Servers,Cloud,Azure main;
 ```
 
 ---
