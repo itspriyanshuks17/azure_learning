@@ -15,22 +15,22 @@
 mindmap
   root((Azure Mastery))
     Networks
-      IP Addressing
-      OSI Model
-      TCP/IP
-      HTTP & HTTPS
+      IP(IP Addressing)
+      OSI(OSI Model)
+      TCPIP(TCP IP)
+      HTTP(HTTP and HTTPS)
     Servers
-      Web Servers
-      Mail Servers
-    Cloud Architecture
-      IaaS / PaaS / SaaS
-      Scaling
-      Virtualization
-    Azure Services
-      Virtual Machines
-      Networking VNet
-      Storage
-      Serverless
+      Web(Web Servers)
+      Mail(Mail Servers)
+    Cloud
+      Models(IaaS PaaS SaaS)
+      Scaling(Scaling)
+      Virt(Virtualization)
+    Azure
+      VM(Virtual Machines)
+      VNet(Networking VNet)
+      Storage(Storage)
+      Serverless(Serverless)
 ```
 
 ---
@@ -199,4 +199,4 @@ This documentation is built with a custom **Node.js** static site generator.
 
 ---
 
-_Created by Priyanshu_
+_Created by Priyanshu K. Sharma_
