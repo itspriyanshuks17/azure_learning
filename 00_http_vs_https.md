@@ -79,6 +79,27 @@ Methods tell the server **what action** to perform on the resource.
 
 ---
 
+---
+
+## 🔢 HTTP Status Codes (The Response)
+
+When a server replies, it gives a 3-digit number to tell you **what happened**.
+
+| Range   | Type              | Meaning                 | Common Examples                                                                 |
+| :------ | :---------------- | :---------------------- | :------------------------------------------------------------------------------ |
+| **1xx** | **Informational** | "Hold on, I'm working." | **100** Continue                                                                |
+| **2xx** | **Success**       | "All good!"             | **200** OK, **201** Created                                                     |
+| **3xx** | **Redirection**   | "Go somewhere else."    | **301** Moved Permanently, **302** Found                                        |
+| **4xx** | **Client Error**  | "You messed up."        | **400** Bad Request, **401** Unauthorized, **403** Forbidden, **404** Not Found |
+| **5xx** | **Server Error**  | "I messed up."          | **500** Internal Server Error, **502** Bad Gateway, **503** Service Unavailable |
+
+### 🧠 Concept: 401 vs 403
+
+- **401 Unauthorized**: "Who are you?" (You need to login).
+- **403 Forbidden**: "I know who you are, but you can't come in." (You are logged in, but don't have permission).
+
+---
+
 ## 🤝 The Handshake Process
 
 Before any data is sent, the client and server must agree to talk. This is called a **Handshake**.
