@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stateful Applications - Azure Learning Guide</title>
+    <title>Http Vs Https - Azure Learning Guide</title>
     <link rel="stylesheet" href="css/style.css" />
     <link
       rel="stylesheet"
@@ -60,49 +60,48 @@
       </nav>
     </aside>
 
-    <main class="main-content"><h1>💾 Stateful Applications</h1>
+    <main class="main-content"><h1>🔐 HTTP vs HTTPS: The Secure Web</h1>
 <h2>📌 Overview</h2>
-<p>While modern cloud apps prefer statelessness, <strong>Stateful Applications</strong> save data on the local disk or memory of the server instance.</p>
+<p>The web runs on these two protocols. The core difference is <strong>Security</strong>.</p>
+<ol>
+<li><p><strong>HTTP (HyperText Transfer Protocol)</strong>:</p>
+<ul>
+<li><strong>Data</strong>: Sent in <strong>Plain Text</strong>.</li>
+<li><strong>Risk</strong>: Anyone on the network (Public Wi-Fi, ISP) can read your password/credit card.</li>
+<li><strong>Analogy</strong>: Sending a <strong>Postcard</strong>. Anyone who picks it up can read it.</li>
+</ul>
+</li>
+<li><p><strong>HTTPS (HTTP Secure)</strong>:</p>
+<ul>
+<li><strong>Data</strong>: Encrypted using <strong>SSL/TLS</strong>.</li>
+<li><strong>Security</strong>: Only the Browser and Server can read the data.</li>
+<li><strong>Analogy</strong>: Sending a <strong>Sealed Envelope</strong>. Only the recipient can open it.</li>
+</ul>
+</li>
+</ol>
 <hr>
-<h2>1. Use Cases</h2>
+<h2>⚔️ Comparison Table</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">HTTP</th><th align="left">HTTPS</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Full Name</strong></td><td align="left">HyperText Transfer Protocol</td><td align="left">HTTP <strong>Secure</strong></td></tr><tr><td align="left"><strong>Port</strong></td><td align="left">80</td><td align="left">443</td></tr><tr><td align="left"><strong>Security</strong></td><td align="left">None (Plain Text)</td><td align="left"><strong>Encrypted</strong> (SSL/TLS)</td></tr><tr><td align="left"><strong>Speed</strong></td><td align="left">Marginally Faster</td><td align="left">Marginally Slower (Encryption overhead)</td></tr><tr><td align="left"><strong>Visual</strong></td><td align="left">&quot;Not Secure&quot; warning in Browser</td><td align="left"><strong>Padlock Icon</strong> (🔒)</td></tr><tr><td align="left"><strong>Use Case</strong></td><td align="left">Blogs, Info sites (Old)</td><td align="left"><strong>Banking, Login, Shopping, Everything</strong></td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>☁️ Azure Context</h2>
 <ul>
-<li><strong>Databases</strong>: SQL Server, MySQL, PostgreSQL. They <em>must</em> persist data to disk.</li>
-<li><strong>Legacy Apps</strong>: Older apps designed before modern cloud patterns.</li>
-<li><strong>Real-time Gaming</strong>: Where microsecond latency matters, and state is kept in memory.</li>
-</ul>
-<hr>
-<h2>2. Challenges in Azure</h2>
-<p>If you run a Stateful App on an Azure VM:</p>
-<ul>
-<li><strong>Scaling is Hard</strong>: You can&#39;t just add a new VM because it won&#39;t have the data from the first VM.</li>
-<li><strong>Failover</strong>: If the VM dies, the local data might be lost (unless using persistent attached storage like Premium SSDs).</li>
-</ul>
-<h2>3. Azure Solutions for Stateful Workloads</h2>
-<h3>A. Session Affinity (Sticky Sessions)</h3>
-<p>If you have a legacy web app that keeps sessions in memory:</p>
-<ul>
-<li>Configure <strong>Azure Application Gateway</strong> with <strong>Cookie-based Affinity</strong>.</li>
-<li><strong>How it works</strong>: The Load Balancer ensures User A <em>always</em> goes to Server A.</li>
-<li><strong>Downside</strong>: If Server A crashes, User A loses their session.</li>
-</ul>
-<h3>B. Stateful Sets (AKS)</h3>
-<p>In Kubernetes (AKS), you can use <strong>StatefulSets</strong>.</p>
-<ul>
-<li>Ensures pods stay sticky to a specific Persistent Volume (Azure Disk).</li>
-<li>Good for running Databases inside containers (e.g., Mongo/Cassandra).</li>
+<li><strong>Azure App Service</strong>: Provides free SSL certificates to enable HTTPS instantly.</li>
+<li><strong>Front Door / App Gateway</strong>: These services can handle <strong>SSL Termination</strong>, meaning they decrypt the HTTPS traffic before sending it to your backend servers (saving CPU).</li>
+<li><strong>Enforcement</strong>: You can toggle a setting &quot;HTTPS Only&quot; to <strong>Force</strong> all users to use the secure version.</li>
 </ul>
 <hr>
 <h2>💡 Hinglish Explanation</h2>
+<h3><strong>1. HTTP (Postcard)</strong></h3>
 <ul>
-<li><strong>Stateful</strong>: Jaise aapne apne laptop ke Desktop pe file save ki. Agar laptop kharab hua, file gayi.</li>
-<li><strong>Problem</strong>: Cloud mein VMs kabhi bhi restart ho sakti hain. Isliye important data VM ke andar maat rakho.</li>
-<li><strong>Solution (External State)</strong>: Data ko Google Drive (Database/Storage) pe rakho. Ab chahe laptop badal lo, data wahi milega.</li>
+<li><strong>Hinglish</strong>: Agar tumne post card par apna credit card number likh kar bheja, toh dakiya (Postman) ya raste mein koi bhi usse padh sakta hai.</li>
 </ul>
-<hr>
-<h2>💡 Summary</h2>
+<h3><strong>2. HTTPS (Sealed Envelope)</strong></h3>
 <ul>
-<li>Avoid building new Stateful web apps.</li>
-<li>If you must (Databases), use <strong>Managed Services</strong> like <strong>Azure SQL Database</strong> which handle the &quot;State&quot; complexity (replication, backups) for you.</li>
+<li><strong>Hinglish</strong>: Agar tumne letter ko lifafe (Envelope) mein band karke bheja, toh koi usse khol nahi sakta. Sirf jiske paas chabi hai (Server Key), wahi padh sakta hai.</li>
 </ul>
 </main>
 
