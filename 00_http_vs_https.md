@@ -54,6 +54,31 @@ Headers are the **Metadata** sent with every request and response. They tell the
 
 ---
 
+---
+
+## 🚦 HTTP Methods (The Verbs)
+
+Methods tell the server **what action** to perform on the resource.
+
+### Common Methods
+
+| Method     | Action     | Description                                     | REST Analogy                     |
+| :--------- | :--------- | :---------------------------------------------- | :------------------------------- |
+| **GET**    | **Read**   | Retrieve data. **Safe** (No changes to server). | "Show me the menu"               |
+| **POST**   | **Create** | Submit new data. **Unsafe** (Creates resource). | "Order a Pizza"                  |
+| **PUT**    | **Update** | Replace entire resource. (Idempotent).          | "Replace my order with a Burger" |
+| **PATCH**  | **Modify** | Partial update. (Standard).                     | "Change cheese to extra cheese"  |
+| **DELETE** | **Delete** | Remove resource.                                | "Cancel my order"                |
+
+### 🧠 Concept: Idempotency
+
+- **Idempotent**: Making the request 10 times has the **same effect** as making it once.
+  - _Example_: `DELETE /user/1`. If you delete it once, it's gone. If you try again, it's still gone. (PUT, DELETE, GET).
+- **Non-Idempotent**: Making the request 10 times creates **10 resources**.
+  - _Example_: `POST /orders` creates 10 different orders.
+
+---
+
 ## 🤝 The Handshake Process
 
 Before any data is sent, the client and server must agree to talk. This is called a **Handshake**.
