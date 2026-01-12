@@ -82,22 +82,53 @@
        (2) HTTP Response (Here is the page)
            |
            v
-    [ User / Browser ] (Renders the Page)</code></pre><h3>Azure Context</h3>
-<ul>
-<li><strong>Azure App Service</strong>: A PaaS offering to host web servers without managing the OS.</li>
-<li><strong>Virtual Machines</strong>: You can install IIS/Nginx on a VM (IaaS).</li>
-</ul>
-<hr>
-<h2>📧 2. Mail Server</h2>
-<p>A <strong>Mail Server</strong> handles the sending, receiving, and storage of emails. It functions like a digital Post Office.</p>
-<h3>The Protocols Trio</h3>
-<ol>
-<li><strong>SMTP (Simple Mail Transfer Protocol)</strong>: Used for <strong>SENDING</strong> email. (Pusher).</li>
-<li><strong>POP3 (Post Office Protocol)</strong>: Used for <strong>RECEIVING</strong> email. Downloads to device and deletes from server. (Old school).</li>
-<li><strong>IMAP (Internet Message Access Protocol)</strong>: Used for <strong>RECEIVING</strong> email. Syncs across devices (Server keeps copy). (Modern).</li>
-</ol>
-<h3>Architecture Flow</h3>
-<pre><code class="language-text">    [ Sender (Outlook) ]
+    [ User / Browser ] (Renders the Page)</code></pre><pre><code class="language-">
+### 1.1 HTTP vs HTTPS 🔐
+
+The web runs on these two protocols. The difference is **Security**.
+
+1.  **HTTP (HyperText Transfer Protocol)**:
+    - **Data**: Sent in **Plain Text**.
+    - **Risk**: Anyone on the network (Public Wi-Fi, ISP) can read your password/credit card.
+    - **Analogy**: Sending a **Postcard**. Anyone who picks it up can read it.
+
+2.  **HTTPS (HTTP Secure)**:
+    - **Data**: Encrypted using **SSL/TLS**.
+    - **Security**: Only the Browser and Server can read the data.
+    - **Analogy**: Sending a **Sealed Envelope**. Only the recipient can open it.
+
+#### Comparison Table
+
+| Feature | HTTP | HTTPS |
+| :--- | :--- | :--- |
+| **Full Name** | HyperText Transfer Protocol | HTTP **Secure** |
+| **Port** | 80 | 443 |
+| **Security** | None (Plain Text) | **Encrypted** (SSL/TLS) |
+| **Speed** | Marginally Faster | Marginally Slower (Encryption overhead) |
+| **Visual** | "Not Secure" warning in Browser | **Padlock Icon** (🔒) |
+| **Use Case** | Blogs, Info sites (Old) | **Banking, Login, Shopping, Everything** |
+
+### Azure Context
+
+- **Azure App Service**: A PaaS offering to host web servers without managing the OS.
+- **Virtual Machines**: You can install IIS/Nginx on a VM (IaaS).
+
+---
+
+## 📧 2. Mail Server
+
+A **Mail Server** handles the sending, receiving, and storage of emails. It functions like a digital Post Office.
+
+### The Protocols Trio
+
+1.  **SMTP (Simple Mail Transfer Protocol)**: Used for **SENDING** email. (Pusher).
+2.  **POP3 (Post Office Protocol)**: Used for **RECEIVING** email. Downloads to device and deletes from server. (Old school).
+3.  **IMAP (Internet Message Access Protocol)**: Used for **RECEIVING** email. Syncs across devices (Server keeps copy). (Modern).
+
+### Architecture Flow
+
+```text
+    [ Sender (Outlook) ]
            |
        (1) SMTP (Send)
            |
