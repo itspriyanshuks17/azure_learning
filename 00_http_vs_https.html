@@ -130,6 +130,20 @@
 </li>
 </ul>
 <hr>
+<hr>
+<h2>🔢 HTTP Status Codes (The Response)</h2>
+<p>When a server replies, it gives a 3-digit number to tell you <strong>what happened</strong>.</p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Range</th><th align="left">Type</th><th align="left">Meaning</th><th align="left">Common Examples</th></tr></thead>
+                <tbody><tr><td align="left"><strong>1xx</strong></td><td align="left"><strong>Informational</strong></td><td align="left">&quot;Hold on, I&#39;m working.&quot;</td><td align="left"><strong>100</strong> Continue</td></tr><tr><td align="left"><strong>2xx</strong></td><td align="left"><strong>Success</strong></td><td align="left">&quot;All good!&quot;</td><td align="left"><strong>200</strong> OK, <strong>201</strong> Created</td></tr><tr><td align="left"><strong>3xx</strong></td><td align="left"><strong>Redirection</strong></td><td align="left">&quot;Go somewhere else.&quot;</td><td align="left"><strong>301</strong> Moved Permanently, <strong>302</strong> Found</td></tr><tr><td align="left"><strong>4xx</strong></td><td align="left"><strong>Client Error</strong></td><td align="left">&quot;You messed up.&quot;</td><td align="left"><strong>400</strong> Bad Request, <strong>401</strong> Unauthorized, <strong>403</strong> Forbidden, <strong>404</strong> Not Found</td></tr><tr><td align="left"><strong>5xx</strong></td><td align="left"><strong>Server Error</strong></td><td align="left">&quot;I messed up.&quot;</td><td align="left"><strong>500</strong> Internal Server Error, <strong>502</strong> Bad Gateway, <strong>503</strong> Service Unavailable</td></tr></tbody>
+            </table>
+        </div><h3>🧠 Concept: 401 vs 403</h3>
+<ul>
+<li><strong>401 Unauthorized</strong>: &quot;Who are you?&quot; (You need to login).</li>
+<li><strong>403 Forbidden</strong>: &quot;I know who you are, but you can&#39;t come in.&quot; (You are logged in, but don&#39;t have permission).</li>
+</ul>
+<hr>
 <h2>🤝 The Handshake Process</h2>
 <p>Before any data is sent, the client and server must agree to talk. This is called a <strong>Handshake</strong>.</p>
 <h3>1. TCP Handshake (The Foundation)</h3>
