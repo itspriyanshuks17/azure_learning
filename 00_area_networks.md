@@ -134,6 +134,25 @@ Understanding these is crucial because **Cloud Computing** is essentially a mass
 
 ---
 
+## 8. VPN (Virtual Private Network) 🛡️
+
+- **Scope**: Virtual tunnel over a public network (Internet).
+- **Purpose**: secure, encrypted connection between two points.
+- **Azure Context**: **VPN Gateway** connects your office to Azure VNet safely over the internet.
+
+#### Architecture: VPN Tunnel
+
+```text
+    [ Office PC ]  ===============>  [ Server ]
+      (Private)      (Encrypted      (Private)
+                      Tunnel)
+           \                       /
+            \                     /
+             ( Public Internet )
+```
+
+---
+
 ## 💡 Hinglish Explanation (Transportation)
 
 ### **1. LAN (Cycle inside House)**
@@ -147,6 +166,10 @@ Understanding these is crucial because **Cloud Computing** is essentially a mass
 ### **3. VLAN (Office Cubicles)**
 
 - **Hinglish**: Ek bada Hall (Switch) hai, lekin humne beech mein kaanch ki deewarein (VLAN) laga di hain taaki HR ki baatein Engineering wale na sun sakein using Logic, not bricks.
+
+### **4. VPN (Secure Pipe)**
+
+- **Hinglish**: Imagine karo crowd mein se ja rahe ho (Internet), lekin tumne ek "invisible pipe" (Tunnel) bana li hai. Koi bahar wala tumhe dekh nahi sakta, aur tum safe ho.
 
 ---
 
