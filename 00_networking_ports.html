@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Networking Ports - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="00_area_networks.html">Area Networks</a>
+<a href="00_cloud_benefits.html">Cloud Benefits</a>
+<a href="00_containers.html">Containers</a>
+<a href="00_cors.html">Cors</a>
+<a href="00_deployment_models.html">Deployment Models</a>
+<a href="00_ip_addresses.html">Ip Addresses</a>
+<a href="00_ip_classes.html">Ip Classes</a>
+<a href="00_load_balancers.html">Load Balancers</a>
+<a href="00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="00_network_architecture.html">Network Architecture</a>
+<a href="00_networking_models.html">Networking Models</a>
+<a href="00_networking_ports.html">Networking Ports</a>
+<a href="00_osi_model.html">Osi Model</a>
+<a href="00_scaling.html">Scaling</a>
+<a href="00_service_models.html">Service Models</a>
+<a href="00_shared_responsibility.html">Shared Responsibility</a>
+<a href="00_stateful_applications.html">Stateful Applications</a>
+<a href="00_stateless_applications.html">Stateless Applications</a>
+<a href="00_tcp_ip_model.html">Tcp Ip Model</a>
+<a href="00_virtualization.html">Virtualization</a>
+<a href="01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="02_resource_groups.html">Resource Groups</a>
+<a href="03_virtual_machines.html">Virtual Machines</a>
+<a href="04_storage_services.html">Storage Services</a>
+<a href="05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="07_azure_container_instances.html">Azure Container Instances</a>
+<a href="08_azure_functions.html">Azure Functions</a>
+<a href="09_virtual_networks.html">Virtual Networks</a>
+<a href="10_subnets.html">Subnets</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🚪 Common Networking Ports &amp; Protocols</h1>
+<h2>📌 Overview</h2>
+<p>A <strong>Port</strong> is a logical communication endpoint that identifies a specific process or service on a computer.</p>
+<ul>
+<li><strong>Analogy</strong>: If the <strong>IP Address</strong> is the &quot;Building Address&quot;, the <strong>Port Number</strong> is the &quot;Apartment Number&quot; or &quot;Office Number&quot; inside that building.</li>
+<li><strong>Range</strong>: 0 to 65535.</li>
+</ul>
+<hr>
+<h2>🔢 Port Categories</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Range</th><th align="left">Name</th><th align="left">Description</th><th align="left">Example</th></tr></thead>
+                <tbody><tr><td align="left"><strong>0 - 1023</strong></td><td align="left"><strong>Well-Known Ports</strong></td><td align="left">Reserved for core system services.</td><td align="left">HTTP (80), SSH (22)</td></tr><tr><td align="left"><strong>1024 - 49151</strong></td><td align="left"><strong>Registered Ports</strong></td><td align="left">Used by user applications &amp; vendor services.</td><td align="left">SQL (1433), RDP (3389)</td></tr><tr><td align="left"><strong>49152 - 65535</strong></td><td align="left"><strong>Dynamic Ports</strong></td><td align="left">Temporary ports for client-side outgoing connections.</td><td align="left">Browser tabs</td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>📜 Detailed Port Guide</h2>
+<h3>1. File Transfer &amp; Remote Access</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Port</th><th align="left">Protocol</th><th align="left">Name</th><th align="left">Description</th><th align="left">Azure Context</th></tr></thead>
+                <tbody><tr><td align="left"><strong>20/21</strong></td><td align="left">TCP</td><td align="left"><strong>FTP</strong></td><td align="left">File Transfer Protocol. Unencrypted.</td><td align="left">Used for older App Service uploads. <strong>Avoid</strong> if possible (Use SFTP).</td></tr><tr><td align="left"><strong>22</strong></td><td align="left">TCP</td><td align="left"><strong>SSH</strong></td><td align="left">Secure Shell. Encrypted Command Line.</td><td align="left"><strong>Critical</strong> for managing Linux VMs.</td></tr><tr><td align="left"><strong>23</strong></td><td align="left">TCP</td><td align="left"><strong>Telnet</strong></td><td align="left">Unencrypted Remote CLI.</td><td align="left"><strong>Blocked/Avoid</strong>. Never use in Cloud.</td></tr><tr><td align="left"><strong>3389</strong></td><td align="left">TCP</td><td align="left"><strong>RDP</strong></td><td align="left">Remote Desktop Protocol. GUI Access.</td><td align="left"><strong>Critical</strong> for managing Windows VMs.</td></tr></tbody>
+            </table>
+        </div><h3>2. Web &amp; Email</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Port</th><th align="left">Protocol</th><th align="left">Name</th><th align="left">Description</th><th align="left">Azure Context</th></tr></thead>
+                <tbody><tr><td align="left"><strong>80</strong></td><td align="left">TCP</td><td align="left"><strong>HTTP</strong></td><td align="left">Unsecured Web Traffic.</td><td align="left">Standard web hosting.</td></tr><tr><td align="left"><strong>443</strong></td><td align="left">TCP</td><td align="left"><strong>HTTPS</strong></td><td align="left">Secured (SSL/TLS) Web Traffic.</td><td align="left"><strong>Mandatory</strong> for secure Azure Web Apps.</td></tr><tr><td align="left"><strong>25</strong></td><td align="left">TCP</td><td align="left"><strong>SMTP</strong></td><td align="left">Simple Mail Transfer Protocol.</td><td align="left">Sending email. <strong>Blocked</strong> by default in Azure to prevent spam.</td></tr><tr><td align="left"><strong>110</strong></td><td align="left">TCP</td><td align="left"><strong>POP3</strong></td><td align="left">Post Office Protocol v3.</td><td align="left">Receiving email (Downloads locally).</td></tr><tr><td align="left"><strong>143</strong></td><td align="left">TCP</td><td align="left"><strong>IMAP</strong></td><td align="left">Internet Message Access Protocol.</td><td align="left">Receiving email (Synced on server).</td></tr></tbody>
+            </table>
+        </div><h3>3. Infrastructure &amp; Database</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Port</th><th align="left">Protocol</th><th align="left">Name</th><th align="left">Description</th><th align="left">Azure Context</th></tr></thead>
+                <tbody><tr><td align="left"><strong>53</strong></td><td align="left">UDP/TCP</td><td align="left"><strong>DNS</strong></td><td align="left">Domain Name System.</td><td align="left">Resolves names to IPs. Azure DNS uses this.</td></tr><tr><td align="left"><strong>67/68</strong></td><td align="left">UDP</td><td align="left"><strong>DHCP</strong></td><td align="left">Auto-assigns IP addresses.</td><td align="left">Managed automatically by Azure VNet.</td></tr><tr><td align="left"><strong>1433</strong></td><td align="left">TCP</td><td align="left"><strong>SQL</strong></td><td align="left">MSSQL Server Default Port.</td><td align="left">Connecting to <strong>Azure SQL Database</strong>.</td></tr><tr><td align="left"><strong>3306</strong></td><td align="left">TCP</td><td align="left"><strong>MySQL</strong></td><td align="left">MySQL Database Port.</td><td align="left">Connecting to Azure Database for MySQL.</td></tr><tr><td align="left"><strong>5432</strong></td><td align="left">TCP</td><td align="left"><strong>PostgreSQL</strong></td><td align="left">PostgreSQL Database Port.</td><td align="left">Connecting to Azure Database for PostgreSQL.</td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>🖼️ Architecture Diagram (The &quot;Apartment&quot; Analogy)</h2>
+<pre><code class="language-text">       [  Server IP: 10.0.0.5  ]
+      +-------------------------+
+      |                         |
+      |   [ Port 80 ]  <-- (Building Entry for Web Requests)
+      |       |
+      |   (Web Server App)      |
+      |                         |
+      |-------------------------|
+      |                         |
+      |   [ Port 22 ]  <-- (Service Entry for Admin/Maintenance)
+      |       |
+      |   (SSH Service)         |
+      |                         |
+      +-------------------------+</code></pre><hr>
+<h2>💡 Hinglish Explanation (Office Building)</h2>
+<h3><strong>1. Port (Cabin Number)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Imagine karo ek badi <strong>Office Building</strong> (Server) hai.</li>
+<li><strong>IP Address</strong>: Building ka address hai.</li>
+<li><strong>Port</strong>: Building ke andar alag-alag <strong>Cabins</strong> hain.<ul>
+<li><strong>Cabin 80 (Reception)</strong>: Yahan public aati hai (Web Private).</li>
+<li><strong>Cabin 22 (Security Room)</strong>: Yahan sirf Admin access kar sakta hai (SSH).</li>
+<li><strong>Cabin 1433 (Store Room)</strong>: Yahan files/data rakha hai (SQL).</li>
+</ul>
+</li>
+</ul>
+<h3><strong>2. Open vs Closed Ports</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Agar Cabin 80 ka darwaza band hai (Port Closed), toh koi andar nahi aa sakta, chahe wo Building tak pahunch jaye. Firewall ka kaam yahi darwaze kholna ya band karna hai.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips for AZ-900</h2>
+<ol>
+<li><strong>NSG Rules</strong>: You must explicitly <strong>Allow</strong> ports in Network Security Groups (NSGs) for traffic to flow.<ul>
+<li><em>Example</em>: To host a website, allow <strong>Port 80/443</strong>.</li>
+<li><em>Example</em>: To admin a VM, allow <strong>Port 22 (Linux)</strong> or <strong>3389 (Windows)</strong>.</li>
+</ul>
+</li>
+<li><strong>Security</strong>: Keep management ports (22, 3389) closed to the public internet using <strong>JIT (Just-In-Time) Access</strong> or <strong>Bastion</strong>.</li>
+<li><strong>SMB (Port 445)</strong>: Used for <strong>Azure Files</strong> storage mounting. often blocked by ISPs.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
