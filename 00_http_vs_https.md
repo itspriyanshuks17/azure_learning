@@ -38,6 +38,62 @@ The web runs on these two protocols. The core difference is **Security**.
 
 ---
 
+## 📨 HTTP Headers
+
+Headers are the **Metadata** sent with every request and response. They tell the browser/server _how_ to handle the data.
+
+### Key Headers
+
+- **User-Agent**: Tells the server "I am Chrome on Windows" or "I am an iPhone".
+- **Content-Type**: Tells the browser "This is an HTML file" or "This is a JSON object".
+- **Authorization**: Sends the password/token (e.g., Bearer Token).
+- **Status Code**:
+  - **200 OK**: Success.
+  - **404 Not Found**: Page missing.
+  - **500 Server Error**: Server crashed.
+
+---
+
+## 🤝 The Handshake Process
+
+Before any data is sent, the client and server must agree to talk. This is called a **Handshake**.
+
+### 1. TCP Handshake (The Foundation)
+
+Every HTTP connection starts with this **3-Way Handshake**.
+
+```text
+    [ Client ]                      [ Server ]
+        |                               |
+        |---- (1) SYN (Hello?) -------->|
+        |                               |
+        |<--- (2) SYN-ACK (Yes!) -------|
+        |                               |
+        |---- (3) ACK (Great!) -------->|
+        |                               |
+      (Connection Established - Data Flow Starts)
+```
+
+### 2. SSL/TLS Handshake (The Security Layer)
+
+For **HTTPS**, an extra handshake happens _after_ TCP to set up encryption.
+
+```text
+    [ Client ]                      [ Server ]
+        |                               |
+        |---- (1) Client Hello -------->| (I support these algorithms)
+        |                               |
+        |<--- (2) Server Hello ---------| (Let's use this one + Here is my Certificate)
+        |                               |
+        |---- (3) Key Exchange -------->| (Here is a secret key encrypted with your cert)
+        |                               |
+        |<--- (4) Finished ------------>| (Decrypted! Let's talk securely)
+        |                               |
+      (             Encrypted Tunnel Established             )
+```
+
+---
+
 ## 💡 Hinglish Explanation
 
 ### **1. HTTP (Postcard)**

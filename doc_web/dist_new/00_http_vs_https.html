@@ -94,6 +94,46 @@
 <li><strong>Enforcement</strong>: You can toggle a setting &quot;HTTPS Only&quot; to <strong>Force</strong> all users to use the secure version.</li>
 </ul>
 <hr>
+<h2>📨 HTTP Headers</h2>
+<p>Headers are the <strong>Metadata</strong> sent with every request and response. They tell the browser/server <em>how</em> to handle the data.</p>
+<h3>Key Headers</h3>
+<ul>
+<li><strong>User-Agent</strong>: Tells the server &quot;I am Chrome on Windows&quot; or &quot;I am an iPhone&quot;.</li>
+<li><strong>Content-Type</strong>: Tells the browser &quot;This is an HTML file&quot; or &quot;This is a JSON object&quot;.</li>
+<li><strong>Authorization</strong>: Sends the password/token (e.g., Bearer Token).</li>
+<li><strong>Status Code</strong>:<ul>
+<li><strong>200 OK</strong>: Success.</li>
+<li><strong>404 Not Found</strong>: Page missing.</li>
+<li><strong>500 Server Error</strong>: Server crashed.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>🤝 The Handshake Process</h2>
+<p>Before any data is sent, the client and server must agree to talk. This is called a <strong>Handshake</strong>.</p>
+<h3>1. TCP Handshake (The Foundation)</h3>
+<p>Every HTTP connection starts with this <strong>3-Way Handshake</strong>.</p>
+<pre><code class="language-text">    [ Client ]                      [ Server ]
+        |                               |
+        |---- (1) SYN (Hello?) -------->|
+        |                               |
+        |<--- (2) SYN-ACK (Yes!) -------|
+        |                               |
+        |---- (3) ACK (Great!) -------->|
+        |                               |
+      (Connection Established - Data Flow Starts)</code></pre><h3>2. SSL/TLS Handshake (The Security Layer)</h3>
+<p>For <strong>HTTPS</strong>, an extra handshake happens <em>after</em> TCP to set up encryption.</p>
+<pre><code class="language-text">    [ Client ]                      [ Server ]
+        |                               |
+        |---- (1) Client Hello -------->| (I support these algorithms)
+        |                               |
+        |<--- (2) Server Hello ---------| (Let's use this one + Here is my Certificate)
+        |                               |
+        |---- (3) Key Exchange -------->| (Here is a secret key encrypted with your cert)
+        |                               |
+        |<--- (4) Finished ------------>| (Decrypted! Let's talk securely)
+        |                               |
+      (             Encrypted Tunnel Established             )</code></pre><hr>
 <h2>💡 Hinglish Explanation</h2>
 <h3><strong>1. HTTP (Postcard)</strong></h3>
 <ul>
