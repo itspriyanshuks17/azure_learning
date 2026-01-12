@@ -42,6 +42,19 @@ As data moves down the stack, each layer adds a "Header" (Envelope).
 
 ---
 
+### ⚔️ TCP vs UDP: The Battle of Protocols
+
+| Feature         | TCP (Transmission Control Protocol)           | UDP (User Datagram Protocol)                |
+| :-------------- | :-------------------------------------------- | :------------------------------------------ |
+| **Connection**  | **Connection-oriented** (3-Way Handshake)     | **Connectionless** (Fire and Forget)        |
+| **Reliability** | **High** (Guarantees delivery via Acks)       | **Low** (No guarantee, packets may be lost) |
+| **Ordering**    | **Ordered** (Sequencing of packets)           | **Unordered** (Arrive in any order)         |
+| **Speed**       | **Slower** (Overhead of error checking)       | **Faster** (No overhead)                    |
+| **Header Size** | **20 Bytes** (Heavy)                          | **8 Bytes** (Lightweight)                   |
+| **Use Case**    | Web (HTTP), Email (SMTP), File Transfer (FTP) | Streaming, Gaming, DNS, VoIP                |
+
+---
+
 ## 3. Architecture Diagram
 
 ```text

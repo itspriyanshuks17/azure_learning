@@ -93,6 +93,13 @@
 </li>
 </ul>
 <hr>
+<h3>⚔️ TCP vs UDP: The Battle of Protocols</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">TCP (Transmission Control Protocol)</th><th align="left">UDP (User Datagram Protocol)</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Connection</strong></td><td align="left"><strong>Connection-oriented</strong> (3-Way Handshake)</td><td align="left"><strong>Connectionless</strong> (Fire and Forget)</td></tr><tr><td align="left"><strong>Reliability</strong></td><td align="left"><strong>High</strong> (Guarantees delivery via Acks)</td><td align="left"><strong>Low</strong> (No guarantee, packets may be lost)</td></tr><tr><td align="left"><strong>Ordering</strong></td><td align="left"><strong>Ordered</strong> (Sequencing of packets)</td><td align="left"><strong>Unordered</strong> (Arrive in any order)</td></tr><tr><td align="left"><strong>Speed</strong></td><td align="left"><strong>Slower</strong> (Overhead of error checking)</td><td align="left"><strong>Faster</strong> (No overhead)</td></tr><tr><td align="left"><strong>Header Size</strong></td><td align="left"><strong>20 Bytes</strong> (Heavy)</td><td align="left"><strong>8 Bytes</strong> (Lightweight)</td></tr><tr><td align="left"><strong>Use Case</strong></td><td align="left">Web (HTTP), Email (SMTP), File Transfer (FTP)</td><td align="left">Streaming, Gaming, DNS, VoIP</td></tr></tbody>
+            </table>
+        </div><hr>
 <h2>3. Architecture Diagram</h2>
 <pre><code class="language-text">    +--------------------------------+
     |      Application Layer         |
