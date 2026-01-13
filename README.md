@@ -1,4 +1,5 @@
 ![1768229913717](image/README/1768229913717.png)
+
 # ☁️ Azure Cloud & Networking Mastery
 
 ![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
@@ -71,6 +72,7 @@ Foundational knowledge required to understand how the Cloud communicates.
 | **Area Networks**     | LAN, WAN, VPN, SAN                        | [View Guide](computer_networks/00_area_networks.md)        |
 | **IP Addresses**      | IPv4 vs IPv6, Public vs Private           | [View Guide](computer_networks/00_ip_addresses.md)         |
 | **CIDR & Subnetting** | /24 Notation, Calculations, Azure Rules   | [View Guide](computer_networks/00_cidr.md)                 |
+| **Firewalls**         | Packet Filtering, Proxy, Stateful         | [View Guide](computer_networks/00_firewalls.md)            |
 | **MAC Address**       | Physical Address, OUI, Layer 2            | [View Guide](computer_networks/00_mac_address.md)          |
 | **Network Arch**      | Topologies, Client-Server, N-Tier         | [View Guide](computer_networks/00_network_architecture.md) |
 | **Networking Models** | Peer-to-Peer vs Client-Server             | [View Guide](computer_networks/00_networking_models.md)    |
