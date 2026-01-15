@@ -48,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (searchInput) {
       // Fetch Search Index
-      fetch("/search.json")
+      const searchPath = window.SEARCH_PATH || "search.json";
+      fetch(searchPath)
           .then(res => res.json())
           .then(data => {
               searchIndex = data;
