@@ -2,10 +2,7 @@
 
 # ☁️ Azure Cloud & Networking Mastery
 
-![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
-![Networking](https://img.shields.io/badge/Networking-CN-red?style=for-the-badge)
-![Cloud](https://img.shields.io/badge/Cloud-Computing-blue?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white) ![Networking](https://img.shields.io/badge/Networking-CN-red?style=for-the-badge) ![Cloud](https://img.shields.io/badge/Cloud-Computing-blue?style=for-the-badge) ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
 > **"From Packet Switching to Cloud Scaling"** — A comprehensive journey through Computer Networks, Server Architecture, and Azure Cloud Services.
 
