@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Machines - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>Azure Virtual Machines (VMs)</h1>
+<h2>Overview</h2>
+<ul>
+<li>Azure Virtual Machines (VMs) provide <strong>Infrastructure as a Service (IaaS)</strong>.</li>
+<li>Allow running <strong>Windows</strong> or <strong>Linux</strong> workloads in the cloud.</li>
+<li>Fully customizable compute, storage, and networking options.</li>
+<li>Useful for hosting apps, databases, or as development/test environments.</li>
+</ul>
+<hr>
+<h2>Key Features</h2>
+<ul>
+<li>Supports multiple OS (Windows, Linux, custom images).</li>
+<li>Flexible sizes: General-purpose, Compute-optimized, Memory-optimized, GPU.</li>
+<li>Integrated with <strong>Azure Networking</strong> (VNet, Subnets, NSGs).</li>
+<li>Supports <strong>scaling</strong> via Virtual Machine Scale Sets.</li>
+<li>High availability using <strong>Availability Sets</strong> and <strong>Zones</strong>.</li>
+<li>Integration with <strong>Azure Monitor</strong> and <strong>Security Center</strong>.</li>
+</ul>
+<hr>
+<h2>Workflow</h2>
+<pre><code class="language-text">    +-----------------+
+    |   User / DevOps |
+    +-----------------+
+            |
+            v
+    +-------------------------------+
+    | Azure CLI / Portal / Powershell|
+    +-------------------------------+
+            |
+            v
+    +-----------------------+
+    |    Resource Group     |
+    +-----------------------+
+      |        |        |
+      |        |        +---> [ Virtual Network + Subnet ] --> [ Network Security Group ]
+      |        |
+      |        +------------> [ Storage: OS Disk / Data Disk ]
+      |
+      v
+  +-----------------+
+  | Virtual Machine | ----> [ Public/Private IP ]
+  +-----------------+</code></pre><hr>
+<h2>Common Use Cases</h2>
+<ul>
+<li>Hosting web applications.</li>
+<li>Running development/test environments.</li>
+<li>Migrating on-premises apps to the cloud.</li>
+<li>High-performance workloads with GPU/compute-intensive VMs.</li>
+</ul>
+<hr>
+<h2>Steps to Create a VM using Azure CLI</h2>
+<h3>1. Login to Azure</h3>
+<pre><code class="language-bash">az login</code></pre><h3>2. Create a Resource Group</h3>
+<pre><code class="language-bash">az group create --name MyResourceGroup --location eastus</code></pre><h3>3. Create a Virtual Network &amp; Subnet</h3>
+<pre><code class="language-bash">az network vnet create \
+  --resource-group MyResourceGroup \
+  --name MyVNet \
+  --subnet-name MySubnet</code></pre><h3>4. Create a Public IP Address</h3>
+<pre><code class="language-bash">az network public-ip create \
+  --resource-group MyResourceGroup \
+  --name MyPublicIP</code></pre><h3>5. Create a Network Security Group (NSG) and Allow SSH/HTTP</h3>
+<pre><code class="language-bash">az network nsg create \
+  --resource-group MyResourceGroup \
+  --name MyNSG
+
+# Allow SSH (Linux VM)
+az network nsg rule create \
+  --resource-group MyResourceGroup \
+  --nsg-name MyNSG \
+  --name AllowSSH \
+  --protocol tcp \
+  --priority 1000 \
+  --destination-port-ranges 22 \
+  --access allow
+
+# Allow RDP (Windows VM)
+az network nsg rule create \
+  --resource-group MyResourceGroup \
+  --nsg-name MyNSG \
+  --name AllowRDP \
+  --protocol tcp \
+  --priority 1001 \
+  --destination-port-ranges 3389 \
+  --access allow</code></pre><h3>6. Create a Network Interface Card (NIC)</h3>
+<pre><code class="language-bash">az network nic create \
+  --resource-group MyResourceGroup \
+  --name MyNIC \
+  --vnet-name MyVNet \
+  --subnet MySubnet \
+  --network-security-group MyNSG \
+  --public-ip-address MyPublicIP</code></pre><h3>7. Create the VM</h3>
+<pre><code class="language-bash">az vm create \
+  --resource-group MyResourceGroup \
+  --name MyVM \
+  --nics MyNIC \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --generate-ssh-keys</code></pre><h3>8. Open Ports (if needed, e.g., HTTP/HTTPS)</h3>
+<pre><code class="language-bash">az vm open-port --port 80 --resource-group MyResourceGroup --name MyVM
+az vm open-port --port 443 --resource-group MyResourceGroup --name MyVM</code></pre><h3>9. Connect to VM</h3>
+<ul>
+<li><p><strong>Linux VM (SSH):</strong></p>
+<pre><code class="language-bash">ssh azureuser@<PublicIP></code></pre></li>
+<li><p><strong>Windows VM (RDP):</strong></p>
+<ul>
+<li>Use Remote Desktop Client → Enter <code>&lt;PublicIP&gt;</code>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Notes</h2>
+<ul>
+<li>Always place VMs inside a <strong>Resource Group</strong>.</li>
+<li>Use <strong>Managed Disks</strong> instead of unmanaged for reliability.</li>
+<li>Tag resources for better management (<code>--tags env=dev project=test</code>).</li>
+<li>Monitor with <strong>Azure Monitor</strong> and <strong>Log Analytics</strong>.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

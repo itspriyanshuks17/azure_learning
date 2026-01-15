@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resource Groups - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>Azure Resource Group (RG)</h1>
+<h2>Overview</h2>
+<ul>
+<li>A <strong>Resource Group (RG)</strong> is a <strong>logical container</strong> for Azure resources.</li>
+<li>It helps manage and organize resources like VMs, VNets, Storage Accounts, Databases, etc.</li>
+<li>Every Azure resource <strong>must belong to exactly one Resource Group</strong>.</li>
+<li>Acts as a <strong>lifecycle boundary</strong> – you can create, update, and delete resources as a group.</li>
+</ul>
+<hr>
+<h2>Key Features</h2>
+<ul>
+<li><strong>Logical Organization</strong>: Group related resources together.</li>
+<li><strong>Lifecycle Management</strong>: Delete the group → all resources inside are deleted.</li>
+<li><strong>Access Control</strong>: Apply RBAC (Role-Based Access Control) at the group level.</li>
+<li><strong>Tagging</strong>: Add metadata (like <code>env=dev</code>, <code>project=xyz</code>) for cost and management.</li>
+<li><strong>Deployment Scope</strong>: Resource Manager templates (ARM/Bicep) target a Resource Group.</li>
+</ul>
+<hr>
+<h2>Workflow</h2>
+<pre><code class="language-text">    +-----------------+
+    |   User / DevOps |
+    +-----------------+
+            |
+            v
+    +-------------------------------+
+    | Azure CLI / Portal / Powershell|
+    +-------------------------------+
+            |
+            v
+    +-----------------------+
+    |   Azure Subscription  |
+    +-----------------------+
+            |
+            v
+    +-----------------------+
+    |    Resource Group     |
+    +-----------------------+
+            |
+            v
+    +------------------------------------------+
+    |  Resources: VM, VNet, Storage, DB, etc.  |
+    +------------------------------------------+</code></pre><hr>
+<h2>Common Use Cases</h2>
+<ul>
+<li>Grouping all resources of a project/application.</li>
+<li>Applying common policies (RBAC, tags) across resources.</li>
+<li>Simplifying billing by grouping related services.</li>
+<li>Easier cleanup (delete RG → delete all inside).</li>
+</ul>
+<hr>
+<h2>Steps to Manage Resource Groups using Azure CLI</h2>
+<h3>1. Login to Azure</h3>
+<pre><code class="language-bash">az login</code></pre><h3>2. List All Resource Groups</h3>
+<pre><code class="language-bash">az group list -o table</code></pre><h3>3. Create a Resource Group</h3>
+<pre><code class="language-bash">az group create \
+  --name MyResourceGroup \
+  --location eastus</code></pre><h3>4. Get Details of a Resource Group</h3>
+<pre><code class="language-bash">az group show --name MyResourceGroup -o json</code></pre><h3>5. Tag a Resource Group</h3>
+<pre><code class="language-bash">az group update \
+  --name MyResourceGroup \
+  --set tags.Project=Demo tags.Environment=Dev</code></pre><h3>6. Delete a Resource Group</h3>
+<pre><code class="language-bash">az group delete --name MyResourceGroup --yes --no-wait</code></pre><hr>
+<h2>Notes</h2>
+<ul>
+<li><strong>Resource Groups are regional</strong> → all resources inside must be in the same region (with some exceptions like DNS).</li>
+<li>Best practice: One RG per <strong>application lifecycle stage</strong> (e.g., <code>App1-Dev-RG</code>, <code>App1-Prod-RG</code>).</li>
+<li>Use <strong>naming conventions</strong> for better clarity.</li>
+<li>Deleting a Resource Group deletes <strong>all associated resources</strong> permanently.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

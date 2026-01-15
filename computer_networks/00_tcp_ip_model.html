@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tcp Ip Model - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🌐 TCP/IP Model (Transmission Control Protocol/Internet Protocol)</h1>
+<h2>📌 Overview</h2>
+<p>The <strong>TCP/IP Model</strong> (also known as the Internet Protocol Suite) is the practical implementation of networking used by the internet today. Unlike the theoretical 7-layer OSI model, TCP/IP simplifies networking into <strong>4 layers</strong>.</p>
+<hr>
+<h2>1. The 4 Layers &amp; OSI Comparison</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">TCP/IP Layer</th><th align="left">OSI Layer Mapping</th><th align="left">Function</th><th align="left">Protocol Examples</th><th align="left">Azure Component</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Application</strong></td><td align="left">Application, Presentation, Session</td><td align="left">User interface &amp; data formatting</td><td align="left">HTTP, DNS, SSH</td><td align="left"><strong>App Gateway</strong>, <strong>Front Door</strong></td></tr><tr><td align="left"><strong>Transport</strong></td><td align="left">Transport</td><td align="left">Reliability &amp; Flow Control</td><td align="left">TCP, UDP</td><td align="left"><strong>Azure Load Balancer</strong></td></tr><tr><td align="left"><strong>Internet</strong></td><td align="left">Network</td><td align="left">Logical Addressing &amp; Routing</td><td align="left">IP, ICMP</td><td align="left"><strong>Virtual Network (VNET)</strong></td></tr><tr><td align="left"><strong>Network Interface</strong></td><td align="left">Data Link, Physical</td><td align="left">Physical Hardware &amp; MAC</td><td align="left">Ethernet, Wi-Fi</td><td align="left"><strong>NIC</strong>, <strong>ExpressRoute</strong></td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>2. Key Concepts</h2>
+<h3>📨 Encapsulation</h3>
+<p>As data moves down the stack, each layer adds a &quot;Header&quot; (Envelope).</p>
+<ol>
+<li><strong>Application</strong>: Data (user payload).</li>
+<li><strong>Transport</strong>: Adds TCP Header (Source/Dest Port). -&gt; <em>Segment</em></li>
+<li><strong>Internet</strong>: Adds IP Header (Source/Dest IP). -&gt; <em>Packet</em></li>
+<li><strong>Network Interface</strong>: Adds MAC Header/Trailer. -&gt; <em>Frame</em></li>
+</ol>
+<h3>🤝 TCP vs UDP (Transport Layer)</h3>
+<ul>
+<li><strong>TCP (Transmission Control Protocol)</strong>:<ul>
+<li><strong>Reliable</strong>: Guarantees delivery (Ack).</li>
+<li><strong>Ordered</strong>: Packets arrive in order.</li>
+<li><strong>Heavy</strong>: Slower.</li>
+<li><strong>Use Case</strong>: Web browsing (HTTP), Email (SMTP), Azure SQL Database connect.</li>
+</ul>
+</li>
+<li><strong>UDP (User Datagram Protocol)</strong>:<ul>
+<li><strong>Unreliable</strong>: Fire and forget (No Ack).</li>
+<li><strong>Fast</strong>: Low latency.</li>
+<li><strong>Use Case</strong>: Streaming, Gaming, DNS queries.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>⚔️ TCP vs UDP: The Battle of Protocols</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">TCP (Transmission Control Protocol)</th><th align="left">UDP (User Datagram Protocol)</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Connection</strong></td><td align="left"><strong>Connection-oriented</strong> (3-Way Handshake)</td><td align="left"><strong>Connectionless</strong> (Fire and Forget)</td></tr><tr><td align="left"><strong>Reliability</strong></td><td align="left"><strong>High</strong> (Guarantees delivery via Acks)</td><td align="left"><strong>Low</strong> (No guarantee, packets may be lost)</td></tr><tr><td align="left"><strong>Ordering</strong></td><td align="left"><strong>Ordered</strong> (Sequencing of packets)</td><td align="left"><strong>Unordered</strong> (Arrive in any order)</td></tr><tr><td align="left"><strong>Speed</strong></td><td align="left"><strong>Slower</strong> (Overhead of error checking)</td><td align="left"><strong>Faster</strong> (No overhead)</td></tr><tr><td align="left"><strong>Header Size</strong></td><td align="left"><strong>20 Bytes</strong> (Heavy)</td><td align="left"><strong>8 Bytes</strong> (Lightweight)</td></tr><tr><td align="left"><strong>Use Case</strong></td><td align="left">Web (HTTP), Email (SMTP), File Transfer (FTP)</td><td align="left">Streaming, Gaming, DNS, VoIP</td></tr></tbody>
+            </table>
+        </div><hr>
+<h3>🚪 Important Ports &amp; Protocols (Cheat Sheet) 🔑</h3>
+<p>Knowing these ports is critical for Cloud Security (NSGs) and Debugging.</p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Port</th><th align="left">Protocol</th><th align="left">Usage</th><th align="left">Azure Context</th></tr></thead>
+                <tbody><tr><td align="left"><strong>20/21</strong></td><td align="left"><strong>FTP</strong></td><td align="left">File Transfer</td><td align="left">Uploading files to App Service / Legacy VMs</td></tr><tr><td align="left"><strong>22</strong></td><td align="left"><strong>SSH</strong></td><td align="left">Secure Shell</td><td align="left"><strong>Connecting to Linux VMs</strong> securely</td></tr><tr><td align="left"><strong>23</strong></td><td align="left"><strong>Telnet</strong></td><td align="left">Unsecured Remote CLI</td><td align="left"><strong>Avoid</strong> (Use SSH instead)</td></tr><tr><td align="left"><strong>25</strong></td><td align="left"><strong>SMTP</strong></td><td align="left">Email Sending</td><td align="left">Sending Emails (Blocked in Azure by default)</td></tr><tr><td align="left"><strong>53</strong></td><td align="left"><strong>DNS</strong></td><td align="left">Domain Name System</td><td align="left">Resolving <code>google.com</code> to IP</td></tr><tr><td align="left"><strong>80</strong></td><td align="left"><strong>HTTP</strong></td><td align="left">Web Traffic</td><td align="left">Standard unencrypted websites</td></tr><tr><td align="left"><strong>443</strong></td><td align="left"><strong>HTTPS</strong></td><td align="left">Secure Web Traffic</td><td align="left"><strong>Standard secured websites</strong> (Banks, Azure Portal)</td></tr><tr><td align="left"><strong>3389</strong></td><td align="left"><strong>RDP</strong></td><td align="left">Remote Desktop</td><td align="left"><strong>Connecting to Windows VMs</strong> GUI</td></tr><tr><td align="left"><strong>8080</strong></td><td align="left"><strong>HTTP Alt</strong></td><td align="left">Web Proxy/Dev</td><td align="left">Often used for Tomcat or Testing Servers</td></tr><tr><td align="left"><strong>1433</strong></td><td align="left"><strong>SQL</strong></td><td align="left">SQL Server</td><td align="left">Connecting to <strong>Azure SQL Database</strong></td></tr><tr><td align="left"><strong>3306</strong></td><td align="left"><strong>MySQL</strong></td><td align="left">MySQL Database</td><td align="left">Connecting to Azure Database for MySQL</td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>3. Architecture Diagram</h2>
+<pre><code class="language-text">    +--------------------------------+
+    |      Application Layer         |
+    |  [ HTTP/HTTPS Data (Payload) ] |
+    +--------------------------------+
+                  |
+                  v (Encapsulation)
+    +--------------------------------+
+    |      Transport Layer           |
+    |  [ TCP Segment                 |
+    |    Source Port: 1024           |
+    |    Dest Port: 80 ]             |
+    +--------------------------------+
+                  |
+                  v (Encapsulation)
+    +--------------------------------+
+    |      Internet Layer            |
+    |  [ IP Packet                   |
+    |    Source IP: 10.0.0.5         |
+    |    Dest IP: 1.2.3.4 ]          |
+    +--------------------------------+
+                  |
+                  v (Encapsulation)
+    +--------------------------------+
+    |   Network Interface Layer      |
+    |  [ Ethernet Frame              |
+    |    MAC Addresses ]             |
+    +--------------------------------+
+                  |
+                  v (Physical Cable)
+        ( The Internet / Azure VNET )</code></pre><hr>
+<hr>
+<h2>💡 Hinglish Explanation (Courier System)</h2>
+<h3><strong>1. Application Layer (Letter Likhna)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Aapne letter (HTTP Data) likha aur envelope mein dala.</li>
+</ul>
+<h3><strong>2. Transport Layer (Receipt)</strong></h3>
+<ul>
+<li><strong>Hinglish (TCP)</strong>: Courier wale ne kaha &quot;Main pakka pahunchaunga aur sign lunga&quot;. (Reliable).</li>
+<li><strong>Hinglish (UDP)</strong>: Courier wale ne kaha &quot;Main phek ke chala jaunga, mila toh mila&quot;. (Fast but Unreliable).</li>
+</ul>
+<h3><strong>3. Internet Layer (Address)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Envelope pe &quot;To: Delhi, From: Mumbai&quot; (IP Address) likha taaki sahi shehar pahunche.</li>
+</ul>
+<h3><strong>4. Network Interface (Gadi)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Actual truck ya train (Ethernet/Wi-Fi) jo physical letter ko lekar gayi.</li>
+</ul>
+<hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li><strong>TCP/IP</strong> is the real-world model; <strong>OSI</strong> is the reference model.</li>
+<li><strong>Azure Diagram</strong>:<ul>
+<li><strong>App Gateway</strong> = Application Layer.</li>
+<li><strong>Load Balancer</strong> = Transport Layer.</li>
+<li><strong>VNET/Router</strong> = Internet Layer.</li>
+</ul>
+</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

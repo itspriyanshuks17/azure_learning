@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firewalls - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🛡️ Firewalls: Types &amp; Functions</h1>
+<h2>📌 Overview</h2>
+<p>A <strong>Firewall</strong> is a network security device (hardware or software) that monitors and controls incoming and outgoing network traffic based on predetermined security rules.</p>
+<p>Think of it as the <strong>Security Guard</strong> of your network. It decides who gets in and who stays out.</p>
+<hr>
+<h2>🚦 Types of Firewalls</h2>
+<h3>1. Packet Filtering Firewall (The Basic Guard)</h3>
+<p>This is the oldest and simplest type. It inspects packets <strong>individually</strong> based on headers (Source IP, Destination IP, Port, Protocol).</p>
+<ul>
+<li><strong>Mechanism</strong>: &quot;Is this IP allowed? Is this Port allowed? Go.&quot;</li>
+<li><strong>Layer</strong>: Network Layer (Layer 3) &amp; Transport Layer (Layer 4).</li>
+<li><strong>Pros</strong>: Very fast, cheap.</li>
+<li><strong>Cons</strong>: <strong>Stateless</strong> (doesn&#39;t remember conversation). Vulnerable to IP Spoofing.</li>
+</ul>
+<blockquote>
+<p><strong>Analogy</strong>: A security guard who only checks your ID card but doesn&#39;t check if you are carrying a weapon or if you were invited.</p>
+</blockquote>
+<h3>2. Stateful Inspection Firewall (The Smart Guard)</h3>
+<p>This is a modern evolution of packet filtering. It keeps track of the <strong>State</strong> of active connections (i.e., it remembers if a packet is part of an existing conversation).</p>
+<ul>
+<li><strong>Mechanism</strong>: &quot;Did I see a request go out for this incoming reply? Yes? Okay, enter.&quot;</li>
+<li><strong>Layer</strong>: Network (Layer 3) and Transport (Layer 4), with some Layer 7 awareness.</li>
+<li><strong>Pros</strong>: More secure than packet filtering. Prevents random external packets.</li>
+<li><strong>Cons</strong>: Slower than packet filtering (needs memory to store tables).</li>
+</ul>
+<blockquote>
+<p><strong>Analogy</strong>: A receptionist who knows you went out for lunch, so when you come back, they let you in without checking ID again.</p>
+</blockquote>
+<h3>3. Proxy Service / Application Gateway (The Middleman)</h3>
+<p>This firewall acts as an <strong>intermediary</strong> between the internal user and the external web. The user connects to the Proxy, and the Proxy connects to the Internet.</p>
+<ul>
+<li><strong>Mechanism</strong>: Deep Packet Inspection (DPI). It opens the packet payload.</li>
+<li><strong>Layer</strong>: Application Layer (Layer 7).</li>
+<li><strong>Pros</strong>: Highest security, can filter content (e.g., block specific URLs/keywords).</li>
+<li><strong>Cons</strong>: Slowest performance (bottleneck).</li>
+</ul>
+<blockquote>
+<p><strong>Analogy</strong>: You give your shopping list to a helper. The helper goes to the shop, buys items, checks them for quality, and then brings them to you. You never talk to the shop directly.</p>
+</blockquote>
+<hr>
+<h2>📊 Comparison Table</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">Packet Filtering 📨</th><th align="left">Stateful Inspection 🧠</th><th align="left">Proxy / App Gateway 🕵️</th></tr></thead>
+                <tbody><tr><td align="left"><strong>OSI Layer</strong></td><td align="left">Layer 3 / 4</td><td align="left">Layer 3 / 4</td><td align="left">Layer 7</td></tr><tr><td align="left"><strong>Speed</strong></td><td align="left">🚀 Fastest</td><td align="left">⚡ Moderate</td><td align="left">🐢 Slowest</td></tr><tr><td align="left"><strong>Security</strong></td><td align="left">🔓 Low</td><td align="left">🔒 Medium</td><td align="left">🔐 High</td></tr><tr><td align="left"><strong>Memory Usage</strong></td><td align="left">Sub-Zero</td><td align="left">High (holds state)</td><td align="left">High</td></tr><tr><td align="left"><strong>Azure Equiv</strong></td><td align="left"><strong>NSG</strong></td><td align="left"><strong>Azure Firewall</strong></td><td align="left"><strong>App Gateway / WAF</strong></td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>☁️ Azure Context</h2>
+<ol>
+<li><strong>Network Security Group (NSG)</strong>: This is a <strong>Packet Filtering</strong> firewall. It allows/denies based on 5-tuple (Src IP, Dst IP, Protocol, Src Port, Dst Port). It is <strong>Stateless</strong>? Actually, Azure NSG is technically stateful (if you allow inbound, outbound is auto-allowed), but usually categorized as basic filtering.</li>
+<li><strong>Azure Firewall</strong>: A managed, cloud-native firewall that offers <strong>Stateful Inspection</strong> and threat intelligence.</li>
+<li><strong>Application Gateway (WAF)</strong>: Operates at Layer 7 (Proxy). Used for Web Applications to protect against SQL Injection, XSS.</li>
+</ol>
+<hr>
+<h2>💡 Hinglish Explanation</h2>
+<h3><strong>1. Packet Filtering (Basic Chowkidar)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Ye wo chowkidar hai jo sirf ID card dekhta hai. &quot;Tum kaun ho? Kahan jaa rahe ho? Jao.&quot;</li>
+<li>Isko fark nahi padta tumne bag mein kya rakha hai. Ye packet ke andar ka data check nahi karta.</li>
+</ul>
+<h3><strong>2. Stateful Inspection (Yaadaash wala Chowkidar)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Ye hoshiyar chowkidar hai. Isko yaad rehta hai ki &quot;Tum 10 minute pehle bahar gaye the, isliye tum wapas aa sakte ho.&quot;</li>
+<li>Ye connection ki &#39;State&#39; (haalat) yaad rakhta hai. Agar bina request kiye koi packet bahar se ayega, toh ye rok dega.</li>
+</ul>
+<h3><strong>3. Proxy Service (Dalaal / Middleman)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Maan lo tumko &#39;Forbidden City&#39; jana hai par tum allowed nahi ho. Tum apne dost (Proxy) ko bhejte ho.</li>
+<li>Dost wahan jata hai, photo khinchta hai, check karta hai sab safe hai, aur fir laake tumko deta hai.</li>
+<li>Tumhara direct connection kabhi nahi bana. Ye sabse safe hai par slow hai kyunki dost beech mein hai.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips</h2>
+<ol>
+<li><strong>Stateless vs Stateful</strong>: Packet filtering is often called stateless (though strictly speaking some implementations differ). Stateful remembers the session.</li>
+<li><strong>Latency</strong>: Proxy is safest but adds most latency. Packet filtering is fastest.</li>
+<li><strong>Layers</strong>: Know which firewall sits on which OSI layer (L3/L4 vs L7).</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

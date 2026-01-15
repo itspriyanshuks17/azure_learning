@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Http Vs Https - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🔐 HTTP vs HTTPS: The Secure Web</h1>
+<h2>📌 Overview</h2>
+<p>The web runs on these two protocols. The core difference is <strong>Security</strong>.</p>
+<ol>
+<li><p><strong>HTTP (HyperText Transfer Protocol)</strong>:</p>
+<ul>
+<li><strong>Data</strong>: Sent in <strong>Plain Text</strong>.</li>
+<li><strong>Risk</strong>: Anyone on the network (Public Wi-Fi, ISP) can read your password/credit card.</li>
+<li><strong>Analogy</strong>: Sending a <strong>Postcard</strong>. Anyone who picks it up can read it.</li>
+</ul>
+</li>
+<li><p><strong>HTTPS (HTTP Secure)</strong>:</p>
+<ul>
+<li><strong>Data</strong>: Encrypted using <strong>SSL/TLS</strong>.</li>
+<li><strong>Security</strong>: Only the Browser and Server can read the data.</li>
+<li><strong>Analogy</strong>: Sending a <strong>Sealed Envelope</strong>. Only the recipient can open it.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>⚔️ Comparison Table</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">HTTP</th><th align="left">HTTPS</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Full Name</strong></td><td align="left">HyperText Transfer Protocol</td><td align="left">HTTP <strong>Secure</strong></td></tr><tr><td align="left"><strong>Port</strong></td><td align="left">80</td><td align="left">443</td></tr><tr><td align="left"><strong>Security</strong></td><td align="left">None (Plain Text)</td><td align="left"><strong>Encrypted</strong> (SSL/TLS)</td></tr><tr><td align="left"><strong>Speed</strong></td><td align="left">Marginally Faster</td><td align="left">Marginally Slower (Encryption overhead)</td></tr><tr><td align="left"><strong>Visual</strong></td><td align="left">&quot;Not Secure&quot; warning in Browser</td><td align="left"><strong>Padlock Icon</strong> (🔒)</td></tr><tr><td align="left"><strong>Use Case</strong></td><td align="left">Blogs, Info sites (Old)</td><td align="left"><strong>Banking, Login, Shopping, Everything</strong></td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>☁️ Azure Context</h2>
+<ul>
+<li><strong>Azure App Service</strong>: Provides free SSL certificates to enable HTTPS instantly.</li>
+<li><strong>Front Door / App Gateway</strong>: These services can handle <strong>SSL Termination</strong>, meaning they decrypt the HTTPS traffic before sending it to your backend servers (saving CPU).</li>
+<li><strong>Enforcement</strong>: You can toggle a setting &quot;HTTPS Only&quot; to <strong>Force</strong> all users to use the secure version.</li>
+</ul>
+<hr>
+<h2>📨 HTTP Headers</h2>
+<p>Headers are the <strong>Metadata</strong> sent with every request and response. They tell the browser/server <em>how</em> to handle the data.</p>
+<h3>Key Headers</h3>
+<ul>
+<li><strong>User-Agent</strong>: Tells the server &quot;I am Chrome on Windows&quot; or &quot;I am an iPhone&quot;.</li>
+<li><strong>Content-Type</strong>: Tells the browser &quot;This is an HTML file&quot; or &quot;This is a JSON object&quot;.</li>
+<li><strong>Authorization</strong>: Sends the password/token (e.g., Bearer Token).</li>
+<li><strong>Status Code</strong>:<ul>
+<li><strong>200 OK</strong>: Success.</li>
+<li><strong>404 Not Found</strong>: Page missing.</li>
+<li><strong>500 Server Error</strong>: Server crashed.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<h2>🚦 HTTP Methods (The Verbs)</h2>
+<p>Methods tell the server <strong>what action</strong> to perform on the resource.</p>
+<h3>Common Methods</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Method</th><th align="left">Action</th><th align="left">Description</th><th align="left">REST Analogy</th></tr></thead>
+                <tbody><tr><td align="left"><strong>GET</strong></td><td align="left"><strong>Read</strong></td><td align="left">Retrieve data. <strong>Safe</strong> (No changes to server).</td><td align="left">&quot;Show me the menu&quot;</td></tr><tr><td align="left"><strong>POST</strong></td><td align="left"><strong>Create</strong></td><td align="left">Submit new data. <strong>Unsafe</strong> (Creates resource).</td><td align="left">&quot;Order a Pizza&quot;</td></tr><tr><td align="left"><strong>PUT</strong></td><td align="left"><strong>Update</strong></td><td align="left">Replace entire resource. (Idempotent).</td><td align="left">&quot;Replace my order with a Burger&quot;</td></tr><tr><td align="left"><strong>PATCH</strong></td><td align="left"><strong>Modify</strong></td><td align="left">Partial update. (Standard).</td><td align="left">&quot;Change cheese to extra cheese&quot;</td></tr><tr><td align="left"><strong>DELETE</strong></td><td align="left"><strong>Delete</strong></td><td align="left">Remove resource.</td><td align="left">&quot;Cancel my order&quot;</td></tr></tbody>
+            </table>
+        </div><h3>🧠 Concept: Idempotency</h3>
+<ul>
+<li><strong>Idempotent</strong>: Making the request 10 times has the <strong>same effect</strong> as making it once.<ul>
+<li><em>Example</em>: <code>DELETE /user/1</code>. If you delete it once, it&#39;s gone. If you try again, it&#39;s still gone. (PUT, DELETE, GET).</li>
+</ul>
+</li>
+<li><strong>Non-Idempotent</strong>: Making the request 10 times creates <strong>10 resources</strong>.<ul>
+<li><em>Example</em>: <code>POST /orders</code> creates 10 different orders.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<h2>🔢 HTTP Status Codes (The Response)</h2>
+<p>When a server replies, it gives a 3-digit number to tell you <strong>what happened</strong>.</p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Range</th><th align="left">Type</th><th align="left">Meaning</th><th align="left">Common Examples</th></tr></thead>
+                <tbody><tr><td align="left"><strong>1xx</strong></td><td align="left"><strong>Informational</strong></td><td align="left">&quot;Hold on, I&#39;m working.&quot;</td><td align="left"><strong>100</strong> Continue</td></tr><tr><td align="left"><strong>2xx</strong></td><td align="left"><strong>Success</strong></td><td align="left">&quot;All good!&quot;</td><td align="left"><strong>200</strong> OK, <strong>201</strong> Created</td></tr><tr><td align="left"><strong>3xx</strong></td><td align="left"><strong>Redirection</strong></td><td align="left">&quot;Go somewhere else.&quot;</td><td align="left"><strong>301</strong> Moved Permanently, <strong>302</strong> Found</td></tr><tr><td align="left"><strong>4xx</strong></td><td align="left"><strong>Client Error</strong></td><td align="left">&quot;You messed up.&quot;</td><td align="left"><strong>400</strong> Bad Request, <strong>401</strong> Unauthorized, <strong>403</strong> Forbidden, <strong>404</strong> Not Found</td></tr><tr><td align="left"><strong>5xx</strong></td><td align="left"><strong>Server Error</strong></td><td align="left">&quot;I messed up.&quot;</td><td align="left"><strong>500</strong> Internal Server Error, <strong>502</strong> Bad Gateway, <strong>503</strong> Service Unavailable</td></tr></tbody>
+            </table>
+        </div><h3>🧠 Concept: 401 vs 403</h3>
+<ul>
+<li><strong>401 Unauthorized</strong>: &quot;Who are you?&quot; (You need to login).</li>
+<li><strong>403 Forbidden</strong>: &quot;I know who you are, but you can&#39;t come in.&quot; (You are logged in, but don&#39;t have permission).</li>
+</ul>
+<hr>
+<h2>🤝 The Handshake Process</h2>
+<p>Before any data is sent, the client and server must agree to talk. This is called a <strong>Handshake</strong>.</p>
+<h3>1. TCP Handshake (The Foundation)</h3>
+<p>Every HTTP connection starts with this <strong>3-Way Handshake</strong>.</p>
+<pre><code class="language-text">    [ Client ]                      [ Server ]
+        |                               |
+        |---- (1) SYN (Hello?) -------->|
+        |                               |
+        |<--- (2) SYN-ACK (Yes!) -------|
+        |                               |
+        |---- (3) ACK (Great!) -------->|
+        |                               |
+      (Connection Established - Data Flow Starts)</code></pre><h3>2. SSL/TLS Handshake (The Security Layer)</h3>
+<p>For <strong>HTTPS</strong>, an extra handshake happens <em>after</em> TCP to set up encryption.</p>
+<pre><code class="language-text">    [ Client ]                      [ Server ]
+        |                               |
+        |---- (1) Client Hello -------->| (I support these algorithms)
+        |                               |
+        |<--- (2) Server Hello ---------| (Let's use this one + Here is my Certificate)
+        |                               |
+        |---- (3) Key Exchange -------->| (Here is a secret key encrypted with your cert)
+        |                               |
+        |<--- (4) Finished ------------>| (Decrypted! Let's talk securely)
+        |                               |
+      (             Encrypted Tunnel Established             )</code></pre><hr>
+<h2>💡 Hinglish Explanation</h2>
+<h3><strong>1. HTTP (Postcard)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Agar tumne post card par apna credit card number likh kar bheja, toh dakiya (Postman) ya raste mein koi bhi usse padh sakta hai.</li>
+</ul>
+<h3><strong>2. HTTPS (Sealed Envelope)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Agar tumne letter ko lifafe (Envelope) mein band karke bheja, toh koi usse khol nahi sakta. Sirf jiske paas chabi hai (Server Key), wahi padh sakta hai.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
