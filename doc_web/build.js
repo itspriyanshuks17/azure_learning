@@ -17,7 +17,6 @@ const CONFIG = {
 };
 
 // Markdown Parser Setup
-// Markdown Parser Setup
 const renderer = {
     code(code, language) {
         let text = '';
@@ -115,6 +114,11 @@ async function build() {
     const sidebarHtml = generateSidebar(mdFiles, CONFIG.rootDir);
 
     const searchIndex = [];
+    // Ensure template exists
+    if (!await fs.pathExists(CONFIG.templatePath)) {
+        console.error(`❌ Template not found at ${CONFIG.templatePath}`);
+        return;
+    }
     const template = await fs.readFile(CONFIG.templatePath, 'utf-8');
 
     for (const file of mdFiles) {
@@ -143,9 +147,6 @@ async function build() {
             content: plainText
         });
 
-        // Resolve absolute path for sidebar links (Handle nesting)
-        // Note: Absolute paths (/foo) work best with 'serve'
-        
         const finalHtml = template
             .replace('{{title}}', title)
             .replace('{{sidebar}}', sidebarHtml)
@@ -221,5 +222,17 @@ function formatTitle(filename) {
     return name.replace(/\b\w/g, l => l.toUpperCase());
 }
 
-// ... unchanged helpers ...
+function parseContentForSearch(content) {
+    // Simple helper to strip markdown and get plain text
+    if (!content) return '';
+    return content
+        .replace(/#+\s/g, '') // Remove headers
+        .replace(/`{1,3}.*?`{1,3}/gs, '') // Remove code blocks
+        .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links
+        .replace(/[*_]/g, '') // Remove bold/italic
+        .replace(/\n/g, ' ') // Collapse newlines
+        .substring(0, 500); // Limit length
+}
 
+// Execute Build
+build().catch(console.error);
