@@ -80,6 +80,19 @@ const renderer = {
                 <tbody>${body}</tbody>
             </table>
         </div>`;
+    },
+    image(href, title, text) {
+        // Force absolute path for local images
+        if (href && !href.startsWith('/') && !href.startsWith('http') && !href.startsWith('https')) {
+            href = '/' + href;
+        }
+        // Classic img tag generation
+        let out = `<img src="${href}" alt="${text}"`;
+        if (title) {
+            out += ` title="${title}"`;
+        }
+        out += '>';
+        return out;
     }
 };
 
