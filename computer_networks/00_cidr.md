@@ -19,20 +19,20 @@ CIDR uses a suffix like `/24` or `/16`. This number represents the **Network Bit
 
 ### 📊 Common CIDR Cheat Sheet
 
-| CIDR          | Subnet Mask     | Total IPs        | Usable IPs* | Use Case                      |
-| :------------ | :-------------- | :--------------- | :---------- | :---------------------------- |
-| **/32** | 255.255.255.255 | **1**      | 1 (Host)    | Specific Device / Loopback    |
-| **/31** | 255.255.255.254 | 2                | 0           | Point-to-Point Links (Rare)   |
-| **/30** | 255.255.255.252 | 4                | 2           | Router-to-Router Links        |
-| **/29** | 255.255.255.248 | 8                | 3 (Azure)   | Small Subnet                  |
-| **/28** | 255.255.255.240 | 16               | 11 (Azure)  | Azure Bastion / GatewaySubnet |
-| **/27** | 255.255.255.224 | 32               | 27 (Azure)  | Typical Small VNet Subnet     |
-| **/24** | 255.255.255.0   | **256**    | 251 (Azure) | Standard LAN / VNet Subnet    |
-| **/16** | 255.255.0.0     | **65,536** | ~65k        | Entire VNet Address Space     |
-| **/8**  | 255.0.0.0       | ~16 M            | Huge        | Entire Large Org / ISP        |
-| **/0**  | 0.0.0.0         | ~4 B             | All IPv4    | The Update Internet           |
+| CIDR    | Subnet Mask     | Total IPs  | Usable IPs\* | Use Case                      |
+| :------ | :-------------- | :--------- | :----------- | :---------------------------- |
+| **/32** | 255.255.255.255 | **1**      | 1 (Host)     | Specific Device / Loopback    |
+| **/31** | 255.255.255.254 | 2          | 0            | Point-to-Point Links (Rare)   |
+| **/30** | 255.255.255.252 | 4          | 2            | Router-to-Router Links        |
+| **/29** | 255.255.255.248 | 8          | 3 (Azure)    | Small Subnet                  |
+| **/28** | 255.255.255.240 | 16         | 11 (Azure)   | Azure Bastion / GatewaySubnet |
+| **/27** | 255.255.255.224 | 32         | 27 (Azure)   | Typical Small VNet Subnet     |
+| **/24** | 255.255.255.0   | **256**    | 251 (Azure)  | Standard LAN / VNet Subnet    |
+| **/16** | 255.255.0.0     | **65,536** | ~65k         | Entire VNet Address Space     |
+| **/8**  | 255.0.0.0       | ~16 M      | Huge         | Entire Large Org / ISP        |
+| **/0**  | 0.0.0.0         | ~4 B       | All IPv4     | The Update Internet           |
 
-*> Note: In standard networking, you lose 2 IPs (Network + Broadcast). In Azure, you lose 5 IPs (Network + Broadcast + Router + DNS + Future).*
+_> Note: In standard networking, you lose 2 IPs (Network + Broadcast). In Azure, you lose 5 IPs (Network + Broadcast + Router + DNS + Future)._
 
 ---
 
@@ -56,6 +56,45 @@ If you need 50 VMs, which CIDR do you need?
 
 - /27 gives 32 IPs (Too small).
 - /26 gives 64 IPs (Perfect fit).
+
+---
+
+## 🔢 How to Calculate Subnet Mask (Step-by-Step)
+
+Want to turn `/26` into `255.255.255.192`? Follow these 3 steps.
+
+### Step 1: Find the "Interesting Octet"
+
+Where does the CIDR number fall?
+
+- **/1 - /8**: 1st Octet (255.x.x.x)
+- **/9 - /16**: 2nd Octet (255.255.x.x)
+- **/17 - /24**: 3rd Octet (255.255.255.x)
+- **/25 - /32**: 4th Octet (255.255.255.255)
+
+**Example: /26**
+
+- It falls in the **4th Octet** (between 25 and 32).
+- So, the mask starts as: `255.255.255.?`
+
+### Step 2: Calculate "On" Bits
+
+How many bits are "On" (1) in that octet?
+
+- **Formula**: `CIDR - (Previous boundary)`
+- **Example /26**: `26 - 24 = 2` bits are On.
+
+### Step 3: Add the Bit Values
+
+Remember the **Magic Binary Values**:
+`| 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |`
+
+- Since **2 bits** are On, add the **first 2 values**:
+- `128 + 64 = 192`
+
+**Final Answer**: `255.255.255.192`
+
+> **Hinglish Tip**: "Jitne bit ON hain, magic table mein shuru se utne numbers ko jod lo."
 
 ---
 
