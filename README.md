@@ -67,24 +67,24 @@ graph TD
 
 Foundational knowledge required to understand how the Cloud communicates.
 
-| Module                | Key Concepts                              | Quick Link                                                 |
-| :-------------------- | :---------------------------------------- | :--------------------------------------------------------- |
-| **Area Networks**     | LAN, WAN, VPN, SAN                        | [View Guide](computer_networks/00_area_networks.md)        |
-| **IP Addresses**      | IPv4 vs IPv6, Public vs Private           | [View Guide](computer_networks/00_ip_addresses.md)         |
-| **CIDR & Subnetting** | /24 Notation, Calculations, Azure Rules   | [View Guide](computer_networks/00_cidr.md)                 |
-| **Firewalls**         | Packet Filtering, Proxy, Stateful         | [View Guide](computer_networks/00_firewalls.md)            |
-| **SSL/TLS Handshake** | Authentication, Encryption, Keys          | [View Guide](computer_networks/00_ssl_tls_handshake.md)    |
-| **Binary Math**       | Dec<->Bin, 2's Complement                 | [View Guide](computer_networks/00_binary_math.md)          |
-| **Subnet Mask**       | Definition, Binary, Calculation           | [View Guide](computer_networks/00_subnet_mask.md)          |
-| **Routing Table**     | Azure System Routes, UDRs, Next Hop       | [View Guide](computer_networks/00_azure_routing.md)        |
-| **VNet Peering**      | Connect VNets, Dashboard Steps            | [View Guide](computer_networks/00_vnet_peering.md)         |
-| **MAC Address**       | Physical Address, OUI, Layer 2            | [View Guide](computer_networks/00_mac_address.md)          |
-| **Network Arch**      | Topologies, Client-Server, N-Tier         | [View Guide](computer_networks/00_network_architecture.md) |
-| **Networking Models** | Peer-to-Peer vs Client-Server             | [View Guide](computer_networks/00_networking_models.md)    |
-| **Ports & Protocols** | HTTP (80), HTTPS (443), SSH (22)          | [View Guide](computer_networks/00_networking_ports.md)     |
-| **OSI Model**         | 7 Layers of Communication                 | [View Guide](computer_networks/00_osi_model.md)            |
-| **TCP/IP Model**      | 4 Layers, TCP vs UDP                      | [View Guide](computer_networks/00_tcp_ip_model.md)         |
-| **HTTP vs HTTPS**     | **NEW!** Headers, Status Codes, Handshake | [View Guide](computer_networks/00_http_vs_https.md)        |
+| Module                | Key Concepts                            | Quick Link                                              |
+| :-------------------- | :-------------------------------------- | :------------------------------------------------------ |
+| **Area Networks**     | LAN, WAN, VPN, SAN                      | [View Guide](computer_networks/00_area_networks.md)     |
+| **IP Addresses**      | IPv4 vs IPv6, Public vs Private         | [View Guide](computer_networks/00_ip_addresses.md)      |
+| **CIDR & Subnetting** | /24 Notation, Calculations, Azure Rules | [View Guide](computer_networks/00_cidr.md)              |
+| **Firewalls**         | Packet Filtering, Proxy, Stateful       | [View Guide](computer_networks/00_firewalls.md)         |
+| **SSL/TLS Handshake** | Authentication, Encryption, Keys        | [View Guide](computer_networks/00_ssl_tls_handshake.md) |
+| **Binary Math**       | Dec<->Bin, 2's Complement               | [View Guide](computer_networks/00_binary_math.md)       |
+| **Subnet Mask**       | Definition, Binary, Calculation         | [View Guide](computer_networks/00_subnet_mask.md)       |
+| **Routing Table**     | Azure System Routes, UDRs, Next Hop     | [View Guide](computer_networks/00_azure_routing.md)     |
+
+| **MAC Address** | Physical Address, OUI, Layer 2 | [View Guide](computer_networks/00_mac_address.md) |
+| **Network Arch** | Topologies, Client-Server, N-Tier | [View Guide](computer_networks/00_network_architecture.md) |
+| **Networking Models** | Peer-to-Peer vs Client-Server | [View Guide](computer_networks/00_networking_models.md) |
+| **Ports & Protocols** | HTTP (80), HTTPS (443), SSH (22) | [View Guide](computer_networks/00_networking_ports.md) |
+| **OSI Model** | 7 Layers of Communication | [View Guide](computer_networks/00_osi_model.md) |
+| **TCP/IP Model** | 4 Layers, TCP vs UDP | [View Guide](computer_networks/00_tcp_ip_model.md) |
+| **HTTP vs HTTPS** | **NEW!** Headers, Status Codes, Handshake | [View Guide](computer_networks/00_http_vs_https.md) |
 
 <details>
 <summary><strong>🔽 Click to Expand Detailed Summaries (English & Hinglish)</strong></summary>
@@ -186,6 +186,7 @@ Deep dives into specific Azure Resources.
 | **08** | **Functions**        | Serverless Compute (Event-driven)  | [View](azure_services/08_azure_functions.md)           |
 | **09** | **VNet**             | Virtual Networks & Peering         | [View](azure_services/09_virtual_networks.md)          |
 | **10** | **Subnets**          | Network Segmentation               | [View](azure_services/10_subnets.md)                   |
+| **11** | **VNet Peering**     | Connect VNets (Dashboard Steps)    | [View](azure_services/11_vnet_peering.md)              |
 
 <details>
 <summary><strong>🔽 Click to Expand Detailed Summaries (English & Hinglish)</strong></summary>
