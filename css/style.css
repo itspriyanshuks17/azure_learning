@@ -328,6 +328,18 @@ summary:hover {
         cursor: pointer;
     }
 
+    .menu-close {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
     .overlay.active {
         display: block;
         position: fixed;
