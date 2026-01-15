@@ -76,6 +76,7 @@ Foundational knowledge required to understand how the Cloud communicates.
 | **SSL/TLS Handshake** | Authentication, Encryption, Keys          | [View Guide](computer_networks/00_ssl_tls_handshake.md)    |
 | **Binary Math**       | Dec<->Bin, 2's Complement                 | [View Guide](computer_networks/00_binary_math.md)          |
 | **Subnet Mask**       | Definition, Binary, Calculation           | [View Guide](computer_networks/00_subnet_mask.md)          |
+| **Routing Table**     | Azure System Routes, UDRs, Next Hop       | [View Guide](computer_networks/00_azure_routing.md)        |
 | **MAC Address**       | Physical Address, OUI, Layer 2            | [View Guide](computer_networks/00_mac_address.md)          |
 | **Network Arch**      | Topologies, Client-Server, N-Tier         | [View Guide](computer_networks/00_network_architecture.md) |
 | **Networking Models** | Peer-to-Peer vs Client-Server             | [View Guide](computer_networks/00_networking_models.md)    |
