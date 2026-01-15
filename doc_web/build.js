@@ -190,6 +190,7 @@ async function build() {
             .replace(/href="\/css\/style\.css"/g, `href="${relativePrefix}css/style.css"`)
             .replace(/src="\/js\/script\.js"/g, `src="${relativePrefix}js/script.js"`)
             .replace(/href="\/index\.html"/g, `href="${relativePrefix}index.html"`)
+            .replace(/href="\/image\//g, `href="${relativePrefix}image/`)
             .replace(/src="\/(image\/[^"]+)"/g, `src="${relativePrefix}$1"`);
 
         const outPath = path.join(CONFIG.outDir, outRelativePath);
