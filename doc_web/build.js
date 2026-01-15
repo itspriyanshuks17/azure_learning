@@ -81,12 +81,17 @@ const renderer = {
             </table>
         </div>`;
     },
-    image(href, title, text) {
+    image(token) {
+        // Marked v12+ passes a generic token object
+        let href = token.href || '';
+        const title = token.title || null;
+        const text = token.text || '';
+
         // Force absolute path for local images
         if (href && !href.startsWith('/') && !href.startsWith('http') && !href.startsWith('https')) {
             href = '/' + href;
         }
-        // Classic img tag generation
+        
         let out = `<img src="${href}" alt="${text}"`;
         if (title) {
             out += ` title="${title}"`;
