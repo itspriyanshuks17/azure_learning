@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resource Hierarchy - Azure Learning Guide</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
@@ -18,11 +18,15 @@
       <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <div class="search-container">
-          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
-          <div id="search-results" class="search-results"></div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
       </div>
       <nav>
-        <a href="index.html">🏠 Home</a>
+        <a href="/index.html">🏠 Home</a>
         <a href="/index.html" class="nav-header">🏠 Home</a>
 <div class="nav-section">App Architecture</div>
 <a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
@@ -129,7 +133,7 @@
                /         \                    /         \
         +--------+   +--------+        +--------+   +--------+
         |   VM   |   | S3 Acc |        |   VM   |   | SQL DB |
-        +--------+   +--------+        +--------+   +--------+</code></pre><h2><img src="image/01_resource_hierarchy/1767940729762.png" alt="1767940729762"></h2>
+        +--------+   +--------+        +--------+   +--------+</code></pre><h2><img src="/image/01_resource_hierarchy/1767940729762.png" alt="1767940729762"></h2>
 <h2>🔒 Policy &amp; Access Inheritance</h2>
 <p>A key concept in Azure is <strong>Inheritance</strong>. Settings applied at a higher level trickle down.</p>
 <ol>
@@ -144,7 +148,7 @@
 </ul>
 </li>
 </ol>
-<h2><img src="image/01_resource_hierarchy/1767940820806.png" alt="1767940820806"></h2>
+<h2><img src="/image/01_resource_hierarchy/1767940820806.png" alt="1767940820806"></h2>
 <h2>💡 Exam Tips for AZ-900</h2>
 <ul>
 <li><strong>Lowest Level</strong>: Resources.</li>
@@ -158,9 +162,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        hljs.highlightAll();
-        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
     </script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>

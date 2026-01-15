@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Subnet Mask - Azure Learning Guide</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
@@ -18,11 +18,15 @@
       <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <div class="search-container">
-          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
-          <div id="search-results" class="search-results"></div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
       </div>
       <nav>
-        <a href="index.html">🏠 Home</a>
+        <a href="/index.html">🏠 Home</a>
         <a href="/index.html" class="nav-header">🏠 Home</a>
 <div class="nav-section">App Architecture</div>
 <a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
@@ -139,7 +143,7 @@
 <p><strong>Result</strong>: <code>255.255.255.192</code></p>
 <hr>
 <h2>My Handwritten Notes</h2>
-<p><img src="image/00_subnet_mask/1768485944425.png" alt="1768485944425"><br><img src="image/00_subnet_mask/1768485955461.png" alt="1768485955461"></p>
+<p><img src="/image/00_subnet_mask/1768485944425.png" alt="1768485944425"><br><img src="/image/00_subnet_mask/1768485955461.png" alt="1768485955461"></p>
 <h2>⚡ Exam Tips</h2>
 <ol>
 <li><strong>ANDing</strong>: The Router performs a logical <strong>AND</strong> operation between the IP and the Mask to find the <strong>Network ID</strong>.</li>
@@ -151,9 +155,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        hljs.highlightAll();
-        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
     </script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>

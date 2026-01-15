@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Containers - Azure Learning Guide</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
@@ -18,11 +18,15 @@
       <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <div class="search-container">
-          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
-          <div id="search-results" class="search-results"></div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
       </div>
       <nav>
-        <a href="index.html">🏠 Home</a>
+        <a href="/index.html">🏠 Home</a>
         <a href="/index.html" class="nav-header">🏠 Home</a>
 <div class="nav-section">App Architecture</div>
 <a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
@@ -99,7 +103,7 @@
                 <thead><tr><th align="left">Feature</th><th align="left">Virtual Machine (VM)</th><th align="left">Container</th></tr></thead>
                 <tbody><tr><td align="left"><strong>Isolation</strong></td><td align="left">Hardware Level (Stronger)</td><td align="left">OS Level (Process isolation)</td></tr><tr><td align="left"><strong>OS</strong></td><td align="left">Owns a full Guest OS</td><td align="left">Shares the Host OS Kernel</td></tr><tr><td align="left"><strong>Size</strong></td><td align="left">Gigabytes (GB)</td><td align="left">Megabytes (MB)</td></tr><tr><td align="left"><strong>Startup</strong></td><td align="left">Minutes</td><td align="left">Seconds</td></tr></tbody>
             </table>
-        </div><h2><img src="image/00_containers/1767943947427.png" alt="1767943947427"></h2>
+        </div><h2><img src="/image/00_containers/1767943947427.png" alt="1767943947427"></h2>
 <h2>2. Docker Fundamentals 🐳</h2>
 <p>Docker is the most popular platform for building and running containers.</p>
 <ul>
@@ -161,9 +165,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        hljs.highlightAll();
-        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
     </script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>
