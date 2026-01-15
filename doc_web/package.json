@@ -11,9 +11,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/drawing_utils": "^0.3.1675466124",
+    "@mediapipe/hands": "^0.4.1675469240",
     "fs-extra": "^11.3.3",
     "highlight.js": "^11.11.1",
-    "marked": "^17.0.1"
+    "marked": "^17.0.1",
+    "three": "^0.182.0"
   },
   "type": "module"
 }

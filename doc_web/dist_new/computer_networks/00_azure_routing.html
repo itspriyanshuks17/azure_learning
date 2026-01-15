@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Routing - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🛣️ Azure Routing: System Routes &amp; UDRs</h1>
+<h2>📌 Overview</h2>
+<p>In Azure, traffic flow is controlled by <strong>Routing Tables</strong>. Just like a GPS tells a car where to turn, Azure Routing tells a data packet where to go next.</p>
+<p>There are two main types of routes in Azure:</p>
+<ol>
+<li><strong>System Routes</strong> (Default / Auto-pilot)</li>
+<li><strong>User Defined Routes (UDR)</strong> (Custom / Manual Steering)</li>
+</ol>
+<hr>
+<h2>🤖 1. System Routes (The Defaults)</h2>
+<p>When you create a Virtual Network (VNet), Azure automatically adds these routes for you. You generally <strong>cannot</strong> delete them, but you can override them.</p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Destination</th><th align="left">Next Hop</th><th align="left">Meaning</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Local VNet</strong></td><td align="left"><code>Virtual Network</code></td><td align="left">&quot;Traffic inside this VNet stays here.&quot;</td></tr><tr><td align="left"><strong>Internet</strong></td><td align="left"><code>Internet</code></td><td align="left">&quot;Traffic destined for the public web goes out.&quot;</td></tr><tr><td align="left"><strong>RFC 1918</strong></td><td align="left"><code>None</code></td><td align="left">&quot;Private IPs that don&#39;t belong here are dropped.&quot;</td></tr></tbody>
+            </table>
+        </div><blockquote>
+<p><strong>Hinglish Analogy</strong>: &quot;Ye factory settings hain. Agar tum kuch nahi bologe, toh traffic waise hi chalega jaise Azure ne socha hai.&quot;</p>
+</blockquote>
+<hr>
+<h2>🛠️ 2. User Defined Routes (UDR)</h2>
+<p>A <strong>UDR (Route Table)</strong> allows you to override the default system routes. This is critical for security architectures, like forcing all traffic to go through a <strong>Firewall</strong> instead of going straight to the Internet.</p>
+<h3>Common Next Hop Types</h3>
+<p>When creating a UDR, you must specify the <strong>Next Hop</strong> (Where the packet goes next).</p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Next Hop Type</th><th align="left">Use Case</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Virtual Appliance</strong></td><td align="left">Send traffic to a <strong>Firewall</strong> (NVA) or Load Balancer.</td></tr><tr><td align="left"><strong>Internet</strong></td><td align="left">Force traffic directly to the internet (bypassing proxies).</td></tr><tr><td align="left"><strong>Virtual Network Gateway</strong></td><td align="left">Send traffic to a <strong>VPN Gateway</strong> or ExpressRoute.</td></tr><tr><td align="left"><strong>None</strong></td><td align="left"><strong>Blackhole</strong>. Drop the traffic completely (useful for security).</td></tr><tr><td align="left"><strong>Virtual Network</strong></td><td align="left">Force traffic to a specific VNet location.</td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>🧠 3. How Azure Selects a Route</h2>
+<p>If there are multiple matching routes, how does Azure decide?</p>
+<h3>Rule #1: Longest Prefix Match (LPM) - The Golden Rule 🏆</h3>
+<p>The route with the <strong>most specific</strong> match (highest CIDR number) ALWAYS wins.</p>
+<p><strong>Example</strong>: Packet going to <code>10.0.0.5</code>.</p>
+<ul>
+<li>Route A: <code>10.0.0.0/16</code> (Matches, but broad).</li>
+<li>Route B: <code>10.0.0.0/24</code> (Matches, more specific).</li>
+<li><strong>Winner</strong>: Route B (<code>/24</code>) because it&#39;s a longer prefix match.</li>
+</ul>
+<h3>Rule #2: Priority (If LPM is tied)</h3>
+<p>If two routes have the EXACT same prefix (e.g., both are <code>0.0.0.0/0</code>), Azure picks in this order:</p>
+<ol>
+<li><strong>User Defined Route (UDR)</strong> (Highest Priority)</li>
+<li><strong>BGP Route</strong> (ExpressRoute)</li>
+<li><strong>System Route</strong> (Lowest Priority)</li>
+</ol>
+<blockquote>
+<p><strong>Hinglish Tip</strong>: &quot;Agar do raste same hain, toh tumhara banaya hua rasta (UDR) pehle mana jayega.&quot;</p>
+</blockquote>
+<hr>
+<h2>⚡ Exam Tips</h2>
+<ol>
+<li><strong>Forcing Traffic</strong>: To send traffic through an Azure Firewall, create a UDR with Next Hop = <strong>Virtual Appliance</strong> and the IP of the Firewall.</li>
+<li><strong>GatewaySubnet</strong>: <strong>NEVER</strong> assign a UDR to the GatewaySubnet unless you know exactly what you are doing (it can break VPN/ExpressRoute).</li>
+<li><strong>Troubleshooting</strong>: Use the <strong>&quot;Effective Routes&quot;</strong> feature in the NIC blade to see exactly which routes (System + UDR) are active.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storage Services - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>Azure Storage Account</h1>
+<h2>Overview</h2>
+<ul>
+<li>Azure Storage Account provides <strong>scalable cloud storage</strong> for:<ul>
+<li>Blobs (object storage)</li>
+<li>Files (SMB/NFS shares)</li>
+<li>Queues (messaging)</li>
+<li>Tables (NoSQL key-value)</li>
+<li>Disks (VM storage)</li>
+</ul>
+</li>
+<li>Acts as a <strong>single namespace</strong> to manage all types of storage.</li>
+<li>Provides <strong>high availability, durability, and security</strong>.</li>
+</ul>
+<hr>
+<h2>Key Features</h2>
+<ul>
+<li><strong>Multiple storage types</strong>:<ul>
+<li><strong>Blob Storage</strong>: unstructured data (images, videos, logs).</li>
+<li><strong>File Storage</strong>: managed file shares.</li>
+<li><strong>Queue Storage</strong>: reliable messaging between apps.</li>
+<li><strong>Table Storage</strong>: NoSQL key-value database.</li>
+<li><strong>Disk Storage</strong>: for Azure VMs.</li>
+</ul>
+</li>
+<li><strong>Replication Options</strong>:<ul>
+<li>LRS (Locally Redundant Storage)</li>
+<li>GRS (Geo-Redundant Storage)</li>
+<li>ZRS (Zone-Redundant Storage)</li>
+</ul>
+</li>
+<li><strong>Access Control</strong>:<ul>
+<li>Shared Access Signature (SAS)</li>
+<li>Azure AD integration</li>
+</ul>
+</li>
+<li><strong>Secure</strong>: Encryption at rest, HTTPS only access.</li>
+</ul>
+<hr>
+<h2>Workflow</h2>
+<pre><code class="language-text">     +--------------------+
+     | User / Application |
+     +--------------------+
+             |
+             v
+  +-------------------------+
+  |  Azure Storage Account  |
+  +-------------------------+
+    |      |      |      |
+    |      |      |      +---> [ Blob Storage ] (Objects/Files)
+    |      |      |
+    |      |      +----------> [ File Storage ] (SMB Shares)
+    |      |
+    |      +-----------------> [ Queue Storage ] (Messaging)
+    |
+    +------------------------> [ Table Storage ] (NoSQL)
+    |
+    +------------------------> [ Managed Disks ] (VM Storage)</code></pre><hr>
+<h2>Common Use Cases</h2>
+<ul>
+<li>Storing application logs, backups, and media files.</li>
+<li>File shares for applications.</li>
+<li>Messaging between microservices using queues.</li>
+<li>Storing structured NoSQL data using tables.</li>
+<li>Persistent storage for VMs.</li>
+</ul>
+<hr>
+<h2>Steps to Manage Storage Account using Azure CLI</h2>
+<h3>1. Login to Azure</h3>
+<pre><code class="language-bash">az login</code></pre><h3>2. Create a Resource Group (if not exists)</h3>
+<pre><code class="language-bash">az group create --name MyResourceGroup --location eastus</code></pre><h3>3. Create a Storage Account</h3>
+<pre><code class="language-bash">az storage account create \
+  --name mystorageacct123 \
+  --resource-group MyResourceGroup \
+  --location eastus \
+  --sku Standard_LRS \
+  --kind StorageV2</code></pre><h3>4. List Storage Accounts</h3>
+<pre><code class="language-bash">az storage account list -o table</code></pre><h3>5. Get Storage Account Keys</h3>
+<pre><code class="language-bash">az storage account keys list \
+  --resource-group MyResourceGroup \
+  --account-name mystorageacct123</code></pre><h3>6. Create a Blob Container</h3>
+<pre><code class="language-bash">az storage container create \
+  --name mycontainer \
+  --account-name mystorageacct123</code></pre><h3>7. Upload a File to Blob</h3>
+<pre><code class="language-bash">az storage blob upload \
+  --container-name mycontainer \
+  --file ./localfile.txt \
+  --name remotefile.txt \
+  --account-name mystorageacct123</code></pre><h3>8. Download a Blob</h3>
+<pre><code class="language-bash">az storage blob download \
+  --container-name mycontainer \
+  --name remotefile.txt \
+  --file ./downloadedfile.txt \
+  --account-name mystorageacct123</code></pre><h3>9. Delete Storage Account (Caution!)</h3>
+<pre><code class="language-bash">az storage account delete --name mystorageacct123 --resource-group MyResourceGroup --yes</code></pre><hr>
+<h2>Notes</h2>
+<ul>
+<li><strong>Storage Account Names</strong> must be <strong>globally unique</strong> and lowercase.</li>
+<li><strong>StorageV2</strong> is recommended (supports all features).</li>
+<li>Use <strong>Azure AD authentication</strong> for secure access instead of account keys.</li>
+<li>Select <strong>replication type</strong> based on durability requirements.</li>
+<li>Blob Storage supports <strong>Hot, Cool, and Archive tiers</strong> for cost optimization.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

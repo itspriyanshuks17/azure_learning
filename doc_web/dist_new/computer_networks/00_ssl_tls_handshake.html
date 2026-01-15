@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ssl Tls Handshake - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🤝 The SSL/TLS Handshake: How HTTPS Works</h1>
+<h2>📌 Overview</h2>
+<p>When you visit a secure website (<code>https://</code>), your browser and the server perform a <strong>secret handshake</strong> to create a secure, encrypted tunnel before any data is sent.</p>
+<ul>
+<li><strong>SSL (Secure Sockets Layer)</strong>: The old, deprecated version.</li>
+<li><strong>TLS (Transport Layer Security)</strong>: The modern, secure version (everyone uses this, but we still often call it SSL).</li>
+</ul>
+<hr>
+<h2>🚦 The Two Handshakes</h2>
+<p>It is important to know that <strong>TWO</strong> handshakes happen when you connect to HTTPS.</p>
+<ol>
+<li><strong>TCP Handshake (Connection)</strong>: &quot;Can we talk?&quot;</li>
+<li><strong>TLS Handshake (Security)</strong>: &quot;Can we talk <strong>secretly</strong>?&quot;</li>
+</ol>
+<hr>
+<h2>1️⃣ TCP 3-Way Handshake (The Recap)</h2>
+<p>This happens first to establish the connection.</p>
+<ol>
+<li><strong>SYN</strong>: Client says &quot;Hello?&quot;.</li>
+<li><strong>SYN-ACK</strong>: Server says &quot;Hello! I hear you.&quot;</li>
+<li><strong>ACK</strong>: Client says &quot;Great, connected.&quot;</li>
+</ol>
+<hr>
+<h2>2️⃣ TLS Handshake (The Encryption)</h2>
+<p>Now that they are connected, they negotiate security. This happens in <strong>milliseconds</strong>.</p>
+<h3>Step-by-Step Flow</h3>
+<h4>1. Client Hello 👋</h4>
+<ul>
+<li><strong>Browser says</strong>: &quot;I want to talk securely. I support these encryption methods (Cipher Suites) and this TLS version (e.g., TLS 1.3).&quot;</li>
+<li><strong>Sends</strong>: A random string of data (Client Random).</li>
+</ul>
+<h4>2. Server Hello 👋</h4>
+<ul>
+<li><strong>Server says</strong>: &quot;Okay, let&#39;s use <strong>TLS 1.3</strong> and <strong>Algorithm X</strong>. Here is my <strong>Digital Certificate</strong> (ID Card) to prove I am really <code>google.com</code>.&quot;</li>
+<li><strong>Sends</strong>: A random string of data (Server Random).</li>
+</ul>
+<h4>3. Authentication &amp; Key Exchange 🔑</h4>
+<ul>
+<li><strong>Browser</strong>: Checks the Certificate with a trusted authority (like Verisign). &quot;Is this valid?&quot; -&gt; Yes.</li>
+<li><strong>Action</strong>: The client creates a <strong>Pre-Master Secret</strong>, encrypts it with the Server&#39;s <strong>Public Key</strong>, and sends it.</li>
+<li><strong>Server</strong>: Decrypts it using its <strong>Private Key</strong>. Now both have the same secret!</li>
+</ul>
+<h4>4. Finished (The Common Secret) 🤐</h4>
+<ul>
+<li>Both generate a <strong>Session Key</strong> (Symmetric Key) from the explicit secrets.</li>
+<li><strong>Browser</strong>: &quot;I am ready. Encrypting from now on.&quot;</li>
+<li><strong>Server</strong>: &quot;Me too. High five!&quot;</li>
+</ul>
+<blockquote>
+<p><strong>Result</strong>: A secure, encrypted tunnel is established.</p>
+</blockquote>
+<hr>
+<h2>🔐 Symmetric vs Asymmetric Encryption</h2>
+<p>The handshake uses <strong>both</strong> types of encryption to be fast and secure.</p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Type</th><th align="left">Key Concept</th><th align="left">Used When?</th><th align="left">Analogy</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Asymmetric</strong></td><td align="left"><strong>2 Keys</strong>: Public (Lock) &amp; Private (Key).</td><td align="left">Only during <strong>Handshake</strong> (Key Exchange).</td><td align="left">I give you an open padlock. You put the message in a box, lock it, and send it back. Only I have the key to open it.</td></tr><tr><td align="left"><strong>Symmetric</strong></td><td align="left"><strong>1 Key</strong>: Same key locks and unlocks.</td><td align="left">During <strong>Data Transfer</strong> (Browsing).</td><td align="left">We both have a copy of the same house key.</td></tr></tbody>
+            </table>
+        </div><blockquote>
+<p><strong>Why switch?</strong> Asymmetric is <strong>Slow</strong> (Math is hard). Symmetric is <strong>Fast</strong>. So we use Asymmetric just to safely share the Symmetric key.</p>
+</blockquote>
+<hr>
+<h2>☁️ Azure Context</h2>
+<ul>
+<li><strong>TLS Termination</strong>: Usually handled by <strong>Azure Application Gateway</strong> or <strong>Front Door</strong>. They take the heavy load of the handshake so your web server (VM/App Service) doesn&#39;t have to work as hard.</li>
+<li><strong>Key Vault</strong>: Store your Private Keys/Certificates securely in <strong>Azure Key Vault</strong>. Never hardcode them.</li>
+</ul>
+<hr>
+<h2>💡 Hinglish Explanation</h2>
+<h3><strong>1. The Problem (Khule Aaam)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Agar tumne class mein chit (note) pass ki, toh beech wale ladke usse padh sakte hain.</li>
+</ul>
+<h3><strong>2. The Solution (Code Language)</strong></h3>
+<ul>
+<li><strong>Client Hello</strong>: &quot;Bhai, baat karni hai. Mujhe Hindi aur English aati hai.&quot;</li>
+<li><strong>Server Hello</strong>: &quot;Thik hai, Hindi mein baat karenge. Ye lo mera ID card, main principal ka aadmi hu.&quot;</li>
+<li><strong>Key Exchange (Briefcase)</strong>:<ul>
+<li><strong>Client</strong>: &quot;Ye lo ek locked briefcase (Asymmetric). Iske andar ek Secret Code (Symmetric Key) hai.&quot;</li>
+<li><strong>Server</strong>: Apni chabi (Private Key) se briefcase kholta hai aur code nikal leta hai.</li>
+</ul>
+</li>
+<li><strong>Session (Gupt Gu)</strong>: Ab dono ke paas wo <strong>Secret Code</strong> hai. Ab wo us code mein baat karenge jo koi aur nahi samajh sakta.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips</h2>
+<ol>
+<li><strong>Handshake Order</strong>: TCP first -&gt; then TLS.</li>
+<li><strong>Public Key</strong>: Encrypts data (Anyone can use it).</li>
+<li><strong>Private Key</strong>: Decrypts data (Only Server has it).</li>
+<li><strong>Certificate</strong>: Verifies identity (prevents Man-in-the-Middle attacks).</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

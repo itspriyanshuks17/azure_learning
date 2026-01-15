@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Functions - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>⚡ Azure Functions</h1>
+<h2>📌 Overview</h2>
+<p><strong>Azure Functions</strong> is a <strong>serverless compute service</strong> that lets you run <strong>event-triggered code</strong> without having to explicitly provision or manage infrastructure.</p>
+<ul>
+<li><strong>Philosophy</strong>: &quot;Focus on the code, not the plumbing.&quot;</li>
+<li><strong>Event-Driven</strong>: It sits idle until something happens (e.g., a file is uploaded, a timer hits 9 AM, an HTTP request arrives).</li>
+</ul>
+<hr>
+<h2>1. Key Concepts</h2>
+<h3>🔫 Triggers</h3>
+<p>A <strong>Trigger</strong> is what causes the function to start running.</p>
+<ul>
+<li><strong>Timer Trigger</strong>: Run a cleanup job every night at 3 AM.</li>
+<li><strong>HTTP Trigger</strong>: Run code when an API endpoint is hit.</li>
+<li><strong>Blob Trigger</strong>: Run code when a new image is uploaded to Storage (e.g., to resize it).</li>
+<li><strong>Cosmos DB Trigger</strong>: Run code when a new document is added to the database.<blockquote>
+<p><strong>Rule</strong>: A function must have exactly one trigger.</p>
+</blockquote>
+</li>
+</ul>
+<h3>🔗 Bindings</h3>
+<p><strong>Bindings</strong> are a declarative way to connect data to your function code. They save you from writing boilerplate connection code.</p>
+<ul>
+<li><strong>Input Binding</strong>: &quot;Fetch the specific Blob that triggered this function and give it to me as a variable.&quot;</li>
+<li><strong>Output Binding</strong>: &quot;Take this result variable and write it to a Queue message.&quot;</li>
+</ul>
+<hr>
+<h2>3. Architecture Flow</h2>
+<pre><code class="language-text">      Events (Trigger)           Function App             Action (Output)
+      ================           ============             ===============
+
+    +----------------+         +--------------+          +---------------+
+    | New Photo      | ------> | Resize Code  | -------> | Save Thumbnail|
+    | (Blob Storage) |         | (Serverless) |          | (Blob Storage)|
+    +----------------+         +--------------+          +---------------+
+            ^                                                   |
+            |                                                   v
+    +----------------+                                   +---------------+
+    | HTTP Request   |                                   | Send Email    |
+    | (API Call)     |                                   | (SendGrid)    |
+    +----------------+                                   +---------------+</code></pre><hr>
+<h2>2. Hosting Plans</h2>
+<p>You pay differently depending on how you host your function.</p>
+<h3>🥤 Consumption Plan (Serverless)</h3>
+<ul>
+<li><strong>Billing</strong>: You pay <strong>only</strong> when the function is running.</li>
+<li><strong>Scaling</strong>: Scales automatically to zero when idle.</li>
+<li><strong>Limitations</strong>: <strong>Cold Start</strong> (latency for the first request after being idle), 10-minute max execution time.</li>
+<li><strong>Best For</strong>: Unpredictable traffic, cost optimization.</li>
+</ul>
+<h3>💎 Premium Plan</h3>
+<ul>
+<li><strong>Billing</strong>: Pre-warmed instances (always ready).</li>
+<li><strong>Benefits</strong>: No Cold Start, VNET integration, longer run duration.</li>
+<li><strong>Best For</strong>: Production APIs requiring instant response.</li>
+</ul>
+<h3>🏢 App Service Plan (Dedicated)</h3>
+<ul>
+<li><strong>Billing</strong>: Monthly fee (you rent the VM).</li>
+<li><strong>Benefits</strong>: Run on the same dedicated VMs as your other App Services.</li>
+<li><strong>Best For</strong>: Predictable usage, reusing existing infrastructure.</li>
+</ul>
+<hr>
+<hr>
+<h2>3. 🛠️ Hands-on: Create a Function App</h2>
+<h3>Step 1: Create a Resource Group</h3>
+<pre><code class="language-bash">az group create --name myResourceGroup --location eastus2</code></pre><h3>Step 2: Create a Storage Account (Required)</h3>
+<p>Function Apps require a storage account to manage triggers and logging.</p>
+<blockquote>
+<p><strong>Note</strong>: Your subscription has a restricted list of allowed regions.<br>If <code>eastus2</code> fails, try: <code>westus2</code>, <code>northeurope</code>, <code>southeastasia</code>.</p>
+</blockquote>
+<pre><code class="language-bash">az storage account create \
+  --name priyanshuksharma$RANDOM \
+  --resource-group myResourceGroup \
+  --location eastasia \
+  --sku Standard_LRS</code></pre><h3>Step 3: Create the Function App</h3>
+<p>Replace <code>&lt;storage_name&gt;</code> with the name generated above.</p>
+<pre><code class="language-bash">az functionapp create \
+  --resource-group myResourceGroup \
+  --consumption-plan-location eastasia \
+  --runtime node \
+  --functions-version 4 \
+  --name myUniqueFunctionApp$RANDOM \
+  --storage-account <storage_name></code></pre><hr>
+<h2>💡 Exam Tips for AZ-900</h2>
+<ul>
+<li><strong>Stateless</strong>: By default, Azure Functions are stateless (they handle a request and forget).</li>
+<li><strong>Durable Functions</strong>: An extension that lets you write <strong>stateful</strong> functions (e.g., waiting for manual approval in a workflow).</li>
+<li><strong>Max Time</strong>: Consumption plan has a timeout (default 5 mins, max 10 mins). For long-running tasks, use a Dedicated plan or Logic Apps.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subnet Mask - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🎭 Subnet Mask: The Complete Guide</h1>
+<h2>📌 Definition</h2>
+<p>A <strong>Subnet Mask</strong> is a 32-bit number that accompanies an IP address. It has one specific job: <strong>To tell the computer which part of the IP address is the &quot;Network&quot; and which part is the &quot;Host&quot;.</strong></p>
+<p>Without a Subnet Mask, an IP address is just a meaningless string of numbers. The mask gives it context.</p>
+<hr>
+<h2>⚡ How It Works (The Logic)</h2>
+<p>The Subnet Mask works like a filter (or a mask) using Binary logic.</p>
+<ul>
+<li><strong>1s (Ones)</strong>: These represent the <strong>Network Portion</strong>. These bits are <strong>LOCKED</strong>. You cannot change them.</li>
+<li><strong>0s (Zeros)</strong>: These represent the <strong>Host Portion</strong>. These bits are <strong>OPEN</strong>. You can assign these to your computers.</li>
+</ul>
+<h3>Binary Visualization</h3>
+<p>Let&#39;s look at a standard <strong>Class C</strong> mask: <code>255.255.255.0</code></p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Format</th><th align="left">Octet 1</th><th align="left">Octet 2</th><th align="left">Octet 3</th><th align="left">Octet 4</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Decimal</strong></td><td align="left">255</td><td align="left">255</td><td align="left">255</td><td align="left">0</td></tr><tr><td align="left"><strong>Binary</strong></td><td align="left"><strong>11111111</strong></td><td align="left"><strong>11111111</strong></td><td align="left"><strong>11111111</strong></td><td align="left"><strong>00000000</strong></td></tr><tr><td align="left"><strong>Meaning</strong></td><td align="left">Network 🔒</td><td align="left">Network 🔒</td><td align="left">Network 🔒</td><td align="left">Host 🔓</td></tr></tbody>
+            </table>
+        </div><p><strong>What this tells the router</strong>:<br>&quot;Any IP address that matches these first 3 octets is on <strong>MY LOCAL NETWORK</strong>. Anything else? Send it to the Gateway.&quot;</p>
+<hr>
+<h2>💡 Hinglish Analogy (The Painting Mask)</h2>
+<p>Imagine you are painting a wall, but you don&#39;t want to paint over the window frame. What do you do? You put <strong>Masking Tape</strong> on it.</p>
+<ul>
+<li><strong>The IP Address</strong>: The Wall.</li>
+<li><strong>The Subnet Mask</strong>: The Masking Tape.</li>
+<li><strong>Network Bits (1s)</strong>: Where the tape is applied. You <strong>CANNOT</strong> paint here. (Fixed).</li>
+<li><strong>Host Bits (0s)</strong>: Where the wall is exposed. You <strong>CAN</strong> paint here. (Variable).</li>
+</ul>
+<blockquote>
+<p>&quot;Jahan &#39;1&#39; hai wahan tape laga hai, kuch mat karo. Jahan &#39;0&#39; hai wahan tumhara raaj hai.&quot;</p>
+</blockquote>
+<hr>
+<h2>📦 Default Subnet Masks (Classes)</h2>
+<p>Before CIDR, we had Classes. These are still the default masks for these IP ranges.</p>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Class</th><th align="left">Range Starts With</th><th align="left">Default Mask</th><th align="left">CIDR</th><th align="left">Format</th></tr></thead>
+                <tbody><tr><td align="left"><strong>A</strong></td><td align="left">1 - 126</td><td align="left"><code>255.0.0.0</code></td><td align="left"><code>/8</code></td><td align="left"><code>N.H.H.H</code></td></tr><tr><td align="left"><strong>B</strong></td><td align="left">128 - 191</td><td align="left"><code>255.255.0.0</code></td><td align="left"><code>/16</code></td><td align="left"><code>N.N.H.H</code></td></tr><tr><td align="left"><strong>C</strong></td><td align="left">192 - 223</td><td align="left"><code>255.255.255.0</code></td><td align="left"><code>/24</code></td><td align="left"><code>N.N.N.H</code></td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>🧮 How to Calculate Subnet Mask (Step-by-Step)</h2>
+<p>If someone gives you a CIDR (e.g., <code>/26</code>), how do you get the mask (<code>255.255.255.192</code>)?</p>
+<h3>Step 1: Find the &quot;Interesting Octet&quot;</h3>
+<p>Where does the CIDR number stop?</p>
+<ul>
+<li><strong>/1 - /8</strong>: 1st Octet</li>
+<li><strong>/9 - /16</strong>: 2nd Octet</li>
+<li><strong>/17 - /24</strong>: 3rd Octet</li>
+<li><strong>/25 - /32</strong>: 4th Octet</li>
+</ul>
+<p><strong>Example: /26</strong> -&gt; Falls in the <strong>4th Octet</strong> (It&#39;s more than 24, less than 32).<br>So the first 3 octets are full (<code>255.255.255.x</code>).</p>
+<h3>Step 2: Calculate &quot;On&quot; Bits in that Octet</h3>
+<p>Subtract the previous boundary from your CIDR.</p>
+<ul>
+<li><strong>Formula</strong>: <code>CIDR - 24</code> (for 4th octet)</li>
+<li><strong>Math</strong>: <code>26 - 24 = 2</code></li>
+<li>So, the 4th octet has <strong>2 bits turned ON</strong>. (<code>11000000</code>)</li>
+</ul>
+<h3>Step 3: Add the Values</h3>
+<p>Use the Magic Table:<br><code>| 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |</code></p>
+<ul>
+<li>Add the first 2 values: <code>128 + 64 = 192</code>.</li>
+</ul>
+<p><strong>Result</strong>: <code>255.255.255.192</code></p>
+<hr>
+<h2>My Handwritten Notes</h2>
+<p><img src="image/00_subnet_mask/1768485944425.png" alt="1768485944425"><br><img src="image/00_subnet_mask/1768485955461.png" alt="1768485955461"></p>
+<h2>⚡ Exam Tips</h2>
+<ol>
+<li><strong>ANDing</strong>: The Router performs a logical <strong>AND</strong> operation between the IP and the Mask to find the <strong>Network ID</strong>.</li>
+<li><strong>Length</strong>: A Subnet Mask is <strong>ALWAYS</strong> 32 bits long.</li>
+<li><strong>Contiguous 1s</strong>: A valid subnet mask must have a continuous stream of 1s followed by 0s. You cannot have <code>11011...</code>.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

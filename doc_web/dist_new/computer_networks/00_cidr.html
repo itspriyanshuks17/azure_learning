@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cidr - Azure Learning Guide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
+          <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="/index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="/app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="/app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="/azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="/azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="/azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="/azure_services/00_containers.html">Containers</a>
+<a href="/azure_services/00_cors.html">Cors</a>
+<a href="/azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="/azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="/azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="/azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="/azure_services/04_storage_services.html">Storage Services</a>
+<a href="/azure_services/10_subnets.html">Subnets</a>
+<a href="/azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="/azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="/azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="/azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="/cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="/cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="/cloud_computing/00_scaling.html">Scaling</a>
+<a href="/cloud_computing/00_service_models.html">Service Models</a>
+<a href="/cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="/cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="/computer_networks/00_area_networks.html">Area Networks</a>
+<a href="/computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="/computer_networks/00_binary_math.html">Binary Math</a>
+<a href="/computer_networks/00_cidr.html">Cidr</a>
+<a href="/computer_networks/00_firewalls.html">Firewalls</a>
+<a href="/computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="/computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="/computer_networks/00_mac_address.html">Mac Address</a>
+<a href="/computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="/computer_networks/00_networking_models.html">Networking Models</a>
+<a href="/computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="/computer_networks/00_osi_model.html">Osi Model</a>
+<a href="/computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="/computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="/computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="/servers/00_server_types.html">Server Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>🍰 CIDR (Classless Inter-Domain Routing) &amp; Subnetting</h1>
+<h2>📌 Overview</h2>
+<p><strong>CIDR</strong> (pronounced &quot;Cider&quot;) is a method for allocating IP addresses and IP routing. It replaces the old &quot;Classful&quot; system (Class A, B, C) and allows for more flexible and efficient use of IP addresses.</p>
+<p>Think of an IP network as a <strong>Pie</strong> or <strong>Pizza</strong>. CIDR tells you <strong>how many slices</strong> you are cutting the network into.</p>
+<ul>
+<li><strong>Smaller CIDR Number (/8)</strong> = Fewer cuts = <strong>Bigger Slices</strong> (More IPs)</li>
+<li><strong>Larger CIDR Number (/32)</strong> = More cuts = <strong>Smaller Slices</strong> (Fewer IPs)</li>
+</ul>
+<hr>
+<h2>🎭 What is a Subnet Mask?</h2>
+<p>A <strong>Subnet Mask</strong> is a 32-bit number that &quot;masks&quot; the IP address. It divides the IP into two parts:</p>
+<ol>
+<li><strong>Network Part (Ones)</strong>: <code>1111...</code> (Fixed, do not touch).</li>
+<li><strong>Host Part (Zeros)</strong>: <code>0000...</code> (Variable, you can assign these).</li>
+</ol>
+<p><strong>Logic</strong>: The computer looks at the mask to decide: <em>&quot;Does this IP belong to my local network, or do I need to send it to the Gateway?&quot;</em></p>
+<blockquote>
+<p><strong>Hinglish Analogy (Masking Tape)</strong><br>Imagine painting a wall. You put <strong>Masking Tape</strong> where you <em>don&#39;t</em> want paint.</p>
+<ul>
+<li><strong>1s (Mask)</strong>: &quot;Tape laga hua hai.&quot; (You can&#39;t change this part).</li>
+<li><strong>0s (Open)</strong>: &quot;Khali jagah hai.&quot; (You can paint/change IPs here).</li>
+</ul>
+</blockquote>
+<hr>
+<h2>📐 The &quot;Slash&quot; Notation (/N)</h2>
+<p>CIDR uses a suffix like <code>/24</code> or <code>/16</code>. This number represents the <strong>Network Bits</strong>—the <strong>part of the address that is &quot;fixed&quot; or &quot;frozen&quot;</strong>. The rest of the bits are &quot;Host Bits&quot; (available for your devices).</p>
+<p><strong>Formula</strong>: $2^{(32 - N)}$ = Total IPs</p>
+<h3>📊 Common CIDR Cheat Sheet</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">CIDR</th><th align="left">Subnet Mask</th><th align="left">Total IPs</th><th align="left">Usable IPs*</th><th align="left">Use Case</th></tr></thead>
+                <tbody><tr><td align="left"><strong>/32</strong></td><td align="left">255.255.255.255</td><td align="left"><strong>1</strong></td><td align="left">1 (Host)</td><td align="left">Specific Device / Loopback</td></tr><tr><td align="left"><strong>/31</strong></td><td align="left">255.255.255.254</td><td align="left">2</td><td align="left">0</td><td align="left">Point-to-Point Links (Rare)</td></tr><tr><td align="left"><strong>/30</strong></td><td align="left">255.255.255.252</td><td align="left">4</td><td align="left">2</td><td align="left">Router-to-Router Links</td></tr><tr><td align="left"><strong>/29</strong></td><td align="left">255.255.255.248</td><td align="left">8</td><td align="left">3 (Azure)</td><td align="left">Small Subnet</td></tr><tr><td align="left"><strong>/28</strong></td><td align="left">255.255.255.240</td><td align="left">16</td><td align="left">11 (Azure)</td><td align="left">Azure Bastion / GatewaySubnet</td></tr><tr><td align="left"><strong>/27</strong></td><td align="left">255.255.255.224</td><td align="left">32</td><td align="left">27 (Azure)</td><td align="left">Typical Small VNet Subnet</td></tr><tr><td align="left"><strong>/24</strong></td><td align="left">255.255.255.0</td><td align="left"><strong>256</strong></td><td align="left">251 (Azure)</td><td align="left">Standard LAN / VNet Subnet</td></tr><tr><td align="left"><strong>/16</strong></td><td align="left">255.255.0.0</td><td align="left"><strong>65,536</strong></td><td align="left">~65k</td><td align="left">Entire VNet Address Space</td></tr><tr><td align="left"><strong>/8</strong></td><td align="left">255.0.0.0</td><td align="left">~16 M</td><td align="left">Huge</td><td align="left">Entire Large Org / ISP</td></tr><tr><td align="left"><strong>/0</strong></td><td align="left">0.0.0.0</td><td align="left">~4 B</td><td align="left">All IPv4</td><td align="left">The Update Internet</td></tr></tbody>
+            </table>
+        </div><p><em>&gt; Note: In standard networking, you lose 2 IPs (Network + Broadcast). In Azure, you lose 5 IPs (Network + Broadcast + Router + DNS + Future).</em></p>
+<hr>
+<h2>🧮 How to Calculate (Easy Method)</h2>
+<p>Don&#39;t do binary math if you don&#39;t have to. Remember the <strong>Power of 2</strong>:</p>
+<ol>
+<li>Start with <strong>/32</strong> = 1 IP.</li>
+<li>Go down by 1, separate by doubling IPs.</li>
+</ol>
+<ul>
+<li><strong>/32</strong> = 1</li>
+<li><strong>/31</strong> = 2</li>
+<li><strong>/30</strong> = 4</li>
+<li><strong>/29</strong> = 8</li>
+<li><strong>/28</strong> = 16</li>
+<li>...</li>
+<li><strong>/24</strong> = 256</li>
+</ul>
+<p><strong>Example</strong>:<br>If you need 50 VMs, which CIDR do you need?</p>
+<ul>
+<li>/27 gives 32 IPs (Too small).</li>
+<li>/26 gives 64 IPs (Perfect fit).</li>
+</ul>
+<hr>
+<h2>🔢 How to Calculate Subnet Mask (Step-by-Step)</h2>
+<p>Want to turn <code>/26</code> into <code>255.255.255.192</code>? Follow these 3 steps.</p>
+<h3>Step 1: Find the &quot;Interesting Octet&quot;</h3>
+<p>Where does the CIDR number fall?</p>
+<ul>
+<li><strong>/1 - /8</strong>: 1st Octet (255.x.x.x)</li>
+<li><strong>/9 - /16</strong>: 2nd Octet (255.255.x.x)</li>
+<li><strong>/17 - /24</strong>: 3rd Octet (255.255.255.x)</li>
+<li><strong>/25 - /32</strong>: 4th Octet (255.255.255.255)</li>
+</ul>
+<p><strong>Example: /26</strong></p>
+<ul>
+<li>It falls in the <strong>4th Octet</strong> (between 25 and 32).</li>
+<li>So, the mask starts as: <code>255.255.255.?</code></li>
+</ul>
+<h3>Step 2: Calculate &quot;On&quot; Bits</h3>
+<p>How many bits are &quot;On&quot; (1) in that octet?</p>
+<ul>
+<li><strong>Formula</strong>: <code>CIDR - (Previous boundary)</code></li>
+<li><strong>Example /26</strong>: <code>26 - 24 = 2</code> bits are On.</li>
+</ul>
+<h3>Step 3: Add the Bit Values</h3>
+<p>Remember the <strong>Magic Binary Values</strong>:<br><code>| 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |</code></p>
+<ul>
+<li>Since <strong>2 bits</strong> are On, add the <strong>first 2 values</strong>:</li>
+<li><code>128 + 64 = 192</code></li>
+</ul>
+<p><strong>Final Answer</strong>: <code>255.255.255.192</code></p>
+<blockquote>
+<p><strong>Hinglish Tip</strong>: &quot;Jitne bit ON hain, magic table mein shuru se utne numbers ko jod lo.&quot;</p>
+</blockquote>
+<hr>
+<h2>☁️ Azure Context</h2>
+<p>subnetting is CRITICAL in Azure. When you create a <strong>Virtual Network (VNet)</strong>:</p>
+<ol>
+<li><strong>VNet Address Space</strong>: Usually big, e.g., <code>10.0.0.0/16</code> (65k IPs).</li>
+<li><strong>Subnets</strong>: You slice this existing VNet into smaller chunks.<ul>
+<li><code>10.0.1.0/24</code> for Web Servers</li>
+<li><code>10.0.2.0/24</code> for Database Servers</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Warning</strong>: Azure reserves <strong>5 IP addresses</strong> in every subnet.<br>If you create a <code>/29</code> (8 IPs), you only get 8 - 5 = <strong>3 usable IPs</strong>.</p>
+</blockquote>
+<hr>
+<h2>💡 Hinglish Explanation (The Pizza Logic)</h2>
+<h3><strong>1. CIDR Number (The Slices)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: CIDR number ko &quot;Chauku&quot; (Knife) cuts samjho.</li>
+<li>Jitna <strong>bada number</strong> (/32), utne <strong>zyada tukde</strong>, lekin <strong>chote pieces</strong> (Kam IPs).</li>
+<li>Jitna <strong>chota number</strong> (/8), utne <strong>kam tukde</strong>, lekin <strong>bade pieces</strong> (Zyada IPs).</li>
+</ul>
+<h3><strong>2. The /24 Magic (Standard)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: <strong>/24</strong> standard hai. Iska matlab &quot;Gali ka last hissa badal sakta hai&quot;.</li>
+<li>Example: <code>192.168.1.x</code>. Yahan <code>192.168.1</code> fix hai, bas last ka <code>x</code> (0-255) badlega. Ye ek building jaisa hai jisme 256 kamre hain.</li>
+</ul>
+<h3><strong>3. Azure Rule (5 IPs Reserved)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: Normal duniya mein 2 IP waste hote hain. Azure mein 5 hote hain (Azure tax samjho).</li>
+<li>Agar <code>/29</code> liya (Total 8 IP), toh Azure bolega: &quot;5 toh Main rakhunga, tumhare liye sirf 3 bache&quot;. Isliye Azure mein kam se kam <code>/27</code> ya <code>/24</code> lena safe hai.</li>
+</ul>
+<hr>
+<h2>⚡ Exam Tips</h2>
+<ol>
+<li><strong>Smallest Subnet in Azure</strong>: technically <code>/29</code>, but realistically <code>/27</code> or <code>/28</code> is recommended for usefulness. GatewaySubnet usually needs <code>/27</code> or <code>/28</code> (if VPN + ExpressRoute).</li>
+<li><strong>Overlap</strong>: VNets with <strong>overlapping CIDR blocks</strong> cannot be peered. (Do VNet <code>10.0.0.0/16</code> ki peering doosre <code>10.0.0.0/16</code> se nahi ho sakti).</li>
+<li><strong>Notation</strong>: Lower CIDR value = More IPs (<code>/16</code> &gt; <code>/24</code>).</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
