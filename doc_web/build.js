@@ -87,10 +87,22 @@ const renderer = {
         const title = token.title || null;
         const text = token.text || '';
 
-        // Force absolute path for local images
-        if (href && !href.startsWith('/') && !href.startsWith('http') && !href.startsWith('https')) {
+        // Force relative path for local images if needed
+        // But for simplicity, we keep them as is if they are relative. 
+        // If the markdown has 'image/...', we want it to be relative to the current page.
+        // However, 'image' folder is at root. So we need to prepend ../ if we are deep.
+        // ACTUALLY, the best way for the renderer (which doesn't know depth) is to use an absolute path prefix placeholder
+        // OR we can just let it be absolute '/' and then replace it in the final HTML processing.
+        // Let's stick to the previous absolute logic but ensure it starts with / so the replacement logic works.
+        
+        if (href && !href.startsWith('http') && !href.startsWith('https') && !href.startsWith('/')) {
             href = '/' + href;
         }
+        
+        // We will replace 'src="/' with 'src="{relativePrefix}' in the main build loop if we want total relativity.
+        // But for now, let's just leave it starting with / and handle it in the file loop globally if possible, 
+        // OR trust the user to write relative paths.
+        // given the user writes 'image/foo.png', and we are in 'computer_networks/foo.html', we need '../image/foo.png'.
         
         let out = `<img src="${href}" alt="${text}"`;
         if (title) {
@@ -165,10 +177,20 @@ async function build() {
             content: plainText
         });
 
+        // Calculate depth for relative assets
+        const depth = outRelativePath.split(/[/\\]/).length - 1;
+        const relativePrefix = depth > 0 ? '../'.repeat(depth) : './';
+
+        const finalSidebar = sidebarHtml.replace(/href="\//g, `href="${relativePrefix}`);
+
         const finalHtml = template
             .replace('{{title}}', title)
-            .replace('{{sidebar}}', sidebarHtml)
-            .replace('{{content}}', htmlContent);
+            .replace('{{sidebar}}', finalSidebar)
+            .replace('{{content}}', htmlContent)
+            .replace(/href="\/css\/style\.css"/g, `href="${relativePrefix}css/style.css"`)
+            .replace(/src="\/js\/script\.js"/g, `src="${relativePrefix}js/script.js"`)
+            .replace(/href="\/index\.html"/g, `href="${relativePrefix}index.html"`)
+            .replace(/src="\/(image\/[^"]+)"/g, `src="${relativePrefix}$1"`);
 
         const outPath = path.join(CONFIG.outDir, outRelativePath);
         await fs.outputFile(outPath, finalHtml);
