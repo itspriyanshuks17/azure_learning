@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Network Architecture - Azure Learning Guide</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
@@ -18,11 +18,15 @@
       <button id="menu-close" class="menu-close">×</button>
       <h2>Azure Learning</h2>
       <div class="search-container">
-          <input type="text" id="search-input" placeholder="🔍 Search topics..." />
-          <div id="search-results" class="search-results"></div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
       </div>
       <nav>
-        <a href="index.html">🏠 Home</a>
+        <a href="/index.html">🏠 Home</a>
         <a href="/index.html" class="nav-header">🏠 Home</a>
 <div class="nav-section">App Architecture</div>
 <a href="/app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
@@ -116,7 +120,7 @@
                     |
              +------+-------+
              |              |
-         (Spoke C)      (Spoke D)</code></pre><p><img src="image/00_network_architecture/1768040188091.png" alt="1768040188091"></p>
+         (Spoke C)      (Spoke D)</code></pre><p><img src="/image/00_network_architecture/1768040188091.png" alt="1768040188091"></p>
 <h3>3. Mesh Topology</h3>
 <ul>
 <li><strong>Full Mesh</strong>: Every VNet connects to every other VNet. (Max Redundancy, High Cost).</li>
@@ -133,7 +137,7 @@
        |   /    \     |
        | /        \   |
       [D] ---------- [C]
-      (Everyone talks to Everyone)</code></pre><p><img src="image/00_network_architecture/1768040214195.png" alt="1768040214195"></p>
+      (Everyone talks to Everyone)</code></pre><p><img src="/image/00_network_architecture/1768040214195.png" alt="1768040214195"></p>
 <h3>4. Bus Topology (Legacy) 🚌</h3>
 <ul>
 <li><strong>Concept</strong>: All devices share a single communication line (Cable).</li>
@@ -145,7 +149,7 @@
        |                               |
        +-------------------------------+  (Backbone)
          |        |        |        |
-        [A]      [B]      [C]      [D]</code></pre><p><img src="image/00_network_architecture/1768040175636.png" alt="1768040175636"></p>
+        [A]      [B]      [C]      [D]</code></pre><p><img src="/image/00_network_architecture/1768040175636.png" alt="1768040175636"></p>
 <h3>5. Ring Topology (Legacy) 💍</h3>
 <ul>
 <li><strong>Concept</strong>: Each device connects to exactly two other devices, forming a circle. Data travels in one direction.</li>
@@ -158,7 +162,7 @@
             |   (Data)   |
             |     ->     |
             |            |
-           [D] -------- [C]</code></pre><p><img src="image/00_network_architecture/1768040202402.png" alt="1768040202402"></p>
+           [D] -------- [C]</code></pre><p><img src="/image/00_network_architecture/1768040202402.png" alt="1768040202402"></p>
 <h3>6. N-Tier Architecture (3-Tier)</h3>
 <p>Not a topology of <em>VNets</em>, but a topology of <em>Subnets</em> inside a VNet.</p>
 <ol>
@@ -199,9 +203,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        hljs.highlightAll();
-        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
     </script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>
