@@ -192,6 +192,7 @@ async function build() {
             .replace(/href="\/index\.html"/g, `href="${relativePrefix}index.html"`)
             .replace(/href="\/image\//g, `href="${relativePrefix}image/`)
             .replace(/window\.SEARCH_PATH = "\/search\.json";/g, `window.SEARCH_PATH = "${relativePrefix}search.json";`)
+            .replace(/window\.RELATIVE_PATH = "\.\/";/g, `window.RELATIVE_PATH = "${relativePrefix}";`)
             .replace(/src="\/(image\/[^"]+)"/g, `src="${relativePrefix}$1"`);
 
         const outPath = path.join(CONFIG.outDir, outRelativePath);

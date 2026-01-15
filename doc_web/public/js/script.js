@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const html = results.map(item => `
-          <a href="${item.url}" class="search-item">
+          <a href="${(window.RELATIVE_PATH || '') + item.url}" class="search-item">
               <div class="search-title">${item.title}</div>
               <div class="search-excerpt">...${getExcerpt(item.content, query)}...</div>
           </a>
