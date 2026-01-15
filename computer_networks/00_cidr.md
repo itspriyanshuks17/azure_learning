@@ -11,6 +11,23 @@ Think of an IP network as a **Pie** or **Pizza**. CIDR tells you **how many slic
 
 ---
 
+## 🎭 What is a Subnet Mask?
+
+A **Subnet Mask** is a 32-bit number that "masks" the IP address. It divides the IP into two parts:
+
+1.  **Network Part (Ones)**: `1111...` (Fixed, do not touch).
+2.  **Host Part (Zeros)**: `0000...` (Variable, you can assign these).
+
+**Logic**: The computer looks at the mask to decide: _"Does this IP belong to my local network, or do I need to send it to the Gateway?"_
+
+> **Hinglish Analogy (Masking Tape)**
+> Imagine painting a wall. You put **Masking Tape** where you _don't_ want paint.
+>
+> - **1s (Mask)**: "Tape laga hua hai." (You can't change this part).
+> - **0s (Open)**: "Khali jagah hai." (You can paint/change IPs here).
+
+---
+
 ## 📐 The "Slash" Notation (/N)
 
 CIDR uses a suffix like `/24` or `/16`. This number represents the **Network Bits**—the **part of the address that is "fixed" or "frozen"**. The rest of the bits are "Host Bits" (available for your devices).
