@@ -31,10 +31,6 @@ A **Web Server** stores, processes, and delivers web pages to clients (Browsers)
     [ User / Browser ] (Renders the Page)
 ```
 
-````
-
-
-
 ### Azure Context
 
 - **Azure App Service**: A PaaS offering to host web servers without managing the OS.
@@ -71,15 +67,16 @@ A **Mail Server** handles the sending, receiving, and storage of emails. It func
            |
            v
     [ Receiver (Phone) ]
-````
+```
 
 ### Azure Context ⚠️
 
 - **Outbound Port 25 Blocked**: Azure **blocks** standard SMTP (Port 25) on VMs to prevent spam.
 - **Solution**: You usually use 3rd party Relay Services like **SendGrid** or **Office 365** to send mail from Azure.
 
----
 ![1768228492451](image/00_server_types/1768228492451.png)
+
+
 ## 💡 Hinglish Explanation
 
 ### **1. Web Server (Restaurant)**

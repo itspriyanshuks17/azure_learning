@@ -100,30 +100,22 @@
        (2) HTTP Response (Here is the page)
            |
            v
-    [ User / Browser ] (Renders the Page)</code></pre><pre><code class="language-">
-
-
-### Azure Context
-
-- **Azure App Service**: A PaaS offering to host web servers without managing the OS.
-- **Virtual Machines**: You can install IIS/Nginx on a VM (IaaS).
-
----
-
-## 📧 2. Mail Server
-
-A **Mail Server** handles the sending, receiving, and storage of emails. It functions like a digital Post Office.
-
-### The Protocols Trio
-
-1.  **SMTP (Simple Mail Transfer Protocol)**: Used for **SENDING** email. (Pusher).
-2.  **POP3 (Post Office Protocol)**: Used for **RECEIVING** email. Downloads to device and deletes from server. (Old school).
-3.  **IMAP (Internet Message Access Protocol)**: Used for **RECEIVING** email. Syncs across devices (Server keeps copy). (Modern).
-
-### Architecture Flow
-
-```text
-    [ Sender (Outlook) ]
+    [ User / Browser ] (Renders the Page)</code></pre><h3>Azure Context</h3>
+<ul>
+<li><strong>Azure App Service</strong>: A PaaS offering to host web servers without managing the OS.</li>
+<li><strong>Virtual Machines</strong>: You can install IIS/Nginx on a VM (IaaS).</li>
+</ul>
+<hr>
+<h2>📧 2. Mail Server</h2>
+<p>A <strong>Mail Server</strong> handles the sending, receiving, and storage of emails. It functions like a digital Post Office.</p>
+<h3>The Protocols Trio</h3>
+<ol>
+<li><strong>SMTP (Simple Mail Transfer Protocol)</strong>: Used for <strong>SENDING</strong> email. (Pusher).</li>
+<li><strong>POP3 (Post Office Protocol)</strong>: Used for <strong>RECEIVING</strong> email. Downloads to device and deletes from server. (Old school).</li>
+<li><strong>IMAP (Internet Message Access Protocol)</strong>: Used for <strong>RECEIVING</strong> email. Syncs across devices (Server keeps copy). (Modern).</li>
+</ol>
+<h3>Architecture Flow</h3>
+<pre><code class="language-text">    [ Sender (Outlook) ]
            |
        (1) SMTP (Send)
            |
@@ -143,7 +135,6 @@ A **Mail Server** handles the sending, receiving, and storage of emails. It func
 <li><strong>Outbound Port 25 Blocked</strong>: Azure <strong>blocks</strong> standard SMTP (Port 25) on VMs to prevent spam.</li>
 <li><strong>Solution</strong>: You usually use 3rd party Relay Services like <strong>SendGrid</strong> or <strong>Office 365</strong> to send mail from Azure.</li>
 </ul>
-<hr>
 <p><img src="../image/00_server_types/1768228492451.png" alt="1768228492451"></p>
 <h2>💡 Hinglish Explanation</h2>
 <h3><strong>1. Web Server (Restaurant)</strong></h3>
