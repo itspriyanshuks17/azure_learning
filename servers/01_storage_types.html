@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Learning Guide</title>
+    <link rel="icon" type="image/png" href="../image/README/1768229281187.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="../index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="../app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="../app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="../app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="../azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="../azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="../azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="../azure_services/00_containers.html">Containers</a>
+<a href="../azure_services/00_cors.html">Cors</a>
+<a href="../azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="../azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="../azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="../azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="../azure_services/04_storage_services.html">Storage Services</a>
+<a href="../azure_services/10_subnets.html">Subnets</a>
+<a href="../azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="../azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="../azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="../azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="../cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="../cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="../cloud_computing/00_scaling.html">Scaling</a>
+<a href="../cloud_computing/00_service_models.html">Service Models</a>
+<a href="../cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="../cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="../computer_networks/00_area_networks.html">Area Networks</a>
+<a href="../computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="../computer_networks/00_binary_math.html">Binary Math</a>
+<a href="../computer_networks/00_cidr.html">Cidr</a>
+<a href="../computer_networks/00_firewalls.html">Firewalls</a>
+<a href="../computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="../computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="../computer_networks/00_mac_address.html">Mac Address</a>
+<a href="../computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="../computer_networks/00_networking_models.html">Networking Models</a>
+<a href="../computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="../computer_networks/00_osi_model.html">Osi Model</a>
+<a href="../computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="../computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="../computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="../servers/03_cifs_protocol.html">Cifs Protocol</a>
+<a href="../servers/00_server_types.html">Server Types</a>
+<a href="../servers/02_smb_protocol.html">Smb Protocol</a>
+<a href="../servers/01_storage_types.html">Storage Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>💾 Storage Types: DAS, NAS, SAN</h1>
+<h2>📌 Overview</h2>
+<p>Storage is where data serves live. In a server environment, how the storage is connected to the computer determines its type, performance, and use case. The three main types are <strong>DAS</strong>, <strong>NAS</strong>, and <strong>SAN</strong>.</p>
+<hr>
+<h2>🔌 1. DAS (Direct Attached Storage)</h2>
+<p><strong>DAS</strong> is <strong>storage directly attached to the server or computer without a network</strong> in between.</p>
+<h3>Architecture Flow</h3>
+<pre><code class="language-text">    +-------------+          +-------------+
+    |  Server A   |          |  Server B   |
+    +------+------+          +------+------+
+           |                        |
+      (SATA/SAS)               (SATA/SAS)
+           |                        |
+    +------+------+          +------+------+
+    |  Hard Disk  |          |  Hard Disk  |
+    +-------------+          +-------------+
+    (Only Server A           (Only Server B
+     can access)              can access)</code></pre><h3>📋 Detailed Breakdown</h3>
+<ul>
+<li><p><strong>Protocols</strong>:</p>
+<ul>
+<li><strong>SATA</strong> (Serial ATA): Common in desktops/laptops.</li>
+<li><strong>SAS</strong> (Serial Attached SCSI): Enterprise grade, faster.</li>
+<li><strong>USB</strong> (Universal Serial Bus): External drives.</li>
+<li><strong>NVMe</strong> (Non-Volatile Memory Express): Ultra-fast direct connection via PCIe.</li>
+</ul>
+</li>
+<li><p><strong>Key Features</strong>:</p>
+<ul>
+<li><strong>1:1 Relationship</strong>: One disk connected to one server.</li>
+<li><strong>No Network</strong>: Data travels via direct cables, not LAN/WAN.</li>
+<li><strong>Block Level Access</strong>: The OS sees it as a raw physical disk (C: Drive).</li>
+</ul>
+</li>
+<li><p><strong>✅ Benefits</strong>:</p>
+<ul>
+<li><strong>Simplicity</strong>: Plug and Play. Easy to configure.</li>
+<li><strong>Low Latency</strong>: No network hops means very fast response time.</li>
+<li><strong>Cost</strong>: Cheapest option. No expensive switches or routers needed.</li>
+</ul>
+</li>
+<li><p><strong>❌ Limitations</strong>:</p>
+<ul>
+<li><strong>Siloed Data</strong>: Data cannot be easily shared with other servers.</li>
+<li><strong>Scalability</strong>: Limited by the number of slots/ports in the server chassis.</li>
+</ul>
+</li>
+<li><p><strong>🏢 Common Uses</strong>:</p>
+<ul>
+<li>Laptop/Desktop internal storage.</li>
+<li>Small businesses with single-server setups.</li>
+<li>Boot drives for OS installation.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>🔗 2. NAS (Network Attached Storage)</h2>
+<p><strong>NAS</strong> is a dedicated file <strong>storage server connected to a network</strong>. It allows <strong>multiple servers/users to share files</strong> over the LAN.</p>
+<h3>Architecture Flow</h3>
+<pre><code class="language-text">       +----------+         +----------+
+       | Server A |         | Server B |
+       +----+-----+         +----+-----+
+            |                    |
+            +---------+----------+
+                      | (Ethernet / LAN)
+                      v
+             +--------+--------+
+             |   NAS Device    |
+             | (Shared Files)  |
+             +-----------------+</code></pre><p><img src="../image/01_storage_types/1768752204282.png" alt="1768752204282"></p>
+<h3>📋 Detailed Breakdown</h3>
+<ul>
+<li><p><strong>Protocols</strong>:</p>
+<ul>
+<li><strong>NFS</strong> (Network File System): Standard for Linux/Unix.</li>
+<li><strong>SMB/CIFS</strong> (Server Message Block): Standard for Windows.</li>
+<li><strong>AFP</strong> (Apple Filing Protocol): Standard for macOS.</li>
+</ul>
+</li>
+<li><p><strong>Key Features</strong>:</p>
+<ul>
+<li><strong>File Level Access</strong>: You access files and folders, not raw disk blocks.</li>
+<li><strong>Network Based</strong>: Connected via standard Ethernet (RJ45).</li>
+<li><strong>OS Optimized</strong>: Runs a stripped-down OS optimized for file serving.</li>
+</ul>
+</li>
+<li><p><strong>✅ Benefits</strong>:</p>
+<ul>
+<li><strong>Collaboration</strong>: Easy file sharing among many users.</li>
+<li><strong>Central Management</strong>: All data in one place, easy to backup.</li>
+<li><strong>Accessibility</strong>: Can be accessed by any device on the network (Phone, PC, TV).</li>
+</ul>
+</li>
+<li><p><strong>❌ Limitations</strong>:</p>
+<ul>
+<li><strong>Performance</strong>: Dependent on network speed (1Gbps/10Gbps) and traffic.</li>
+<li><strong>Latency</strong>: Higher latency compared to DAS/SAN due to network overhead.</li>
+</ul>
+</li>
+<li><p><strong>🏢 Common Uses</strong>:</p>
+<ul>
+<li>Office File Shares (User Home Directories).</li>
+<li>Media Streaming Servers (Plex).</li>
+<li>Storing Backups and Archives.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>⚡ 3. SAN (Storage Area Network)</h2>
+<p><strong>SAN</strong> is a <strong>high-speed</strong>, <strong>dedicated network that provides block-level access to storage</strong>. It makes remote storage look like a local disk to the server.</p>
+<h3>Architecture Flow</h3>
+<pre><code class="language-text">       +----------+         +----------+
+       | Server A |         | Server B |
+       +----+-----+         +----+-----+
+            | (Fiber Channel)    |
+            +---------+----------+
+                      |
+             +--------+--------+
+             |   SAN Switch    |
+             +--------+--------+
+                      |
+           +----------+----------+
+           |    Storage Array    |
+           | (Raw Block Storage) |
+           +---------------------+</code></pre><p><img src="../image/01_storage_types/1768752237399.png" alt="1768752237399"></p>
+<hr>
+<h3>📋 Detailed Breakdown</h3>
+<ul>
+<li><p><strong>Protocols</strong>:</p>
+<ul>
+<li><strong>FCP</strong> (Fibre Channel Protocol): Specialized high-speed optical network (8Gbps - 128Gbps).</li>
+<li><strong>iSCSI</strong> (Internet Small Computer System Interface): Uses standard Ethernet but sends block commands.</li>
+<li><strong>FCoE</strong> (Fibre Channel over Ethernet): Converges FC and Ethernet.</li>
+</ul>
+</li>
+<li><p><strong>Key Features</strong>:</p>
+<ul>
+<li><strong>Block Level Access</strong>: Server sees a &quot;Local Disk&quot; in Disk Management, even though it&#39;s miles away.</li>
+<li><strong>Dedicated Network</strong>: Traffic is separated from normal user LAN traffic (No lag from YouTube videos).</li>
+<li><strong>Redundancy</strong>: Multiple paths (Multipathing) ensure if one cable breaks, data still flows.</li>
+</ul>
+</li>
+<li><p><strong>✅ Benefits</strong>:</p>
+<ul>
+<li><strong>Extreme Speed</strong>: Low latency and high throughput.</li>
+<li><strong>High Availability</strong>: Crucial for clustering (if Server A fails, Server B can mount the same disk).</li>
+<li><strong>Scalability</strong>: Add petabytes of storage without touching the servers.</li>
+</ul>
+</li>
+<li><p><strong>❌ Limitations</strong>:</p>
+<ul>
+<li><strong>Cost</strong>: Very expensive hardware (FC Switches, HBAs).</li>
+<li><strong>Complexity</strong>: Requires specialized skills to manage (Storage Admins).</li>
+</ul>
+</li>
+<li><p><strong>🏢 Common Uses</strong>:</p>
+<ul>
+<li>Enterprise Databases (Oracle, SQL Server).</li>
+<li>Virtualization Farms (VMware ESXi, Hyper-V).</li>
+<li>Mission-Critical Applications (Banking, Stock Trading).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>⚖️ Comparison: DAS vs NAS vs SAN</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">DAS (Direct)</th><th align="left">NAS (Network)</th><th align="left">SAN (Network)</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Full Form</strong></td><td align="left">Direct Attached Storage</td><td align="left">Network Attached Storage</td><td align="left">Storage Area Network</td></tr><tr><td align="left"><strong>Data Type</strong></td><td align="left"><strong>Block</strong> (Raw Disk)</td><td align="left"><strong>File</strong> (Shared Folder)</td><td align="left"><strong>Block</strong> (Raw Disk)</td></tr><tr><td align="left"><strong>Connection</strong></td><td align="left">SATA / SAS / USB</td><td align="left">Ethernet (LAN)</td><td align="left">Fiber Channel (FC)</td></tr><tr><td align="left"><strong>Protocol</strong></td><td align="left">SCSI / SATA / NVMe</td><td align="left">NFS / SMB / CIFS</td><td align="left">FCP / iSCSI</td></tr><tr><td align="left"><strong>Speed</strong></td><td align="left">Very Fast</td><td align="left">Moderate (Network dependent)</td><td align="left">Extremely Fast</td></tr><tr><td align="left"><strong>Cost</strong></td><td align="left">Low</td><td align="left">Medium</td><td align="left">High</td></tr><tr><td align="left"><strong>Best For</strong></td><td align="left">Single PC, Boot OS</td><td align="left">File Sharing, Home Media</td><td align="left">Databases, Virtualization</td></tr></tbody>
+            </table>
+        </div><h2><img src="../image/01_storage_types/1768752332196.png" alt="1768752332196"></h2>
+<h2>☁️ Azure Context</h2>
+<p>How do these map to the Cloud (Azure)?</p>
+<ol>
+<li><strong>DAS (Direct)</strong>: <strong>Azure Managed Disks</strong>. Virtual hard drives attached to one VM. Good for OS disks and temporary data.</li>
+<li><strong>NAS (File Sharing)</strong>: <strong>Azure Files</strong>. Managed file shares accessible via SMB anywhere. Great for &quot;Lift and Shift&quot; of on-prem file servers.</li>
+<li><strong>SAN (High Perf)</strong>: <strong>Azure Elastic SAN</strong> / <strong>Ultra Disks</strong>. For when you need massive IOPS and throughput for top-tier databases.</li>
+</ol>
+<hr>
+<h2>💡 Hinglish Explanation</h2>
+<h3><strong>1. DAS (My Laptop&#39;s Hard Disk)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: DAS wahi hai jo tumhare laptop ke andar laga hua hard disk hai.</li>
+<li><strong>Simple</strong>: Sirf <strong>MERI</strong> machine use kar sakti hai. Koi aur directly access nahi kar sakta.</li>
+</ul>
+<h3><strong>2. NAS (Google Drive / Shared Folder)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: NAS ek <strong>Shared Folder</strong> hai ghar ke WiFi pe.</li>
+<li><strong>Simple</strong>: Main bhi photo daal sakta hu, mera bhai bhi ussi folder se photo le sakta hai. <strong>Files share</strong> karne ke liye best hai.</li>
+</ul>
+<h3><strong>3. SAN (Super Fast External Hard Disk via Fiber)</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: SAN ek <strong>special high-speed network</strong> hai jo sirf storage ke liye bana hai.</li>
+<li><strong>Simple</strong>: Ye itna fast hai ki server ko lagta hai disk uske andar hi lagi hai, par asal mein wo door rakhi hoti hai. Badi companies (Amazon, Flipkart) databases ke liye use karti hain.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+      window.SEARCH_PATH = "../search.json";
+      window.RELATIVE_PATH = "../";
+    </script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
