@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Learning Guide</title>
+    <link rel="icon" type="image/png" href="../image/README/1768229281187.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="../index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="../app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="../app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="../app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="../azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="../azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="../azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="../azure_services/00_containers.html">Containers</a>
+<a href="../azure_services/00_cors.html">Cors</a>
+<a href="../azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="../azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="../azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="../azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="../azure_services/04_storage_services.html">Storage Services</a>
+<a href="../azure_services/10_subnets.html">Subnets</a>
+<a href="../azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="../azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="../azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="../azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="../cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="../cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="../cloud_computing/00_scaling.html">Scaling</a>
+<a href="../cloud_computing/00_service_models.html">Service Models</a>
+<a href="../cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="../cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="../computer_networks/00_area_networks.html">Area Networks</a>
+<a href="../computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="../computer_networks/00_binary_math.html">Binary Math</a>
+<a href="../computer_networks/00_cidr.html">Cidr</a>
+<a href="../computer_networks/00_firewalls.html">Firewalls</a>
+<a href="../computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="../computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="../computer_networks/00_mac_address.html">Mac Address</a>
+<a href="../computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="../computer_networks/00_networking_models.html">Networking Models</a>
+<a href="../computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="../computer_networks/00_osi_model.html">Osi Model</a>
+<a href="../computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="../computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="../computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="../servers/03_cifs_protocol.html">Cifs Protocol</a>
+<a href="../servers/00_server_types.html">Server Types</a>
+<a href="../servers/02_smb_protocol.html">Smb Protocol</a>
+<a href="../servers/01_storage_types.html">Storage Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>📂 CIFS (Common Internet File System)</h1>
+<h2>📌 1. Overview</h2>
+<p><strong>CIFS (Common Internet File System)</strong> is essentially a version of the <strong>SMB</strong> protocol. It’s used to share files and printers over a network, particularly in Windows environments. Think of it as SMB’s “internet-friendly” form that allows computers to access remote resources as if they were local.</p>
+<ul>
+<li><strong>Family</strong>: Network file sharing protocol, part of the SMB family.</li>
+<li><strong>Transport</strong>: Operates over TCP/IP (usually <strong>Port 445</strong>).</li>
+<li><strong>Status</strong>: Older/Legacy version of SMB.</li>
+</ul>
+<h2><img src="../image/03_cifs_protocol/1768752717636.png" alt="1768752717636"></h2>
+<h2>🎯 2. Purpose</h2>
+<ul>
+<li><strong>Remote Access</strong>: Enables access to files, folders, and printers on remote servers.</li>
+<li><strong>Local Feel</strong>: Makes network resources appear as local drives (e.g., Z: Drive) to users.</li>
+</ul>
+<h3>Architecture Flow</h3>
+<pre><code class="language-text">    +-------------+                            +-------------+
+    |   Client    |                            |   Server    |
+    | (Windows PC)|                            | (File Srvr) |
+    +-------------+                            +-------------+
+           |                                          |
+           |                Network (LAN)             |
+           +----------------------------------------> |
+           |        Request File (\\Server\Share)     |
+           |                                          |
+           |          Response (File Content)         |
+           | <----------------------------------------+
+           |                                          |</code></pre><hr>
+<h2>💻 3. Compatibility</h2>
+<ul>
+<li><strong>Windows</strong>: Native support.</li>
+<li><strong>Linux/macOS</strong>: Can access CIFS shares using <code>cifs</code> or <code>smb</code> tools (e.g., <code>mount.cifs</code>).</li>
+</ul>
+<hr>
+<h2>🆚 4. Difference from SMB</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">SMB</th><th align="left">CIFS</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Definition</strong></td><td align="left">Server Message Block (The Protocol Family).</td><td align="left">Common Internet File System (A specific version of SMB).</td></tr><tr><td align="left"><strong>Relationship</strong></td><td align="left">The underlying protocol.</td><td align="left">An older, public version of SMB (SMBv1 era).</td></tr><tr><td align="left"><strong>Usage</strong></td><td align="left">Modern systems use <strong>SMBv2</strong> or <strong>SMBv3</strong>.</td><td align="left">Legacy term, often used interchangeably but refers to the older standard.</td></tr><tr><td align="left"><strong>Performance</strong></td><td align="left">Faster, Secure, WAN-optimized.</td><td align="left">Slower, &quot;Chatty&quot;, less secure.</td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>⚙️ 5. Typical Usage Example</h2>
+<h3>Mounting a network folder on Linux</h3>
+<pre><code class="language-bash">sudo mount -t cifs //ServerName/SharedFolder /mnt/mountpoint -o username=user</code></pre><hr>
+<h2>📝 6. Notes</h2>
+<ul>
+<li><strong>Connectivity</strong>: Make sure the server is accessible on the network.</li>
+<li><strong>Ports</strong>:<ul>
+<li><strong>445</strong>: Direct TCP (Modern).</li>
+<li><strong>139</strong>: NetBIOS (Legacy).</li>
+</ul>
+</li>
+<li><strong>Security</strong>: Always use credentials for access.</li>
+<li><strong>Recommendation</strong>: For modern systems, prefer <strong>SMB2/img/3</strong> over CIFS for speed and security.</li>
+</ul>
+<hr>
+<h2>🏢 7. Where to use CIFS?</h2>
+<p>CIFS is used wherever you need network-based file or printer sharing, especially in environments with Windows or mixed operating systems.</p>
+<h3>1. File Sharing in Local Networks</h3>
+<ul>
+<li>Access files on another computer or server over LAN.</li>
+<li><strong>Example</strong>: Office shared drives, project folders.</li>
+</ul>
+<h3>2. Accessing NAS (Network-Attached Storage)</h3>
+<ul>
+<li>Many NAS devices use CIFS/SMB to allow computers to mount storage.</li>
+<li><strong>Example</strong>: Centralized storage for backups or media.</li>
+</ul>
+<h3>3. Printer Sharing</h3>
+<ul>
+<li>Share printers over the network so multiple users can print without direct USB connection.</li>
+</ul>
+<h3>4. Cross-Platform Environments</h3>
+<ul>
+<li>CIFS works across Windows, Linux, macOS.</li>
+</ul>
+<h3>5. Home Media Streaming</h3>
+<ul>
+<li>Stream videos, music, photos from central server to TV/PC.</li>
+</ul>
+<h3>6. Enterprise Environments</h3>
+<ul>
+<li>Centralized file servers (Home directories, Team folders).</li>
+</ul>
+<blockquote>
+<p><strong>Key Point</strong>: CIFS is mainly used within <strong>trusted networks</strong> (LANs or VPNs). Exposing CIFS directly to the internet is a security risk.</p>
+</blockquote>
+<hr>
+<h2>✅ 8. Benefits of CIFS</h2>
+<ol>
+<li><strong>Easy File Sharing</strong>: Access remote files without physical transfer (USB/Email).</li>
+<li><strong>Cross-Platform</strong>: Works with Windows, Linux, macOS.</li>
+<li><strong>Centralized Storage</strong>: Simplifies backups and management (NAS).</li>
+<li><strong>Security</strong>: Supports authentication (User/Password) and permissions (Read/Write).</li>
+<li><strong>Collaboration</strong>: Multiple users can edit files simultaneously.</li>
+<li><strong>Printer Sharing</strong>: Reduces hardware costs.</li>
+<li><strong>Windows Integration</strong>: Seamless with Active Directory and mapped drives.</li>
+</ol>
+<hr>
+<h2>💡 Hinglish Explanation</h2>
+<h3><strong>CIFS kya hai?</strong></h3>
+<ul>
+<li><strong>Hinglish</strong>: CIFS bas <strong>SMB ka purana naam/version</strong> hai.</li>
+<li><strong>Analogy</strong>: Jaise <strong>&quot;Bombay&quot;</strong> aur <strong>&quot;Mumbai&quot;</strong>. Cheez wahi hai, bas naya naam aur version better hai (SMBv2/v3).</li>
+<li><strong>Usage</strong>: Jab hum network pe folder share karte hain taaki doosra banda access kar sake, usse CIFS/SMB kehte hain.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+      window.SEARCH_PATH = "../search.json";
+      window.RELATIVE_PATH = "../";
+    </script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

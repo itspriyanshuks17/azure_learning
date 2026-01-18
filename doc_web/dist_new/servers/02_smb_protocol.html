@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Learning Guide</title>
+    <link rel="icon" type="image/png" href="../image/README/1768229281187.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="../index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="../app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="../app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="../app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="../azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="../azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="../azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="../azure_services/00_containers.html">Containers</a>
+<a href="../azure_services/00_cors.html">Cors</a>
+<a href="../azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="../azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="../azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="../azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="../azure_services/04_storage_services.html">Storage Services</a>
+<a href="../azure_services/10_subnets.html">Subnets</a>
+<a href="../azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="../azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="../azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="../azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="../cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="../cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="../cloud_computing/00_scaling.html">Scaling</a>
+<a href="../cloud_computing/00_service_models.html">Service Models</a>
+<a href="../cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="../cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="../computer_networks/00_area_networks.html">Area Networks</a>
+<a href="../computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="../computer_networks/00_binary_math.html">Binary Math</a>
+<a href="../computer_networks/00_cidr.html">Cidr</a>
+<a href="../computer_networks/00_firewalls.html">Firewalls</a>
+<a href="../computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="../computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="../computer_networks/00_mac_address.html">Mac Address</a>
+<a href="../computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="../computer_networks/00_networking_models.html">Networking Models</a>
+<a href="../computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="../computer_networks/00_osi_model.html">Osi Model</a>
+<a href="../computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="../computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="../computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="../servers/03_cifs_protocol.html">Cifs Protocol</a>
+<a href="../servers/00_server_types.html">Server Types</a>
+<a href="../servers/02_smb_protocol.html">Smb Protocol</a>
+<a href="../servers/01_storage_types.html">Storage Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>📂 SMB (Server Message Block) Protocol</h1>
+<h2>📌 1. Overview</h2>
+<p><strong>SMB (Server Message Block)</strong> is a network communication protocol used for providing shared access to files, printers, and serial ports between nodes on a network. It mostly works on the <strong>Application Layer</strong> (Layer 7).</p>
+<ul>
+<li><strong>Analogy</strong>: Think of it as a &quot;Waiter&quot; in a restaurant. You (Client) ask the waiter for a specific dish (File) from the Kitchen (Server). The waiter takes your request, goes to the kitchen, gets the dish, and serves it to you.</li>
+<li><strong>Primary OS</strong>: Native to <strong>Windows</strong>, but widely supported on Linux (via Samba) and macOS.</li>
+</ul>
+<hr>
+<h2>⚙️ 2. How it Works (Architecture)</h2>
+<p>SMB operates on a <strong>Client-Server</strong> request-response model.</p>
+<ol>
+<li><strong>Session Setup</strong>: Client connects to Server and authenticates (Username/Password).</li>
+<li><strong>Tree Connect</strong>: Client connects to a specific Share (e.g., <code>\\Server\Share</code>).</li>
+<li><strong>File Operations</strong>: Client sends commands like <code>Open</code>, <code>Read</code>, <code>Write</code>, <code>Close</code>.</li>
+<li><strong>Tree Disconnect</strong>: Client leaves the Share.</li>
+</ol>
+<pre><code class="language-text">    +-------------+                            +-------------+
+    |   Client    |                            |   Server    |
+    | (Windows PC)|                            | (File Srvr) |
+    +-------------+                            +-------------+
+           |                                          |
+           |   (1) Session Setup (Login)              |
+           +----------------------------------------> |
+           |                                          |
+           |   (2) Tree Connect (Connect to Share)    |
+           +----------------------------------------> |
+           |                                          |
+           |   (3) SMB_COM_READ (Give me file.txt)    |
+           +----------------------------------------> |
+           |                                          |
+           |       (4) DATA (Here is the file)        |
+           | <----------------------------------------+
+           |                                          |</code></pre><p><img src="../image/02_smb_protocol/1768752114300.png" alt="1768752114300"></p>
+<h3>🛣️ Ports Used</h3>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Port</th><th align="left">Description</th><th align="left">Status</th></tr></thead>
+                <tbody><tr><td align="left"><strong>445</strong></td><td align="left"><strong>Direct TCP</strong>. The modern standard for SMB over TCP/IP.</td><td align="left"><strong>Active</strong></td></tr><tr><td align="left"><strong>139</strong></td><td align="left"><strong>NetBIOS</strong> Session Service. Older, relies on NetBIOS layout.</td><td align="left">Legacy</td></tr></tbody>
+            </table>
+        </div><blockquote>
+<p><strong>⚠️ Security Warning</strong>: Port <strong>445</strong> is heavily targeted by hackers (e.g., WannaCry). <strong>NEVER</strong> expose Port 445 directly to the public internet.</p>
+</blockquote>
+<hr>
+<h2>⏳ 3. Versions History</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Version</th><th align="left">Name</th><th align="left">Description</th><th align="left">Status</th></tr></thead>
+                <tbody><tr><td align="left"><strong>SMB v1</strong></td><td align="left"><strong>CIFS</strong></td><td align="left">Ancient (1980s). Very chatty, insecure. <strong>Vulnerable to WannaCry</strong>.</td><td align="left">🛑 <strong>DISABLED</strong></td></tr><tr><td align="left"><strong>SMB v2</strong></td><td align="left">SMB 2.0</td><td align="left">Introduced with Vista (2006). Reduced chattiness, supported WANs.</td><td align="left">✅ Active</td></tr><tr><td align="left"><strong>SMB v3</strong></td><td align="left">SMB 3.0</td><td align="left">Introduced with Win 8 (2012). Added <strong>Encryption</strong> and <strong>Multi-channel</strong>.</td><td align="left">🚀 <strong>Current Standard</strong></td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>🏗️ 4. Where to Use SMB? (Common Use Cases)</h2>
+<ol>
+<li><strong>File Servers in Offices</strong>:<ul>
+<li>Storing Excel sheets, PDFs, and official documents in a central location (<code>Z:</code> drive).</li>
+</ul>
+</li>
+<li><strong>Printer Sharing</strong>:<ul>
+<li>Allowing multiple computers to print to a single shared office printer.</li>
+</ul>
+</li>
+<li><strong>Active Directory (SYSVOL)</strong>:<ul>
+<li>Windows Domain Controllers use SMB to replicate Group Policies and Login Scripts.</li>
+</ul>
+</li>
+<li><strong>Home Media Servers</strong>:<ul>
+<li>Streaming movies from a NAS to a TV or PC (Plex often reads from SMB).</li>
+</ul>
+</li>
+<li><strong>Distributed Applications</strong>:<ul>
+<li>Applications that need to read/write config files from a central location.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>✅ 5. Key Benefits</h2>
+<ol>
+<li><strong>Native Windows Support</strong>: No extra software needed on Windows. Just type <code>\\Servername\Sharename</code>.</li>
+<li><strong>File Locking</strong>: Prevents two people from editing the same Excel sheet at the same time (The &quot;Read-Only&quot; notification).</li>
+<li><strong>Authentication Integrated</strong>: Works seamlessly with Active Directory (AD). Permissions follow the user identity.</li>
+<li><strong>Performance (SMBv3)</strong>: Features like <em>SMB Direct</em> (RDMA) and <em>SMB Multichannel</em> make it incredibly fast over high-speed networks.</li>
+</ol>
+<hr>
+<h2>☁️ 6. Azure Context</h2>
+<p>How does SMB fit into the Cloud?</p>
+<ul>
+<li><strong>Azure Files</strong>: A fully managed &quot;Serverless&quot; SMB share in the cloud.<ul>
+<li><strong>Benefit</strong>: You don&#39;t need to manage a Windows Server VM.</li>
+<li><strong>Usage</strong>: Create a Storage Account -&gt; Create File Share -&gt; Mount using the generated PowerShell script (uses Port 445).</li>
+</ul>
+</li>
+<li><strong>Azure NetApp Files</strong>: Enterprise-grade high-performance file storage (supports SMB and NFS).</li>
+</ul>
+<hr>
+<h2>💡 7. Hinglish Explanation</h2>
+<h3><strong>The &quot;Waiter&quot; Analogy</strong></h3>
+<ul>
+<li><strong>Scenario</strong>: Tum ek restaurant mein ho.</li>
+<li><strong>Client (Tum)</strong>: Tumhe <code>Menu.txt</code> chahiye.</li>
+<li><strong>Server (Kitchen/Chef)</strong>: Jaha <code>Menu.txt</code> rakha hai.</li>
+<li><strong>SMB (Waiter)</strong>: Tum chillake kitchen mein baat nahi karte. Tum <strong>Waiter (SMB)</strong> ko bolte ho, &quot;Bhai, Menu lana&quot;. Waiter kitchen jata hai, menu uthata hai, aur tumhe laake deta hai.</li>
+<li><strong>Port 445</strong>: Ye wo rasta hai jaha se waiter aata-jata hai. Agar restaurant ka darwaza (Firewall) band hai, toh waiter nahi aa payega.</li>
+</ul>
+<h3><strong>Why use SMB?</strong></h3>
+<ul>
+<li>Agar puri family ko ek hi album dekhni hai, toh 10 copy mat banao. Album ko <strong>Dining Table (Server)</strong> pe rakh do (SMB Share). Sab wahi aake dekh lenge.</li>
+</ul>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+      window.SEARCH_PATH = "../search.json";
+      window.RELATIVE_PATH = "../";
+    </script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
