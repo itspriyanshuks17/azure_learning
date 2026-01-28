@@ -57,6 +57,52 @@
 
 ---
 
+---
+
+## ☁️ Azure Blob Storage Types
+
+In Azure, **Blob (Binary Large Object)** storage is used to store massive amounts of unstructured data. There are **three main types** of blobs tailored for different needs.
+
+### 1. Block Blobs 🧱
+
+**Best for**: Storing text, binary data, documents, photos, and videos.
+
+- **Architecture**: Data is broken into small "Blocks". Each block can be managed individually.
+- **Maximum Size**: Up to ~190.7 TiB.
+- **Key Feature**: Optimized for uploading large amounts of data efficiently.
+- **Hinglish**: Ye generic storage hai. Jaise tumhare Google Drive pe photos ya PDF hotey hain, waisa hi Block Blob hai. Data ko chhote-chhote 'blocks' mein baant kar save karta hai.
+
+### 2. Append Blobs 📝
+
+**Best for**: Logging and auditing.
+
+- **Architecture**: Similar to Block Blobs, but you can only **add (append)** new data to the end of the blob.
+- **Use Case**: Logging data from virtual machines.
+- **Key Feature**: Existing data cannot be modified or deleted; only new data can be added.
+- **Hinglish**: Ye 'Register' ki tarah hai. Tum sirf naya data niche likh sakte ho (Append), purana mita nahi sakte. Logs maintain karne ke liye best hai.
+
+### 3. Page Blobs 📄
+
+**Best for**: Random read/write operations and Virtual Machine disks (VHDs).
+
+- **Architecture**: Data is organized in 512-byte pages.
+- **Use Case**: Azure Virtual Machine disks (OS and Data disks).
+- **Key Feature**: Optimized for random access, meaning you can jump to any part of the file quickly.
+- **Hinglish**: Ye Virtual Machine ki **Hard Disk** ki tarah kaam karta hai. Isme system kahin bhi (randomly) read/write kar sakta hai.
+
+---
+
+## ⚖️ Summary Table: Azure Blobs
+
+| Feature           | Block Blobs                   | Append Blobs        | Page Blobs        |
+| :---------------- | :---------------------------- | :------------------ | :---------------- |
+| **Primary Use**   | General files (Images, Video) | Logs, Journaling    | VM Disks (VHDs)   |
+| **Data Access**   | Sequential                    | Append-only         | Random Read/Write |
+| **Max Size**      | ~190.7 TiB                    | ~195 GiB            | 8 TiB             |
+| **Hinglish Core** | Normal File storage           | Lock/Register style | Virtual Hard Disk |
+
+---
+
 ## Common Use Cases
 
 - Storing application logs, backups, and media files.
