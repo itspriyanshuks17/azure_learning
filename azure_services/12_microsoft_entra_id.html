@@ -82,50 +82,36 @@
       </nav>
     </aside>
 
-    <main class="main-content"><h1>💾 Stateful Applications</h1>
-<h2>📌 Overview</h2>
-<p>While modern cloud apps prefer statelessness, <strong>Stateful Applications</strong> save data on the local disk or memory of the server instance.</p>
-<hr>
-<h2>1. Use Cases</h2>
+    <main class="main-content"><h1>Microsoft Entra ID</h1>
+<h2>Overview</h2>
+<p>Microsoft Entra ID (formerly Azure Active Directory) is Microsoft&#39;s cloud-based identity and access management (IAM) service. It provides secure access to applications, devices, and data, enabling organizations to manage user identities and control access across cloud and on-premises environments.</p>
+<h2>Key Features</h2>
 <ul>
-<li><strong>Databases</strong>: SQL Server, MySQL, PostgreSQL. They <em>must</em> persist data to disk.</li>
-<li><strong>Legacy Apps</strong>: Older apps designed before modern cloud patterns.</li>
-<li><strong>Real-time Gaming</strong>: Where microsecond latency matters, and state is kept in memory.</li>
+<li><strong>Single Sign-On (SSO)</strong>: Allows users to access multiple applications with a single set of credentials.</li>
+<li><strong>Multi-Factor Authentication (MFA)</strong>: Adds an extra layer of security by requiring additional verification.</li>
+<li><strong>Conditional Access</strong>: Enables policies to control access based on conditions like user location, device state, and risk level.</li>
+<li><strong>Identity Protection</strong>: Detects and responds to identity risks using machine learning.</li>
+<li><strong>Application Management</strong>: Integrates with thousands of SaaS applications and supports custom app development.</li>
+<li><strong>Device Management</strong>: Manages and secures devices accessing corporate resources.</li>
 </ul>
-<hr>
-<h2>2. Challenges in Azure</h2>
-<p>If you run a Stateful App on an Azure VM:</p>
+<h2>Components</h2>
 <ul>
-<li><strong>Scaling is Hard</strong>: You can&#39;t just add a new VM because it won&#39;t have the data from the first VM.</li>
-<li><strong>Failover</strong>: If the VM dies, the local data might be lost (unless using persistent attached storage like Premium SSDs).</li>
+<li><strong>Users and Groups</strong>: Manage user accounts and group memberships.</li>
+<li><strong>Tenants</strong>: Isolated instances for organizations.</li>
+<li><strong>Domains</strong>: Custom domains for branding and user experience.</li>
+<li><strong>Roles and Permissions</strong>: Define roles for administrative tasks.</li>
 </ul>
-<h2>3. Azure Solutions for Stateful Workloads</h2>
-<h3>A. Session Affinity (Sticky Sessions)</h3>
-<p>If you have a legacy web app that keeps sessions in memory:</p>
-<ul>
-<li>Configure <strong>Azure Application Gateway</strong> with <strong>Cookie-based Affinity</strong>.</li>
-<li><strong>How it works</strong>: The Load Balancer ensures User A <em>always</em> goes to Server A.</li>
-<li><strong>Downside</strong>: If Server A crashes, User A loses their session.</li>
-</ul>
-<h3>B. Stateful Sets (AKS)</h3>
-<p>In Kubernetes (AKS), you can use <strong>StatefulSets</strong>.</p>
-<ul>
-<li>Ensures pods stay sticky to a specific Persistent Volume (Azure Disk).</li>
-<li>Good for running Databases inside containers (e.g., Mongo/Cassandra).</li>
-</ul>
-<hr>
-<h2>💡 Hinglish Explanation</h2>
-<ul>
-<li><strong>Stateful</strong>: Jaise aapne apne laptop ke Desktop pe file save ki. Agar laptop kharab hua, file gayi.</li>
-<li><strong>Problem</strong>: Cloud mein VMs kabhi bhi restart ho sakti hain. Isliye important data VM ke andar maat rakho.</li>
-<li><strong>Solution (External State)</strong>: Data ko Google Drive (Database/Storage) pe rakho. Ab chahe laptop badal lo, data wahi milega.</li>
-</ul>
-<hr>
-<h2>💡 Summary</h2>
-<ul>
-<li>Avoid building new Stateful web apps.</li>
-<li>If you must (Databases), use <strong>Managed Services</strong> like <strong>Azure SQL Database</strong> which handle the &quot;State&quot; complexity (replication, backups) for you.</li>
-</ul>
+<h2>Integration with Azure Services</h2>
+<p>Microsoft Entra ID integrates seamlessly with other Azure services, providing centralized identity management for resources like Azure VMs, storage accounts, and applications deployed on Azure.</p>
+<h2>Getting Started</h2>
+<p>To use Microsoft Entra ID:</p>
+<ol>
+<li>Create an Azure account if you don&#39;t have one.</li>
+<li>Set up a Microsoft Entra ID tenant.</li>
+<li>Add users and assign roles.</li>
+<li>Configure applications and access policies.</li>
+</ol>
+<p>For more information, visit the <a href="https://learn.microsoft.com/en-us/entra/">official Microsoft Entra ID documentation</a>.</p>
 </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
