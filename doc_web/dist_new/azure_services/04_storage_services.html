@@ -40,6 +40,7 @@
 <a href="../azure_services/00_cors.html">Cors</a>
 <a href="../azure_services/00_ip_classes.html">Ip Classes</a>
 <a href="../azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="../azure_services/12_microsoft_entra_id.html">Microsoft Entra Id</a>
 <a href="../azure_services/02_resource_groups.html">Resource Groups</a>
 <a href="../azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
 <a href="../azure_services/04_storage_services.html">Storage Services</a>
@@ -73,6 +74,7 @@
 <a href="../computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
 <div class="nav-section">Servers</div>
 <a href="../servers/03_cifs_protocol.html">Cifs Protocol</a>
+<a href="../servers/04_raid_concepts.html">Raid Concepts</a>
 <a href="../servers/00_server_types.html">Server Types</a>
 <a href="../servers/02_smb_protocol.html">Smb Protocol</a>
 <a href="../servers/01_storage_types.html">Storage Types</a>
@@ -138,6 +140,41 @@
     +------------------------> [ Table Storage ] (NoSQL)
     |
     +------------------------> [ Managed Disks ] (VM Storage)</code></pre><hr>
+<hr>
+<h2>☁️ Azure Blob Storage Types</h2>
+<p>In Azure, <strong>Blob (Binary Large Object)</strong> storage is used to store massive amounts of unstructured data. There are <strong>three main types</strong> of blobs tailored for different needs.</p>
+<h3>1. Block Blobs 🧱</h3>
+<p><strong>Best for</strong>: Storing text, binary data, documents, photos, and videos.</p>
+<ul>
+<li><strong>Architecture</strong>: Data is broken into small &quot;Blocks&quot;. Each block can be managed individually.</li>
+<li><strong>Maximum Size</strong>: Up to ~190.7 TiB.</li>
+<li><strong>Key Feature</strong>: Optimized for uploading large amounts of data efficiently.</li>
+<li><strong>Hinglish</strong>: Ye generic storage hai. Jaise tumhare Google Drive pe photos ya PDF hotey hain, waisa hi Block Blob hai. Data ko chhote-chhote &#39;blocks&#39; mein baant kar save karta hai.</li>
+</ul>
+<h3>2. Append Blobs 📝</h3>
+<p><strong>Best for</strong>: Logging and auditing.</p>
+<ul>
+<li><strong>Architecture</strong>: Similar to Block Blobs, but you can only <strong>add (append)</strong> new data to the end of the blob.</li>
+<li><strong>Use Case</strong>: Logging data from virtual machines.</li>
+<li><strong>Key Feature</strong>: Existing data cannot be modified or deleted; only new data can be added.</li>
+<li><strong>Hinglish</strong>: Ye &#39;Register&#39; ki tarah hai. Tum sirf naya data niche likh sakte ho (Append), purana mita nahi sakte. Logs maintain karne ke liye best hai.</li>
+</ul>
+<h3>3. Page Blobs 📄</h3>
+<p><strong>Best for</strong>: Random read/write operations and Virtual Machine disks (VHDs).</p>
+<ul>
+<li><strong>Architecture</strong>: Data is organized in 512-byte pages.</li>
+<li><strong>Use Case</strong>: Azure Virtual Machine disks (OS and Data disks).</li>
+<li><strong>Key Feature</strong>: Optimized for random access, meaning you can jump to any part of the file quickly.</li>
+<li><strong>Hinglish</strong>: Ye Virtual Machine ki <strong>Hard Disk</strong> ki tarah kaam karta hai. Isme system kahin bhi (randomly) read/write kar sakta hai.</li>
+</ul>
+<hr>
+<h2>⚖️ Summary Table: Azure Blobs</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Feature</th><th align="left">Block Blobs</th><th align="left">Append Blobs</th><th align="left">Page Blobs</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Primary Use</strong></td><td align="left">General files (Images, Video)</td><td align="left">Logs, Journaling</td><td align="left">VM Disks (VHDs)</td></tr><tr><td align="left"><strong>Data Access</strong></td><td align="left">Sequential</td><td align="left">Append-only</td><td align="left">Random Read/Write</td></tr><tr><td align="left"><strong>Max Size</strong></td><td align="left">~190.7 TiB</td><td align="left">~195 GiB</td><td align="left">8 TiB</td></tr><tr><td align="left"><strong>Hinglish Core</strong></td><td align="left">Normal File storage</td><td align="left">Lock/Register style</td><td align="left">Virtual Hard Disk</td></tr></tbody>
+            </table>
+        </div><hr>
 <h2>Common Use Cases</h2>
 <ul>
 <li>Storing application logs, backups, and media files.</li>

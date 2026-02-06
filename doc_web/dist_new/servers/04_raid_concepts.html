@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Learning Guide</title>
+    <link rel="icon" type="image/png" href="../image/README/1768229281187.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="../index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="../app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="../app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="../app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="../azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="../azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="../azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="../azure_services/00_containers.html">Containers</a>
+<a href="../azure_services/00_cors.html">Cors</a>
+<a href="../azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="../azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="../azure_services/12_microsoft_entra_id.html">Microsoft Entra Id</a>
+<a href="../azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="../azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="../azure_services/04_storage_services.html">Storage Services</a>
+<a href="../azure_services/10_subnets.html">Subnets</a>
+<a href="../azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="../azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="../azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="../azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="../cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="../cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="../cloud_computing/00_scaling.html">Scaling</a>
+<a href="../cloud_computing/00_service_models.html">Service Models</a>
+<a href="../cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="../cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="../computer_networks/00_area_networks.html">Area Networks</a>
+<a href="../computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="../computer_networks/00_binary_math.html">Binary Math</a>
+<a href="../computer_networks/00_cidr.html">Cidr</a>
+<a href="../computer_networks/00_firewalls.html">Firewalls</a>
+<a href="../computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="../computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="../computer_networks/00_mac_address.html">Mac Address</a>
+<a href="../computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="../computer_networks/00_networking_models.html">Networking Models</a>
+<a href="../computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="../computer_networks/00_osi_model.html">Osi Model</a>
+<a href="../computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="../computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="../computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="../servers/03_cifs_protocol.html">Cifs Protocol</a>
+<a href="../servers/04_raid_concepts.html">Raid Concepts</a>
+<a href="../servers/00_server_types.html">Server Types</a>
+<a href="../servers/02_smb_protocol.html">Smb Protocol</a>
+<a href="../servers/01_storage_types.html">Storage Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>💽 RAID (Redundant Array of Independent Disks)</h1>
+<h2>📌 1. Overview</h2>
+<p><strong>RAID</strong> stands for <strong>Redundant Array of Independent</strong> (or Inexpensive) <strong>Disks</strong>. It is a technology that combines multiple physical hard drives or SSDs into a single logical unit.</p>
+<ul>
+<li><strong>Goal</strong>: Improve <strong>Performance</strong> (Speed), <strong>Reliability</strong> (Redundancy), or <strong>Capacity</strong>.</li>
+<li><strong>Not a Backup</strong>: RAID protects against drive failure, but not against accidental deletion, malware, or fire.</li>
+</ul>
+<hr>
+<h2>🛠️ 2. How to Use? (Implementation)</h2>
+<p>You can set up RAID in two main ways:</p>
+<h3>A. Hardware RAID (Best for Servers)</h3>
+<ul>
+<li><strong>Where</strong>: Uses a dedicated RAID Controller card on the motherboard.</li>
+<li><strong>Pros</strong>: Bootable, OS-independent, Higher Performance (doesn&#39;t use CPU RAM).</li>
+<li><strong>Cons</strong>: Expensive.</li>
+<li><strong>Steps</strong>:<ol>
+<li>Enter RAID BIOS/UEFI (Ctrl+R / F2) during boot.</li>
+<li>Select RAID Level.</li>
+<li>Select Disks.</li>
+<li>Initialize.</li>
+</ol>
+</li>
+</ul>
+<h3>B. Software RAID (OS Based)</h3>
+<ul>
+<li><strong>Where</strong>: Managed by the Operating System (Windows Storage Spaces, Linux <code>mdadm</code>, ZFS).</li>
+<li><strong>Pros</strong>: Cheap, Flexible, Hardware agnostic.</li>
+<li><strong>Cons</strong>: Uses System CPU/RAM resources.</li>
+</ul>
+<hr>
+<h2>📊 3. RAID Levels Explained</h2>
+<h3>RAID 0 (Striping)</h3>
+<ul>
+<li><strong>Concept</strong>: Splits data evenly across two or more disks.</li>
+<li><strong>Diagram</strong>:</li>
+</ul>
+<pre><code class="language-text">      [ DATA ]
+      /      \
+ [Block 1]  [Block 2]
+ [Block 3]  [Block 4]
+    |          |
+  Disk 1     Disk 2</code></pre><ul>
+<li><strong>Pros</strong>: 🚀 Maximum Speed (Read/Write), Full Capacity utilization.</li>
+<li><strong>Cons</strong>: ⚠️ <strong>Zero Fault Tolerance</strong>. If one disk fails, <strong>ALL</strong> data is lost.</li>
+<li><strong>Use Case</strong>: Video Editing caches, Gaming, Non-critical temporary data.</li>
+</ul>
+<hr>
+<h3>RAID 1 (Mirroring)</h3>
+<ul>
+<li><strong>Concept</strong>: Creates an exact copy (mirror) of data on two or more disks.</li>
+<li><strong>Diagram</strong>:</li>
+</ul>
+<pre><code class="language-text">      [ DATA ]
+      /      \
+ [Block 1]  [Block 1]
+ [Block 2]  [Block 2]
+    |          |
+  Disk 1     Disk 2</code></pre><ul>
+<li><strong>Pros</strong>: ✅ High Redundancy (1 disk can fail), Fast Reads.</li>
+<li><strong>Cons</strong>: 🛑 50% Capacity loss (Buy 2TB, get 1TB). Slower Writes.</li>
+<li><strong>Use Case</strong>: OS Drives for Servers, Accounting data, Critical documents.</li>
+</ul>
+<hr>
+<h3>RAID 2, 3, 4 (Obsolete/Rare)</h3>
+<ul>
+<li><strong>RAID 2</strong>: Uses Hamming Code for error correction. (Complex, obsolete).</li>
+<li><strong>RAID 3</strong>: Byte-level striping with dedicated parity disk. (Good for long sequential files, bad for random IO).</li>
+<li><strong>RAID 4</strong>: Block-level striping with dedicated parity disk. (Similar to RAID 5 but with a bottleneck on the parity disk).</li>
+<li><strong>Status</strong>: Mostly replaced by RAID 5 and 6.</li>
+</ul>
+<hr>
+<h3>RAID 5 (Striping with Parity)</h3>
+<ul>
+<li><strong>Concept</strong>: stripes data and parity information across 3+ disks.</li>
+<li><strong>Diagram</strong>:</li>
+</ul>
+<pre><code class="language-text">  Disk 1     Disk 2     Disk 3
+ [Data 1]   [Data 2]   [Parity]
+ [Data 3]   [Parity]   [Data 4]
+ [Parity]   [Data 5]   [Data 6]</code></pre><ul>
+<li><strong>Pros</strong>: ✅ Good balance of Performance, Storage, and Redundancy (1 disk failure allowed).</li>
+<li><strong>Cons</strong>: Slower writes (Parity calculation). Slow rebuild times.</li>
+<li><strong>Use Case</strong>: General File Servers, NAS, Web Servers.</li>
+</ul>
+<hr>
+<h3>RAID 6 (Striping with Double Parity)</h3>
+<ul>
+<li><strong>Concept</strong>: Like RAID 5, but with <strong>two</strong> parity blocks.</li>
+<li><strong>Diagram</strong>:</li>
+</ul>
+<pre><code class="language-text">  Disk 1     Disk 2     Disk 3     Disk 4
+ [Data 1]   [Data 2]   [Parity]   [Parity]
+ [Data 3]   [Parity]   [Parity]   [Data 4]</code></pre><ul>
+<li><strong>Pros</strong>: ✅✅ High Redundancy (<strong>2 disks</strong> can fail).</li>
+<li><strong>Cons</strong>: Writes are slower than RAID 5. Needs minimum 4 disks.</li>
+<li><strong>Use Case</strong>: Large Archive Servers, Backup Servers where data safety is #1.</li>
+</ul>
+<hr>
+<h3>RAID 10 (1+0) (Mirroring + Striping)</h3>
+<ul>
+<li><strong>Concept</strong>: A &quot;Stripe of Mirrors&quot;. Combines speed of RAID 0 with safety of RAID 1.</li>
+<li><strong>Diagram</strong>:</li>
+</ul>
+<pre><code class="language-text">      [ RAID 0 Stripe ]
+      /               \
+ [ RAID 1 ]       [ RAID 1 ]
+  /      \         /      \
+Disk 1  Disk 2   Disk 3  Disk 4</code></pre><ul>
+<li><strong>Pros</strong>: 🚀🚀 Best Performance AND Redundancy. Fast rebuilds.</li>
+<li><strong>Cons</strong>: 💰 Expensive (50% capacity loss, minimum 4 disks).</li>
+<li><strong>Use Case</strong>: <strong>Database Servers</strong> (SQL, Oracle), High-load Virtualization.</li>
+</ul>
+<hr>
+<h2>🏢 4. Where to use RAID?</h2>
+<ol>
+<li><strong>Servers</strong>: RAID 1 (OS), RAID 5/10 (Data). Keeps apps running 24/7.</li>
+<li><strong>NAS</strong>: RAID 5/6. Shared storage for office/home.</li>
+<li><strong>Workstations</strong>: RAID 0 (Video rendering), RAID 10 (Production).</li>
+<li><strong>Backups</strong>: RAID 6. Reliability is key.</li>
+</ol>
+<hr>
+<h2>✅ 5. Benefits Summary</h2>
+<div class="table-wrapper">
+            <table>
+                <thead><tr><th align="left">Benefit</th><th align="left">Description</th><th align="left">Best RAID</th></tr></thead>
+                <tbody><tr><td align="left"><strong>Fault Tolerance</strong></td><td align="left">Protects against hardware failure.</td><td align="left">RAID 1, 6, 10</td></tr><tr><td align="left"><strong>Performance</strong></td><td align="left">Increases Read/Write speeds.</td><td align="left">RAID 0, 10</td></tr><tr><td align="left"><strong>Capacity</strong></td><td align="left">Combines small disks into one large volume.</td><td align="left">RAID 0, 5, 6</td></tr><tr><td align="left"><strong>Uptime</strong></td><td align="left">Swap failed drives without shutdown (Hot Swap).</td><td align="left">RAID 1, 5, 6, 10</td></tr></tbody>
+            </table>
+        </div><hr>
+<h2>💡 Hinglish Explanation</h2>
+<h3><strong>RAID kya hai?</strong></h3>
+<ul>
+<li><strong>Concept</strong>: Socho tumhare paas <strong>Ek Haath (One Disk)</strong> hai kaam karne ke liye. Agar chot lag gayi, toh kaam band.</li>
+<li><strong>RAID</strong>: Tumne apne <strong>do haath (RAID 1)</strong> ya <strong>chaar haath (RAID 0/10)</strong> laga diye kaam pe.</li>
+</ul>
+<h3><strong>Levels Analogies</strong></h3>
+<ol>
+<li><strong>RAID 0 (Ferrari)</strong>: Do engine laga diye ek gaadi mein. Speed double, par agar ek engine phata, toh gaadi Khatam.</li>
+<li><strong>RAID 1 (Photocopy)</strong>: Har document ki turant photocopy nikal ke locker mein rakh di. Agar original phat gaya, toh copy hai. Safe par mehnat dugni.</li>
+<li><strong>RAID 5 (Teamwork)</strong>: Teen dost milke kaam kar rahe hain. Har koi thoda kaam aur thoda &quot;backup&quot; (parity) yaad rakhta hai. Agar ek bimaar hua, toh baaki do milke uska hissa bata sakte hain.</li>
+<li><strong>RAID 10 (Best of Both)</strong>: Ferrari bhi hai aur Photocopy bhi. Mehenga hai par best hai.</li>
+</ol>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+      window.SEARCH_PATH = "../search.json";
+      window.RELATIVE_PATH = "../";
+    </script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

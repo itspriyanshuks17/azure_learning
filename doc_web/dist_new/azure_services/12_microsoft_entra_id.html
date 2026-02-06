@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azure Learning Guide</title>
+    <link rel="icon" type="image/png" href="../image/README/1768229281187.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <div id="overlay" class="overlay"></div>
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <aside class="sidebar">
+      <button id="menu-close" class="menu-close">×</button>
+      <h2>Azure Learning</h2>
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍 Search topics..."
+        />
+        <div id="search-results" class="search-results"></div>
+      </div>
+      <nav>
+        <a href="../index.html" class="nav-header">🏠 Home</a>
+<div class="nav-section">App Architecture</div>
+<a href="../app_architecture/00_monolith_vs_microservices.html">Monolith Vs Microservices</a>
+<a href="../app_architecture/00_stateful_applications.html">Stateful Applications</a>
+<a href="../app_architecture/00_stateless_applications.html">Stateless Applications</a>
+<div class="nav-section">Azure Services</div>
+<a href="../azure_services/07_azure_container_instances.html">Azure Container Instances</a>
+<a href="../azure_services/08_azure_functions.html">Azure Functions</a>
+<a href="../azure_services/06_azure_virtual_desktop.html">Azure Virtual Desktop</a>
+<a href="../azure_services/00_containers.html">Containers</a>
+<a href="../azure_services/00_cors.html">Cors</a>
+<a href="../azure_services/00_ip_classes.html">Ip Classes</a>
+<a href="../azure_services/00_load_balancers.html">Load Balancers</a>
+<a href="../azure_services/12_microsoft_entra_id.html">Microsoft Entra Id</a>
+<a href="../azure_services/02_resource_groups.html">Resource Groups</a>
+<a href="../azure_services/01_resource_hierarchy.html">Resource Hierarchy</a>
+<a href="../azure_services/04_storage_services.html">Storage Services</a>
+<a href="../azure_services/10_subnets.html">Subnets</a>
+<a href="../azure_services/03_virtual_machines.html">Virtual Machines</a>
+<a href="../azure_services/09_virtual_networks.html">Virtual Networks</a>
+<a href="../azure_services/05_vm_scale_sets.html">Vm Scale Sets</a>
+<a href="../azure_services/11_vnet_peering.html">Vnet Peering</a>
+<div class="nav-section">Cloud Computing</div>
+<a href="../cloud_computing/00_cloud_benefits.html">Cloud Benefits</a>
+<a href="../cloud_computing/00_deployment_models.html">Deployment Models</a>
+<a href="../cloud_computing/00_scaling.html">Scaling</a>
+<a href="../cloud_computing/00_service_models.html">Service Models</a>
+<a href="../cloud_computing/00_shared_responsibility.html">Shared Responsibility</a>
+<a href="../cloud_computing/00_virtualization.html">Virtualization</a>
+<div class="nav-section">Computer Networks</div>
+<a href="../computer_networks/00_area_networks.html">Area Networks</a>
+<a href="../computer_networks/00_azure_routing.html">Azure Routing</a>
+<a href="../computer_networks/00_binary_math.html">Binary Math</a>
+<a href="../computer_networks/00_cidr.html">Cidr</a>
+<a href="../computer_networks/00_firewalls.html">Firewalls</a>
+<a href="../computer_networks/00_http_vs_https.html">Http Vs Https</a>
+<a href="../computer_networks/00_ip_addresses.html">Ip Addresses</a>
+<a href="../computer_networks/00_mac_address.html">Mac Address</a>
+<a href="../computer_networks/00_network_architecture.html">Network Architecture</a>
+<a href="../computer_networks/00_networking_models.html">Networking Models</a>
+<a href="../computer_networks/00_networking_ports.html">Networking Ports</a>
+<a href="../computer_networks/00_osi_model.html">Osi Model</a>
+<a href="../computer_networks/00_ssl_tls_handshake.html">Ssl Tls Handshake</a>
+<a href="../computer_networks/00_subnet_mask.html">Subnet Mask</a>
+<a href="../computer_networks/00_tcp_ip_model.html">Tcp Ip Model</a>
+<div class="nav-section">Servers</div>
+<a href="../servers/03_cifs_protocol.html">Cifs Protocol</a>
+<a href="../servers/04_raid_concepts.html">Raid Concepts</a>
+<a href="../servers/00_server_types.html">Server Types</a>
+<a href="../servers/02_smb_protocol.html">Smb Protocol</a>
+<a href="../servers/01_storage_types.html">Storage Types</a>
+
+      </nav>
+    </aside>
+
+    <main class="main-content"><h1>Microsoft Entra ID</h1>
+<h2>Overview</h2>
+<p>Microsoft Entra ID (formerly Azure Active Directory) is Microsoft&#39;s cloud-based identity and access management (IAM) service. It provides secure access to applications, devices, and data, enabling organizations to manage user identities and control access across cloud and on-premises environments.</p>
+<h2>Key Features</h2>
+<ul>
+<li><strong>Single Sign-On (SSO)</strong>: Allows users to access multiple applications with a single set of credentials.</li>
+<li><strong>Multi-Factor Authentication (MFA)</strong>: Adds an extra layer of security by requiring additional verification.</li>
+<li><strong>Conditional Access</strong>: Enables policies to control access based on conditions like user location, device state, and risk level.</li>
+<li><strong>Identity Protection</strong>: Detects and responds to identity risks using machine learning.</li>
+<li><strong>Application Management</strong>: Integrates with thousands of SaaS applications and supports custom app development.</li>
+<li><strong>Device Management</strong>: Manages and secures devices accessing corporate resources.</li>
+</ul>
+<h2>Components</h2>
+<ul>
+<li><strong>Users and Groups</strong>: Manage user accounts and group memberships.</li>
+<li><strong>Tenants</strong>: Isolated instances for organizations.</li>
+<li><strong>Domains</strong>: Custom domains for branding and user experience.</li>
+<li><strong>Roles and Permissions</strong>: Define roles for administrative tasks.</li>
+</ul>
+<h2>Integration with Azure Services</h2>
+<p>Microsoft Entra ID integrates seamlessly with other Azure services, providing centralized identity management for resources like Azure VMs, storage accounts, and applications deployed on Azure.</p>
+<h2>Integration with AWS IAM Identity Centre</h2>
+<p>Microsoft Entra ID can be integrated with AWS IAM Identity Centre (formerly AWS SSO) to enable seamless single sign-on (SSO) between Azure and AWS environments. This allows users to access AWS resources using their Entra ID credentials.</p>
+<h3>Key Benefits</h3>
+<ul>
+<li>Unified identity management across cloud platforms.</li>
+<li>Enhanced security through centralized authentication.</li>
+<li>Simplified user experience with SSO.</li>
+</ul>
+<h3>Configuration Steps</h3>
+<ol>
+<li><p><strong>Set up SAML Application in Microsoft Entra ID</strong>:</p>
+<ul>
+<li>Navigate to the Azure portal and create a new Enterprise Application.</li>
+<li>Choose &quot;Non-gallery application&quot; and name it (e.g., &quot;AWS IAM Identity Centre&quot;).</li>
+<li>Configure SAML settings:<ul>
+<li>Identifier (Entity ID): <code>urn:amazon:webservices</code></li>
+<li>Reply URL: <code>https://signin.aws.amazon.com/saml</code></li>
+</ul>
+</li>
+<li>Download the SAML metadata XML from Entra ID.</li>
+</ul>
+</li>
+<li><p><strong>Configure Identity Provider in AWS IAM Identity Centre</strong>:</p>
+<ul>
+<li>In the AWS Management Console, go to IAM Identity Centre.</li>
+<li>Add a new identity provider.</li>
+<li>Upload the SAML metadata from Entra ID.</li>
+<li>Set up attribute mappings (e.g., email, name).</li>
+</ul>
+</li>
+<li><p><strong>Assign Users and Groups</strong>:</p>
+<ul>
+<li>In Entra ID, assign users/groups to the AWS application.</li>
+<li>In IAM Identity Centre, create permission sets and assign them to users.</li>
+</ul>
+</li>
+<li><p><strong>Test the Integration</strong>:</p>
+<ul>
+<li>Users can now log in to AWS via the Entra ID portal.</li>
+</ul>
+</li>
+</ol>
+<h3>Metadata Exchange</h3>
+<ul>
+<li><strong>Entra ID Metadata</strong>: The SAML metadata XML contains the signing certificate, entity ID, and endpoints. This is downloaded from the Entra ID application configuration.</li>
+<li><strong>AWS Metadata</strong>: AWS provides its own metadata URL for the identity provider configuration, but for Entra ID as IdP, you upload Entra&#39;s metadata to AWS.</li>
+</ul>
+<p>For detailed guides, refer to:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/entra/identity/saas-apps/aws-single-sign-on-tutorial">Microsoft Documentation: Integrate with AWS</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/saml.html">AWS Documentation: SAML Federation</a></li>
+</ul>
+<h3>SSO Flow Diagram</h3>
+<div class="mermaid">sequenceDiagram
+    participant User
+    participant EntraID as Microsoft Entra ID
+    participant IAMIC as AWS IAM Identity Centre
+    participant AWS as AWS Services
+
+    User->>EntraID: Request access to AWS
+    EntraID->>User: Authenticate user (MFA if enabled)
+    User->>IAMIC: Redirect with SAML request
+    IAMIC->>EntraID: Request SAML assertion
+    EntraID->>IAMIC: Return SAML assertion
+    IAMIC->>User: Grant access to AWS console/services
+    User->>AWS: Access resources</div><h2>Getting Started</h2>
+<p>To use Microsoft Entra ID:</p>
+<ol>
+<li>Create an Azure account if you don&#39;t have one.</li>
+<li>Set up a Microsoft Entra ID tenant.</li>
+<li>Add users and assign roles.</li>
+<li>Configure applications and access policies.</li>
+</ol>
+<p>For more information, visit the <a href="https://learn.microsoft.com/en-us/entra/">official Microsoft Entra ID documentation</a>.</p>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      hljs.highlightAll();
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+      window.SEARCH_PATH = "../search.json";
+      window.RELATIVE_PATH = "../";
+    </script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
