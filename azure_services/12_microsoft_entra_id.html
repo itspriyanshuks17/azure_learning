@@ -103,7 +103,72 @@
 </ul>
 <h2>Integration with Azure Services</h2>
 <p>Microsoft Entra ID integrates seamlessly with other Azure services, providing centralized identity management for resources like Azure VMs, storage accounts, and applications deployed on Azure.</p>
-<h2>Getting Started</h2>
+<h2>Integration with AWS IAM Identity Centre</h2>
+<p>Microsoft Entra ID can be integrated with AWS IAM Identity Centre (formerly AWS SSO) to enable seamless single sign-on (SSO) between Azure and AWS environments. This allows users to access AWS resources using their Entra ID credentials.</p>
+<h3>Key Benefits</h3>
+<ul>
+<li>Unified identity management across cloud platforms.</li>
+<li>Enhanced security through centralized authentication.</li>
+<li>Simplified user experience with SSO.</li>
+</ul>
+<h3>Configuration Steps</h3>
+<ol>
+<li><p><strong>Set up SAML Application in Microsoft Entra ID</strong>:</p>
+<ul>
+<li>Navigate to the Azure portal and create a new Enterprise Application.</li>
+<li>Choose &quot;Non-gallery application&quot; and name it (e.g., &quot;AWS IAM Identity Centre&quot;).</li>
+<li>Configure SAML settings:<ul>
+<li>Identifier (Entity ID): <code>urn:amazon:webservices</code></li>
+<li>Reply URL: <code>https://signin.aws.amazon.com/saml</code></li>
+</ul>
+</li>
+<li>Download the SAML metadata XML from Entra ID.</li>
+</ul>
+</li>
+<li><p><strong>Configure Identity Provider in AWS IAM Identity Centre</strong>:</p>
+<ul>
+<li>In the AWS Management Console, go to IAM Identity Centre.</li>
+<li>Add a new identity provider.</li>
+<li>Upload the SAML metadata from Entra ID.</li>
+<li>Set up attribute mappings (e.g., email, name).</li>
+</ul>
+</li>
+<li><p><strong>Assign Users and Groups</strong>:</p>
+<ul>
+<li>In Entra ID, assign users/groups to the AWS application.</li>
+<li>In IAM Identity Centre, create permission sets and assign them to users.</li>
+</ul>
+</li>
+<li><p><strong>Test the Integration</strong>:</p>
+<ul>
+<li>Users can now log in to AWS via the Entra ID portal.</li>
+</ul>
+</li>
+</ol>
+<h3>Metadata Exchange</h3>
+<ul>
+<li><strong>Entra ID Metadata</strong>: The SAML metadata XML contains the signing certificate, entity ID, and endpoints. This is downloaded from the Entra ID application configuration.</li>
+<li><strong>AWS Metadata</strong>: AWS provides its own metadata URL for the identity provider configuration, but for Entra ID as IdP, you upload Entra&#39;s metadata to AWS.</li>
+</ul>
+<p>For detailed guides, refer to:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/entra/identity/saas-apps/aws-single-sign-on-tutorial">Microsoft Documentation: Integrate with AWS</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/saml.html">AWS Documentation: SAML Federation</a></li>
+</ul>
+<h3>SSO Flow Diagram</h3>
+<div class="mermaid">sequenceDiagram
+    participant User
+    participant EntraID as Microsoft Entra ID
+    participant IAMIC as AWS IAM Identity Centre
+    participant AWS as AWS Services
+
+    User->>EntraID: Request access to AWS
+    EntraID->>User: Authenticate user (MFA if enabled)
+    User->>IAMIC: Redirect with SAML request
+    IAMIC->>EntraID: Request SAML assertion
+    EntraID->>IAMIC: Return SAML assertion
+    IAMIC->>User: Grant access to AWS console/services
+    User->>AWS: Access resources</div><h2>Getting Started</h2>
 <p>To use Microsoft Entra ID:</p>
 <ol>
 <li>Create an Azure account if you don&#39;t have one.</li>
