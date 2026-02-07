@@ -122,6 +122,15 @@ The **OSI Model** is a conceptual framework used to understand how data travels 
      |     [ Virtual Machine ]       |
      +-------------------------------+
 ```
+---
+
+## Hand Written Notes
+![OSI-Model](<WhatsApp Image 2026-02-07 at 07.55.31.jpeg>)
+![OSI-Model](<WhatsApp Image 2026-02-07 at 07.55.32.jpeg>)
+![OSI-Model](<WhatsApp Image 2026-02-07 at 07.55.32 (1).jpeg>)
+![OSI-Model](<WhatsApp Image 2026-02-07 at 07.55.32 (2).jpeg>)
+![OSI-Model](<WhatsApp Image 2026-02-07 at 07.55.32 (3).jpeg>)
+![OSI-Model](<WhatsApp Image 2026-02-07 at 07.55.33.jpeg>)
 
 ---
 
